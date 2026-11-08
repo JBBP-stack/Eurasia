@@ -1,0 +1,29 @@
+{
+  "nota": "Estas preguntas y puntuaciones son diseño didáctico del videojuego, NO hechos históricos ni recomendaciones de inversión.",
+  "preguntas": {
+    "p_lehman": {
+      "enunciado": "Tienes gastos que cubrir este mes y recibes noticias sobre la quiebra de un gran banco. ¿Qué decisión es más prudente?",
+      "opciones": [
+        {"id": "a", "texto": "Revisar mi liquidez y fondo de emergencia antes de asumir más riesgo.", "efecto": {"prudencia": 2}, "explicacion": "La liquidez ayuda a afrontar imprevistos sin tener que vender inversiones precipitadamente."},
+        {"id": "b", "texto": "Pedir un préstamo para comprar acciones porque ahora parecen baratas.", "efecto": {"prudencia": -2}, "explicacion": "Invertir mediante deuda aumenta la exposición a pérdidas y compromete pagos futuros."},
+        {"id": "c", "texto": "Invertir todos mis ahorros en una única empresa financiera.", "efecto": {"prudencia": -2}, "explicacion": "La concentración en una empresa expone a riesgos específicos sin diversificación."}
+      ]
+    },
+    "p_tipos": {
+      "enunciado": "La Reserva Federal mantiene su tipo objetivo en el 2 %. ¿Qué conclusión puede obtenerse con seguridad de esta noticia aislada?",
+      "opciones": [
+        {"id": "a", "texto": "Que todas las acciones subirán mañana.", "efecto": {"prudencia": -2}, "explicacion": "Una decisión de tipos no permite predecir con certeza el movimiento de todas las acciones."},
+        {"id": "b", "texto": "Que las condiciones monetarias importan, pero necesito más información antes de actuar.", "efecto": {"prudencia": 2}, "explicacion": "Los tipos influyen en financiación y valoración, pero no determinan por sí solos el mercado."},
+        {"id": "c", "texto": "Que desaparece el riesgo de quiebra bancaria.", "efecto": {"prudencia": -2}, "explicacion": "Mantener tipos de interés no garantiza la solvencia de las entidades."}
+      ]
+    },
+    "p_aig": {
+      "enunciado": "Tras el rescate anunciado de AIG, ¿qué significa realmente que la empresa reciba apoyo público?",
+      "opciones": [
+        {"id": "a", "texto": "Que sus accionistas tienen garantizada una ganancia.", "efecto": {"prudencia": -2}, "explicacion": "Ayudar a la continuidad de una empresa no garantiza rendimientos a sus accionistas."},
+        {"id": "b", "texto": "Que ya no existe ningún riesgo financiero en el sector.", "efecto": {"prudencia": -2}, "explicacion": "Un rescate concreto no elimina automáticamente otros riesgos sistémicos."},
+        {"id": "c", "texto": "Que debo distinguir entre estabilidad de la empresa y valor para sus accionistas.", "efecto": {"prudencia": 2}, "explicacion": "Las medidas de rescate pueden proteger la estabilidad financiera y a la vez perjudicar el valor de las acciones."}
+      ]
+    }
+  }
+}
