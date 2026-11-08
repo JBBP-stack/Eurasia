@@ -218,3 +218,12 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Godot
+.godot/
+*.translation
+
+# Python
+.venv/
+__pycache__/
+*.pyc
