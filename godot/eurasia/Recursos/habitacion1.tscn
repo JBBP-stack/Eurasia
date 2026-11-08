@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://dujlmm78f68xq"]
 
-[ext_resource type="Script" uid="uid://ykad3t33b848" path="res://jugador.gd" id="1_m8ldt"]
+[ext_resource type="Script" uid="uid://ykad3t33b848" path="res://jugador.gd" id="1_o42vu"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j4qlg"]
 load_path = "res://.godot/imported/maderita1.png-13d0b3526dd15457d9eb61d3c81280fe.ctex"
@@ -9,13 +9,16 @@ load_path = "res://.godot/imported/maderita1.png-13d0b3526dd15457d9eb61d3c81280f
 texture = SubResource("CompressedTexture2D_j4qlg")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
-1:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_ncon7"]
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_3s3qs")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o42vu"]
+size = Vector2(1.3333335, 1.3333335)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_62odp"]
+size = Vector2(14, 353)
 
 [node name="Node2D" type="Node2D" unique_id=662007093]
 position = Vector2(0, 2)
@@ -25,11 +28,41 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAACAAAAAAAAAAA
 tile_set = SubResource("TileSet_ncon7")
 
 [node name="Jugador" type="CharacterBody2D" parent="." unique_id=2011933307]
-script = ExtResource("1_m8ldt")
+position = Vector2(100, 100)
+script = ExtResource("1_o42vu")
 
 [node name="ColorRect" type="ColorRect" parent="Jugador" unique_id=1747819800]
-offset_left = -8.0
-offset_top = -12.0
-offset_right = 8.0
-offset_bottom = 12.0
+offset_left = 17.0
+offset_top = 8.0
+offset_right = 33.0
+offset_bottom = 24.0
 color = Color(0.60170525, 1, 0.4275429, 1)
+
+[node name="Camera2D" type="Camera2D" parent="Jugador" unique_id=321583200]
+zoom = Vector2(2, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Jugador" unique_id=1102162062]
+position = Vector2(25, 16)
+scale = Vector2(12, 12)
+shape = SubResource("RectangleShape2D_o42vu")
+
+[node name="Pared izquierda" type="StaticBody2D" parent="." unique_id=1980136408]
+position = Vector2(100, 100)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pared izquierda" unique_id=2055133612]
+position = Vector2(-101, 59)
+shape = SubResource("RectangleShape2D_62odp")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Pared izquierda" unique_id=1510799129]
+position = Vector2(155, 62)
+shape = SubResource("RectangleShape2D_62odp")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Pared izquierda" unique_id=1253028098]
+position = Vector2(29, 220)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_62odp")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Pared izquierda" unique_id=1247656480]
+position = Vector2(20, -100)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_62odp")
