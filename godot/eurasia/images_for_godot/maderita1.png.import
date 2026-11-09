@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1xyeivpp68rx"
-path="res://.godot/imported/suelo1_0002.png-d398c7e8e202ec5eea9edf750dcd644b.ctex"
+uid="uid://0hsgjrar4u6r"
+path="res://.godot/imported/maderita1.png-f80d08c353bf5de7088f33434d59ff73.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://svgs_godot/suelo1_0002.png"
-dest_files=["res://.godot/imported/suelo1_0002.png-d398c7e8e202ec5eea9edf750dcd644b.ctex"]
+source_file="res://images_for_godot/maderita1.png"
+dest_files=["res://.godot/imported/maderita1.png-f80d08c353bf5de7088f33434d59ff73.ctex"]
 
 [params]
 
