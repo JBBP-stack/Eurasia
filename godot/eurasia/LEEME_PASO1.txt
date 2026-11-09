@@ -1,0 +1,33 @@
+EURASIA - PASO 1: ESTADO INICIAL + FICHA DE PERSONAJE
+
+A) COPIAR LOS ARCHIVOS
+Copia las carpetas 'sistemas' e 'interfaces' dentro de tu proyecto Godot, al lado de project.godot.
+Ejemplo: Eurasia/godot/eurasia/sistemas/EstadoJuego.gd
+         Eurasia/godot/eurasia/interfaces/FichaInicio.gd
+No copies ni sustituyas el archivo project.godot de tu repositorio.
+
+B) REGISTRAR EL ESTADO GLOBAL
+Godot > Proyecto > Configuración del proyecto > Globales > Autoload.
+Selecciona res://sistemas/EstadoJuego.gd, nombre 'EstadoJuego', Añadir/Activado.
+Es similar a cómo ya está configurado NoticiasManager.
+
+C) MOSTRAR FICHA AL INICIAR
+Abre Recursos/habitacion1.tscn.
+Selecciona el nodo raíz Node2D, añade un hijo CanvasLayer y nómbralo FichaInicio.
+Adjunta a FichaInicio el script res://interfaces/FichaInicio.gd.
+Guarda y pulsa F6.
+Debe aparecer la ficha y la partida permanecer pausada hasta pulsar COMENZAR PARTIDA.
+
+D) ADVERTENCIA SOBRE EL SISTEMA DE NOTICIAS EXISTENTE
+Tu NoticiasUI actual muestra nombres reales y fechas de septiembre de 2008.
+Para probar el aspecto sin spoilers, puedes retirar su instancia de la escena habitacion1,
+sin borrar ninguno de sus archivos. Lo adaptaremos en el próximo paso.
+NoticiasManager conserva por ahora su propio calendario; todavía NO está integrado.
+
+E) RESULTADO ESPERADO
+Banco: 15.000 €, inversiones: 15.000 €, patrimonio: 30.000 €.
+La fecha histórica interna es 2007-07-02, pero solo se muestra 'Día de partida: 1'.
+La edad, género, país, ingreso mensual, empresas y precios de 100 € por acción son DE PRUEBA.
+NO son datos históricos verificados ni recomendaciones de inversión.
+
+NOTA: scripts revisados estáticamente; no se han ejecutado en Godot en este entorno.
