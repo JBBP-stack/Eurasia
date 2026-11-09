@@ -10,8 +10,8 @@ var fecha_historica_interna: String = "2007-07-02"
 var dia_de_partida: int = 1
 
 var perfil: Dictionary = {
-	"edad": 28,
-	"genero": "Mujer",
+	"edad": 30,
+	"genero": "Hombre",
 	"pais_ficticio": "República de Liria",
 	"ingreso_mensual_centimos": 200_000
 }

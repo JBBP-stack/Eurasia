@@ -35,20 +35,17 @@ func _ready() -> void:
 
 	var info := Label.new()
 	var persona: Dictionary = EstadoJuego.perfil
-	info.text = "Edad: %d\nGénero: %s\nPaís: %s\nDía de partida: %d\nIngreso mensual: %s €\nDinero en el banco: %s €\nInvertido: %s €\nPATRIMONIO INICIAL: %s €" % [
+	info.text = "Edad: %d\nGénero: %s\nPaís: %s\nDinero en el banco: %s €\nInvertido: %s €" % [
 		int(persona["edad"]),
 		str(persona["genero"]),
 		str(persona["pais_ficticio"]),
-		EstadoJuego.dia_de_partida,
-		EstadoJuego.euros(int(persona["ingreso_mensual_centimos"])),
 		EstadoJuego.euros(EstadoJuego.saldo_bancario_centimos),
 		EstadoJuego.euros(EstadoJuego.valor_cartera_centimos()),
-		EstadoJuego.euros(EstadoJuego.patrimonio_total_centimos())
 	]
 	contenido.add_child(info)
 
 	var detalle := Label.new()
-	detalle.text = "Inversiones iniciales:"
+	detalle.text = "Inversiones actuales:"
 	for posicion in EstadoJuego.cartera:
 		detalle.text += "\n• %s — %s €" % [
 			str(posicion["nombre"]),
@@ -57,7 +54,7 @@ func _ready() -> void:
 	contenido.add_child(detalle)
 
 	var empezar := Button.new()
-	empezar.text = "COMENZAR PARTIDA"
+	empezar.text = "\nCOMENZAR PARTIDA"
 	empezar.pressed.connect(_comenzar)
 	contenido.add_child(empezar)
 
