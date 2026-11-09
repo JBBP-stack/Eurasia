@@ -1,0 +1,7 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://isf8ej2n0heg" path="res://escenas/interfaces/NoticiasUI.gd" id="1_noticias"]
+
+[node name="NoticiasUI" type="CanvasLayer"]
+layer = 25
+script = ExtResource("1_noticias")

@@ -1,0 +1,16 @@
+godot
+arte
+docs
+tools
+README.md
+LICENSE
+.gitignore
+.order
+godot/project.godot
+godot/escenas
+godot/sistemas
+godot/datos
+godot/assets
+godot/escenas/habitacion
+godot/escenas/personaje
+godot/escenas/interfaces

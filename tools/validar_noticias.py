@@ -2,7 +2,13 @@
 import json
 from pathlib import Path
 
-base = Path(__file__).parent / "noticias" / "datos"
+base = (
+    Path(__file__).resolve().parent.parent
+    / "godot"
+    / "datos"
+    / "noticias"
+)
+
 noticias = json.loads((base / "noticias_2008.json").read_text(encoding="utf-8"))["noticias"]
 preguntas = json.loads((base / "preguntas_2008.json").read_text(encoding="utf-8"))["preguntas"]
 ids = set()

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0hsgjrar4u6r"
-path="res://.godot/imported/maderita1.png-f80d08c353bf5de7088f33434d59ff73.ctex"
+uid="uid://c6fqqibc83unm"
+path="res://.godot/imported/maderin_hecho3.png-42ac5e8e208b4842782ee02b4710c129.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images_for_godot/maderita1.png"
-dest_files=["res://.godot/imported/maderita1.png-f80d08c353bf5de7088f33434d59ff73.ctex"]
+source_file="res://assets/escenarios/maderin_hecho3.png"
+dest_files=["res://.godot/imported/maderin_hecho3.png-42ac5e8e208b4842782ee02b4710c129.ctex"]
 
 [params]
 
