@@ -11,6 +11,9 @@ const FECHA_INICIO_PROVISIONAL: String = "2008-09-15"
 # Calendario interno, no visible directamente para el jugador.
 var fecha_historica_interna: String = FECHA_INICIO_PROVISIONAL
 var dia_de_partida: int = 1
+var posicion_retorno_habitacion: Vector2 = Vector2(135.0, 42.0)
+var regresar_a_habitacion: bool = false
+var partida_iniciada: bool = false
 
 
 var perfil: Dictionary = {

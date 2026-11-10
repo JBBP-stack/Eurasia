@@ -2,6 +2,9 @@ extends CanvasLayer
 ## Ficha inicial del personaje. Se muestra sobre la habitación hasta comenzar.
 
 func _ready() -> void:
+	if EstadoJuego.partida_iniciada:
+		queue_free()
+		return
 	layer = 100
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_crear_ficha()
@@ -83,5 +86,6 @@ func _agregar_dato(contenedor: VBoxContainer, nombre: String, valor: String) -> 
 
 
 func _comenzar() -> void:
+	EstadoJuego.partida_iniciada = true
 	get_tree().paused = false
 	queue_free()

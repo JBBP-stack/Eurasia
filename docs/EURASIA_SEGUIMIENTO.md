@@ -18,7 +18,7 @@ Actualizado: 10/11/2026
 - [ ] Integrar el análisis real de noticias cuando se incorpore Claude.
 - [ ] Implementar consumo y compra de comida cuando se definan sus reglas.
 - [ ] Distribuir los objetos interactivos de la habitación sin alterar movimiento, cámara ni colisiones.
-- [ ] Diseñar el escenario del banco y reservar sus operaciones para la última fase funcional.
+- [ ] Completar la escena del banco y sus puntos de interacción; reservar las operaciones financieras para la última fase funcional.
 
 ## Notas
 
@@ -27,4 +27,5 @@ Actualizado: 10/11/2026
 
 ## En curso
 
-- [ ] **Diccionario financiero en la habitación.** Libro interactivo con búsqueda local de términos y definiciones breves; pendiente de validación en Godot.
+- [ ] **Diccionario financiero en la habitación.** El panel ahora queda por encima del HUD y el buzón; pendiente de confirmar la lectura en Godot.
+- [ ] **Escenario provisional del banco.** Acceso desde la puerta superior, retorno a la posición anterior y mostrador/cajero visuales; sin operaciones financieras.

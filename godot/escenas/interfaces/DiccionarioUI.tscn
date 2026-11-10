@@ -3,4 +3,5 @@
 [ext_resource type="Script" path="res://escenas/interfaces/DiccionarioUI.gd" id="1_diccionario"]
 
 [node name="DiccionarioUI" type="CanvasLayer"]
+layer = 30
 script = ExtResource("1_diccionario")

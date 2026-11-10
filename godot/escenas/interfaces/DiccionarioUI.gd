@@ -172,6 +172,7 @@ func _cerrar_diccionario() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not _abierta:
 		return
-	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
-		_cerrar_diccionario()
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_ESCAPE:
+			_cerrar_diccionario()
 		get_viewport().set_input_as_handled()
