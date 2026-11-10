@@ -13,7 +13,7 @@ Actualizado: 10/11/2026
 - [x] **Acceso al estado del análisis desde el portátil.** El bloqueo depende de que termine el reparto y de que se hayan recogido todas las noticias del día. La integración real con Claude queda separada.
 - [x] **Consulta de existencias en la nevera.** La interacción muestra la cantidad actual de comida de EstadoJuego; no consume ni compra raciones. Confirmado por el usuario.
 - [x] **Diccionario financiero ampliado.** Búsqueda local, panel legible y siete conceptos con ejemplos. Confirmado por el usuario.
-- [x] **Escena provisional y acceso al banco.** La puerta permite entrar y volver a la habitación conservando la posición del personaje; no incluye operaciones financieras. Confirmado por el usuario.
+- [x] **Escena y acceso al banco.** La puerta permite entrar y volver a la habitación conservando la posición del personaje; acceso confirmado en Godot. Confirmado por el usuario.
 - [x] **Teléfono provisional.** La interacción informa que no hay llamadas pendientes; no altera el estado económico. Confirmado por el usuario.
 
 ## Pendiente
@@ -30,4 +30,4 @@ Actualizado: 10/11/2026
 
 ## En curso
 
-- [ ] **Banco funcional provisional.** Cuenta y efectivo, ingresos/retiradas, compra/venta con confirmación, historial persistente y accesos desde ventanilla/cajero. Usa los tres activos actuales, precio fijo de prueba y comisión cero; pendiente de validación en Godot.
+- [ ] **Operaciones bancarias provisionales.** Interfaz de cuenta, efectivo, inversiones e historial; depósitos, retiradas y compra/venta con confirmación y guardado persistente. Usa los tres activos actuales, precios fijos de prueba y comisión cero; falta validar las operaciones en Godot.
