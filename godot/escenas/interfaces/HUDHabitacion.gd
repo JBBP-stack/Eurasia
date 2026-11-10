@@ -13,6 +13,7 @@ var _temporizador_mensaje: Timer
 func _ready() -> void:
 	layer = 20
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	add_to_group("hud_habitacion")
 	_crear_interfaz()
 	EstadoJuego.dia_cambiado.connect(_al_cambiar_dia)
 	NoticiasManager.decision_resuelta.connect(_al_resolver_decision)
@@ -132,12 +133,12 @@ func _al_resolver_decision(_noticia_id: String, _opcion_id: String, _efecto: Dic
 
 func _dormir() -> void:
 	if NoticiasManager.avanzar_dia():
-		_mostrar_mensaje("Has pasado a %s." % EstadoJuego.etiqueta_dia())
+		mostrar_mensaje_temporal("Has pasado a %s." % EstadoJuego.etiqueta_dia())
 	else:
-		_mostrar_mensaje(NoticiasManager.motivo_no_puede_dormir())
+		mostrar_mensaje_temporal(NoticiasManager.motivo_no_puede_dormir())
 
 
-func _mostrar_mensaje(texto: String) -> void:
+func mostrar_mensaje_temporal(texto: String) -> void:
 	_mensaje.text = texto
 	_mensaje.visible = true
 	_temporizador_mensaje.start()
