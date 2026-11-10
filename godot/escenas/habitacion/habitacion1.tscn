@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" path="res://escenas/habitacion/Buzon.tscn" id="6_buzon"]
 [ext_resource type="PackedScene" path="res://escenas/habitacion/Cama.tscn" id="7_cama"]
 [ext_resource type="PackedScene" path="res://escenas/habitacion/Portatil.tscn" id="8_portatil"]
+[ext_resource type="PackedScene" path="res://escenas/habitacion/Nevera.tscn" id="9_nevera"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7r0pk"]
 texture = ExtResource("2_xym36")
@@ -312,7 +313,9 @@ tile_set = SubResource("TileSet_inxgb")
 [node name="Cama" parent="." unique_id=1020421977 instance=ExtResource("7_cama")]
 position = Vector2(34, 100)
 
-[node name="Portatil" parent="." instance=ExtResource("8_portatil")]
+[node name="Portatil" parent="." unique_id=627521874 instance=ExtResource("8_portatil")]
+
+[node name="Nevera" parent="." unique_id=843991717 instance=ExtResource("9_nevera")]
 
 [node name="Jugador" parent="." unique_id=1196908318 instance=ExtResource("3_xym36")]
 position = Vector2(100, 100)
