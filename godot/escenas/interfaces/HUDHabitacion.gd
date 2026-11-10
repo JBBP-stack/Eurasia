@@ -24,6 +24,8 @@ func _ready() -> void:
 	SistemaMercado.precios_actualizados.connect(_al_actualizar_finanzas)
 	EstadoJuego.estado_vital_actualizado.connect(_al_actualizar_finanzas)
 	GestorPartida.resumen_dia.connect(_al_recibir_resumen_dia)
+	GestorPartida.consecuencia_aplicada.connect(func(_id: String, texto: String) -> void:
+		mostrar_mensaje_temporal("Consecuencia de tu decisión: " + texto, 8.0))
 	NoticiasManager.noticias_actualizadas.connect(func(_c: int) -> void: actualizar())
 	actualizar()
 

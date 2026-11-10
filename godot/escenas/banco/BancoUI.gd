@@ -281,7 +281,7 @@ func _crear_pagina_inversiones() -> void:
 	operar.add_child(_mensaje_inversion)
 
 	var ayuda := Label.new()
-	ayuda.text = "Acciones enteras pagadas con el saldo de la cuenta. Máximo %d posiciones activas. La bolsa cierra fines de semana y festivos." % SistemaFinanciero.MAX_POSICIONES
+	ayuda.text = "Acciones enteras pagadas con el saldo de la cuenta. Máximo %d posiciones activas. Puedes operar cualquier día: si no hay sesión, se usa el último precio de cierre." % SistemaFinanciero.MAX_POSICIONES
 	ayuda.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	ayuda.modulate = Color(1, 1, 1, 0.75)
 	operar.add_child(ayuda)
@@ -336,10 +336,10 @@ func abrir_banco(origen: String = "ventanilla") -> void:
 	_abierto = true
 	_fondo.visible = true
 	_panel.visible = true
+	# Desde el cajero se abre la pestaña de efectivo, pero todas las operaciones están disponibles.
 	var desde_cajero := origen == "cajero"
-	_pestanas.set_tab_disabled(TAB_INVERSIONES, desde_cajero)
 	_pestanas.current_tab = TAB_EFECTIVO if desde_cajero else TAB_CUENTA
-	_mensaje.text = "Cajero automático: solo operaciones de efectivo." if desde_cajero else ""
+	_mensaje.text = ""
 	_mensaje_efectivo.text = ""
 	_mensaje_inversion.text = ""
 	_cargar_activos()
@@ -391,7 +391,7 @@ func _actualizar_datos() -> void:
 	if _lista_cartera.item_count == 0:
 		_lista_cartera.add_item("No tienes acciones en cartera.")
 
-	var estado_bolsa := "Bolsa abierta" if SistemaMercado.mercado_abierto() else "Bolsa cerrada hoy (%s)" % SistemaMercado.motivo_mercado_cerrado()
+	var estado_bolsa := SistemaMercado.texto_estado_bolsa()
 	_aviso_mercado.text = "%s · comisión %.2f %% (mínimo %s €) · cotizaciones reales de empresas con nombre ficticio, convertidas a euros." % [
 		estado_bolsa,
 		float(Reglas.entero("mercado/comision_puntos_base", 0)) / 100.0,
@@ -430,7 +430,7 @@ func _actualizar_estimacion(_valor: Variant = null) -> void:
 		EstadoJuego.euros(importe + comision if es_compra else importe - comision),
 		EstadoJuego.euros(importe),
 		EstadoJuego.euros(comision),
-		"" if SistemaMercado.mercado_abierto() else " · la bolsa está cerrada hoy"
+		"" if SistemaMercado.mercado_abierto() else " · %s" % SistemaMercado.texto_estado_bolsa().to_lower()
 	]
 
 
@@ -472,7 +472,7 @@ func _preparar_inversion() -> void:
 	if activo_id.is_empty():
 		_mensaje_inversion.text = "No hay activos disponibles."
 		return
-	if not SistemaMercado.mercado_abierto():
+	if not SistemaMercado.se_puede_operar():
 		_mensaje_inversion.text = "La bolsa está cerrada hoy (%s). Podrás operar el próximo día con sesión." % SistemaMercado.motivo_mercado_cerrado()
 		return
 	var cantidad := int(_cantidad_inversion.value)

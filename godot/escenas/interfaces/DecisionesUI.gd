@@ -7,6 +7,7 @@ var _fondo: ColorRect
 var _titulo: Label
 var _contenido: VBoxContainer
 var _abierta: bool = false
+var _consecuencias: Dictionary = {}  # noticia_id -> texto de la consecuencia aplicada
 
 
 func _ready() -> void:
@@ -17,6 +18,9 @@ func _ready() -> void:
 	NoticiasManager.noticias_actualizadas.connect(func(_c: int) -> void: _refrescar_si_abierta())
 	NoticiasManager.decision_resuelta.connect(func(_n: String, _o: String, _e: Dictionary) -> void: _refrescar_si_abierta())
 	EstadoJuego.dia_cambiado.connect(func(_d: int) -> void: _refrescar_si_abierta())
+	GestorPartida.consecuencia_aplicada.connect(func(noticia_id: String, texto: String) -> void:
+		_consecuencias[noticia_id] = texto
+		_refrescar_si_abierta())
 	_cerrar()
 
 
@@ -166,7 +170,10 @@ func _agregar_tarjeta(decision: Dictionary) -> void:
 		if elegida:
 			var explicacion := Label.new()
 			explicacion.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-			explicacion.text = "Consecuencia: " + str(opcion.get("explicacion", ""))
+			explicacion.text = "%s%s" % [
+				("Lo que ha pasado: %s\n\n" % _consecuencias[noticia_id]) if _consecuencias.has(noticia_id) else "",
+				str(opcion.get("explicacion", ""))
+			]
 			caja.add_child(explicacion)
 
 

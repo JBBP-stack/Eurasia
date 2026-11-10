@@ -1,6 +1,6 @@
 {
 	"escenario": "Crisis financiera de 2008",
-	"descripcion": "Selección editorial de hechos reales adaptados por EURASIA con nombres ficticios. 'archivo': true = hemeroteca de los dos años anteriores (visible desde el inicio). Los campos de 'origen' son internos y solo se revelan en el informe final. 'falsa': true = invención didáctica.",
+	"descripcion": "Selección editorial de hechos reales adaptados por EURASIA con nombres ficticios: noticias económicas y primeras planas generales. 'archivo': true = hemeroteca de los dos años anteriores. 'origen' es interno y solo se revela en el informe final. 'falsa': true = invención didáctica.",
 	"noticias": [
 		{
 			"id": "arch_tipos_20060920",
@@ -19,7 +19,8 @@
 				"titulo_real": "La Reserva Federal mantiene los tipos en el 5,25 %",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
-			}
+			},
+			"seccion": "Hemeroteca"
 		},
 		{
 			"id": "arch_imperial_20070207",
@@ -38,7 +39,8 @@
 				"titulo_real": "HSBC advierte de pérdidas por las hipotecas subprime en EE. UU.",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
-			}
+			},
+			"seccion": "Hemeroteca"
 		},
 		{
 			"id": "arch_catay_20070227",
@@ -57,7 +59,8 @@
 				"titulo_real": "La bolsa de Shanghái cae casi un 9 % y provoca una venta global",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
-			}
+			},
+			"seccion": "Hemeroteca"
 		},
 		{
 			"id": "arch_nuevosiglo_20070402",
@@ -76,7 +79,8 @@
 				"titulo_real": "New Century Financial se declara en quiebra",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
-			}
+			},
+			"seccion": "Hemeroteca"
 		},
 		{
 			"id": "arch_osborne_20070622",
@@ -95,7 +99,8 @@
 				"titulo_real": "Bear Stearns rescata uno de sus hedge funds expuestos a hipotecas subprime",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
-			}
+			},
+			"seccion": "Hemeroteca"
 		},
 		{
 			"id": "arch_galia_20070809",
@@ -114,7 +119,8 @@
 				"titulo_real": "BNP Paribas congela tres fondos; el BCE inyecta 95.000 millones de euros",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
-			}
+			},
+			"seccion": "Hemeroteca"
 		},
 		{
 			"id": "arch_roca_20070914",
@@ -133,7 +139,8 @@
 				"titulo_real": "Northern Rock recibe ayuda de emergencia del Banco de Inglaterra; pánico bancario",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
-			}
+			},
+			"seccion": "Hemeroteca"
 		},
 		{
 			"id": "arch_tipos_20070918",
@@ -152,7 +159,8 @@
 				"titulo_real": "La Reserva Federal baja los tipos 50 puntos básicos, al 4,75 %",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
-			}
+			},
+			"seccion": "Hemeroteca"
 		},
 		{
 			"id": "arch_linares_20071030",
@@ -171,7 +179,8 @@
 				"titulo_real": "Stan O'Neal deja Merrill Lynch tras una amortización de 8.400 millones de dólares",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
-			}
+			},
+			"seccion": "Hemeroteca"
 		},
 		{
 			"id": "arch_campina_20080111",
@@ -190,7 +199,8 @@
 				"titulo_real": "Bank of America compra Countrywide",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
-			}
+			},
+			"seccion": "Hemeroteca"
 		},
 		{
 			"id": "arch_tipos_20080122",
@@ -209,7 +219,8 @@
 				"titulo_real": "La Reserva Federal baja los tipos 75 puntos básicos en una reunión de emergencia",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
-			}
+			},
+			"seccion": "Hemeroteca"
 		},
 		{
 			"id": "arch_sociedad_20080124",
@@ -228,7 +239,8 @@
 				"titulo_real": "Société Générale descubre un fraude de 4.900 millones de euros",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
-			}
+			},
+			"seccion": "Hemeroteca"
 		},
 		{
 			"id": "arch_roca_20080217",
@@ -247,7 +259,8 @@
 				"titulo_real": "El Reino Unido nacionaliza Northern Rock",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
-			}
+			},
+			"seccion": "Hemeroteca"
 		},
 		{
 			"id": "arch_osborne_20080316",
@@ -266,7 +279,8 @@
 				"titulo_real": "JPMorgan compra Bear Stearns por 2 dólares por acción con apoyo de la Reserva Federal",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
-			}
+			},
+			"seccion": "Hemeroteca"
 		},
 		{
 			"id": "arch_bcu_20080703",
@@ -285,7 +299,8 @@
 				"titulo_real": "El BCE sube los tipos al 4,25 %",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
-			}
+			},
+			"seccion": "Hemeroteca"
 		},
 		{
 			"id": "arch_indimar_20080711",
@@ -304,7 +319,8 @@
 				"titulo_real": "Cae IndyMac; el petróleo marca un récord de 147 dólares",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
-			}
+			},
+			"seccion": "Hemeroteca"
 		},
 		{
 			"id": "arch_torreval_20080715",
@@ -323,7 +339,8 @@
 				"titulo_real": "Martinsa-Fadesa presenta concurso de acreedores",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
-			}
+			},
+			"seccion": "Hemeroteca"
 		},
 		{
 			"id": "arch_ley_20080730",
@@ -342,11 +359,12 @@
 				"titulo_real": "Se firma la Housing and Economic Recovery Act",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
-			}
+			},
+			"seccion": "Hemeroteca"
 		},
 		{
 			"id": "albion_20080901",
-			"disponible_desde": "2008-09-01",
+			"disponible_desde": "2008-08-30",
 			"medio": "El Observador Financiero",
 			"titulo": "El ministro de Hacienda de Albión advierte de la peor situación económica en sesenta años",
 			"resumen": "En una entrevista, el ministro reconoce que la economía afronta la coyuntura más difícil en décadas y que la crisis será más profunda y duradera de lo esperado.",
@@ -354,14 +372,15 @@
 			"prioridad": 7,
 			"pregunta_id": "",
 			"falsa": false,
-			"archivo": false,
+			"archivo": true,
 			"origen": {
 				"fecha_evento": "2008-08-30",
-				"fecha_publicacion": "2008-09-01",
+				"fecha_publicacion": "2008-08-30",
 				"titulo_real": "Alistair Darling: la economía afronta su peor momento en 60 años",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
-			}
+			},
+			"seccion": "Hemeroteca"
 		},
 		{
 			"id": "huracan_20080901",
@@ -373,14 +392,15 @@
 			"prioridad": 6,
 			"pregunta_id": "",
 			"falsa": false,
-			"archivo": false,
+			"archivo": true,
 			"origen": {
 				"fecha_evento": "2008-09-01",
 				"fecha_publicacion": "2008-09-01",
 				"titulo_real": "El huracán Gustav toca tierra en Luisiana (festivo del Día del Trabajo)",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
-			}
+			},
+			"seccion": "Hemeroteca"
 		},
 		{
 			"id": "paro_liria_20080902",
@@ -390,23 +410,205 @@
 			"resumen": "Es la mayor subida en un mes de agosto en décadas. La construcción y los servicios concentran la destrucción de empleo tras el frenazo inmobiliario.",
 			"categoria": "empleo",
 			"prioridad": 9,
-			"pregunta_id": "p_paro",
+			"pregunta_id": "",
 			"falsa": false,
-			"archivo": false,
+			"archivo": true,
 			"origen": {
 				"fecha_evento": "2008-09-02",
 				"fecha_publicacion": "2008-09-02",
 				"titulo_real": "El paro registrado sube en 103.840 personas en agosto",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
+			},
+			"seccion": "Hemeroteca"
+		},
+		{
+			"id": "goryeo_20080903",
+			"disponible_desde": "2008-09-03",
+			"medio": "El Observador Financiero",
+			"titulo": "Casa Halvard Hermanos negocia la venta de una participación a un banco de Goryeo",
+			"resumen": "El banco de inversión busca capital fresco para tapar sus pérdidas inmobiliarias. Las conversaciones con un banco estatal extranjero avanzan con dificultad.",
+			"categoria": "banca",
+			"prioridad": 7,
+			"pregunta_id": "",
+			"falsa": false,
+			"archivo": true,
+			"origen": {
+				"fecha_evento": "2008-09-03",
+				"fecha_publicacion": "2008-09-03",
+				"titulo_real": "Lehman negocia con el Korea Development Bank",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			},
+			"seccion": "Hemeroteca"
+		},
+		{
+			"id": "bcu_20080904",
+			"disponible_desde": "2008-09-04",
+			"medio": "Diario Económico de Liria",
+			"titulo": "El Banco Central de la Unión mantiene los tipos en el 4,25 % y rebaja sus previsiones",
+			"resumen": "El organismo prevé menos crecimiento y advierte de que la inflación seguirá alta. La bolsa de Ostria cae con fuerza por el temor a una recesión.",
+			"categoria": "politica_monetaria",
+			"prioridad": 8,
+			"pregunta_id": "",
+			"falsa": false,
+			"archivo": true,
+			"origen": {
+				"fecha_evento": "2008-09-04",
+				"fecha_publicacion": "2008-09-04",
+				"titulo_real": "El BCE mantiene los tipos en el 4,25 %; el Dow cae 344 puntos",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			},
+			"seccion": "Hemeroteca"
+		},
+		{
+			"id": "empleo_ostria_20080905",
+			"disponible_desde": "2008-09-05",
+			"seccion": "Economía",
+			"medio": "El Observador Financiero",
+			"titulo": "El paro en Ostria sube al 6,1 %, el más alto en cinco años",
+			"resumen": "La economía de la Federación de Ostria destruyó empleo por octavo mes consecutivo. Las empresas recortan plantilla en la construcción, la industria y el comercio, y la tasa de paro da un salto de cuatro décimas en un solo mes.\n\nLos analistas temen que el desempleo alimente un círculo vicioso: menos empleo significa menos consumo, más impagos de hipotecas y más pérdidas para los bancos que ya arrastran problemas.",
+			"categoria": "empleo",
+			"prioridad": 9,
+			"pregunta_id": "",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-05",
+				"fecha_publicacion": "2008-09-05",
+				"titulo_real": "El desempleo en EE. UU. sube al 6,1 % en agosto",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
 			}
 		},
 		{
-			"id": "falsa_oro_20080902",
-			"disponible_desde": "2008-09-02",
+			"id": "euribor_liria_20080905",
+			"disponible_desde": "2008-09-05",
+			"seccion": "Economía de Liria",
+			"medio": "Diario Económico de Liria",
+			"titulo": "Las hipotecas lirias se encarecen y la venta de pisos se hunde",
+			"resumen": "El índice al que están referenciadas la mayoría de las hipotecas de Liria sigue por encima del 5 %, y las cuotas mensuales de muchas familias han subido más de cien euros en un año.\n\nMientras tanto, las promotoras acumulan pisos sin vender y algunas empiezan a tener problemas para pagar a sus proveedores. «Nunca habíamos visto la oficina tan vacía», reconoce el responsable de una inmobiliaria del centro de la capital.",
+			"categoria": "inmobiliario",
+			"prioridad": 8,
+			"pregunta_id": "p_cunado",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-05",
+				"fecha_publicacion": "2008-09-05",
+				"titulo_real": "El euríbor por encima del 5 % y caída de la compraventa de viviendas en España",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			}
+		},
+		{
+			"id": "convencion_20080905",
+			"disponible_desde": "2008-09-05",
+			"seccion": "Portada",
+			"medio": "El Mundo Hoy (diario generalista)",
+			"titulo": "El veterano senador acepta la candidatura a la presidencia de Ostria",
+			"resumen": "Ante miles de seguidores, el candidato del partido en el Gobierno cerró anoche la convención de su formación con un discurso centrado en la seguridad y en la reforma de la economía. Su compañera de candidatura, una gobernadora casi desconocida hasta hace una semana, se ha convertido en la sensación de la campaña.\n\nLas encuestas muestran un empate técnico con el joven senador de la oposición a dos meses de las elecciones. La economía ya es la principal preocupación de los votantes.",
+			"categoria": "politica",
+			"prioridad": 7,
+			"pregunta_id": "",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-05",
+				"fecha_publicacion": "2008-09-05",
+				"titulo_real": "John McCain acepta la nominación republicana (convención del 4 de septiembre)",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			}
+		},
+		{
+			"id": "huracan_ike_20080905",
+			"disponible_desde": "2008-09-05",
+			"seccion": "Internacional",
+			"medio": "El Mundo Hoy (diario generalista)",
+			"titulo": "Un huracán de categoría 4 avanza por el Atlántico hacia el Caribe",
+			"resumen": "Los meteorólogos vigilan con preocupación un huracán que ha ganado fuerza muy rápidamente en mar abierto. Varias islas del Caribe preparan evacuaciones y la costa petrolera de Ostria no descarta verse afectada la próxima semana.\n\nEs la tercera gran tormenta en apenas quince días: una semana antes, otro huracán obligó a cerrar plataformas petrolíferas en el golfo de Ostria.",
+			"categoria": "internacional",
+			"prioridad": 5,
+			"pregunta_id": "",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-05",
+				"fecha_publicacion": "2008-09-05",
+				"titulo_real": "El huracán Ike alcanza la categoría 4 en el Atlántico",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			}
+		},
+		{
+			"id": "plan_hipotecarias_20080906",
+			"disponible_desde": "2008-09-06",
+			"seccion": "Portada",
+			"medio": "El Observador Financiero",
+			"titulo": "El Gobierno de Ostria prepara la toma de control de Fanara y Fredan",
+			"resumen": "Según fuentes oficiales citadas por varios periódicos, el Gobierno ultima un plan para hacerse cargo de las dos grandes hipotecarias del país, que respaldan casi la mitad de las hipotecas de Ostria y cuyas pérdidas no dejan de crecer.\n\nLos directivos de ambas entidades fueron convocados ayer por sorpresa a una reunión con el ministro de Hacienda y el presidente del banco central. Nadie sabe todavía qué pasará con los accionistas: «El objetivo es proteger el sistema, no a los inversores», resume un analista.",
+			"categoria": "banca",
+			"prioridad": 10,
+			"pregunta_id": "p_fanara",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-06",
+				"fecha_publicacion": "2008-09-06",
+				"titulo_real": "El Tesoro de EE. UU. prepara la intervención de Fannie Mae y Freddie Mac",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			}
+		},
+		{
+			"id": "paralimpicos_20080906",
+			"disponible_desde": "2008-09-06",
+			"seccion": "Deportes",
+			"medio": "Gaceta Deportiva de Liria",
+			"titulo": "Arrancan los Juegos Paralímpicos de Catay con récord de participación",
+			"resumen": "Cerca de 4.000 deportistas de 148 países participan en los Juegos Paralímpicos, que se inauguraron con una ceremonia espectacular en el mismo estadio que acogió los Juegos Olímpicos hace unas semanas.\n\nLa delegación de Liria aspira a superar su medallero anterior, sobre todo en natación y atletismo.",
+			"categoria": "deportes",
+			"prioridad": 4,
+			"pregunta_id": "",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-06",
+				"fecha_publicacion": "2008-09-06",
+				"titulo_real": "Inauguración de los Juegos Paralímpicos de Pekín",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			}
+		},
+		{
+			"id": "hanna_20080906",
+			"disponible_desde": "2008-09-06",
+			"seccion": "Internacional",
+			"medio": "El Mundo Hoy (diario generalista)",
+			"titulo": "Una tormenta tropical toca tierra en la costa este de Ostria",
+			"resumen": "La tormenta ha dejado lluvias torrenciales y cortes de luz en varios estados, aunque con menos daños de los temidos. Las autoridades piden no bajar la guardia: el gran huracán que avanza por el Caribe podría llegar al golfo la próxima semana.",
+			"categoria": "internacional",
+			"prioridad": 4,
+			"pregunta_id": "",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-06",
+				"fecha_publicacion": "2008-09-06",
+				"titulo_real": "La tormenta Hanna toca tierra en Carolina del Sur",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			}
+		},
+		{
+			"id": "falsa_oro_20080906",
+			"disponible_desde": "2008-09-06",
+			"seccion": "Opinión",
 			"medio": "Cadena de mensajes reenviada",
 			"titulo": "Venden todo: el oro se va a multiplicar por diez este mes",
-			"resumen": "Me lo ha pasado mi cuñado y él lo leyó en un foro: los grandes bancos están escondiendo el oro porque saben que va a subir muchísimo. Hay que meter todos los ahorros ya, antes de que se enteren los demás. ¡Reenvíalo a tus contactos!",
+			"resumen": "Me lo ha pasado mi cuñado y él lo leyó en un foro: los grandes bancos están escondiendo el oro porque saben que va a subir muchísimo. Hay que meter todos los ahorros ya, antes de que se enteren los demás.\n\n¡Reenvíalo a tus contactos! Los medios no te lo van a contar.",
 			"categoria": "rumor",
 			"prioridad": 2,
 			"pregunta_id": "",
@@ -421,90 +623,15 @@
 			}
 		},
 		{
-			"id": "goryeo_20080903",
-			"disponible_desde": "2008-09-03",
-			"medio": "El Observador Financiero",
-			"titulo": "Casa Halvard Hermanos negocia la venta de una participación a un banco de Goryeo",
-			"resumen": "El banco de inversión busca capital fresco para tapar sus pérdidas inmobiliarias. Las conversaciones con un banco estatal extranjero avanzan con dificultad.",
-			"categoria": "banca",
-			"prioridad": 7,
-			"pregunta_id": "",
-			"falsa": false,
-			"archivo": false,
-			"origen": {
-				"fecha_evento": "2008-09-03",
-				"fecha_publicacion": "2008-09-03",
-				"titulo_real": "Lehman negocia con el Korea Development Bank",
-				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
-				"fuente_url": ""
-			}
-		},
-		{
-			"id": "bcu_20080904",
-			"disponible_desde": "2008-09-04",
-			"medio": "Diario Económico de Liria",
-			"titulo": "El Banco Central de la Unión mantiene los tipos en el 4,25 % y rebaja sus previsiones",
-			"resumen": "El organismo prevé menos crecimiento y advierte de que la inflación seguirá alta. La bolsa de Ostria cae con fuerza por el temor a una recesión.",
-			"categoria": "politica_monetaria",
-			"prioridad": 8,
-			"pregunta_id": "",
-			"falsa": false,
-			"archivo": false,
-			"origen": {
-				"fecha_evento": "2008-09-04",
-				"fecha_publicacion": "2008-09-04",
-				"titulo_real": "El BCE mantiene los tipos en el 4,25 %; el Dow cae 344 puntos",
-				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
-				"fuente_url": ""
-			}
-		},
-		{
-			"id": "empleo_ostria_20080905",
-			"disponible_desde": "2008-09-05",
-			"medio": "El Observador Financiero",
-			"titulo": "El paro en Ostria sube al 6,1 %, el más alto en cinco años",
-			"resumen": "La economía de Ostria destruye empleo por octavo mes consecutivo.",
-			"categoria": "empleo",
-			"prioridad": 8,
-			"pregunta_id": "",
-			"falsa": false,
-			"archivo": false,
-			"origen": {
-				"fecha_evento": "2008-09-05",
-				"fecha_publicacion": "2008-09-05",
-				"titulo_real": "El desempleo en EE. UU. sube al 6,1 % en agosto",
-				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
-				"fuente_url": ""
-			}
-		},
-		{
-			"id": "plan_hipotecarias_20080906",
-			"disponible_desde": "2008-09-06",
-			"medio": "El Observador Financiero",
-			"titulo": "El Gobierno de Ostria prepara la toma de control de Fanara y Fredan, según la prensa",
-			"resumen": "Fuentes oficiales indican que el Gobierno ultima un plan para hacerse cargo de las dos grandes hipotecarias, cuyas pérdidas no dejan de crecer.",
-			"categoria": "banca",
-			"prioridad": 8,
-			"pregunta_id": "",
-			"falsa": false,
-			"archivo": false,
-			"origen": {
-				"fecha_evento": "2008-09-06",
-				"fecha_publicacion": "2008-09-06",
-				"titulo_real": "El Tesoro de EE. UU. prepara la intervención de Fannie Mae y Freddie Mac",
-				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
-				"fuente_url": ""
-			}
-		},
-		{
 			"id": "intervencion_20080907",
 			"disponible_desde": "2008-09-07",
+			"seccion": "Portada",
 			"medio": "El Observador Financiero",
 			"titulo": "El Gobierno de Ostria interviene Fanara y Fredan",
-			"resumen": "Las dos hipotecarias, que respaldan casi la mitad de las hipotecas del país, pasan a estar bajo tutela pública. Se sustituye a sus directivos y se suspenden los dividendos. Los accionistas quedan en último lugar.",
+			"resumen": "Las dos hipotecarias pasan a estar bajo tutela pública. El Estado podrá inyectar hasta 100.000 millones de coronas en cada una a cambio de acciones preferentes, se sustituye a sus presidentes y se suspenden los dividendos.\n\n«Era la mejor de las malas opciones», dijo el ministro de Hacienda. Los accionistas quedan en último lugar: sus títulos seguirán existiendo, pero cualquier beneficio futuro irá primero al Estado.",
 			"categoria": "banca",
 			"prioridad": 10,
-			"pregunta_id": "p_fannie",
+			"pregunta_id": "p_fredan",
 			"falsa": false,
 			"archivo": false,
 			"origen": {
@@ -516,20 +643,101 @@
 			}
 		},
 		{
+			"id": "tenis_20080907",
+			"disponible_desde": "2008-09-07",
+			"seccion": "Deportes",
+			"medio": "Gaceta Deportiva de Liria",
+			"titulo": "La tenista ostriana recupera el número uno tras ganar el Abierto de Ostria",
+			"resumen": "Seis años después de su primer título en el torneo, la jugadora volvió a imponerse en la final y recuperará mañana el primer puesto del ranking mundial. «Nunca dejé de creer», dijo entre lágrimas.\n\nEl cuadro masculino se resolverá mañana, después de que la lluvia obligara a aplazar las semifinales.",
+			"categoria": "deportes",
+			"prioridad": 3,
+			"pregunta_id": "",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-07",
+				"fecha_publicacion": "2008-09-07",
+				"titulo_real": "Serena Williams gana el US Open y recupera el número 1",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			}
+		},
+		{
+			"id": "huracan_caribia_20080907",
+			"disponible_desde": "2008-09-07",
+			"seccion": "Internacional",
+			"medio": "El Mundo Hoy (diario generalista)",
+			"titulo": "El huracán golpea la isla de Caribia: cientos de miles de evacuados",
+			"resumen": "Con vientos de más de 200 kilómetros por hora, el huracán ha tocado tierra en Caribia, donde las autoridades han evacuado a cientos de miles de personas. Hay viviendas destruidas y cosechas arrasadas.\n\nLos modelos prevén que la tormenta entre después en el golfo de Ostria, donde se concentran muchas refinerías.",
+			"categoria": "internacional",
+			"prioridad": 5,
+			"pregunta_id": "",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-07",
+				"fecha_publicacion": "2008-09-07",
+				"titulo_real": "El huracán Ike toca tierra en Cuba",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			}
+		},
+		{
 			"id": "rebote_20080908",
 			"disponible_desde": "2008-09-08",
+			"seccion": "Portada",
 			"medio": "El Observador Financiero",
-			"titulo": "Las bolsas suben tras el rescate, pero las acciones de Fanara y Fredan se hunden cerca de un 90 %",
-			"resumen": "Los mercados celebran que el Estado garantice la financiación hipotecaria. Para los accionistas de las dos entidades, en cambio, la intervención supone perder casi todo su dinero.",
+			"titulo": "Las bolsas celebran el rescate, pero Fanara, Fredan y Halvard se hunden",
+			"resumen": "La bolsa de Ostria sube con fuerza: los inversores celebran que el Estado garantice la financiación de las hipotecas. Los bancos con muchos títulos hipotecarios en balance son los grandes ganadores del día.\n\nPero no todos suben. Las acciones de Fanara y Fredan pierden cerca de un 90 % y Casa Halvard Hermanos cae un 13 %, lastrada por las dudas sobre sus inversiones inmobiliarias y sus negociaciones con un banco extranjero.",
 			"categoria": "mercados",
-			"prioridad": 9,
+			"prioridad": 10,
+			"pregunta_id": "p_halvard",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-08",
+				"fecha_publicacion": "2008-09-08",
+				"titulo_real": "Las bolsas suben tras el rescate; Fannie y Freddie se hunden; Lehman cae",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			}
+		},
+		{
+			"id": "helvecio_20080908",
+			"disponible_desde": "2008-09-08",
+			"seccion": "Deportes",
+			"medio": "Gaceta Deportiva de Liria",
+			"titulo": "El tenista helvecio gana su quinto Abierto de Ostria consecutivo",
+			"resumen": "El campeón helvecio, que llegaba al torneo después de perder el número uno, se impuso con autoridad en la final, que se jugó en lunes por la lluvia. Iguala así un récord que duraba más de ochenta años.\n\nEl número uno lirio cayó en semifinales tras un partido aplazado dos veces por el mal tiempo.",
+			"categoria": "deportes",
+			"prioridad": 3,
 			"pregunta_id": "",
 			"falsa": false,
 			"archivo": false,
 			"origen": {
 				"fecha_evento": "2008-09-08",
 				"fecha_publicacion": "2008-09-08",
-				"titulo_real": "Las bolsas suben; Fannie y Freddie se hunden en bolsa",
+				"titulo_real": "Roger Federer gana su quinto US Open consecutivo",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			}
+		},
+		{
+			"id": "opep_20080908",
+			"disponible_desde": "2008-09-08",
+			"seccion": "Economía",
+			"medio": "Agencia de noticias de Albión",
+			"titulo": "El petróleo cae a su nivel más bajo en cinco meses antes de la reunión de los exportadores",
+			"resumen": "El barril ha perdido más de un 25 % desde el récord de julio, cuando superó las 147 coronas. La desaceleración económica reduce la demanda de combustible y los países exportadores se reúnen mañana para decidir si recortan la producción.\n\nPara las familias es un respiro: la gasolina empieza a bajar en las estaciones de servicio de Liria.",
+			"categoria": "energia",
+			"prioridad": 5,
+			"pregunta_id": "",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-08",
+				"fecha_publicacion": "2008-09-08",
+				"titulo_real": "El petróleo baja a mínimos de cinco meses; reunión de la OPEP",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
 			}
@@ -537,12 +745,13 @@
 		{
 			"id": "halvard_cae_20080909",
 			"disponible_desde": "2008-09-09",
+			"seccion": "Portada",
 			"medio": "El Observador Financiero",
 			"titulo": "Las acciones de Casa Halvard Hermanos se desploman un 45 %",
-			"resumen": "El banco de Goryeo suspende las conversaciones para entrar en su capital. Los inversores dudan de que Halvard pueda captar el dinero que necesita.",
+			"resumen": "El banco de Goryeo con el que negociaba la venta de una participación ha suspendido las conversaciones. Los inversores dudan de que Halvard pueda conseguir el capital que necesita para cubrir sus pérdidas inmobiliarias, y la acción vive su peor día en una década.\n\nEn las oficinas de algunos bancos de Liria se han visto clientes preguntando si sus depósitos están a salvo. «Nos llaman preguntando por el fondo de garantía», cuenta el director de una sucursal.",
 			"categoria": "banca",
 			"prioridad": 10,
-			"pregunta_id": "p_caida",
+			"pregunta_id": "p_garantia",
 			"falsa": false,
 			"archivo": false,
 			"origen": {
@@ -554,14 +763,55 @@
 			}
 		},
 		{
+			"id": "siam_20080909",
+			"disponible_desde": "2008-09-09",
+			"seccion": "Internacional",
+			"medio": "El Mundo Hoy (diario generalista)",
+			"titulo": "Un tribunal destituye al primer ministro de Siam por presentar un programa de cocina",
+			"resumen": "El Tribunal Constitucional de Siam ha decidido que el primer ministro violó la Constitución al cobrar por presentar un programa de recetas en televisión mientras ocupaba el cargo. La decisión agrava la crisis política del país, cuyos manifestantes ocupan la sede del Gobierno desde hace semanas.",
+			"categoria": "internacional",
+			"prioridad": 4,
+			"pregunta_id": "",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-09",
+				"fecha_publicacion": "2008-09-09",
+				"titulo_real": "El Tribunal Constitucional de Tailandia destituye a Samak Sundaravej",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			}
+		},
+		{
+			"id": "opep_recorte_20080909",
+			"disponible_desde": "2008-09-09",
+			"seccion": "Economía",
+			"medio": "Agencia de noticias de Albión",
+			"titulo": "Los países exportadores acuerdan recortar la producción de petróleo",
+			"resumen": "Tras una reunión maratoniana, el cártel de los grandes productores ha decidido reducir su producción para frenar la caída de precios. Algunos analistas dudan de que el recorte se cumpla: con la economía mundial frenando, la demanda sigue bajando.",
+			"categoria": "energia",
+			"prioridad": 5,
+			"pregunta_id": "",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-09",
+				"fecha_publicacion": "2008-09-09",
+				"titulo_real": "La OPEP acuerda recortar la producción de crudo",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			}
+		},
+		{
 			"id": "halvard_perdidas_20080910",
 			"disponible_desde": "2008-09-10",
+			"seccion": "Portada",
 			"medio": "El Observador Financiero",
 			"titulo": "Casa Halvard Hermanos pierde 3.900 millones y anuncia la venta de activos",
-			"resumen": "El banco presenta las mayores pérdidas trimestrales de su historia y planea separar sus inmuebles comerciales y vender parte de su gestora. La acción vuelve a caer.",
+			"resumen": "El banco ha adelantado sus resultados: las mayores pérdidas trimestrales de su historia. Su plan pasa por separar en otra sociedad sus inmuebles comerciales y vender la mayoría de su gestora de fondos.\n\nEl presidente asegura que la entidad es solvente y que no necesita ayuda. El mercado no se lo cree del todo: la acción vuelve a caer y ya vale un 75 % menos que a principios de año.",
 			"categoria": "banca",
 			"prioridad": 9,
-			"pregunta_id": "",
+			"pregunta_id": "p_chollo",
 			"falsa": false,
 			"archivo": false,
 			"origen": {
@@ -573,11 +823,52 @@
 			}
 		},
 		{
+			"id": "acelerador_20080910",
+			"disponible_desde": "2008-09-10",
+			"seccion": "Ciencia",
+			"medio": "El Mundo Hoy (diario generalista)",
+			"titulo": "Arranca el mayor acelerador de partículas del mundo... y el planeta sigue en su sitio",
+			"resumen": "Los científicos del gran laboratorio europeo de Helvecia han hecho circular por primera vez un haz de partículas por el anillo de 27 kilómetros del nuevo acelerador. Aplausos y champán en la sala de control.\n\nEn las últimas semanas habían circulado bulos que aseguraban que el experimento crearía un agujero negro capaz de tragarse la Tierra. Los físicos insisten en que nunca hubo riesgo alguno.",
+			"categoria": "ciencia",
+			"prioridad": 6,
+			"pregunta_id": "",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-10",
+				"fecha_publicacion": "2008-09-10",
+				"titulo_real": "El LHC del CERN hace circular su primer haz de protones",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			}
+		},
+		{
+			"id": "seleccion_20080910",
+			"disponible_desde": "2008-09-10",
+			"seccion": "Deportes",
+			"medio": "Gaceta Deportiva de Liria",
+			"titulo": "La selección liria golea 4-0 y lidera su grupo de clasificación para el Mundial",
+			"resumen": "Los campeones continentales siguen invictos con una actuación muy seria. El seleccionador pidió humildad: «Quedan muchos partidos y nadie regala nada».",
+			"categoria": "deportes",
+			"prioridad": 3,
+			"pregunta_id": "",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-10",
+				"fecha_publicacion": "2008-09-10",
+				"titulo_real": "España gana 4-0 a Armenia en la clasificación para el Mundial",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			}
+		},
+		{
 			"id": "halvard_comprador_20080911",
 			"disponible_desde": "2008-09-11",
+			"seccion": "Portada",
 			"medio": "El Observador Financiero",
-			"titulo": "Casa Halvard Hermanos busca comprador tras caer otro 42 % en bolsa",
-			"resumen": "Las agencias de calificación amenazan con rebajar su nota. El banco explora su venta completa.",
+			"titulo": "Casa Halvard Hermanos busca comprador tras caer otro 42 %",
+			"resumen": "Las agencias de calificación amenazan con rebajar su nota, lo que encarecería su financiación. Según la prensa, el banco ha contratado asesores para explorar su venta completa, y suenan como posibles compradores un banco de Albión y el Banco Continental de Ostria.\n\nLa acción ha perdido más del 90 % de su valor en lo que va de año.",
 			"categoria": "banca",
 			"prioridad": 9,
 			"pregunta_id": "",
@@ -592,11 +883,52 @@
 			}
 		},
 		{
+			"id": "confianza_liria_20080911",
+			"disponible_desde": "2008-09-11",
+			"seccion": "Economía de Liria",
+			"medio": "Diario Económico de Liria",
+			"titulo": "La confianza de los consumidores lirios cae a mínimos y las empresas frenan contrataciones",
+			"resumen": "Las familias lirias nunca habían sido tan pesimistas desde que existen registros. Los comercios notan la caída de ventas y muchas empresas aplazan contrataciones o recurren a horas extra en lugar de contratar.\n\n«Prefiero pagar horas extra a mis empleados que comprometerme con un contrato nuevo sin saber qué pasará en enero», explica la dueña de una empresa de logística.",
+			"categoria": "economia",
+			"prioridad": 8,
+			"pregunta_id": "p_horas",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-11",
+				"fecha_publicacion": "2008-09-11",
+				"titulo_real": "La confianza del consumidor en España en mínimos históricos",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			}
+		},
+		{
+			"id": "ike_evacuacion_20080911",
+			"disponible_desde": "2008-09-11",
+			"seccion": "Internacional",
+			"medio": "El Mundo Hoy (diario generalista)",
+			"titulo": "Orden de evacuación en la costa petrolera de Ostria ante la llegada del huracán",
+			"resumen": "Las autoridades piden a cientos de miles de vecinos de la costa del golfo que abandonen sus casas. Varias refinerías han empezado a detener la producción por precaución, y los precios de la gasolina suben en las gasolineras de la zona.",
+			"categoria": "internacional",
+			"prioridad": 5,
+			"pregunta_id": "",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-11",
+				"fecha_publicacion": "2008-09-11",
+				"titulo_real": "Evacuación de Galveston ante la llegada del huracán Ike",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			}
+		},
+		{
 			"id": "falsa_halvard_20080911",
 			"disponible_desde": "2008-09-11",
+			"seccion": "Opinión",
 			"medio": "Foro «Inversores ganadores»",
 			"titulo": "¡Halvard será comprado mañana al doble de precio! Compra YA",
-			"resumen": "Un usuario que dice trabajar en un banco asegura que mañana se anuncia la compra de Halvard y que la acción se duplicará. «Es dinero gratis, no lo penséis», escribe.",
+			"resumen": "Un usuario que dice trabajar en un banco asegura que mañana se anuncia la compra de Halvard y que la acción se duplicará. «Es dinero gratis, no lo penséis, yo he metido los ahorros de mi madre», escribe.\n\nEl mensaje tiene miles de «me gusta», pero ninguna fuente identificable.",
 			"categoria": "rumor",
 			"prioridad": 3,
 			"pregunta_id": "",
@@ -613,12 +945,13 @@
 		{
 			"id": "reunion_20080912",
 			"disponible_desde": "2008-09-12",
+			"seccion": "Portada",
 			"medio": "El Observador Financiero",
 			"titulo": "Reunión de urgencia de los grandes banqueros en el banco central de Ostria",
-			"resumen": "Las autoridades convocan a los presidentes de los principales bancos para buscar una salida a Casa Halvard Hermanos antes de la apertura del lunes.",
+			"resumen": "Esta tarde, las autoridades han convocado a los presidentes de los principales bancos para buscar una salida a Casa Halvard Hermanos antes de la apertura del lunes. El mensaje oficial es claro: esta vez no habrá dinero público.\n\nEn los mercados reina el nerviosismo. Muchos inversores venden acciones de cualquier banco por miedo al contagio, y hasta empresas de sectores tranquilos pierden valor.",
 			"categoria": "banca",
 			"prioridad": 9,
-			"pregunta_id": "",
+			"pregunta_id": "p_cola",
 			"falsa": false,
 			"archivo": false,
 			"origen": {
@@ -630,11 +963,32 @@
 			}
 		},
 		{
+			"id": "trenes_20080912",
+			"disponible_desde": "2008-09-12",
+			"seccion": "Sucesos",
+			"medio": "El Mundo Hoy (diario generalista)",
+			"titulo": "Un choque de trenes en Ostria deja al menos 25 muertos",
+			"resumen": "Un tren de cercanías y un mercancías chocaron de frente en una vía única a las afueras de una gran ciudad de la costa oeste. Los investigadores estudian si el maquinista estaba enviando mensajes con el móvil en el momento del accidente.",
+			"categoria": "sucesos",
+			"prioridad": 5,
+			"pregunta_id": "",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-12",
+				"fecha_publicacion": "2008-09-12",
+				"titulo_real": "Accidente ferroviario de Chatsworth (Los Ángeles)",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			}
+		},
+		{
 			"id": "falsa_deposito_20080912",
 			"disponible_desde": "2008-09-12",
+			"seccion": "Opinión",
 			"medio": "Panfleto repartido en la calle",
 			"titulo": "Saca YA tu dinero: mañana cierran todos los bancos de Liria",
-			"resumen": "Fuentes que no pueden dar su nombre dicen que mañana el Gobierno congelará todas las cuentas del país. Lo más listo es sacar el dinero hoy y guardarlo en casa. ¡No digas que no te avisamos!",
+			"resumen": "Fuentes que no pueden dar su nombre dicen que mañana el Gobierno congelará todas las cuentas del país. Lo más listo es sacar el dinero hoy y guardarlo en casa.\n\n¡No digas que no te avisamos! Pásalo a todos tus conocidos.",
 			"categoria": "rumor",
 			"prioridad": 2,
 			"pregunta_id": "",
@@ -651,12 +1005,13 @@
 		{
 			"id": "negociaciones_20080913",
 			"disponible_desde": "2008-09-13",
+			"seccion": "Portada",
 			"medio": "El Observador Financiero",
 			"titulo": "Fin de semana de negociaciones: el Gobierno descarta usar dinero público para Halvard",
-			"resumen": "Banco Barcia y Banco Continental de Ostria estudian comprar Halvard, pero el Gobierno se niega a garantizar sus pérdidas como hizo con Osborne-Stern.",
+			"resumen": "Banco Barcia y Banco Continental de Ostria estudian comprar Halvard, pero el Gobierno se niega a garantizar sus pérdidas como hizo hace seis meses con Osborne-Stern. Los banqueros trabajan a contrarreloj en la sede del banco central.\n\nAlgunos proponen que los grandes bancos aporten dinero entre todos para comprar los activos más tóxicos de Halvard.",
 			"categoria": "banca",
 			"prioridad": 9,
-			"pregunta_id": "",
+			"pregunta_id": "p_finde",
 			"falsa": false,
 			"archivo": false,
 			"origen": {
@@ -668,14 +1023,55 @@
 			}
 		},
 		{
+			"id": "ike_tierra_20080913",
+			"disponible_desde": "2008-09-13",
+			"seccion": "Internacional",
+			"medio": "El Mundo Hoy (diario generalista)",
+			"titulo": "El huracán arrasa una ciudad portuaria de Ostria y paraliza refinerías",
+			"resumen": "El ojo del huracán pasó de madrugada sobre una isla-ciudad del golfo. Hay barrios enteros inundados, millones de personas sin luz y una parte importante de la capacidad de refino del país está parada.\n\nLa gasolina sube en varias regiones y algunas estaciones se han quedado sin combustible.",
+			"categoria": "internacional",
+			"prioridad": 6,
+			"pregunta_id": "",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-13",
+				"fecha_publicacion": "2008-09-13",
+				"titulo_real": "El huracán Ike toca tierra en Galveston (Texas)",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			}
+		},
+		{
+			"id": "atentados_20080913",
+			"disponible_desde": "2008-09-13",
+			"seccion": "Internacional",
+			"medio": "El Mundo Hoy (diario generalista)",
+			"titulo": "Cinco explosiones sacuden la capital de Indostán",
+			"resumen": "Una cadena de bombas colocadas en mercados y zonas comerciales ha causado una veintena de muertos y un centenar de heridos. Un grupo radical ha reivindicado los atentados.",
+			"categoria": "internacional",
+			"prioridad": 4,
+			"pregunta_id": "",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-13",
+				"fecha_publicacion": "2008-09-13",
+				"titulo_real": "Atentados con bomba en Delhi",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			}
+		},
+		{
 			"id": "barcia_20080914",
 			"disponible_desde": "2008-09-14",
+			"seccion": "Portada",
 			"medio": "El Observador Financiero",
 			"titulo": "Banco Barcia se retira y Casa Halvard Hermanos prepara la quiebra",
-			"resumen": "Sin comprador ni ayuda pública, Halvard se dispone a presentar la solicitud de quiebra. Los mercados temen un lunes negro.",
+			"resumen": "Sin comprador y sin ayuda pública, Halvard se dispone a presentar la solicitud de quiebra esta misma noche. El regulador de Albión no ha autorizado a Banco Barcia a completar la compra.\n\nAl mismo tiempo, se habla de una operación de última hora entre Banco Continental de Ostria y Corredora Linares, otra gran entidad en apuros. Los mercados temen un lunes negro.",
 			"categoria": "banca",
 			"prioridad": 10,
-			"pregunta_id": "",
+			"pregunta_id": "p_quiebra",
 			"falsa": false,
 			"archivo": false,
 			"origen": {
@@ -687,11 +1083,32 @@
 			}
 		},
 		{
+			"id": "avion_20080914",
+			"disponible_desde": "2008-09-14",
+			"seccion": "Sucesos",
+			"medio": "El Mundo Hoy (diario generalista)",
+			"titulo": "Un avión de pasajeros se estrella al aterrizar en una ciudad de Rus",
+			"resumen": "El aparato, con 88 personas a bordo, cayó sobre una zona deshabitada cerca del aeropuerto. No hay supervivientes. Es el peor accidente aéreo del año en Rus.",
+			"categoria": "sucesos",
+			"prioridad": 4,
+			"pregunta_id": "",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-14",
+				"fecha_publicacion": "2008-09-14",
+				"titulo_real": "Accidente del vuelo 821 de Aeroflot en Perm",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			}
+		},
+		{
 			"id": "lehman_20080915",
 			"disponible_desde": "2008-09-15",
+			"seccion": "Portada",
 			"medio": "El Observador Financiero",
 			"titulo": "Casa Halvard Hermanos solicita protección por bancarrota",
-			"resumen": "El banco de inversión Casa Halvard Hermanos, uno de los mayores de la Federación de Ostria, anuncia su entrada en un proceso de bancarrota. La crisis financiera se agrava y aumenta la incertidumbre sobre la solvencia de otras entidades y sobre la liquidez del mercado interbancario.",
+			"resumen": "Con más de 600.000 millones de coronas en deudas, es la mayor quiebra de la historia de Ostria. Miles de empleados salen de sus oficinas con cajas de cartón, y los inversores que tenían bonos o acciones del banco se preparan para perder casi todo.\n\nLa quiebra agrava la crisis financiera y aumenta la incertidumbre sobre la solvencia de otras entidades y sobre la liquidez del mercado interbancario.",
 			"categoria": "banca",
 			"prioridad": 10,
 			"pregunta_id": "p_lehman",
@@ -708,9 +1125,10 @@
 		{
 			"id": "merrill_20080915",
 			"disponible_desde": "2008-09-15",
+			"seccion": "Economía",
 			"medio": "El Observador Financiero",
-			"titulo": "Banco Continental de Ostria acuerda adquirir Corredora Linares",
-			"resumen": "Banco Continental de Ostria llega a un acuerdo para comprar Corredora Linares por unos 50.000 millones de coronas ostrianas, en plena inestabilidad del sistema financiero de la Federación de Ostria. La operación busca evitar una nueva quiebra desordenada.",
+			"titulo": "Banco Continental de Ostria compra Corredora Linares por 50.000 millones",
+			"resumen": "En una operación cerrada en pocas horas durante el fin de semana, Banco Continental de Ostria se queda con Corredora Linares, que temía correr la misma suerte que Halvard.\n\nLa operación evita una segunda quiebra desordenada, pero deja al sistema financiero de Ostria con solo dos grandes bancos de inversión independientes.",
 			"categoria": "banca",
 			"prioridad": 9,
 			"pregunta_id": "",
@@ -727,9 +1145,10 @@
 		{
 			"id": "mercados_20080915",
 			"disponible_desde": "2008-09-15",
+			"seccion": "Economía",
 			"medio": "El Observador Financiero",
-			"titulo": "Caídas bursátiles y temor por la estabilidad financiera",
-			"resumen": "La quiebra de Casa Halvard Hermanos coincide con fuertes descensos de las bolsas y con una creciente aversión al riesgo. Los inversores temen por la situación de otras instituciones financieras con exposición a activos hipotecarios.",
+			"titulo": "Lunes negro: las bolsas se desploman y los bancos dejan de fiarse entre sí",
+			"resumen": "La bolsa de Ostria vive una de sus peores jornadas en años, y las bolsas europeas y la de Liria la acompañan en la caída. Las acciones de aseguradoras y bancos son las más castigadas.\n\nEl coste de los préstamos entre bancos se dispara: nadie sabe quién puede ser el siguiente en caer.",
 			"categoria": "mercados",
 			"prioridad": 8,
 			"pregunta_id": "",
@@ -744,11 +1163,32 @@
 			}
 		},
 		{
+			"id": "acuerdo_africa_20080915",
+			"disponible_desde": "2008-09-15",
+			"seccion": "Internacional",
+			"medio": "El Mundo Hoy (diario generalista)",
+			"titulo": "Acuerdo histórico para compartir el poder en un país del sur de África",
+			"resumen": "Tras meses de violencia postelectoral, el presidente y el líder de la oposición han firmado un acuerdo por el que este último será primer ministro. La economía del país sufre una inflación desbocada: los precios se duplican cada pocos días.",
+			"categoria": "internacional",
+			"prioridad": 4,
+			"pregunta_id": "",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-15",
+				"fecha_publicacion": "2008-09-15",
+				"titulo_real": "Acuerdo de reparto del poder en Zimbabue",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			}
+		},
+		{
 			"id": "falsa_bancos_20080915",
 			"disponible_desde": "2008-09-15",
+			"seccion": "Opinión",
 			"medio": "Rumores de Bolsa (blog)",
 			"titulo": "¡Un experto asegura que la banca se recupera ya mismo!",
-			"resumen": "Nos lo cuenta un amigo que trabaja en una gestora: esto es solo un susto y en un par de días todo vuelve a la normalidad. Según él, quien no compre acciones de bancos esta semana se arrepentirá toda la vida. ¡Ojo al dato!",
+			"resumen": "Nos lo cuenta un amigo que trabaja en una gestora: esto es solo un susto y en un par de días todo vuelve a la normalidad. Según él, quien no compre acciones de bancos esta semana se arrepentirá toda la vida.\n\n¡Ojo al dato! Los que saben ya están comprando.",
 			"categoria": "rumor",
 			"prioridad": 3,
 			"pregunta_id": "",
@@ -765,12 +1205,13 @@
 		{
 			"id": "fed_tipos_20080916",
 			"disponible_desde": "2008-09-16",
+			"seccion": "Economía",
 			"medio": "Comunicado oficial del Banco Central de Ostria",
-			"titulo": "El Banco Central de Ostria mantiene su tipo objetivo en el 2 %",
-			"resumen": "El Banco Central de Ostria mantiene el objetivo del tipo de interés interbancario en el 2 %, pese al empeoramiento de las condiciones financieras. El comunicado señala que vigilará de cerca la evolución de los mercados y los riesgos para el crecimiento y la inflación.",
+			"titulo": "El Banco Central de Ostria mantiene su tipo de interés en el 2 %",
+			"resumen": "Pese a la quiebra de Halvard, el banco central no baja los tipos. El comunicado reconoce que las tensiones financieras «han aumentado significativamente», pero sigue preocupado por la inflación.\n\nAlgunos analistas critican la decisión: creen que el banco central debería actuar ya para evitar que la crisis financiera se extienda a toda la economía.",
 			"categoria": "politica_monetaria",
-			"prioridad": 9,
-			"pregunta_id": "p_tipos",
+			"prioridad": 8,
+			"pregunta_id": "p_monetario",
 			"falsa": false,
 			"archivo": false,
 			"origen": {
@@ -782,11 +1223,32 @@
 			}
 		},
 		{
+			"id": "atlantida_20080916",
+			"disponible_desde": "2008-09-16",
+			"seccion": "Portada",
+			"medio": "El Observador Financiero",
+			"titulo": "Aseguradora Atlántida, al borde del abismo: negocia un préstamo de emergencia",
+			"resumen": "La mayor aseguradora del mundo ha perdido más del 60 % de su valor en bolsa en dos días. Tras la rebaja de su calificación crediticia, debe aportar miles de millones en garantías que no tiene.\n\nSu caída sería mucho más grave que la de Halvard: Atlántida asegura a bancos de todo el mundo contra impagos. Las autoridades negocian contrarreloj un préstamo de emergencia.",
+			"categoria": "banca",
+			"prioridad": 10,
+			"pregunta_id": "",
+			"falsa": false,
+			"archivo": false,
+			"origen": {
+				"fecha_evento": "2008-09-16",
+				"fecha_publicacion": "2008-09-16",
+				"titulo_real": "AIG se hunde en bolsa y negocia un préstamo de emergencia con la Reserva Federal",
+				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
+				"fuente_url": ""
+			}
+		},
+		{
 			"id": "fondo_monetario_20080916",
 			"disponible_desde": "2008-09-16",
+			"seccion": "Economía",
 			"medio": "El Observador Financiero",
 			"titulo": "Un gran fondo monetario pierde valor por su exposición a Halvard",
-			"resumen": "El Fondo Monetario Reserva Prima, considerado casi tan seguro como un depósito, anuncia que sus participaciones valen menos de lo invertido. Los partícipes se apresuran a retirar su dinero.",
+			"resumen": "El Fondo Monetario Reserva Prima, considerado casi tan seguro como un depósito, anuncia que sus participaciones valen menos de lo invertido por culpa de los bonos de Halvard que tenía en cartera. Es la segunda vez en la historia que ocurre algo así.\n\nLos partícipes se apresuran a retirar su dinero de este y de otros fondos parecidos.",
 			"categoria": "mercados",
 			"prioridad": 8,
 			"pregunta_id": "",
@@ -796,82 +1258,6 @@
 				"fecha_evento": "2008-09-16",
 				"fecha_publicacion": "2008-09-16",
 				"titulo_real": "El Reserve Primary Fund «rompe el dólar» por su exposición a Lehman",
-				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
-				"fuente_url": ""
-			}
-		},
-		{
-			"id": "aig_20080916",
-			"disponible_desde": "2008-09-17",
-			"medio": "Comunicado oficial del Banco Central de Ostria",
-			"titulo": "El Banco Central de Ostria anuncia apoyo extraordinario a Aseguradora Atlántida",
-			"resumen": "El Banco Central de Ostria autoriza una línea de crédito de hasta 85.000 millones de coronas ostrianas a la Aseguradora Atlántida, una de las mayores del mundo. A cambio, el Estado obtiene una participación mayoritaria en la compañía. El anuncio se publicó a última hora de la noche anterior.",
-			"categoria": "rescate_financiero",
-			"prioridad": 10,
-			"pregunta_id": "p_aig",
-			"falsa": false,
-			"archivo": false,
-			"origen": {
-				"fecha_evento": "2008-09-16",
-				"fecha_publicacion": "2008-09-17",
-				"titulo_real": "La Reserva Federal anuncia apoyo extraordinario a AIG",
-				"fuente": "Reserva Federal — comunicado del 16 de septiembre, 21:00 EDT",
-				"fuente_url": "https://www.federalreserve.gov/newsevents/pressreleases/other20080916a.htm"
-			}
-		},
-		{
-			"id": "panico_20080917",
-			"disponible_desde": "2008-09-17",
-			"medio": "El Observador Financiero",
-			"titulo": "Nuevo desplome en bolsa y los bancos dejan de prestarse dinero entre sí",
-			"resumen": "Los tipos interbancarios se disparan y los inversores huyen hacia la deuda pública y el oro. Las acciones de los bancos de inversión que siguen en pie caen con fuerza.",
-			"categoria": "mercados",
-			"prioridad": 8,
-			"pregunta_id": "",
-			"falsa": false,
-			"archivo": false,
-			"origen": {
-				"fecha_evento": "2008-09-17",
-				"fecha_publicacion": "2008-09-17",
-				"titulo_real": "Nueva caída del Dow (−449 puntos); se disparan los tipos interbancarios",
-				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
-				"fuente_url": ""
-			}
-		},
-		{
-			"id": "lloydan_20080918",
-			"disponible_desde": "2008-09-18",
-			"medio": "Agencia de noticias de Albión",
-			"titulo": "Banco Lloydan comprará el Banco Hipotecario de Caledonia para evitar su caída",
-			"resumen": "Con el visto bueno del Gobierno de Albión, el mayor prestamista hipotecario del país será absorbido por unos 12.200 millones de libras.",
-			"categoria": "banca",
-			"prioridad": 8,
-			"pregunta_id": "",
-			"falsa": false,
-			"archivo": false,
-			"origen": {
-				"fecha_evento": "2008-09-18",
-				"fecha_publicacion": "2008-09-18",
-				"titulo_real": "Lloyds TSB acuerda comprar HBOS por 12.200 millones de libras",
-				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
-				"fuente_url": ""
-			}
-		},
-		{
-			"id": "liquidez_20080918",
-			"disponible_desde": "2008-09-18",
-			"medio": "El Observador Financiero",
-			"titulo": "Los grandes bancos centrales inyectan 180.000 millones de forma coordinada",
-			"resumen": "Varios bancos centrales actúan juntos para dar liquidez a un sistema financiero en el que nadie se fía de nadie.",
-			"categoria": "politica_monetaria",
-			"prioridad": 9,
-			"pregunta_id": "p_final",
-			"falsa": false,
-			"archivo": false,
-			"origen": {
-				"fecha_evento": "2008-09-18",
-				"fecha_publicacion": "2008-09-18",
-				"titulo_real": "Acción coordinada de bancos centrales: 180.000 millones de dólares de liquidez",
 				"fuente": "Resumen editorial de EURASIA de un hecho ampliamente documentado; fuente primaria pendiente de enlazar",
 				"fuente_url": ""
 			}

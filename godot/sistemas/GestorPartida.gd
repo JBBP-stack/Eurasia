@@ -8,6 +8,10 @@ extends Node
 
 signal resumen_dia(eventos: Array[String])
 signal partida_finalizada(resultado: Dictionary)
+## Resumen legible de lo que ha provocado una decisión (ventas, compras, dinero, salud).
+signal consecuencia_aplicada(noticia_id: String, texto: String)
+
+var ultima_consecuencia: String = ""
 
 const ESCENA_INICIAL: String = "res://escenas/habitacion/habitacion1.tscn"
 const PATRIMONIO_INICIAL_CENTIMOS: int = 3_000_000
@@ -172,19 +176,8 @@ func _aplicar_decision(noticia_id: String, opcion_id: String, efecto: Dictionary
 
 	EstadoJuego.prudencia += int(efecto.get("prudencia", 0))
 	EstadoJuego.riesgo += int(efecto.get("riesgo", 0))
-	var delta_banco := int(efecto.get("saldo_bancario_centimos", 0))
-	var delta_efectivo := int(efecto.get("efectivo_centimos", 0))
-	if delta_banco != 0 or delta_efectivo != 0:
-		SistemaFinanciero.registrar_movimiento_externo(
-			"Consecuencia de decisión",
-			"Decisión: " + str(opcion.get("texto", opcion_id)),
-			delta_banco,
-			delta_efectivo
-		)
-	if efecto.has("comida"):
-		EstadoJuego.comida_disponible = maxi(0, EstadoJuego.comida_disponible + int(efecto["comida"]))
-	if efecto.has("salud"):
-		EstadoJuego.salud = clampi(EstadoJuego.salud + int(efecto["salud"]), 0, Reglas.entero("alimentacion/salud_maxima", 100))
+	var consecuencias := _aplicar_efectos_directos(efecto, str(opcion.get("texto", opcion_id)))
+	ultima_consecuencia = " ".join(consecuencias) if not consecuencias.is_empty() else "Sin cambios inmediatos en tu dinero."
 
 	EstadoJuego.registro_decisiones.append({
 		"dia": EstadoJuego.dia_de_partida,
@@ -201,6 +194,65 @@ func _aplicar_decision(noticia_id: String, opcion_id: String, efecto: Dictionary
 	_comprobar_fin_de_partida()
 	EstadoJuego.guardar_estado()
 	EstadoJuego.estado_vital_actualizado.emit()
+	consecuencia_aplicada.emit(noticia_id, ultima_consecuencia)
+
+
+## Ejecuta las consecuencias inmediatas de una decisión y devuelve frases que las describen.
+func _aplicar_efectos_directos(efecto: Dictionary, texto_opcion: String) -> Array[String]:
+	var frases: Array[String] = []
+	var detalle := "Decisión: " + texto_opcion
+
+	# Ventas (porcentaje de las acciones que se tienen) y venta total.
+	var ventas: Dictionary = {}
+	if bool(efecto.get("vender_todo", false)):
+		for posicion in EstadoJuego.cartera:
+			ventas[str(posicion.get("id", ""))] = 100
+	var ventas_definidas: Variant = efecto.get("vender", {})
+	if ventas_definidas is Dictionary:
+		for activo_id in ventas_definidas:
+			ventas[str(activo_id)] = int(ventas_definidas[activo_id])
+	for activo_id in ventas:
+		var tenidas := 0
+		for posicion in EstadoJuego.cartera:
+			if str(posicion.get("id", "")) == activo_id:
+				tenidas = int(posicion.get("acciones", 0))
+		var cantidad := int(floor(float(tenidas) * float(ventas[activo_id]) / 100.0))
+		if cantidad <= 0:
+			continue
+		var resultado := SistemaFinanciero.vender_acciones(activo_id, cantidad)
+		frases.append(str(resultado.get("mensaje", "")))
+
+	# Compras por importe.
+	var compras: Variant = efecto.get("comprar", {})
+	if compras is Dictionary:
+		for activo_id in compras:
+			var precio := SistemaMercado.precio_actual_centimos(str(activo_id))
+			var cantidad := int(floor(float(int(compras[activo_id])) / float(maxi(1, precio))))
+			if cantidad <= 0:
+				continue
+			var resultado := SistemaFinanciero.comprar_acciones(str(activo_id), cantidad)
+			frases.append(str(resultado.get("mensaje", "")))
+
+	# Dinero: los pagos en efectivo que no se pueden cubrir salen de la cuenta.
+	var delta_banco := int(efecto.get("saldo_bancario_centimos", 0))
+	var delta_efectivo := int(efecto.get("efectivo_centimos", 0))
+	if delta_efectivo < 0 and delta_banco == 0:
+		SistemaFinanciero.cargar_gasto_obligatorio("Consecuencia de decisión", detalle, -delta_efectivo)
+		frases.append("Pagas %s €." % EstadoJuego.euros(-delta_efectivo))
+	elif delta_banco != 0 or delta_efectivo != 0:
+		SistemaFinanciero.registrar_movimiento_externo("Consecuencia de decisión", detalle, delta_banco, delta_efectivo)
+		if delta_banco != 0:
+			frases.append("Tu cuenta %s %s €." % ["recibe" if delta_banco > 0 else "pierde", EstadoJuego.euros(absi(delta_banco))])
+		if delta_efectivo != 0:
+			frases.append("Tu efectivo %s %s €." % ["aumenta" if delta_efectivo > 0 else "disminuye", EstadoJuego.euros(absi(delta_efectivo))])
+
+	if efecto.has("comida"):
+		EstadoJuego.comida_disponible = maxi(0, EstadoJuego.comida_disponible + int(efecto["comida"]))
+		frases.append("Comida %+d raciones." % int(efecto["comida"]))
+	if efecto.has("salud"):
+		EstadoJuego.salud = clampi(EstadoJuego.salud + int(efecto["salud"]), 0, Reglas.entero("alimentacion/salud_maxima", 100))
+		frases.append("Salud %+d (ahora %d)." % [int(efecto["salud"]), EstadoJuego.salud])
+	return frases
 
 
 # --- Fin de partida e informe -------------------------------------------------

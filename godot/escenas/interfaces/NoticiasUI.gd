@@ -87,6 +87,7 @@ func _crear_interfaz() -> void:
 
 	var cuerpo := HSplitContainer.new()
 	cuerpo.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	cuerpo.split_offset = 160
 	raiz.add_child(cuerpo)
 
 	_lista = ItemList.new()
@@ -174,7 +175,7 @@ func _actualizar(_cantidad: int) -> void:
 			_lista.add_item("[%s] %s" % [_antiguedad(noticia), str(noticia.get("titulo", ""))])
 		else:
 			var marca := "✓ " if NoticiasManager.leidas.has(id) else "• "
-			_lista.add_item(marca + str(noticia.get("titulo", "")))
+			_lista.add_item(marca + "[%s] %s" % [str(noticia.get("seccion", "")), str(noticia.get("titulo", ""))])
 	if _modo_hemeroteca and _abierta:
 		_texto.text = "Noticias económicas más relevantes de los dos últimos años. Los periódicos que recojas se añaden aquí."
 		_limpiar_opciones()
@@ -259,7 +260,7 @@ func _seleccionar(indice: int) -> void:
 	if not bool(noticia.get("archivo", false)):
 		NoticiasManager.marcar_leida(noticia_id)
 	# Solo se muestran campos anonimizados: la fecha real, la fuente y si es falsa se revelan en el informe final.
-	_texto.text = str(noticia.get("titulo", "")) \
+	_texto.text = str(noticia.get("seccion", "Noticias")).to_upper() + "\n\n" + str(noticia.get("titulo", "")) \
 		+ "\n\n" + str(noticia.get("resumen", "")) \
 		+ "\n\nPublicado: " + _antiguedad(noticia) \
 		+ "\nMedio: " + str(noticia.get("medio", "Desconocido")) \
@@ -294,7 +295,7 @@ func _responder(noticia_id: String, opcion_id: String) -> void:
 	if not opcion.is_empty():
 		_actualizar(NoticiasManager.cuantas_sin_leer())
 		_seleccionar(_indice_seleccionado)
-		_resultado.text = "Consecuencia educativa: " + str(opcion.get("explicacion", ""))
+		_resultado.text = "Consecuencia: %s\n\n%s" % [GestorPartida.ultima_consecuencia, str(opcion.get("explicacion", ""))]
 
 func _dormir() -> void:
 	if NoticiasManager.avanzar_dia():

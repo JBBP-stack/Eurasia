@@ -45,6 +45,17 @@ Probado con Godot 4.7.2 en modo *headless* (escenas reales, sin errores de scrip
 - [ ] **Fichas de cotización** con gráfica (de 5 días a 2 años), rentabilidades, máximo y mínimo anuales, y trayectoria de los dos últimos años.
 - [ ] **2.000 € de efectivo** iniciales y gastos domésticos repartidos por el mes.
 
+## Tercera iteración (10/11/2026) · validada con pruebas automáticas y capturas, pendiente de confirmar en el editor
+
+- [ ] **Corrección del cajero.** La pestaña de Inversiones estaba desactivada a propósito en el modo cajero; ahora está disponible.
+- [ ] **Calendario del 05/09/2008 al 16/09/2008** (12 días). Las noticias del 30/08 al 04/09 pasan a la hemeroteca.
+- [ ] **Atención bancaria con Marisa,** gestora de la sucursal (`datos/atencion_bancaria.json`): comentarios de actualidad por día, opinión sobre la situación del jugador sin decirle qué hacer, y acceso a la ventanilla.
+- [ ] **Al menos 2 noticias auténticas y 1 decisión por día,** con textos más completos y primeras planas generales. Lo comprueba `tools/validar_noticias.py`.
+- [ ] **Diccionario de 62 términos** con búsqueda de texto completo y sugerencias.
+- [ ] **Compraventa cualquier día.** `mercado/operar_todos_los_dias`: en los días sin sesión se usa el último cierre.
+- [ ] **Decisiones con consecuencias directas** (`vender`, `vender_todo`, `comprar`, dinero, salud), visibles en el buzón, la ventana de decisiones y el HUD.
+- [ ] **Decisiones menos evidentes:** las tres opciones tienen argumentos plausibles y la explicación solo aparece al responder.
+
 ## Pendiente
 
 - [ ] **Verificar la serie de Casa Halvard Hermanos (Lehman).** Están contrastados los cierres del 9, 10, 11, 12 y 15/09/2008 (prensa). Los cierres mensuales anteriores y los del 2 al 8 y del 16 al 18/09 son aproximados. Las otras 9 empresas usan datos diarios de Yahoo Finance.

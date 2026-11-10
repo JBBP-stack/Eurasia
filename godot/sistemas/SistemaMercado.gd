@@ -100,6 +100,21 @@ func mercado_abierto(fecha: String = "") -> bool:
 	return (referencia.get("precios_centimos", {}) as Dictionary).has(fecha)
 
 
+## Se puede comprar y vender si hay sesión o si las reglas permiten operar todos los días
+## (en días sin sesión se usa el último precio de cierre).
+func se_puede_operar() -> bool:
+	return mercado_abierto() or bool(Reglas.valor("mercado/operar_todos_los_dias", false))
+
+
+## Texto breve del estado de la bolsa para las interfaces.
+func texto_estado_bolsa() -> String:
+	if mercado_abierto():
+		return "Bolsa abierta"
+	if se_puede_operar():
+		return "Hoy no hay sesión (%s): se opera al último precio de cierre" % motivo_mercado_cerrado()
+	return "Bolsa cerrada hoy (%s)" % motivo_mercado_cerrado()
+
+
 func motivo_mercado_cerrado(fecha: String = "") -> String:
 	if fecha.is_empty():
 		fecha = EstadoJuego.fecha_historica_interna

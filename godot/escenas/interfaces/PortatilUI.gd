@@ -271,7 +271,7 @@ func _actualizar_resumen() -> void:
 		EstadoJuego.salud,
 		EstadoJuego.comida_disponible,
 		"ya has comido hoy" if EstadoJuego.comido_hoy else "todavía no has comido hoy",
-		"abierta" if SistemaMercado.mercado_abierto() else "cerrada hoy (%s)" % SistemaMercado.motivo_mercado_cerrado(),
+		SistemaMercado.texto_estado_bolsa().to_lower(),
 		"Cotizaciones reales de empresas con nombre ficticio, convertidas a euros."
 	]
 	if EstadoJuego.saldo_bancario_centimos < 0:

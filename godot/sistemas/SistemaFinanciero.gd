@@ -5,7 +5,7 @@ signal finanzas_actualizadas
 
 const RUTA_GUARDADO: String = "user://eurasia_finanzas.json"
 const VERSION_GUARDADO: int = 1
-const ID_ESCENARIO: String = "eurasia_demo_2008_sep"
+const ID_ESCENARIO: String = "eurasia_demo_2008_sep05"
 const MAX_POSICIONES: int = 10
 const MAX_MOVIMIENTOS: int = 200
 # Las comisiones y la disponibilidad del mercado se leen de datos/reglas_demo.json (provisionales).
@@ -188,7 +188,7 @@ func reiniciar() -> void:
 func _motivo_mercado_no_disponible() -> String:
 	if EstadoJuego.partida_terminada:
 		return "La partida ha terminado."
-	if not SistemaMercado.mercado_abierto():
+	if not SistemaMercado.se_puede_operar():
 		return "La bolsa está cerrada hoy (%s). Podrás operar el próximo día con sesión." % SistemaMercado.motivo_mercado_cerrado()
 	return ""
 

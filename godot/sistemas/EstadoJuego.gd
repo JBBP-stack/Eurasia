@@ -12,7 +12,7 @@ signal estado_vital_actualizado
 
 # Fecha temporal del prototipo. No es la fecha definitiva de la demo.
 # Debe coincidir con "calendario/fecha_inicio" de datos/reglas_demo.json (lo usa el servicio del asistente).
-const FECHA_INICIO_PROVISIONAL: String = "2008-09-01"
+const FECHA_INICIO_PROVISIONAL: String = "2008-09-05"
 const RUTA_GUARDADO: String = "user://eurasia_estado.json"
 const VERSION_GUARDADO: int = 1
 const MAX_HISTORIAL: int = 400

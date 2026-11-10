@@ -120,7 +120,7 @@ func _actualizar() -> void:
 	for posicion in EstadoJuego.cartera:
 		if str(posicion.get("id", "")) == activo_id:
 			acciones = int(posicion.get("acciones", 0))
-	var estado_bolsa := "Bolsa abierta" if SistemaMercado.mercado_abierto() else "Bolsa cerrada hoy (%s)" % SistemaMercado.motivo_mercado_cerrado()
+	var estado_bolsa := SistemaMercado.texto_estado_bolsa()
 	_subcabecera.text = "%s · %s · En tu cartera: %d acciones (%s €)" % [
 		str(info.get("sector", "")), estado_bolsa, acciones, EstadoJuego.euros(acciones * precio)
 	]

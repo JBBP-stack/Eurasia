@@ -1,30 +1,63 @@
 {
 	"nota": "Reglas PROVISIONALES de la demo. El GDD aún no fija estas cifras: se centralizan aquí para ajustarlas sin tocar código. Importes en céntimos.",
 	"calendario": {
-		"fecha_inicio": "2008-09-01",
-		"fecha_fin_escenario": "2008-09-18"
+		"fecha_inicio": "2008-09-05",
+		"fecha_fin_escenario": "2008-09-16"
 	},
 	"situacion_inicial": {
 		"saldo_bancario_centimos": 1500000,
 		"efectivo_centimos": 200000,
-		"nota_cartera": "Unos 13.000 € al cierre del 29/08/2008. Al menos la mitad de las empresas quebraron o fueron intervenidas en la crisis (HAL = Lehman, FAN = Fannie Mae).",
+		"nota_cartera": "Unos 13.000 € al cierre del 05/09/2008 (primer día de partida). Al menos la mitad de las empresas quebraron o fueron intervenidas en la crisis (HAL = Lehman, FAN = Fannie Mae).",
 		"cartera": [
-			{"id": "HAL", "acciones": 410},
-			{"id": "FAN", "acciones": 858},
-			{"id": "COL", "acciones": 127}
+			{
+				"id": "HAL",
+				"acciones": 396
+			},
+			{
+				"id": "FAN",
+				"acciones": 811
+			},
+			{
+				"id": "COL",
+				"acciones": 124
+			}
 		]
 	},
 	"economia_domestica": {
 		"dia_del_mes_cobro": 28,
 		"gastos_fijos_mensuales": [
-			{"concepto": "Alquiler de la vivienda", "importe_centimos": 75000, "dia_del_mes": 5},
-			{"concepto": "Teléfono e internet", "importe_centimos": 5000, "dia_del_mes": 8},
-			{"concepto": "Electricidad", "importe_centimos": 6500, "dia_del_mes": 10},
-			{"concepto": "Gas", "importe_centimos": 4000, "dia_del_mes": 12},
-			{"concepto": "Agua", "importe_centimos": 3000, "dia_del_mes": 15}
+			{
+				"concepto": "Alquiler de la vivienda",
+				"importe_centimos": 75000,
+				"dia_del_mes": 10
+			},
+			{
+				"concepto": "Teléfono e internet",
+				"importe_centimos": 5000,
+				"dia_del_mes": 8
+			},
+			{
+				"concepto": "Electricidad",
+				"importe_centimos": 6500,
+				"dia_del_mes": 12
+			},
+			{
+				"concepto": "Gas",
+				"importe_centimos": 4000,
+				"dia_del_mes": 14
+			},
+			{
+				"concepto": "Agua",
+				"importe_centimos": 3000,
+				"dia_del_mes": 16
+			}
 		],
 		"gastos_semanales": [
-			{"concepto": "Gastos personales (transporte, ocio, higiene)", "importe_centimos": 6000, "dia_semana": 1}
+			{
+				"concepto": "Gastos personales (transporte, ocio, higiene)",
+				"importe_centimos": 6000,
+				"dia_semana": 1
+			}
 		]
 	},
 	"alimentacion": {
@@ -38,7 +71,9 @@
 	"mercado": {
 		"comision_puntos_base": 25,
 		"comision_minima_centimos": 200,
-		"activo_referencia_sesiones": "COL"
+		"activo_referencia_sesiones": "COL",
+		"operar_todos_los_dias": true,
+		"nota": "Con operar_todos_los_dias, se puede comprar y vender cualquier día: los días sin sesión (fines de semana y festivos) se opera al último precio de cierre."
 	},
 	"bancarrota": {
 		"dias_gracia_descubierto": 3,

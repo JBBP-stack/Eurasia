@@ -18,14 +18,15 @@ Videojuego retro de simulación financiera e histórica. La demo se desarrolla a
 
 Probado con Godot 4.7.2 en modo *headless* y con capturas reales, sin errores. Falta revisarlo jugando en el editor (detalle en [EURASIA_SEGUIMIENTO.md](EURASIA_SEGUIMIENTO.md)).
 
-- **Escenario:** del lunes **01/09/2008** al jueves **18/09/2008** (18 días). Al dormir el día 18 termina la partida, salvo que antes haya una bancarrota o la muerte del personaje.
+- **Escenario:** del viernes **05/09/2008** al martes **16/09/2008** (12 días). Al dormir el día 16 termina la partida, salvo que antes haya una bancarrota o la muerte del personaje.
 - **Situación inicial:** 15.000 € en cuenta, **2.000 € en efectivo** y unos 13.000 € en acciones: 30.000 € en total, como indica el GDD.
 - **Cartera inicial de empresas reales con nombre ficticio:** Casa Halvard Hermanos (= Lehman Brothers, quiebra el 15/09), Hipotecaria Federal Fanara (= Fannie Mae, intervenida el 07/09) y Refrescos Cola Dorada (= Coca-Cola). Otras 7 empresas reales se pueden comprar. La equivalencia se revela al final.
-- **Cotizaciones reales:** datos diarios de dos años convertidos a euros (Yahoo Finance; Lehman, reconstruida con cierres publicados en prensa). Fichas de cotización con rangos de 5 días a 2 años, rentabilidades y descripción, en el banco y en el portátil (pestaña «Mercado»). La bolsa cierra fines de semana y festivos reales.
-- **Hemeroteca:** 18 noticias relevantes de los dos años anteriores. Los periódicos recogidos se van añadiendo.
-- **Decisiones del día:** botón «Decisiones (N)» en el HUD o tecla D, para consultarlas y responderlas en cualquier momento.
+- **Cotizaciones reales:** datos diarios de dos años convertidos a euros (Yahoo Finance; Lehman, reconstruida con cierres publicados en prensa). Fichas de cotización con rangos de 5 días a 2 años, rentabilidades y descripción, en el banco y en el portátil (pestaña «Mercado»). Se puede comprar y vender cualquier día: si no hay sesión, se usa el último precio de cierre.
+- **Noticias:** entre 2 y 4 auténticas cada día, más completas y con sección (Portada, Economía, Internacional, Deportes, Ciencia, Sucesos), incluidas primeras planas no financieras. La hemeroteca tiene 23 noticias de los dos años anteriores y se le van sumando los periódicos recogidos.
+- **Decisiones:** una por día (12) con consecuencias directas: compran o venden acciones, mueven dinero o cambian la salud. Opciones con argumentos creíbles para que la correcta no sea evidente. Se consultan y responden en cualquier momento (botón «Decisiones (N)» o tecla D).
 - **Gastos domésticos:** alquiler, luz, gas, agua y teléfono en su día del mes, y gastos personales cada lunes. Se pagan primero con efectivo.
-- **Banco:** confirmación dentro del panel (ya no usa una ventana aparte) e importes con formato español.
+- **Banco:** en la ventanilla atiende Marisa, la gestora, que comenta la actualidad del día y tu situación. El cajero permite todas las operaciones, incluidas las de inversión. La confirmación aparece dentro del panel.
+- **Diccionario:** 62 términos. Busca cualquier palabra (también dentro de las definiciones) y sugiere términos parecidos si no hay coincidencias.
 - **Asistente:** el portátil arranca solo el servicio local. La clave va en `.env` (ver `.env.example` y `servidor_asistente/README.md`).
 - Siguen funcionando la nevera, la derrota, el informe final, las noticias falsas y el guardado de estado. Un guardado de una versión anterior se aparta como `.incompatible.bak` y se empieza de cero.
 
@@ -49,10 +50,10 @@ Los sistemas principales están registrados como *autoloads* en `godot/project.g
 
 ## Próximos pasos recomendados
 
-1. Abrir el proyecto en el editor, jugar los 18 días y añadir al repositorio los `.uid` que genere Godot.
+1. Abrir el proyecto en el editor, jugar los 12 días y añadir al repositorio los `.uid` que genere Godot.
 2. Crear `.env` con la clave de Anthropic y probar el asistente.
 3. Verificar los cierres aproximados de Lehman y enlazar las fuentes de las noticias que no tienen enlace.
 4. Revisar y ajustar las reglas provisionales de `datos/reglas_demo.json`.
 
-**Importante para colaborar:** el calendario va del 01/09/2008 al 18/09/2008. El perfil, los gastos y otros valores son datos de prototipo. Conviene mantenerlos identificados como provisionales hasta contrastarlos con el GDD. Antes de editar, sincronizad el repositorio y evitad trabajar simultáneamente en los mismos scripts.
+**Importante para colaborar:** el calendario va del 05/09/2008 al 16/09/2008. El perfil, los gastos y otros valores son datos de prototipo. Conviene mantenerlos identificados como provisionales hasta contrastarlos con el GDD. Antes de editar, sincronizad el repositorio y evitad trabajar simultáneamente en los mismos scripts.
 

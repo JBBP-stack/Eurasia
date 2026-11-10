@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://escenas/banco/PuntoBanco.gd" id="7_punto_banco"]
 [ext_resource type="PackedScene" path="res://escenas/interfaces/InformeFinalUI.tscn" id="8_informe_final"]
 [ext_resource type="PackedScene" path="res://escenas/interfaces/DecisionesUI.tscn" id="9_decisiones"]
+[ext_resource type="PackedScene" path="res://escenas/banco/AtencionBancariaUI.tscn" id="10_atencion"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_horizontal"]
 size = Vector2(286, 14)
@@ -42,6 +43,8 @@ radius = 44.0
 [node name="InformeFinalUI" parent="." instance=ExtResource("8_informe_final")]
 
 [node name="DecisionesUI" parent="." instance=ExtResource("9_decisiones")]
+
+[node name="AtencionBancariaUI" parent="." instance=ExtResource("10_atencion")]
 
 [node name="Suelo" type="Node2D" parent="."]
 script = ExtResource("4_suelo")
@@ -97,7 +100,7 @@ collision_layer = 0
 collision_mask = 1
 script = ExtResource("7_punto_banco")
 modo = "ventanilla"
-texto_indicador = "E: hablar con el empleado"
+texto_indicador = "E: hablar con Marisa"
 
 [node name="Rango" type="CollisionShape2D" parent="Empleado/ZonaAtencion"]
 shape = SubResource("CircleShape2D_atencion")
