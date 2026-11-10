@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-NoticiasManager="*uid://bo45pvnr0fobp"
 EstadoJuego="*uid://du7t4qf72pyea"
+NoticiasManager="*uid://bo45pvnr0fobp"
 
 [display]
 

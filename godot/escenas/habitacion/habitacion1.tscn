@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://dujlmm78f68xq"]
 
 [ext_resource type="PackedScene" path="res://escenas/interfaces/NoticiasUI.tscn" id="1_wkp45"]
+[ext_resource type="PackedScene" path="res://escenas/interfaces/HUDHabitacion.tscn" id="5_hud"]
 [ext_resource type="Texture2D" uid="uid://bvwxiffictu3e" path="res://assets/escenarios/maderin_hecho2.png" id="2_7r0pk"]
 [ext_resource type="Texture2D" uid="uid://cm1jnc56cni8g" path="res://assets/escenarios/maderin_hecho.png" id="2_xym36"]
 [ext_resource type="Script" uid="uid://c8hfc6ovrl06y" path="res://escenas/interfaces/FichaInicio.gd" id="3_3mxfk"]
@@ -296,6 +297,8 @@ position = Vector2(0, 2)
 
 [node name="NoticiasUI" parent="." unique_id=187045347 instance=ExtResource("1_wkp45")]
 
+[node name="HUDHabitacion" parent="." instance=ExtResource("5_hud")]
+
 [node name="Suelo_TileMapLayer" type="TileMapLayer" parent="." unique_id=1239304008]
 scale = Vector2(0.535, 0.535)
 tile_map_data = PackedByteArray("AAACAAAAAgAAAAEAAAADAAAAAgABAAEAAAAEAAAAAgAAAAEAAAAFAAAAAgABAAEAAAAGAAAAAgAAAAEAAAAHAAAAAgABAAEAAAAAAAEAAwAAAAAAAAAAAAIAAwAAAAEAAAAAAAMAAwAAAAAAAAAAAAQAAwAAAAEAAAAAAAUAAwAAAAAAAAAAAAYAAwAAAAEAAAAAAAcAAwAAAAAAAAAAAAgAAwAAAAEAAAAAAAkAAwAAAAAAAAAHAAEAAwABAAAAAAAHAAIAAwABAAEAAAAHAAMAAwABAAAAAAAHAAQAAwABAAEAAAAHAAUAAwABAAAAAAAHAAYAAwABAAEAAAAHAAcAAwABAAAAAAAHAAgAAwABAAEAAAAHAAkAAwABAAAAAAAGAAkAAwAAAAAAAAAFAAkAAwABAAAAAAAEAAkAAwAAAAAAAAADAAkAAwABAAAAAAACAAkAAwAAAAAAAAABAAkAAwABAAAAAAABAAgAAwABAAEAAAABAAcAAwABAAAAAAABAAYAAwABAAEAAAABAAUAAwABAAAAAAABAAQAAwABAAEAAAABAAMAAwABAAAAAAABAAIAAwABAAEAAAABAAEAAwABAAAAAAACAAEAAwAAAAAAAAACAAIAAwAAAAEAAAACAAMAAwAAAAAAAAACAAYAAwAAAAEAAAACAAcAAwAAAAAAAAACAAgAAwAAAAEAAAADAAgAAwABAAEAAAADAAcAAwABAAAAAAADAAYAAwABAAEAAAADAAUAAwABAAAAAAACAAQAAwAAAAEAAAADAAMAAwABAAAAAAADAAIAAwABAAEAAAAEAAIAAwAAAAEAAAAEAAEAAwAAAAAAAAADAAEAAwABAAAAAAAFAAEAAwABAAAAAAAGAAEAAwAAAAAAAAAGAAIAAwAAAAEAAAAGAAMAAwAAAAAAAAAGAAQAAwAAAAEAAAAGAAUAAwAAAAAAAAAGAAYAAwAAAAEAAAAGAAcAAwAAAAAAAAAGAAgAAwAAAAEAAAAFAAgAAwABAAEAAAAFAAcAAwABAAAAAAAFAAYAAwABAAEAAAAFAAUAAwABAAAAAAAFAAQAAwABAAEAAAAFAAMAAwABAAAAAAAFAAIAAwABAAEAAAAEAAMAAwAAAAAAAAAEAAQAAwAAAAEAAAAEAAUAAwAAAAAAAAAEAAYAAwAAAAEAAAAEAAcAAwAAAAAAAAAEAAgAAwAAAAEAAAACAAUAAwAAAAAAAAADAAQAAwABAAEAAAAAAAAAAwAAAAEAAAABAAAAAwABAAEAAAA=")
@@ -308,15 +311,15 @@ position = Vector2(100, 100)
 position = Vector2(100, 100)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pared izquierda" unique_id=2055133612]
-position = Vector2(-101, 59)
+position = Vector2(-101, 80)
 shape = SubResource("RectangleShape2D_62odp")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Pared izquierda" unique_id=1510799129]
-position = Vector2(155, 62)
+position = Vector2(177, 79)
 shape = SubResource("RectangleShape2D_62odp")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Pared izquierda" unique_id=1253028098]
-position = Vector2(29, 220)
+position = Vector2(27, 242)
 rotation = 1.5707964
 shape = SubResource("RectangleShape2D_62odp")
 

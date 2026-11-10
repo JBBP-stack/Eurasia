@@ -106,7 +106,7 @@ func _crear_interfaz() -> void:
 
 func _actualizar(_cantidad: int) -> void:
 	_hoy = NoticiasManager.obtener_noticias_hoy()
-	_titulo.text = "BUZÓN | " + NoticiasManager.fecha_actual
+	_titulo.text = "BUZÓN | " + EstadoJuego.etiqueta_dia()	
 	_buzon.text = "Buzón: %d nueva(s)" % NoticiasManager.cuantas_sin_leer()
 	_lista.clear()
 	for noticia in _hoy:
@@ -145,7 +145,11 @@ func _seleccionar(indice: int) -> void:
 	var noticia: Dictionary = _hoy[indice]
 	var noticia_id := str(noticia.get("id", ""))
 	NoticiasManager.marcar_leida(noticia_id)
-	_texto.text = str(noticia.get("titulo", "")) + "\n\n" + str(noticia.get("resumen", "")) + "\n\nPublicado: " + str(noticia.get("fecha_publicacion", "")) + "\nFuente: " + str(noticia.get("fuente", "")) + "\n\nTexto educativo adaptado por EURASIA."
+	_texto.text = str(noticia.get("titulo", "")) \
+		+ "\n\n" + str(noticia.get("resumen", "")) \
+		+ "\n\nPublicado: " + str(noticia.get("fecha_publicacion", "")) \
+		+ "\nFuente: " + str(noticia.get("fuente", "")) \
+		+ "\n\nTexto educativo adaptado por EURASIA."
 	_origen_url = str(noticia.get("fuente_url", ""))
 	_enlace.visible = not _origen_url.is_empty()
 	_limpiar_opciones()

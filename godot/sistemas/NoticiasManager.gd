@@ -6,13 +6,14 @@ signal decision_resuelta(noticia_id: String, opcion_id: String, efecto: Dictiona
 
 const RUTA_NOTICIAS := "res://datos/noticias/noticias_2008.json"
 const RUTA_PREGUNTAS := "res://datos/noticias/preguntas_2008.json"
-const RUTA_PARTIDA := "user://eurasia_noticias_partida.json"
+const RUTA_PARTIDA := "user://eurasia_calendario_noticias_v2.json"
+const RUTA_PARTIDA_ANTIGUA := "user://eurasia_noticias_partida.json"
 
-var fecha_actual: String = "2008-09-15"
 var noticias: Array[Dictionary] = []
 var preguntas: Dictionary = {}
 var leidas: Dictionary = {}
 var respuestas: Dictionary = {}
+var _guardado_bloqueado: bool = false
 
 func _ready() -> void:
 	_cargar_contenido()
@@ -41,7 +42,7 @@ func _cargar_contenido() -> void:
 func obtener_noticias_hoy() -> Array[Dictionary]:
 	var resultado: Array[Dictionary] = []
 	for noticia in noticias:
-		if str(noticia.get("disponible_desde", "")) == fecha_actual:
+		if str(noticia.get("disponible_desde", "")) == EstadoJuego.fecha_historica_interna:
 			resultado.append(noticia)
 	resultado.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
 		return int(a.get("prioridad", 0)) > int(b.get("prioridad", 0)))
@@ -95,37 +96,84 @@ func puede_dormir() -> bool:
 			return false
 	return true
 
+
 func avanzar_dia() -> bool:
 	if not puede_dormir():
 		return false
-	var segundos := Time.get_unix_time_from_datetime_string(fecha_actual + "T00:00:00")
-	fecha_actual = Time.get_date_string_from_unix_time(int(segundos) + 86400)
+
+	EstadoJuego.avanzar_un_dia()
+
 	_guardar_partida()
 	noticias_actualizadas.emit(cuantas_sin_leer())
+
 	return true
 
+
 func reiniciar_demo() -> void:
-	fecha_actual = "2008-09-15"
+	EstadoJuego.restaurar_dia(1)
+
 	leidas.clear()
 	respuestas.clear()
+	_guardado_bloqueado = false
+
 	_guardar_partida()
 	noticias_actualizadas.emit(cuantas_sin_leer())
 
+
 func _guardar_partida() -> void:
-	var archivo := FileAccess.open(RUTA_PARTIDA, FileAccess.WRITE)
-	if archivo == null:
-		push_error("No se pudo guardar el estado de noticias")
+	if _guardado_bloqueado:
+		push_warning("Guardado bloqueado: archivo incompatible.")
 		return
-	archivo.store_string(JSON.stringify({
-		"fecha_actual": fecha_actual,
+
+	var archivo := FileAccess.open(RUTA_PARTIDA, FileAccess.WRITE)
+
+	if archivo == null:
+		push_error("No se pudo guardar la partida.")
+		return
+
+	var datos: Dictionary = {
+		"version": 2,
+		"fecha_inicio": EstadoJuego.FECHA_INICIO_PROVISIONAL,
+		"dia_de_partida": EstadoJuego.dia_de_partida,
 		"leidas": leidas,
 		"respuestas": respuestas
-	}, "\t"))
+	}
+
+	archivo.store_string(JSON.stringify(datos, "\t"))
+	archivo.close()
+
+
 
 func _cargar_partida() -> void:
 	if not FileAccess.file_exists(RUTA_PARTIDA):
+		if FileAccess.file_exists(RUTA_PARTIDA_ANTIGUA):
+			print("Guardado antiguo detectado. Se conserva sin importar.")
 		return
-	var guardado := _leer_json(RUTA_PARTIDA)
-	fecha_actual = str(guardado.get("fecha_actual", fecha_actual))
-	leidas = guardado.get("leidas", {})
-	respuestas = guardado.get("respuestas", {})
+
+	var guardado: Dictionary = _leer_json(RUTA_PARTIDA)
+
+	if int(guardado.get("version", 0)) != 2:
+		_guardado_bloqueado = true
+		push_warning("Versión de guardado incompatible.")
+		return
+
+	if str(guardado.get("fecha_inicio", "")) != EstadoJuego.FECHA_INICIO_PROVISIONAL:
+		_guardado_bloqueado = true
+		push_warning("El guardado pertenece a otro calendario.")
+		return
+
+	var dia_guardado: int = int(guardado.get("dia_de_partida", 0))
+	var leidas_guardadas = guardado.get("leidas", {})
+	var respuestas_guardadas = guardado.get("respuestas", {})
+
+	if not (leidas_guardadas is Dictionary and respuestas_guardadas is Dictionary):
+		_guardado_bloqueado = true
+		push_warning("Datos de noticias incompatibles.")
+		return
+
+	if not EstadoJuego.restaurar_dia(dia_guardado):
+		_guardado_bloqueado = true
+		return
+
+	leidas = leidas_guardadas
+	respuestas = respuestas_guardadas

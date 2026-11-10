@@ -2,12 +2,16 @@ extends Node
 ## Estado inicial de la demo. Cifras monetarias en céntimos para evitar errores de redondeo.
 ## Todos los datos salvo el reparto 15.000/15.000 y el total de 30.000 son provisionales.
 
-## signal patrimonio_actualizado
 
-# La fecha histórica se mantiene oculta al jugador.
-# Más adelante NoticiasManager utilizará esta misma fecha para evitar dos calendarios.
-var fecha_historica_interna: String = "2007-07-02"
+signal dia_cambiado(nuevo_dia: int)
+
+# Fecha temporal del prototipo. No es la fecha definitiva de la demo.
+const FECHA_INICIO_PROVISIONAL: String = "2008-09-15"
+
+# Calendario interno, no visible directamente para el jugador.
+var fecha_historica_interna: String = FECHA_INICIO_PROVISIONAL
 var dia_de_partida: int = 1
+
 
 var perfil: Dictionary = {
 	"edad": 30,
@@ -42,3 +46,29 @@ func patrimonio_total_centimos() -> int:
 
 func euros(centimos: int) -> String:
 	return "%.2f" % (float(centimos) / 100.0)
+
+
+func etiqueta_dia() -> String:
+	return "Día %d" % dia_de_partida
+
+
+func avanzar_un_dia() -> void:
+	restaurar_dia(dia_de_partida + 1)
+
+
+func restaurar_dia(nuevo_dia: int) -> bool:
+	if nuevo_dia < 1:
+		push_warning("El día de partida no puede ser menor que 1.")
+		return false
+
+	var inicio: int = Time.get_unix_time_from_datetime_string(
+		FECHA_INICIO_PROVISIONAL + "T00:00:00"
+	)
+
+	var segundos: int = inicio + (nuevo_dia - 1) * 86_400
+
+	fecha_historica_interna = Time.get_date_string_from_unix_time(segundos)
+	dia_de_partida = nuevo_dia
+
+	dia_cambiado.emit(dia_de_partida)
+	return true
