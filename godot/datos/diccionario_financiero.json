@@ -1,0 +1,28 @@
+{
+  "terminos": [
+    {
+      "termino": "Inflación",
+      "aliases": ["IPC", "poder adquisitivo"],
+      "definicion": "Aumento general y sostenido de los precios de bienes y servicios. Cuando los precios suben, cada unidad de dinero permite comprar menos.",
+      "ejemplo": "Si tus ingresos no cambian y suben los precios de la compra, con el mismo dinero puedes llevarte menos productos.",
+      "fuente": "Banco Central Europeo",
+      "url": "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/what_is_inflation.es.html"
+    },
+    {
+      "termino": "Liquidez",
+      "aliases": ["disponibilidad", "activo líquido"],
+      "definicion": "Facilidad y rapidez con la que puedes disponer del dinero o convertir un activo en dinero. Un depósito disponible a la vista suele ser más líquido que una inversión con vencimiento.",
+      "ejemplo": "El saldo de una cuenta corriente suele estar disponible antes que el dinero colocado en un depósito a plazo.",
+      "fuente": "Banco de España",
+      "url": "https://clientebancario.bde.es/pcb/es/blog/productos-de-ahorro-vs-inversion.html?blog=%2Fwebcb%2FBlog%2FCuentasDepositos"
+    },
+    {
+      "termino": "Volatilidad",
+      "aliases": ["variación de precio", "riesgo de mercado"],
+      "definicion": "Grado en que el precio de una inversión cambia con el tiempo. Una volatilidad alta implica cambios más amplios o frecuentes.",
+      "ejemplo": "Si una acción alterna subidas y bajadas grandes en pocos días, su precio muestra alta volatilidad.",
+      "fuente": "Investor.gov, SEC",
+      "url": "https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins/investor-2"
+    }
+  ]
+}

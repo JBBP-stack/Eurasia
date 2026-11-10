@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" path="res://escenas/habitacion/Cama.tscn" id="7_cama"]
 [ext_resource type="PackedScene" path="res://escenas/habitacion/Portatil.tscn" id="8_portatil"]
 [ext_resource type="PackedScene" path="res://escenas/habitacion/Nevera.tscn" id="9_nevera"]
+[ext_resource type="PackedScene" path="res://escenas/habitacion/Libro.tscn" id="10_libro"]
+[ext_resource type="PackedScene" path="res://escenas/interfaces/DiccionarioUI.tscn" id="11_diccionario"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7r0pk"]
 texture = ExtResource("2_xym36")
@@ -309,13 +311,20 @@ tile_map_data = PackedByteArray("AAACAAAAAgAAAAEAAAADAAAAAgABAAEAAAAEAAAAAgAAAAE
 tile_set = SubResource("TileSet_inxgb")
 
 [node name="Buzon" parent="." unique_id=506260982 instance=ExtResource("6_buzon")]
+position = Vector2(251, 199)
 
 [node name="Cama" parent="." unique_id=1020421977 instance=ExtResource("7_cama")]
 position = Vector2(34, 100)
 
 [node name="Portatil" parent="." unique_id=627521874 instance=ExtResource("8_portatil")]
+position = Vector2(241, 86)
 
 [node name="Nevera" parent="." unique_id=843991717 instance=ExtResource("9_nevera")]
+
+[node name="Libro" parent="." unique_id=1035530416 instance=ExtResource("10_libro")]
+position = Vector2(143, 312)
+
+[node name="DiccionarioUI" parent="." unique_id=1994601392 instance=ExtResource("11_diccionario")]
 
 [node name="Jugador" parent="." unique_id=1196908318 instance=ExtResource("3_xym36")]
 position = Vector2(100, 100)

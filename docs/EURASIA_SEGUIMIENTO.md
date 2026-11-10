@@ -11,6 +11,7 @@ Actualizado: 10/11/2026
 - [x] **Recogida física del buzón.** Al acercarse y pulsar E se recoge un periódico; el archivo solo muestra periódicos recogidos y la lectura ocurre al abrir cada entrada. Confirmado por el usuario.
 - [x] **Cama física.** La interacción usa el mismo avance de día que ambos botones y muestra el motivo si no se puede dormir. Confirmado por el usuario.
 - [x] **Acceso al estado del análisis desde el portátil.** El bloqueo depende de que termine el reparto y de que se hayan recogido todas las noticias del día. La integración real con Claude queda separada.
+- [x] **Consulta de existencias en la nevera.** La interacción muestra la cantidad actual de comida de EstadoJuego; no consume ni compra raciones. Confirmado por el usuario.
 
 ## Pendiente
 
@@ -26,4 +27,4 @@ Actualizado: 10/11/2026
 
 ## En curso
 
-- [ ] **Consulta de existencias en la nevera (pendiente de validación).** La interacción muestra la cantidad actual de comida de EstadoJuego; no consume ni compra raciones.
+- [ ] **Diccionario financiero en la habitación.** Libro interactivo con búsqueda local de términos y definiciones breves; pendiente de validación en Godot.
