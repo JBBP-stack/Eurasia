@@ -9,10 +9,11 @@ Actualizado: 10/11/2026
 - [x] **HUD de la habitación.** Muestra día, saldo bancario, valor por empresa y patrimonio total desde EstadoJuego. Confirmado por el usuario.
 - [x] **Reparto escalonado y bloqueo de dormir.** Las noticias llegan en orden determinista y ambos botones usan el mismo control: esperar al fin del reparto y responder las decisiones obligatorias. Confirmado por el usuario.
 - [x] **Recogida física del buzón.** Al acercarse y pulsar E se recoge un periódico; el archivo solo muestra periódicos recogidos y la lectura ocurre al abrir cada entrada. Confirmado por el usuario.
+- [x] **Cama física.** La interacción usa el mismo avance de día que ambos botones y muestra el motivo si no se puede dormir. Confirmado por el usuario.
 
 ## Pendiente
 
-- [ ] Completar el ciclo de noticias con recogida, lectura y desbloqueo del análisis después de recoger todas las noticias del día.
+- [ ] Integrar el análisis real de noticias cuando se incorpore Claude.
 - [ ] Distribuir los objetos interactivos de la habitación sin alterar movimiento, cámara ni colisiones.
 - [ ] Diseñar el escenario del banco y reservar sus operaciones para la última fase funcional.
 
@@ -23,4 +24,4 @@ Actualizado: 10/11/2026
 
 ## En curso
 
-- [ ] **Cama física (pendiente de validación).** Al acercarse y pulsar E debe llamar al mismo avance de día que los dos botones de dormir y mostrar el motivo si el reparto o las decisiones están pendientes. La tecla E sigue siendo provisional.
+- [ ] **Acceso al análisis desde el portátil (pendiente de validación).** La interacción provisional consulta el estado del reparto y la recogida de noticias; el análisis solo se desbloquea después de recoger todas las noticias del día. La integración con Claude no está incluida todavía.

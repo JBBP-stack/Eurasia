@@ -148,13 +148,27 @@ func recoger_siguiente_noticia() -> Dictionary:
 
 
 func puede_analizar_noticias_hoy() -> bool:
-	if not _reparto_finalizado:
+	var programadas := obtener_noticias_hoy()
+	if programadas.is_empty() or not _reparto_finalizado:
 		return false
-	for noticia in obtener_noticias_hoy():
+	for noticia in programadas:
 		var noticia_id := str(noticia.get("id", ""))
 		if not entregadas.has(noticia_id) or not recogidas.has(noticia_id):
 			return false
 	return true
+
+
+func motivo_analisis_no_disponible() -> String:
+	var programadas := obtener_noticias_hoy()
+	if programadas.is_empty():
+		return "Hoy no hay noticias que analizar."
+	if not _reparto_finalizado:
+		return "Espera a que termine el reparto de noticias."
+	for noticia in programadas:
+		var noticia_id := str(noticia.get("id", ""))
+		if not recogidas.has(noticia_id):
+			return "Recoge todos los periódicos del día en el buzón."
+	return ""
 
 
 func marcar_leida(noticia_id: String) -> void:

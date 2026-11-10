@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" path="res://escenas/interfaces/HUDHabitacion.tscn" id="5_hud"]
 [ext_resource type="PackedScene" path="res://escenas/habitacion/Buzon.tscn" id="6_buzon"]
 [ext_resource type="PackedScene" path="res://escenas/habitacion/Cama.tscn" id="7_cama"]
+[ext_resource type="PackedScene" path="res://escenas/habitacion/Portatil.tscn" id="8_portatil"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7r0pk"]
 texture = ExtResource("2_xym36")
@@ -310,6 +311,8 @@ tile_set = SubResource("TileSet_inxgb")
 
 [node name="Cama" parent="." unique_id=1020421977 instance=ExtResource("7_cama")]
 position = Vector2(34, 100)
+
+[node name="Portatil" parent="." instance=ExtResource("8_portatil")]
 
 [node name="Jugador" parent="." unique_id=1196908318 instance=ExtResource("3_xym36")]
 position = Vector2(100, 100)

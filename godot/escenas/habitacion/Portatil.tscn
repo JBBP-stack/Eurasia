@@ -1,0 +1,31 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://escenas/habitacion/Portatil.gd" id="1_portatil"]
+[ext_resource type="Texture2D" uid="uid://be1eql5n6x4j1" path="res://assets/objetos/ordenador.png" id="2_ordenador"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rango"]
+radius = 48.0
+
+[node name="Portatil" type="Area2D"]
+position = Vector2(190, 55)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("1_portatil")
+
+[node name="Rango" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rango")
+
+[node name="Ordenador" type="Sprite2D" parent="."]
+texture = ExtResource("2_ordenador")
+scale = Vector2(0.16, 0.16)
+
+[node name="Indicador" type="Label" parent="."]
+offset_left = -80.0
+offset_top = -46.0
+offset_right = 80.0
+offset_bottom = -20.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 10
+text = "E: consultar portátil"
+horizontal_alignment = 1
+visible = false
