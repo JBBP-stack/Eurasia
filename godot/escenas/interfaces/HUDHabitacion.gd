@@ -6,6 +6,8 @@ var _saldo_bancario: Label
 var _total_inversiones: Label
 var _lista_inversiones: VBoxContainer
 var _patrimonio_total: Label
+var _mensaje: Label
+var _temporizador_mensaje: Timer
 
 
 func _ready() -> void:
@@ -29,6 +31,32 @@ func _crear_interfaz() -> void:
 	_dia = Label.new()
 	_dia.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	panel_dia.add_child(_dia)
+
+	var dormir := Button.new()
+	add_child(dormir)
+	dormir.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+	dormir.offset_left = 182
+	dormir.offset_top = 12
+	dormir.offset_right = 258
+	dormir.offset_bottom = 48
+	dormir.text = "Dormir"
+	dormir.pressed.connect(_dormir)
+
+	_mensaje = Label.new()
+	add_child(_mensaje)
+	_mensaje.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
+	_mensaje.offset_left = 270
+	_mensaje.offset_top = 12
+	_mensaje.offset_right = -220
+	_mensaje.offset_bottom = 48
+	_mensaje.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_mensaje.visible = false
+
+	_temporizador_mensaje = Timer.new()
+	_temporizador_mensaje.one_shot = true
+	_temporizador_mensaje.wait_time = 4.0
+	add_child(_temporizador_mensaje)
+	_temporizador_mensaje.timeout.connect(_ocultar_mensaje)
 
 	var panel_patrimonio := PanelContainer.new()
 	add_child(panel_patrimonio)
@@ -100,3 +128,20 @@ func _al_cambiar_dia(_nuevo_dia: int) -> void:
 
 func _al_resolver_decision(_noticia_id: String, _opcion_id: String, _efecto: Dictionary) -> void:
 	actualizar()
+
+
+func _dormir() -> void:
+	if NoticiasManager.avanzar_dia():
+		_mostrar_mensaje("Has pasado a %s." % EstadoJuego.etiqueta_dia())
+	else:
+		_mostrar_mensaje(NoticiasManager.motivo_no_puede_dormir())
+
+
+func _mostrar_mensaje(texto: String) -> void:
+	_mensaje.text = texto
+	_mensaje.visible = true
+	_temporizador_mensaje.start()
+
+
+func _ocultar_mensaje() -> void:
+	_mensaje.visible = false

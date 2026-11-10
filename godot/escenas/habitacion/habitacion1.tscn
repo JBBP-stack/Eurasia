@@ -1,12 +1,13 @@
 [gd_scene format=4 uid="uid://dujlmm78f68xq"]
 
 [ext_resource type="PackedScene" path="res://escenas/interfaces/NoticiasUI.tscn" id="1_wkp45"]
-[ext_resource type="PackedScene" path="res://escenas/interfaces/HUDHabitacion.tscn" id="5_hud"]
 [ext_resource type="Texture2D" uid="uid://bvwxiffictu3e" path="res://assets/escenarios/maderin_hecho2.png" id="2_7r0pk"]
 [ext_resource type="Texture2D" uid="uid://cm1jnc56cni8g" path="res://assets/escenarios/maderin_hecho.png" id="2_xym36"]
 [ext_resource type="Script" uid="uid://c8hfc6ovrl06y" path="res://escenas/interfaces/FichaInicio.gd" id="3_3mxfk"]
 [ext_resource type="PackedScene" uid="uid://dpjo5ovx45rkc" path="res://escenas/personaje/jugador.tscn" id="3_xym36"]
 [ext_resource type="Texture2D" uid="uid://c6fqqibc83unm" path="res://assets/escenarios/maderin_hecho3.png" id="4_hbugj"]
+[ext_resource type="PackedScene" path="res://escenas/interfaces/HUDHabitacion.tscn" id="5_hud"]
+[ext_resource type="PackedScene" path="res://escenas/habitacion/Buzon.tscn" id="6_buzon"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7r0pk"]
 texture = ExtResource("2_xym36")
@@ -297,12 +298,14 @@ position = Vector2(0, 2)
 
 [node name="NoticiasUI" parent="." unique_id=187045347 instance=ExtResource("1_wkp45")]
 
-[node name="HUDHabitacion" parent="." instance=ExtResource("5_hud")]
+[node name="HUDHabitacion" parent="." unique_id=874755302 instance=ExtResource("5_hud")]
 
 [node name="Suelo_TileMapLayer" type="TileMapLayer" parent="." unique_id=1239304008]
 scale = Vector2(0.535, 0.535)
 tile_map_data = PackedByteArray("AAACAAAAAgAAAAEAAAADAAAAAgABAAEAAAAEAAAAAgAAAAEAAAAFAAAAAgABAAEAAAAGAAAAAgAAAAEAAAAHAAAAAgABAAEAAAAAAAEAAwAAAAAAAAAAAAIAAwAAAAEAAAAAAAMAAwAAAAAAAAAAAAQAAwAAAAEAAAAAAAUAAwAAAAAAAAAAAAYAAwAAAAEAAAAAAAcAAwAAAAAAAAAAAAgAAwAAAAEAAAAAAAkAAwAAAAAAAAAHAAEAAwABAAAAAAAHAAIAAwABAAEAAAAHAAMAAwABAAAAAAAHAAQAAwABAAEAAAAHAAUAAwABAAAAAAAHAAYAAwABAAEAAAAHAAcAAwABAAAAAAAHAAgAAwABAAEAAAAHAAkAAwABAAAAAAAGAAkAAwAAAAAAAAAFAAkAAwABAAAAAAAEAAkAAwAAAAAAAAADAAkAAwABAAAAAAACAAkAAwAAAAAAAAABAAkAAwABAAAAAAABAAgAAwABAAEAAAABAAcAAwABAAAAAAABAAYAAwABAAEAAAABAAUAAwABAAAAAAABAAQAAwABAAEAAAABAAMAAwABAAAAAAABAAIAAwABAAEAAAABAAEAAwABAAAAAAACAAEAAwAAAAAAAAACAAIAAwAAAAEAAAACAAMAAwAAAAAAAAACAAYAAwAAAAEAAAACAAcAAwAAAAAAAAACAAgAAwAAAAEAAAADAAgAAwABAAEAAAADAAcAAwABAAAAAAADAAYAAwABAAEAAAADAAUAAwABAAAAAAACAAQAAwAAAAEAAAADAAMAAwABAAAAAAADAAIAAwABAAEAAAAEAAIAAwAAAAEAAAAEAAEAAwAAAAAAAAADAAEAAwABAAAAAAAFAAEAAwABAAAAAAAGAAEAAwAAAAAAAAAGAAIAAwAAAAEAAAAGAAMAAwAAAAAAAAAGAAQAAwAAAAEAAAAGAAUAAwAAAAAAAAAGAAYAAwAAAAEAAAAGAAcAAwAAAAAAAAAGAAgAAwAAAAEAAAAFAAgAAwABAAEAAAAFAAcAAwABAAAAAAAFAAYAAwABAAEAAAAFAAUAAwABAAAAAAAFAAQAAwABAAEAAAAFAAMAAwABAAAAAAAFAAIAAwABAAEAAAAEAAMAAwAAAAAAAAAEAAQAAwAAAAEAAAAEAAUAAwAAAAAAAAAEAAYAAwAAAAEAAAAEAAcAAwAAAAAAAAAEAAgAAwAAAAEAAAACAAUAAwAAAAAAAAADAAQAAwABAAEAAAAAAAAAAwAAAAEAAAABAAAAAwABAAEAAAA=")
 tile_set = SubResource("TileSet_inxgb")
+
+[node name="Buzon" parent="." unique_id=506260982 instance=ExtResource("6_buzon")]
 
 [node name="Jugador" parent="." unique_id=1196908318 instance=ExtResource("3_xym36")]
 position = Vector2(100, 100)
