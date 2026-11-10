@@ -7,6 +7,7 @@ var _efectivo: Label
 var _total_inversiones: Label
 var _lista_inversiones: VBoxContainer
 var _patrimonio_total: Label
+var _vital: Label
 var _mensaje: Label
 var _temporizador_mensaje: Timer
 
@@ -19,6 +20,9 @@ func _ready() -> void:
 	EstadoJuego.dia_cambiado.connect(_al_cambiar_dia)
 	NoticiasManager.decision_resuelta.connect(_al_resolver_decision)
 	SistemaFinanciero.finanzas_actualizadas.connect(_al_actualizar_finanzas)
+	SistemaMercado.precios_actualizados.connect(_al_actualizar_finanzas)
+	EstadoJuego.estado_vital_actualizado.connect(_al_actualizar_finanzas)
+	GestorPartida.resumen_dia.connect(_al_recibir_resumen_dia)
 	actualizar()
 
 
@@ -51,8 +55,9 @@ func _crear_interfaz() -> void:
 	_mensaje.offset_left = 270
 	_mensaje.offset_top = 12
 	_mensaje.offset_right = -220
-	_mensaje.offset_bottom = 48
+	_mensaje.offset_bottom = 110
 	_mensaje.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_mensaje.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_mensaje.visible = false
 
 	_temporizador_mensaje = Timer.new()
@@ -101,6 +106,10 @@ func _crear_interfaz() -> void:
 	_patrimonio_total = Label.new()
 	contenido.add_child(_patrimonio_total)
 
+	contenido.add_child(HSeparator.new())
+	_vital = Label.new()
+	contenido.add_child(_vital)
+
 
 func actualizar() -> void:
 	_dia.text = EstadoJuego.etiqueta_dia()
@@ -109,18 +118,30 @@ func actualizar() -> void:
 	_total_inversiones.text = "Inversiones: %s €" % EstadoJuego.euros(EstadoJuego.valor_cartera_centimos())
 	_patrimonio_total.text = "Total: %s €" % EstadoJuego.euros(EstadoJuego.patrimonio_total_centimos())
 
-	while _lista_inversiones.get_child_count() > EstadoJuego.cartera.size():
+	_vital.text = "Salud: %d · Comida: %d raciones%s" % [
+		EstadoJuego.salud,
+		EstadoJuego.comida_disponible,
+		"" if EstadoJuego.comido_hoy else " · sin comer hoy"
+	]
+
+	# Solo se listan las posiciones con acciones; el catálogo completo está en el portátil y el banco.
+	var posiciones: Array[Dictionary] = []
+	for posicion in EstadoJuego.cartera:
+		if int(posicion.get("acciones", 0)) > 0:
+			posiciones.append(posicion)
+
+	while _lista_inversiones.get_child_count() > posiciones.size():
 		var ultima := _lista_inversiones.get_child(_lista_inversiones.get_child_count() - 1)
 		_lista_inversiones.remove_child(ultima)
 		ultima.queue_free()
 
-	while _lista_inversiones.get_child_count() < EstadoJuego.cartera.size():
+	while _lista_inversiones.get_child_count() < posiciones.size():
 		var etiqueta := Label.new()
 		etiqueta.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		_lista_inversiones.add_child(etiqueta)
 
-	for indice in range(EstadoJuego.cartera.size()):
-		var posicion: Dictionary = EstadoJuego.cartera[indice]
+	for indice in range(posiciones.size()):
+		var posicion: Dictionary = posiciones[indice]
 		var valor_centimos := int(posicion.get("acciones", 0)) * int(posicion.get("precio_centimos", 0))
 		var etiqueta := _lista_inversiones.get_child(indice) as Label
 		etiqueta.text = "· %s: %s €" % [
@@ -141,17 +162,26 @@ func _al_actualizar_finanzas() -> void:
 	actualizar()
 
 
+func _al_recibir_resumen_dia(eventos: Array[String]) -> void:
+	if eventos.is_empty():
+		return
+	mostrar_mensaje_temporal("%s · %s" % [EstadoJuego.etiqueta_dia(), " ".join(eventos)], 8.0)
+
+
 func _dormir() -> void:
+	if GestorPartida.hay_ventanas_abiertas():
+		mostrar_mensaje_temporal("Cierra la ventana abierta antes de dormir.")
+		return
 	if NoticiasManager.avanzar_dia():
 		mostrar_mensaje_temporal("Has pasado a %s." % EstadoJuego.etiqueta_dia())
 	else:
 		mostrar_mensaje_temporal(NoticiasManager.motivo_no_puede_dormir())
 
 
-func mostrar_mensaje_temporal(texto: String) -> void:
+func mostrar_mensaje_temporal(texto: String, segundos: float = 4.0) -> void:
 	_mensaje.text = texto
 	_mensaje.visible = true
-	_temporizador_mensaje.start()
+	_temporizador_mensaje.start(segundos)
 
 
 func _ocultar_mensaje() -> void:

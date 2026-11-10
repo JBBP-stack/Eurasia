@@ -51,6 +51,6 @@ offset_right = 78.0
 offset_bottom = -42.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 10
-text = "E: consultar comida"
+text = "E: abrir nevera"
 horizontal_alignment = 1
 visible = false

@@ -12,6 +12,7 @@ var _pestanas: TabContainer
 var _dia: Label
 var _resumen: Label
 var _lista_cartera: ItemList
+var _aviso_mercado: Label
 var _saldo_efectivo: Label
 var _accion_efectivo: OptionButton
 var _importe_efectivo: LineEdit
@@ -32,6 +33,7 @@ func _ready() -> void:
 	add_to_group("banco_ui")
 	_crear_interfaz()
 	SistemaFinanciero.finanzas_actualizadas.connect(_actualizar_datos)
+	SistemaMercado.precios_actualizados.connect(_actualizar_datos)
 	EstadoJuego.dia_cambiado.connect(_actualizar_dia)
 	_actualizar_datos()
 	_cerrar_banco()
@@ -122,10 +124,9 @@ func _crear_pagina_cuenta() -> void:
 	_lista_cartera.custom_minimum_size = Vector2(0, 100)
 	pagina.add_child(_lista_cartera)
 
-	var aviso := Label.new()
-	aviso.text = "Precios fijos de prueba · comisión 0 € · no son cotizaciones históricas."
-	aviso.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	pagina.add_child(aviso)
+	_aviso_mercado = Label.new()
+	_aviso_mercado.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	pagina.add_child(_aviso_mercado)
 
 
 func _crear_pagina_efectivo() -> void:
@@ -167,7 +168,7 @@ func _crear_pagina_inversiones() -> void:
 	_pestanas.add_child(pagina)
 
 	var explicacion := Label.new()
-	explicacion.text = "Opera con las posiciones de prueba de la partida. Solo se permiten acciones enteras y saldo disponible."
+	explicacion.text = "Compra o vende acciones enteras con el saldo de tu cuenta. Máximo %d posiciones activas. La bolsa cierra los fines de semana." % SistemaFinanciero.MAX_POSICIONES
 	explicacion.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	pagina.add_child(explicacion)
 
@@ -236,7 +237,7 @@ func abrir_banco(origen: String = "ventanilla") -> void:
 	_mensaje.text = ""
 	_cargar_activos()
 	_actualizar_datos()
-	get_tree().paused = true
+	GestorPartida.abrir_ventana("banco")
 
 
 func _cerrar_banco() -> void:
@@ -248,7 +249,11 @@ func _cerrar_banco() -> void:
 		_fondo.visible = false
 	if _panel:
 		_panel.visible = false
-	get_tree().paused = false
+	GestorPartida.cerrar_ventana("banco")
+
+
+func _exit_tree() -> void:
+	GestorPartida.cerrar_ventana("banco")
 
 
 func _actualizar_datos() -> void:
@@ -266,12 +271,26 @@ func _actualizar_datos() -> void:
 		var cantidad := int(activo.get("acciones", 0))
 		var precio := int(activo.get("precio_centimos", 0))
 		var valor := cantidad * precio
-		_lista_cartera.add_item("%s · %d acciones · %s € por acción · valor %s €" % [
+		var anterior := SistemaMercado.precio_sesion_anterior(str(activo.get("id", "")))
+		var variacion := (float(precio - anterior) / float(anterior) * 100.0) if anterior > 0 else 0.0
+		_lista_cartera.add_item("%s · %d acciones · %s € por acción (%+.1f %% hoy) · valor %s €" % [
 			str(activo.get("nombre", activo.get("id", "Activo"))),
 			cantidad,
 			EstadoJuego.euros(precio),
+			variacion,
 			EstadoJuego.euros(valor)
 		])
+
+	var estado_bolsa := "Bolsa abierta" if SistemaMercado.mercado_abierto() else "Bolsa cerrada (fin de semana)"
+	var calidad := "cotizaciones verificadas" if SistemaMercado.verificado else "precios ilustrativos pendientes de verificar"
+	_aviso_mercado.text = "%s · comisión %.2f %% (mínimo %s €) · %s." % [
+		estado_bolsa,
+		float(Reglas.entero("mercado/comision_puntos_base", 0)) / 100.0,
+		EstadoJuego.euros(Reglas.entero("mercado/comision_minima_centimos", 0)),
+		calidad
+	]
+	if EstadoJuego.saldo_bancario_centimos < 0:
+		_aviso_mercado.text += "\nCuenta en descubierto: ingresa efectivo o vende inversiones antes de %d días." % Reglas.entero("bancarrota/dias_gracia_descubierto", 3)
 
 	_saldo_efectivo.text = "Efectivo disponible: %s €" % EstadoJuego.euros(EstadoJuego.efectivo_centimos)
 
@@ -295,11 +314,15 @@ func _actualizar_estimacion(_valor: Variant = null) -> void:
 	var cantidad := int(_cantidad_inversion.value)
 	var importe := precio * cantidad
 	var es_compra := _accion_inversion.get_selected_id() == 0
-	var etiqueta := "Coste estimado" if es_compra else "Ingreso estimado"
-	_estimacion_inversion.text = "%s: %s € · precio de prueba %s € por acción · comisión 0 €" % [
+	var comision := SistemaFinanciero.estimar_comision(importe)
+	var total := importe + comision if es_compra else importe - comision
+	var etiqueta := "Coste total estimado" if es_compra else "Ingreso neto estimado"
+	_estimacion_inversion.text = "%s: %s € · precio %s € por acción · comisión %s €%s" % [
 		etiqueta,
-		EstadoJuego.euros(importe),
-		EstadoJuego.euros(precio)
+		EstadoJuego.euros(total),
+		EstadoJuego.euros(precio),
+		EstadoJuego.euros(comision),
+		"" if SistemaMercado.mercado_abierto() else " · bolsa cerrada hoy"
 	]
 
 
@@ -340,17 +363,21 @@ func _preparar_inversion() -> void:
 	var cantidad := int(_cantidad_inversion.value)
 	var comprar := _accion_inversion.get_selected_id() == 0
 	var precio := SistemaFinanciero.precio_actual_centimos(activo_id)
+	var comision := SistemaFinanciero.estimar_comision(precio * cantidad)
 	_operacion_pendiente = {
 		"tipo": "comprar" if comprar else "vender",
 		"activo_id": activo_id,
 		"cantidad": cantidad
 	}
-	_confirmacion.dialog_text = "%s %d acciones de %s a %s € por acción?\nTotal estimado: %s €\n\nPrecio fijo de prueba, sin cotización histórica ni comisión." % [
+	_confirmacion.dialog_text = "%s %d acciones de %s a %s € por acción?\nImporte: %s € · comisión: %s €\nTotal %s: %s €\n\nNo se aplicará hasta que confirmes." % [
 		"¿Comprar" if comprar else "¿Vender",
 		cantidad,
 		_activo_inversion.get_item_text(_activo_inversion.selected),
 		EstadoJuego.euros(precio),
-		EstadoJuego.euros(precio * cantidad)
+		EstadoJuego.euros(precio * cantidad),
+		EstadoJuego.euros(comision),
+		"a pagar" if comprar else "a recibir",
+		EstadoJuego.euros(precio * cantidad + comision if comprar else precio * cantidad - comision)
 	]
 	_confirmacion.popup_centered(Vector2i(520, 230))
 

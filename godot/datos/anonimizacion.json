@@ -1,0 +1,17 @@
+{
+	"nota": "Equivalencias INTERNAS entre entidades reales y nombres ficticios. Cada entidad real conserva siempre el mismo nombre ficticio (principio de anonimización consistente). No se muestra al jugador hasta el informe final. 'terminos_prohibidos' lo usa tools/validar_noticias.py para impedir fugas en los textos visibles.",
+	"entidades": [
+		{"real": "Lehman Brothers", "ficticio": "Casa Halvard Hermanos", "tipo": "banco de inversión"},
+		{"real": "Merrill Lynch", "ficticio": "Corredora Linares", "tipo": "banco de inversión"},
+		{"real": "Bank of America", "ficticio": "Banco Continental de Ostria", "tipo": "banco comercial"},
+		{"real": "AIG", "ficticio": "Aseguradora Atlántida", "tipo": "aseguradora"},
+		{"real": "Reserva Federal", "ficticio": "Banco Central de Ostria", "tipo": "banco central"},
+		{"real": "Estados Unidos", "ficticio": "Federación de Ostria", "tipo": "país"},
+		{"real": "dólares", "ficticio": "coronas ostrianas", "tipo": "moneda"},
+		{"real": "The Guardian", "ficticio": "El Observador Financiero", "tipo": "medio de comunicación"}
+	],
+	"terminos_prohibidos": [
+		"Lehman", "Merrill", "Bank of America", "AIG", "Reserva Federal", "Federal Reserve",
+		"Estados Unidos", "estadounidense", "Wall Street", "dólar", "Guardian", "2008", "Nueva York"
+	]
+}

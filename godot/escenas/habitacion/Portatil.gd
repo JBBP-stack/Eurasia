@@ -1,5 +1,5 @@
 extends Area2D
-## Interacción provisional que comprueba si el análisis diario está desbloqueado.
+## Portátil: abre la consulta financiera y el asistente de análisis de noticias.
 
 @onready var _indicador: Label = $Indicador
 var _jugador_cerca: bool = false
@@ -29,9 +29,9 @@ func _actualizar_indicador(_cantidad: int) -> void:
 	if not _jugador_cerca:
 		return
 	if NoticiasManager.puede_analizar_noticias_hoy():
-		_indicador.text = "E: consultar análisis"
+		_indicador.text = "E: portátil (análisis disponible)"
 	else:
-		_indicador.text = "E: estado del análisis"
+		_indicador.text = "E: usar portátil"
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -43,12 +43,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _consultar_estado() -> void:
-	var hud := get_tree().get_first_node_in_group("hud_habitacion")
-	if hud == null:
-		push_warning("No se encontró el HUD para mostrar el estado del análisis.")
+	var portatil_ui := get_tree().get_first_node_in_group("portatil_ui")
+	if portatil_ui == null:
+		push_warning("No se encontró la interfaz del portátil.")
 		return
-
-	if NoticiasManager.puede_analizar_noticias_hoy():
-		hud.call("mostrar_mensaje_temporal", "Análisis desbloqueado. La integración con Claude está pendiente.")
-	else:
-		hud.call("mostrar_mensaje_temporal", NoticiasManager.motivo_analisis_no_disponible())
+	# Si el análisis está disponible se abre directamente la pestaña del asistente.
+	var pestana: int = 4 if NoticiasManager.puede_analizar_noticias_hoy() else 0
+	portatil_ui.call("abrir_portatil", pestana)

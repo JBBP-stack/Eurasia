@@ -1,0 +1,40 @@
+{
+	"nota": "Reglas PROVISIONALES de la demo. El GDD aún no fija estas cifras: se centralizan aquí para ajustarlas sin tocar código. Importes en céntimos.",
+	"calendario": {
+		"fecha_inicio": "2008-09-15",
+		"fecha_fin_escenario": "2008-10-10"
+	},
+	"economia_domestica": {
+		"dia_del_mes_cobro": 1,
+		"gastos_fijos_mensuales": [
+			{"concepto": "Alquiler de la vivienda", "importe_centimos": 75000},
+			{"concepto": "Suministros (luz, agua, gas)", "importe_centimos": 15000},
+			{"concepto": "Transporte y teléfono", "importe_centimos": 10000}
+		]
+	},
+	"alimentacion": {
+		"comida_inicial": 3,
+		"precio_racion_centimos": 600,
+		"raciones_por_paquete": 7,
+		"perdida_salud_dia_sin_comer": 20,
+		"recuperacion_salud_dia_comiendo": 10,
+		"salud_maxima": 100
+	},
+	"mercado": {
+		"comision_puntos_base": 25,
+		"comision_minima_centimos": 200,
+		"cerrado_fines_de_semana": true
+	},
+	"bancarrota": {
+		"dias_gracia_descubierto": 3,
+		"limite_descubierto_centimos": 300000
+	},
+	"noticias": {
+		"probabilidad_noticia_falsa": 0.6
+	},
+	"asistente": {
+		"url_servicio": "http://127.0.0.1:8787/analizar",
+		"max_turnos_historial": 6,
+		"max_caracteres_pregunta": 600
+	}
+}

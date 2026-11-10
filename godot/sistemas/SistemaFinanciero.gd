@@ -8,8 +8,7 @@ const VERSION_GUARDADO: int = 1
 const ID_ESCENARIO: String = "eurasia_demo_2008"
 const MAX_POSICIONES: int = 10
 const MAX_MOVIMIENTOS: int = 200
-# Regla provisional hasta que el GDD defina los costes de operación.
-const COMISION_PUNTOS_BASE: int = 0
+# Las comisiones y la disponibilidad del mercado se leen de datos/reglas_demo.json (provisionales).
 
 var movimientos: Array[Dictionary] = []
 var _guardado_bloqueado: bool = false
@@ -20,6 +19,8 @@ func _ready() -> void:
 
 
 func depositar_efectivo(importe_centimos: int) -> Dictionary:
+	if EstadoJuego.partida_terminada:
+		return _error("La partida ha terminado.")
 	if importe_centimos <= 0:
 		return _error("Indica un importe mayor que cero.")
 	if importe_centimos > EstadoJuego.efectivo_centimos:
@@ -37,6 +38,8 @@ func depositar_efectivo(importe_centimos: int) -> Dictionary:
 
 
 func retirar_efectivo(importe_centimos: int) -> Dictionary:
+	if EstadoJuego.partida_terminada:
+		return _error("La partida ha terminado.")
 	if importe_centimos <= 0:
 		return _error("Indica un importe mayor que cero.")
 	if importe_centimos > EstadoJuego.saldo_bancario_centimos:
@@ -54,6 +57,9 @@ func retirar_efectivo(importe_centimos: int) -> Dictionary:
 
 
 func comprar_acciones(activo_id: String, cantidad: int) -> Dictionary:
+	var bloqueo := _motivo_mercado_no_disponible()
+	if not bloqueo.is_empty():
+		return _error(bloqueo)
 	if cantidad <= 0:
 		return _error("La cantidad debe ser de al menos una acción.")
 
@@ -82,12 +88,15 @@ func comprar_acciones(activo_id: String, cantidad: int) -> Dictionary:
 	return _finalizar_operacion(
 		snapshot,
 		"Compra de acciones",
-		"Compra de %d acciones de %s" % [cantidad, nombre],
+		"Compra de %d acciones de %s (comisión %s €)" % [cantidad, nombre, EstadoJuego.euros(comision)],
 		-coste_total
 	)
 
 
 func vender_acciones(activo_id: String, cantidad: int) -> Dictionary:
+	var bloqueo := _motivo_mercado_no_disponible()
+	if not bloqueo.is_empty():
+		return _error(bloqueo)
 	if cantidad <= 0:
 		return _error("La cantidad debe ser de al menos una acción.")
 
@@ -116,7 +125,7 @@ func vender_acciones(activo_id: String, cantidad: int) -> Dictionary:
 	return _finalizar_operacion(
 		snapshot,
 		"Venta de acciones",
-		"Venta de %d acciones de %s" % [cantidad, nombre],
+		"Venta de %d acciones de %s (comisión %s €)" % [cantidad, nombre, EstadoJuego.euros(comision)],
 		ingreso_neto
 	)
 
@@ -126,6 +135,53 @@ func precio_actual_centimos(activo_id: String) -> int:
 	if indice < 0:
 		return 0
 	return int(EstadoJuego.cartera[indice].get("precio_centimos", 0))
+
+
+func estimar_comision(importe_centimos: int) -> int:
+	return _calcular_comision(importe_centimos)
+
+
+## Pago voluntario (por ejemplo, comida). Usa primero el efectivo y después la cuenta; no permite descubierto.
+func pagar(tipo: String, detalle: String, importe_centimos: int) -> Dictionary:
+	if EstadoJuego.partida_terminada:
+		return _error("La partida ha terminado.")
+	if importe_centimos <= 0:
+		return _error("El importe del pago no es válido.")
+	if importe_centimos > maxi(0, EstadoJuego.saldo_bancario_centimos) + EstadoJuego.efectivo_centimos:
+		return _error("No tienes liquidez suficiente (efectivo + cuenta) para pagar %s €." % EstadoJuego.euros(importe_centimos))
+
+	var snapshot := _capturar_estado()
+	var desde_efectivo := mini(EstadoJuego.efectivo_centimos, importe_centimos)
+	EstadoJuego.efectivo_centimos -= desde_efectivo
+	EstadoJuego.saldo_bancario_centimos -= importe_centimos - desde_efectivo
+	return _finalizar_operacion(snapshot, tipo, detalle, -importe_centimos)
+
+
+## Ingreso o cargo obligatorio (salario, gastos fijos, consecuencias de decisiones).
+## Los cargos pueden dejar la cuenta en descubierto: ese es el origen de los impagos y de la bancarrota.
+func registrar_movimiento_externo(tipo: String, detalle: String, delta_banco_centimos: int, delta_efectivo_centimos: int = 0) -> Dictionary:
+	if delta_banco_centimos == 0 and delta_efectivo_centimos == 0:
+		return {"ok": true, "mensaje": detalle}
+	var snapshot := _capturar_estado()
+	EstadoJuego.saldo_bancario_centimos += delta_banco_centimos
+	EstadoJuego.efectivo_centimos = maxi(0, EstadoJuego.efectivo_centimos + delta_efectivo_centimos)
+	return _finalizar_operacion(snapshot, tipo, detalle, delta_banco_centimos + delta_efectivo_centimos)
+
+
+## Borra movimientos y vuelve a los valores iniciales de EstadoJuego (que debe haberse reiniciado antes).
+func reiniciar() -> void:
+	movimientos.clear()
+	_guardado_bloqueado = false
+	_guardar_estado()
+	finanzas_actualizadas.emit()
+
+
+func _motivo_mercado_no_disponible() -> String:
+	if EstadoJuego.partida_terminada:
+		return "La partida ha terminado."
+	if not SistemaMercado.mercado_abierto():
+		return "La bolsa está cerrada hoy (fin de semana). Podrás operar el próximo día laborable."
+	return ""
 
 
 func _buscar_activo(activo_id: String) -> int:
@@ -144,7 +200,12 @@ func _contar_posiciones_activas() -> int:
 
 
 func _calcular_comision(importe_centimos: int) -> int:
-	return int(ceil(float(importe_centimos) * float(COMISION_PUNTOS_BASE) / 10_000.0))
+	if importe_centimos <= 0:
+		return 0
+	var puntos_base := Reglas.entero("mercado/comision_puntos_base", 0)
+	var minima := Reglas.entero("mercado/comision_minima_centimos", 0)
+	var proporcional := int(ceil(float(importe_centimos) * float(puntos_base) / 10_000.0))
+	return maxi(minima, proporcional)
 
 
 func _capturar_estado() -> Dictionary:
@@ -237,11 +298,12 @@ func _cargar_estado() -> void:
 		_bloquear_guardado("El archivo de finanzas pertenece a otro escenario.")
 		return
 
-	var saldo := int(datos.get("saldo_bancario_centimos", -1))
+	var saldo := int(datos.get("saldo_bancario_centimos", 0))
 	var efectivo := int(datos.get("efectivo_centimos", -1))
 	var cartera_guardada: Variant = datos.get("cartera", [])
 	var movimientos_guardados: Variant = datos.get("movimientos", [])
-	if saldo < 0 or efectivo < 0 or not cartera_guardada is Array or not movimientos_guardados is Array:
+	# El saldo bancario puede ser negativo (descubierto por cargos obligatorios); el efectivo no.
+	if efectivo < 0 or not cartera_guardada is Array or not movimientos_guardados is Array:
 		_bloquear_guardado("El archivo de finanzas contiene datos incompatibles.")
 		return
 	if cartera_guardada.size() > MAX_POSICIONES or movimientos_guardados.size() > MAX_MOVIMIENTOS:

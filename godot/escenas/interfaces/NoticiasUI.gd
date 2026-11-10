@@ -7,12 +7,10 @@ var _buzon: Button
 var _titulo: Label
 var _lista: ItemList
 var _texto: Label
-var _enlace: Button
 var _opciones: VBoxContainer
 var _resultado: Label
 var _aviso_entrega: Label
 var _temporizador_aviso: Timer
-var _origen_url: String = ""
 var _hoy: Array[Dictionary] = []
 var _abierta: bool = false
 var _indice_seleccionado: int = 0
@@ -87,11 +85,6 @@ func _crear_interfaz() -> void:
 	_texto.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	contenido.add_child(_texto)
 
-	_enlace = Button.new()
-	_enlace.text = "Ver fuente original"
-	_enlace.pressed.connect(_abrir_fuente)
-	contenido.add_child(_enlace)
-
 	_opciones = VBoxContainer.new()
 	contenido.add_child(_opciones)
 	_resultado = Label.new()
@@ -144,7 +137,6 @@ func _actualizar(_cantidad: int) -> void:
 			_texto.text = "No hay noticias programadas para este día."
 		else:
 			_texto.text = "Todavía no has recogido los periódicos de hoy."
-		_enlace.visible = false
 		_limpiar_opciones()
 	elif _abierta:
 		var por_recoger := NoticiasManager.cuantas_por_recoger()
@@ -152,7 +144,6 @@ func _actualizar(_cantidad: int) -> void:
 			_texto.text = "%d periódico(s) esperan en el buzón de la habitación. Acércate y pulsa E para recogerlos." % por_recoger
 		else:
 			_texto.text = "Selecciona un periódico recogido para leerlo."
-		_enlace.visible = false
 		_limpiar_opciones()
 
 func _al_llegar_noticia(_noticia_id: String, ultimo_del_dia: bool) -> void:
@@ -180,7 +171,7 @@ func _abrir_buzon(noticia_id: String) -> void:
 	_oscurecer.visible = true
 	_ventana.visible = true
 	_buzon.visible = false
-	get_tree().paused = true
+	GestorPartida.abrir_ventana("noticias")
 	_actualizar(NoticiasManager.cuantas_sin_leer())
 	if noticia_id.is_empty():
 		return
@@ -199,7 +190,11 @@ func cerrar_buzon() -> void:
 		_ventana.visible = false
 	if _buzon:
 		_buzon.visible = true
-	get_tree().paused = false
+	GestorPartida.cerrar_ventana("noticias")
+
+
+func _exit_tree() -> void:
+	GestorPartida.cerrar_ventana("noticias")
 
 func _seleccionar(indice: int) -> void:
 	if indice < 0 or indice >= _hoy.size():
@@ -208,13 +203,13 @@ func _seleccionar(indice: int) -> void:
 	var noticia: Dictionary = _hoy[indice]
 	var noticia_id := str(noticia.get("id", ""))
 	NoticiasManager.marcar_leida(noticia_id)
+	# Solo se muestran campos anonimizados: la fecha real, la fuente y si es falsa se revelan en el informe final.
+	var dia_publicacion := EstadoJuego.dia_de_fecha(str(noticia.get("disponible_desde", "")))
 	_texto.text = str(noticia.get("titulo", "")) \
 		+ "\n\n" + str(noticia.get("resumen", "")) \
-		+ "\n\nPublicado: " + str(noticia.get("fecha_publicacion", "")) \
-		+ "\nFuente: " + str(noticia.get("fuente", "")) \
-		+ "\n\nTexto educativo adaptado por EURASIA."
-	_origen_url = str(noticia.get("fuente_url", ""))
-	_enlace.visible = not _origen_url.is_empty()
+		+ "\n\nRecibido: Día %d" % dia_publicacion \
+		+ "\nMedio: " + str(noticia.get("medio", "Desconocido")) \
+		+ "\n\nTexto educativo adaptado por EURASIA. Contrasta la fiabilidad de cada medio."
 	_limpiar_opciones()
 	var pregunta := NoticiasManager.obtener_pregunta(noticia_id)
 	if pregunta.is_empty():
@@ -252,10 +247,6 @@ func _dormir() -> void:
 		_actualizar(NoticiasManager.cuantas_sin_leer())
 	else:
 		_resultado.text = NoticiasManager.motivo_no_puede_dormir()
-
-func _abrir_fuente() -> void:
-	if _origen_url.begins_with("https://"):
-		OS.shell_open(_origen_url)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_N:

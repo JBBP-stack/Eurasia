@@ -1,71 +1,150 @@
 {
-  "escenario": "Crisis financiera de 2008",
-  "descripcion": "Selección editorial de hechos reales: textos adaptados por EURASIA, con enlaces a fuentes verificables.",
-  "noticias": [
-    {
-      "id": "lehman_20080915",
-      "fecha_evento": "2008-09-15",
-      "fecha_publicacion": "2008-09-15",
-      "disponible_desde": "2008-09-15",
-      "fuente": "The Guardian — noticia contemporánea",
-      "fuente_url": "https://www.theguardian.com/business/2008/sep/15/lehmanbrothers.creditcrunch",
-      "titulo": "Lehman Brothers solicita protección por bancarrota",
-      "resumen": "El banco de inversión Lehman Brothers anuncia su entrada en un proceso de bancarrota. La crisis financiera se agrava y aumenta la incertidumbre sobre otras entidades.",
-      "categoria": "banca",
-      "prioridad": 10,
-      "pregunta_id": "p_lehman"
-    },
-    {
-      "id": "merrill_20080915",
-      "fecha_evento": "2008-09-15",
-      "fecha_publicacion": "2008-09-15",
-      "disponible_desde": "2008-09-15",
-      "fuente": "The Guardian — noticia contemporánea",
-      "fuente_url": "https://www.theguardian.com/business/2008/sep/15/merrilllynch.wallstreet1",
-      "titulo": "Bank of America acuerda adquirir Merrill Lynch",
-      "resumen": "Bank of America llega a un acuerdo para comprar Merrill Lynch por unos 50.000 millones de dólares, en plena inestabilidad del sistema financiero estadounidense.",
-      "categoria": "banca",
-      "prioridad": 9,
-      "pregunta_id": ""
-    },
-    {
-      "id": "mercados_20080915",
-      "fecha_evento": "2008-09-15",
-      "fecha_publicacion": "2008-09-15",
-      "disponible_desde": "2008-09-15",
-      "fuente": "The Guardian — crónica contemporánea",
-      "fuente_url": "https://www.theguardian.com/business/2008/sep/15/marketturmoil.lehmanbrothers",
-      "titulo": "Caídas bursátiles y temor por la estabilidad financiera",
-      "resumen": "La crisis de Lehman Brothers coincide con fuertes descensos de las bolsas y preocupación por la situación de otras instituciones financieras.",
-      "categoria": "mercados",
-      "prioridad": 8,
-      "pregunta_id": ""
-    },
-    {
-      "id": "fed_tipos_20080916",
-      "fecha_evento": "2008-09-16",
-      "fecha_publicacion": "2008-09-16",
-      "disponible_desde": "2008-09-16",
-      "fuente": "Reserva Federal — comunicado del día",
-      "fuente_url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20080916a.htm",
-      "titulo": "La Reserva Federal mantiene su tipo objetivo en el 2 %",
-      "resumen": "La Reserva Federal mantiene el objetivo del tipo de interés de los fondos federales en el 2 %, pese al empeoramiento de las condiciones financieras.",
-      "categoria": "politica_monetaria",
-      "prioridad": 9,
-      "pregunta_id": "p_tipos"
-    },
-    {
-      "id": "aig_20080916",
-      "fecha_evento": "2008-09-16",
-      "fecha_publicacion": "2008-09-16",
-      "disponible_desde": "2008-09-17",
-      "fuente": "Reserva Federal — comunicado del 16 de septiembre, 21:00 EDT",
-      "fuente_url": "https://www.federalreserve.gov/newsevents/pressreleases/other20080916a.htm",
-      "titulo": "La Reserva Federal anuncia apoyo extraordinario a AIG",
-      "resumen": "La Reserva Federal autoriza una línea de crédito de hasta 85.000 millones de dólares a la aseguradora AIG. El anuncio se publica por la noche, por lo que el juego lo muestra el día siguiente.",
-      "categoria": "rescate_financiero",
-      "prioridad": 10,
-      "pregunta_id": "p_aig"
-    }
-  ]
+	"escenario": "Crisis financiera de 2008",
+	"descripcion": "Selección editorial de hechos reales adaptados por EURASIA con nombres ficticios. Los campos de 'origen' son internos: solo se revelan en el informe final. Las noticias con 'falsa': true son invenciones didácticas.",
+	"noticias": [
+		{
+			"id": "lehman_20080915",
+			"disponible_desde": "2008-09-15",
+			"medio": "El Observador Financiero",
+			"titulo": "Casa Halvard Hermanos solicita protección por bancarrota",
+			"resumen": "El banco de inversión Casa Halvard Hermanos, uno de los mayores de la Federación de Ostria, anuncia su entrada en un proceso de bancarrota. La crisis financiera se agrava y aumenta la incertidumbre sobre la solvencia de otras entidades y sobre la liquidez del mercado interbancario.",
+			"categoria": "banca",
+			"prioridad": 10,
+			"pregunta_id": "p_lehman",
+			"falsa": false,
+			"origen": {
+				"fecha_evento": "2008-09-15",
+				"fecha_publicacion": "2008-09-15",
+				"titulo_real": "Lehman Brothers solicita protección por bancarrota",
+				"fuente": "The Guardian — noticia contemporánea",
+				"fuente_url": "https://www.theguardian.com/business/2008/sep/15/lehmanbrothers.creditcrunch"
+			}
+		},
+		{
+			"id": "merrill_20080915",
+			"disponible_desde": "2008-09-15",
+			"medio": "El Observador Financiero",
+			"titulo": "Banco Continental de Ostria acuerda adquirir Corredora Linares",
+			"resumen": "Banco Continental de Ostria llega a un acuerdo para comprar Corredora Linares por unos 50.000 millones de coronas ostrianas, en plena inestabilidad del sistema financiero de la Federación de Ostria. La operación busca evitar una nueva quiebra desordenada.",
+			"categoria": "banca",
+			"prioridad": 9,
+			"pregunta_id": "",
+			"falsa": false,
+			"origen": {
+				"fecha_evento": "2008-09-15",
+				"fecha_publicacion": "2008-09-15",
+				"titulo_real": "Bank of America acuerda adquirir Merrill Lynch",
+				"fuente": "The Guardian — noticia contemporánea",
+				"fuente_url": "https://www.theguardian.com/business/2008/sep/15/merrilllynch.wallstreet1"
+			}
+		},
+		{
+			"id": "mercados_20080915",
+			"disponible_desde": "2008-09-15",
+			"medio": "El Observador Financiero",
+			"titulo": "Caídas bursátiles y temor por la estabilidad financiera",
+			"resumen": "La quiebra de Casa Halvard Hermanos coincide con fuertes descensos de las bolsas y con una creciente aversión al riesgo. Los inversores temen por la situación de otras instituciones financieras con exposición a activos hipotecarios.",
+			"categoria": "mercados",
+			"prioridad": 8,
+			"pregunta_id": "",
+			"falsa": false,
+			"origen": {
+				"fecha_evento": "2008-09-15",
+				"fecha_publicacion": "2008-09-15",
+				"titulo_real": "Caídas bursátiles y temor por la estabilidad financiera tras la quiebra de Lehman Brothers",
+				"fuente": "The Guardian — crónica contemporánea",
+				"fuente_url": "https://www.theguardian.com/business/2008/sep/15/marketturmoil.lehmanbrothers"
+			}
+		},
+		{
+			"id": "falsa_bancos_20080915",
+			"disponible_desde": "2008-09-15",
+			"medio": "Rumores de Bolsa (blog)",
+			"titulo": "¡Un experto asegura que la banca se recupera ya mismo!",
+			"resumen": "Nos lo cuenta un amigo que trabaja en una gestora: esto es solo un susto y en un par de días todo vuelve a la normalidad. Según él, quien no compre acciones de bancos esta semana se arrepentirá toda la vida. ¡Ojo al dato!",
+			"categoria": "rumor",
+			"prioridad": 3,
+			"pregunta_id": "",
+			"falsa": true,
+			"origen": {
+				"fecha_evento": "",
+				"fecha_publicacion": "",
+				"titulo_real": "Noticia inventada por EURASIA (no ocurrió)",
+				"fuente": "Invención didáctica: tono coloquial, fuente anónima y promesa de ganancias seguras",
+				"fuente_url": ""
+			}
+		},
+		{
+			"id": "fed_tipos_20080916",
+			"disponible_desde": "2008-09-16",
+			"medio": "Comunicado oficial del Banco Central de Ostria",
+			"titulo": "El Banco Central de Ostria mantiene su tipo objetivo en el 2 %",
+			"resumen": "El Banco Central de Ostria mantiene el objetivo del tipo de interés interbancario en el 2 %, pese al empeoramiento de las condiciones financieras. El comunicado señala que vigilará de cerca la evolución de los mercados y los riesgos para el crecimiento y la inflación.",
+			"categoria": "politica_monetaria",
+			"prioridad": 9,
+			"pregunta_id": "p_tipos",
+			"falsa": false,
+			"origen": {
+				"fecha_evento": "2008-09-16",
+				"fecha_publicacion": "2008-09-16",
+				"titulo_real": "La Reserva Federal mantiene su tipo objetivo en el 2 %",
+				"fuente": "Reserva Federal — comunicado del día",
+				"fuente_url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20080916a.htm"
+			}
+		},
+		{
+			"id": "falsa_oro_20080916",
+			"disponible_desde": "2008-09-16",
+			"medio": "Cadena de mensajes reenviada",
+			"titulo": "Venden todo: el oro se va a multiplicar por diez este mes",
+			"resumen": "Me lo ha pasado mi cuñado y él lo leyó en un foro: los grandes bancos están escondiendo el oro porque saben que va a subir muchísimo. Hay que meter todos los ahorros ya, antes de que se enteren los demás. ¡Reenvíalo a tus contactos!",
+			"categoria": "rumor",
+			"prioridad": 2,
+			"pregunta_id": "",
+			"falsa": true,
+			"origen": {
+				"fecha_evento": "",
+				"fecha_publicacion": "",
+				"titulo_real": "Noticia inventada por EURASIA (no ocurrió)",
+				"fuente": "Invención didáctica: cadena de mensajes, sin fuente verificable y con urgencia artificial",
+				"fuente_url": ""
+			}
+		},
+		{
+			"id": "aig_20080916",
+			"disponible_desde": "2008-09-17",
+			"medio": "Comunicado oficial del Banco Central de Ostria",
+			"titulo": "El Banco Central de Ostria anuncia apoyo extraordinario a Aseguradora Atlántida",
+			"resumen": "El Banco Central de Ostria autoriza una línea de crédito de hasta 85.000 millones de coronas ostrianas a la Aseguradora Atlántida, una de las mayores del mundo. A cambio, el Estado obtiene una participación mayoritaria en la compañía. El anuncio se publicó a última hora de la noche anterior.",
+			"categoria": "rescate_financiero",
+			"prioridad": 10,
+			"pregunta_id": "p_aig",
+			"falsa": false,
+			"origen": {
+				"fecha_evento": "2008-09-16",
+				"fecha_publicacion": "2008-09-16",
+				"titulo_real": "La Reserva Federal anuncia apoyo extraordinario a AIG",
+				"fuente": "Reserva Federal — comunicado del 16 de septiembre, 21:00 EDT",
+				"fuente_url": "https://www.federalreserve.gov/newsevents/pressreleases/other20080916a.htm"
+			}
+		},
+		{
+			"id": "falsa_deposito_20080917",
+			"disponible_desde": "2008-09-17",
+			"medio": "Panfleto repartido en la calle",
+			"titulo": "Saca YA tu dinero: mañana cierran todos los bancos de Liria",
+			"resumen": "Fuentes que no pueden dar su nombre dicen que mañana el Gobierno congelará todas las cuentas del país. Lo más listo es sacar el dinero hoy y guardarlo en casa. ¡No digas que no te avisamos!",
+			"categoria": "rumor",
+			"prioridad": 2,
+			"pregunta_id": "",
+			"falsa": true,
+			"origen": {
+				"fecha_evento": "",
+				"fecha_publicacion": "",
+				"titulo_real": "Noticia inventada por EURASIA (no ocurrió)",
+				"fuente": "Invención didáctica: fuente anónima, alarmismo y llamada a actuar de inmediato",
+				"fuente_url": ""
+			}
+		}
+	]
 }

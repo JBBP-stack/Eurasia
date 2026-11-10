@@ -1,5 +1,5 @@
 extends Area2D
-## Nevera provisional: permite consultar las existencias guardadas en EstadoJuego.
+## Nevera: abre la interfaz para consultar existencias, comer y comprar comida.
 
 @onready var _indicador: Label = $Indicador
 var _jugador_cerca: bool = false
@@ -31,8 +31,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _consultar_existencias() -> void:
-	var hud := get_tree().get_first_node_in_group("hud_habitacion")
-	if hud == null:
-		push_warning("No se encontró el HUD para mostrar las existencias de comida.")
+	var nevera_ui := get_tree().get_first_node_in_group("nevera_ui")
+	if nevera_ui == null:
+		push_warning("No se encontró la interfaz de la nevera.")
 		return
-	hud.call("mostrar_mensaje_temporal", "Comida disponible: %d raciones." % EstadoJuego.comida_disponible)
+	nevera_ui.call("abrir_nevera")

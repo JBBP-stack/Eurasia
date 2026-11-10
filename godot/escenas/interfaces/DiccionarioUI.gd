@@ -156,7 +156,7 @@ func abrir_diccionario() -> void:
 	_fondo.visible = true
 	_panel.visible = true
 	_filtro.clear()
-	get_tree().paused = true
+	GestorPartida.abrir_ventana("diccionario")
 	_filtro.grab_focus()
 
 
@@ -166,7 +166,11 @@ func _cerrar_diccionario() -> void:
 		_fondo.visible = false
 	if _panel:
 		_panel.visible = false
-	get_tree().paused = false
+	GestorPartida.cerrar_ventana("diccionario")
+
+
+func _exit_tree() -> void:
+	GestorPartida.cerrar_ventana("diccionario")
 
 
 func _unhandled_input(event: InputEvent) -> void:

@@ -22,6 +22,8 @@ var respuestas: Dictionary = {}
 var entregadas: Dictionary = {}
 var recogidas: Dictionary = {}
 var _guardado_bloqueado: bool = false
+# Semilla de la partida: decide de forma reproducible qué noticias falsas aparecen.
+var semilla: int = 0
 var _cola_entregas: Array[String] = []
 var _reparto_finalizado: bool = false
 var _temporizador_entrega: Timer
@@ -30,6 +32,9 @@ var _temporizador_entrega: Timer
 func _ready() -> void:
 	_cargar_contenido()
 	_cargar_partida()
+	if semilla == 0:
+		_generar_semilla()
+		_guardar_partida()
 	_crear_temporizador_entrega()
 	call_deferred("_iniciar_reparto_diario")
 	noticias_actualizadas.emit(cuantas_sin_leer())
@@ -64,10 +69,33 @@ func _cargar_contenido() -> void:
 	preguntas = _leer_json(RUTA_PREGUNTAS).get("preguntas", {})
 
 
+func _generar_semilla() -> void:
+	var rng := RandomNumberGenerator.new()
+	rng.randomize()
+	semilla = rng.randi_range(1, 2_000_000_000)
+
+
+## Las noticias auténticas siempre se programan; las falsas, con la probabilidad configurada en reglas_demo.json.
+## El resultado es estable para una misma partida (depende de la semilla y del id).
+func _noticia_programada(noticia: Dictionary) -> bool:
+	if not bool(noticia.get("falsa", false)):
+		return true
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash(str(semilla) + ":" + str(noticia.get("id", "")))
+	return rng.randf() < Reglas.decimal("noticias/probabilidad_noticia_falsa", 0.5)
+
+
+func obtener_noticia(noticia_id: String) -> Dictionary:
+	for noticia in noticias:
+		if str(noticia.get("id", "")) == noticia_id:
+			return noticia
+	return {}
+
+
 func obtener_noticias_hoy() -> Array[Dictionary]:
 	var resultado: Array[Dictionary] = []
 	for noticia in noticias:
-		if str(noticia.get("disponible_desde", "")) == EstadoJuego.fecha_historica_interna:
+		if str(noticia.get("disponible_desde", "")) == EstadoJuego.fecha_historica_interna and _noticia_programada(noticia):
 			resultado.append(noticia)
 	resultado.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
 		return int(a.get("prioridad", 0)) > int(b.get("prioridad", 0)))
@@ -87,6 +115,15 @@ func obtener_noticias_entregadas_hoy() -> Array[Dictionary]:
 func obtener_noticias_recogidas() -> Array[Dictionary]:
 	var resultado: Array[Dictionary] = []
 	for noticia in noticias:
+		if recogidas.has(str(noticia.get("id", ""))):
+			resultado.append(noticia)
+	return resultado
+
+
+## Noticias de hoy que el jugador ya ha recogido: es la única información que puede enviarse al asistente.
+func obtener_noticias_recogidas_hoy() -> Array[Dictionary]:
+	var resultado: Array[Dictionary] = []
+	for noticia in obtener_noticias_hoy():
 		if recogidas.has(str(noticia.get("id", ""))):
 			resultado.append(noticia)
 	return resultado
@@ -183,6 +220,8 @@ func marcar_leida(noticia_id: String) -> void:
 
 
 func responder(noticia_id: String, opcion_id: String) -> Dictionary:
+	if EstadoJuego.partida_terminada:
+		return {}
 	if respuestas.has(noticia_id) or not recogidas.has(noticia_id):
 		return {}
 	var pregunta := obtener_pregunta(noticia_id)
@@ -201,6 +240,8 @@ func respuesta_de(noticia_id: String) -> String:
 
 
 func motivo_no_puede_dormir() -> String:
+	if EstadoJuego.partida_terminada:
+		return "La partida ha terminado. Consulta el informe final."
 	if not _reparto_finalizado:
 		return "Todavía quedan periódicos programados por llegar."
 	for noticia in obtener_noticias_hoy():
@@ -219,6 +260,8 @@ func avanzar_dia() -> bool:
 		return false
 
 	EstadoJuego.avanzar_un_dia()
+	# Salario, gastos, comida, salud, patrimonio y condiciones de derrota.
+	GestorPartida.procesar_nuevo_dia()
 	_iniciar_reparto_diario()
 	_guardar_partida()
 	return true
@@ -232,6 +275,7 @@ func reiniciar_demo() -> void:
 	entregadas.clear()
 	recogidas.clear()
 	_guardado_bloqueado = false
+	_generar_semilla()
 	_iniciar_reparto_diario()
 	_guardar_partida()
 
@@ -293,7 +337,8 @@ func _guardar_partida() -> void:
 		"leidas": leidas,
 		"respuestas": respuestas,
 		"entregadas": entregadas,
-		"recogidas": recogidas
+		"recogidas": recogidas,
+		"semilla": semilla
 	}
 	archivo.store_string(JSON.stringify(datos, "\t"))
 	archivo.close()
@@ -338,6 +383,7 @@ func _cargar_partida() -> void:
 	respuestas = respuestas_guardadas
 	entregadas = entregadas_guardadas
 	recogidas = recogidas_guardadas
+	semilla = int(guardado.get("semilla", 0))
 	# En partidas v2, las noticias leídas ya habían sido mostradas al jugador.
 	if version == 2:
 		for id in leidas.keys():
