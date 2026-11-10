@@ -121,6 +121,18 @@ func _mostrar(resultado: Dictionary) -> void:
 	cabecera.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	cabecera.text = "Escenario real: crisis financiera de 2008. Fecha real de inicio de la partida: %s. Los nombres del juego sustituían a entidades reales." % EstadoJuego.FECHA_INICIO_PROVISIONAL
 	_revelacion.add_child(cabecera)
+	var empresas := Label.new()
+	empresas.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	var lineas_empresas: Array[String] = ["EMPRESAS DEL MERCADO"]
+	for empresa in GestorPartida.empresas_para_revelar():
+		lineas_empresas.append("%s = %s (%s). %s\nDatos: %s" % [
+			str(empresa["nombre"]), str(empresa["real"]), str(empresa["ticker"]), str(empresa["destino"]), str(empresa["fuente"])
+		])
+	empresas.text = "\n\n".join(lineas_empresas)
+	_revelacion.add_child(empresas)
+	var titulo_noticias := Label.new()
+	titulo_noticias.text = "NOTICIAS"
+	_revelacion.add_child(titulo_noticias)
 	for noticia in GestorPartida.noticias_para_revelar():
 		var texto := Label.new()
 		texto.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART

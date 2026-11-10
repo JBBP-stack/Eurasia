@@ -12,7 +12,7 @@ signal estado_vital_actualizado
 
 # Fecha temporal del prototipo. No es la fecha definitiva de la demo.
 # Debe coincidir con "calendario/fecha_inicio" de datos/reglas_demo.json (lo usa el servicio del asistente).
-const FECHA_INICIO_PROVISIONAL: String = "2008-09-15"
+const FECHA_INICIO_PROVISIONAL: String = "2008-09-01"
 const RUTA_GUARDADO: String = "user://eurasia_estado.json"
 const VERSION_GUARDADO: int = 1
 const MAX_HISTORIAL: int = 400
@@ -69,14 +69,19 @@ func _restablecer_valores_iniciales() -> void:
 		"clase_social": "Clase media (provisional)",
 		"ingreso_mensual_centimos": 200_000
 	}
-	saldo_bancario_centimos = 1_500_000  # 15.000 €
-	efectivo_centimos = 0
-	# 50 acciones a 100 € = 15.000 € en inversiones. Los precios los fija SistemaMercado según la fecha.
-	cartera = [
-		{"id": "AUR", "nombre": "Aurora Financiera", "acciones": 50, "precio_centimos": 10_000},
-		{"id": "LIR", "nombre": "Liria Industrial", "acciones": 50, "precio_centimos": 10_000},
-		{"id": "NEX", "nombre": "Nexo Comercial", "acciones": 50, "precio_centimos": 10_000}
-	]
+	# Situación inicial (reglas_demo.json): 15.000 € en cuenta, 2.000 € en efectivo y ~13.000 € invertidos.
+	saldo_bancario_centimos = Reglas.entero("situacion_inicial/saldo_bancario_centimos", 1_500_000)
+	efectivo_centimos = Reglas.entero("situacion_inicial/efectivo_centimos", 200_000)
+	# Nombres y precios los completa SistemaMercado según el catálogo y la fecha.
+	cartera = []
+	for posicion in Reglas.valor("situacion_inicial/cartera", []):
+		if posicion is Dictionary:
+			cartera.append({
+				"id": str(posicion.get("id", "")),
+				"nombre": str(posicion.get("id", "")),
+				"acciones": int(posicion.get("acciones", 0)),
+				"precio_centimos": 0
+			})
 	comida_disponible = Reglas.entero("alimentacion/comida_inicial", 3)
 	comido_hoy = false
 	dias_sin_comer = 0
@@ -90,6 +95,16 @@ func _restablecer_valores_iniciales() -> void:
 	patrimonio_inicial_centimos = 0
 	partida_terminada = false
 	resultado_final = {}
+
+
+## Un guardado de otro calendario o versión se aparta (renombrado) y la partida empieza de cero.
+## Así un cambio de escenario no deja el juego sin poder guardar.
+static func archivar_guardado_incompatible(ruta: String, motivo: String) -> void:
+	var destino := ruta + ".incompatible.bak"
+	if FileAccess.file_exists(destino):
+		DirAccess.remove_absolute(destino)
+	var error := DirAccess.rename_absolute(ruta, destino)
+	push_warning("%s Se archiva como %s y se empieza una partida nueva." % [motivo, destino.get_file()] if error == OK else motivo)
 
 
 func valor_cartera_centimos() -> int:
@@ -215,11 +230,8 @@ func _cargar_estado() -> void:
 	if not datos is Dictionary:
 		_bloquear_guardado("El archivo de estado no tiene un formato válido.")
 		return
-	if int(datos.get("version", 0)) != VERSION_GUARDADO:
-		_bloquear_guardado("La versión del archivo de estado no es compatible.")
-		return
-	if str(datos.get("fecha_inicio", "")) != FECHA_INICIO_PROVISIONAL:
-		_bloquear_guardado("El archivo de estado pertenece a otro calendario.")
+	if int(datos.get("version", 0)) != VERSION_GUARDADO or str(datos.get("fecha_inicio", "")) != FECHA_INICIO_PROVISIONAL:
+		archivar_guardado_incompatible(RUTA_GUARDADO, "El archivo de estado pertenece a otra versión o calendario.")
 		return
 
 	var decisiones: Variant = datos.get("registro_decisiones", [])

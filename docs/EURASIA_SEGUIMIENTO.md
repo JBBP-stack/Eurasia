@@ -33,15 +33,26 @@ Probado con Godot 4.7.2 en modo *headless* (escenas reales, sin errores de scrip
 - [ ] **Derrota, fin de escenario e informe final.** Las causas de fin son la muerte, el patrimonio menor o igual a 0, superar el límite de descubierto, los días de impago y la fecha de fin del escenario. El informe incluye explicación básica y técnica, errores, decisiones y la información real.
 - [ ] **Pausa compartida.** Las ventanas usan `GestorPartida.abrir_ventana()/cerrar_ventana()`, de modo que cerrar una no reanuda el juego si hay otra abierta.
 
+## Segunda iteración (10/11/2026) · validada con pruebas automáticas y capturas, pendiente de confirmar en el editor
+
+- [ ] **Corrección del asistente.** Fallaba porque no había SDK `anthropic` en el `.venv` ni clave, y el servidor no arrancaba. Ahora el autoload `Asistente` arranca el servicio con el Python del `.venv`, el servidor lee la clave de `.env` y, si falta, explica cómo configurarla. El servicio se detiene al cerrar el juego.
+- [ ] **Corrección del banco.** Ingresar fallaba porque había 0 € de efectivo. La confirmación pasa a estar dentro del panel en vez de en un `ConfirmationDialog` (una ventana aparte). Admite importes como «1.000» y «250,50». Los controles de compra quedan siempre visibles. Probado con clics reales: retirar, ingresar y comprar.
+- [ ] **Calendario del 01/09/2008 al 18/09/2008** con noticias reales todos los días y fin al dormir el día 18.
+- [ ] **Hemeroteca** de los dos años anteriores (18 noticias), a la que se suman los periódicos recogidos.
+- [ ] **Decisiones del día** accesibles en todo momento (HUD y tecla D).
+- [ ] **Puerta** a escala 1,5 con filtrado nítido.
+- [ ] **Empresas reales con nombre ficticio:** 2 de las 3 de la cartera inicial quebraron o fueron intervenidas (Lehman, Fannie Mae). Hay 7 empresas nuevas.
+- [ ] **Fichas de cotización** con gráfica (de 5 días a 2 años), rentabilidades, máximo y mínimo anuales, y trayectoria de los dos últimos años.
+- [ ] **2.000 € de efectivo** iniciales y gastos domésticos repartidos por el mes.
+
 ## Pendiente
 
-- [ ] **Sustituir la serie de precios ilustrativa por cotizaciones históricas verificadas.** `datos/mercado/mercado_2008.json` tiene `verificado: false`: la serie se generó a partir de una trayectoria aproximada de un índice general con betas ficticias. También falta asignar `equivalencia_real` a cada activo.
+- [ ] **Verificar la serie de Casa Halvard Hermanos (Lehman).** Están contrastados los cierres del 9, 10, 11, 12 y 15/09/2008 (prensa). Los cierres mensuales anteriores y los del 2 al 8 y del 16 al 18/09 son aproximados. Las otras 9 empresas usan datos diarios de Yahoo Finance.
+- [ ] Enlazar la fuente primaria de las noticias que no tienen enlace (las marca `tools/validar_noticias.py`).
 - [ ] Confirmar o ajustar las reglas provisionales de `datos/reglas_demo.json` (gastos, precio de la comida, salud, comisiones, bancarrota, probabilidad de rumores, fecha de fin).
-- [ ] Ampliar el contenido: solo hay noticias en los días 1 a 3 y el escenario termina el día 26 (10/10/2008).
-- [ ] Probar el asistente con una clave real y revisar la calidad y los límites de sus respuestas.
+- [ ] Crear `.env` con una clave real, probar el asistente y revisar la calidad y los límites de sus respuestas.
 - [ ] Arte: retrato del personaje, sprites del jugador, del banco y de la nevera según las existencias.
 - [ ] Distribuir los objetos interactivos de la habitación sin alterar movimiento, cámara ni colisiones.
-- [ ] Corregir el GDD: 15.000 € + 13.000 € no suman 30.000 € (el código usa 15.000 € + 15.000 €).
 - [ ] Al abrir el proyecto en el editor se generarán los `.uid` de los scripts nuevos: hay que añadirlos al repositorio.
 
 ## Notas

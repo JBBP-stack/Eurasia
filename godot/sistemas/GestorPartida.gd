@@ -11,6 +11,7 @@ signal partida_finalizada(resultado: Dictionary)
 
 const ESCENA_INICIAL: String = "res://escenas/habitacion/habitacion1.tscn"
 const PATRIMONIO_INICIAL_CENTIMOS: int = 3_000_000
+const SECTORES_FINANCIEROS: Array[String] = ["Banca", "Banca de inversión", "Financiación hipotecaria", "Seguros"]
 
 var _ventanas_abiertas: Dictionary = {}
 
@@ -65,27 +66,68 @@ func procesar_nuevo_dia() -> void:
 
 func _procesar_economia_domestica() -> Array[String]:
 	var eventos: Array[String] = []
-	var dia_del_mes := int(EstadoJuego.fecha_historica_interna.substr(8, 2))
-	if dia_del_mes != Reglas.entero("economia_domestica/dia_del_mes_cobro", 1):
-		return eventos
+	var fecha := EstadoJuego.fecha_historica_interna
+	var dia_del_mes := int(fecha.substr(8, 2))
 
-	var nomina := int(EstadoJuego.perfil.get("ingreso_mensual_centimos", 0))
-	if nomina > 0:
-		SistemaFinanciero.registrar_movimiento_externo("Nómina", "Ingreso mensual de la nómina", nomina)
-		eventos.append("Has cobrado tu nómina: +%s €." % EstadoJuego.euros(nomina))
+	if dia_del_mes == Reglas.entero("economia_domestica/dia_del_mes_cobro", 28):
+		var nomina := int(EstadoJuego.perfil.get("ingreso_mensual_centimos", 0))
+		if nomina > 0:
+			SistemaFinanciero.registrar_movimiento_externo("Nómina", "Ingreso mensual de la nómina", nomina)
+			eventos.append("Has cobrado tu nómina: +%s €." % EstadoJuego.euros(nomina))
 
-	var total_gastos := 0
-	for gasto in Reglas.valor("economia_domestica/gastos_fijos_mensuales", []):
-		if not gasto is Dictionary:
-			continue
+	for gasto in gastos_del_dia(fecha):
 		var importe := int(gasto.get("importe_centimos", 0))
-		if importe <= 0:
-			continue
-		total_gastos += importe
-		SistemaFinanciero.registrar_movimiento_externo("Gasto fijo", str(gasto.get("concepto", "Gasto fijo")), -importe)
-	if total_gastos > 0:
-		eventos.append("Se han cargado los gastos fijos del mes: -%s €." % EstadoJuego.euros(total_gastos))
+		SistemaFinanciero.cargar_gasto_obligatorio("Gasto fijo", str(gasto.get("concepto", "Gasto")), importe)
+		eventos.append("Pagado: %s (−%s €)." % [str(gasto.get("concepto", "Gasto")), EstadoJuego.euros(importe)])
 	return eventos
+
+
+## Gastos obligatorios que vencen en una fecha: mensuales por día del mes y semanales por día de la semana (1 = lunes).
+func gastos_del_dia(fecha: String) -> Array[Dictionary]:
+	var resultado: Array[Dictionary] = []
+	var dia_del_mes := int(fecha.substr(8, 2))
+	for gasto in Reglas.valor("economia_domestica/gastos_fijos_mensuales", []):
+		if gasto is Dictionary and int(gasto.get("dia_del_mes", 1)) == dia_del_mes and int(gasto.get("importe_centimos", 0)) > 0:
+			resultado.append(gasto)
+	var dia_semana := int(Time.get_datetime_dict_from_datetime_string(fecha + "T00:00:00", true).get("weekday", 0))
+	for gasto in Reglas.valor("economia_domestica/gastos_semanales", []):
+		if gasto is Dictionary and int(gasto.get("dia_semana", 1)) == dia_semana and int(gasto.get("importe_centimos", 0)) > 0:
+			resultado.append(gasto)
+	return resultado
+
+
+## Próximos gastos obligatorios (para el portátil): [{"dias": int, "concepto": String, "importe_centimos": int}].
+func proximos_gastos(dias_vista: int = 14) -> Array[Dictionary]:
+	var resultado: Array[Dictionary] = []
+	for dias in range(1, dias_vista + 1):
+		var fecha := EstadoJuego.fecha_de_dia(EstadoJuego.dia_de_partida + dias)
+		for gasto in gastos_del_dia(fecha):
+			resultado.append({"dias": dias, "concepto": str(gasto.get("concepto", "")), "importe_centimos": int(gasto.get("importe_centimos", 0))})
+	return resultado
+
+
+func es_ultimo_dia() -> bool:
+	var fecha_fin := Reglas.texto("calendario/fecha_fin_escenario", "")
+	return not fecha_fin.is_empty() and EstadoJuego.fecha_historica_interna >= fecha_fin
+
+
+func dias_restantes() -> int:
+	var fecha_fin := Reglas.texto("calendario/fecha_fin_escenario", "")
+	if fecha_fin.is_empty():
+		return -1
+	return maxi(0, EstadoJuego.dia_de_fecha(fecha_fin) - EstadoJuego.dia_de_partida)
+
+
+## Al dormir el último día: se cierra el día (comida y salud) y termina el escenario si no hubo derrota.
+func cerrar_ultimo_dia() -> void:
+	var eventos: Array[String] = []
+	eventos.append_array(SistemaVida.procesar_fin_de_dia())
+	EstadoJuego.registrar_patrimonio_del_dia()
+	_comprobar_fin_de_partida()
+	if not EstadoJuego.partida_terminada:
+		terminar_partida("fin_escenario")
+	EstadoJuego.guardar_estado()
+	resumen_dia.emit(eventos)
 
 
 func _procesar_descubierto() -> Array[String]:
@@ -116,9 +158,6 @@ func _comprobar_fin_de_partida() -> void:
 	if EstadoJuego.saldo_bancario_centimos < 0 and EstadoJuego.dias_en_descubierto > Reglas.entero("bancarrota/dias_gracia_descubierto", 3):
 		terminar_partida("bancarrota_impago")
 		return
-	var fecha_fin := Reglas.texto("calendario/fecha_fin_escenario", "")
-	if not fecha_fin.is_empty() and EstadoJuego.fecha_historica_interna >= fecha_fin:
-		terminar_partida("fin_escenario")
 
 
 # --- Decisiones ---------------------------------------------------------------
@@ -235,7 +274,7 @@ func _calcular_metricas() -> Dictionary:
 		if valor > mayor_posicion:
 			mayor_posicion = valor
 			nombre_mayor = str(posicion.get("nombre", ""))
-		if str(SistemaMercado.info_activo(str(posicion.get("id", ""))).get("sector", "")) == "Banca":
+		if str(SistemaMercado.info_activo(str(posicion.get("id", ""))).get("sector", "")) in SECTORES_FINANCIEROS:
 			peso_banca += valor
 
 	var ingresos := 0
@@ -296,7 +335,7 @@ func _explicacion_tecnica(m: Dictionary) -> String:
 		EstadoJuego.euros(int(m["liquidez"])), _porcentaje(float(m["peso_liquidez"]), false),
 		EstadoJuego.euros(int(m["gastos_fijos_mes"]))
 	])
-	lineas.append("Inversiones: %s € en %d posiciones. Mayor posición: %s (%s del patrimonio). Exposición al sector bancario: %s." % [
+	lineas.append("Inversiones: %s € en %d posiciones. Mayor posición: %s (%s del patrimonio). Exposición al sector financiero: %s." % [
 		EstadoJuego.euros(int(m["valor_cartera"])), int(m["posiciones"]), str(m["mayor_posicion"]),
 		_porcentaje(float(m["peso_mayor_posicion"]), false), _porcentaje(float(m["peso_banca"]), false)
 	])
@@ -324,13 +363,22 @@ func _detectar_errores(m: Dictionary) -> Array[String]:
 			str(m["mayor_posicion"]), _porcentaje(float(m["peso_mayor_posicion"]), false)
 		])
 	if float(m["peso_banca"]) > 0.3:
-		errores.append("Exposición sectorial: mantenías el %s del patrimonio en banca durante una crisis bancaria." % _porcentaje(float(m["peso_banca"]), false))
+		errores.append("Exposición sectorial: mantenías el %s del patrimonio en empresas financieras durante una crisis financiera." % _porcentaje(float(m["peso_banca"]), false))
 	if int(m["liquidez"]) < 3 * int(m["gastos_fijos_mes"]):
 		errores.append("Fondo de emergencia insuficiente: tu liquidez no cubría tres meses de gastos fijos.")
 	if int(m["dias_en_descubierto"]) > 0:
 		errores.append("Terminaste con la cuenta en descubierto: los pagos obligatorios necesitan dinero disponible.")
 	if EstadoJuego.dias_sin_comer > 0:
 		errores.append("Pasaste %d día(s) sin comer: las necesidades básicas van antes que las inversiones." % EstadoJuego.dias_sin_comer)
+	for posicion in EstadoJuego.cartera:
+		var acciones := int(posicion.get("acciones", 0))
+		var activo_id := str(posicion.get("id", ""))
+		var precio_inicio := SistemaMercado.precio_en(activo_id, EstadoJuego.FECHA_INICIO_PROVISIONAL)
+		var precio_actual := int(posicion.get("precio_centimos", 0))
+		if acciones > 0 and precio_inicio > 0 and precio_actual < precio_inicio / 2:
+			errores.append("Mantuviste %d acciones de %s hasta el final: su cotización cayó un %s durante la partida." % [
+				acciones, str(posicion.get("nombre", activo_id)), _porcentaje(1.0 - float(precio_actual) / float(precio_inicio), false)
+			])
 	errores.append_array(_errores_por_rumores())
 	if errores.is_empty():
 		errores.append("No se detectaron errores relevantes según las reglas de la demo.")
@@ -352,12 +400,26 @@ func _errores_por_rumores() -> Array[String]:
 	return errores
 
 
+## Empresas del mercado y su equivalencia real (se revela al terminar).
+func empresas_para_revelar() -> Array[Dictionary]:
+	var resultado: Array[Dictionary] = []
+	for activo in SistemaMercado.activos:
+		resultado.append({
+			"nombre": str(activo.get("nombre", "")),
+			"real": str(activo.get("equivalencia_real", "")),
+			"ticker": str(activo.get("ticker_real", "")),
+			"destino": str(activo.get("destino_real", "")),
+			"fuente": str(activo.get("fuente", ""))
+		})
+	return resultado
+
+
 ## Información real que se revela al terminar: fechas, fuentes y qué noticias eran falsas.
 func noticias_para_revelar() -> Array[Dictionary]:
 	var resultado: Array[Dictionary] = []
 	for noticia in NoticiasManager.noticias:
 		var noticia_id := str(noticia.get("id", ""))
-		if not NoticiasManager.entregadas.has(noticia_id):
+		if not NoticiasManager.entregadas.has(noticia_id) and not bool(noticia.get("archivo", false)):
 			continue
 		var origen: Dictionary = noticia.get("origen", {})
 		resultado.append({

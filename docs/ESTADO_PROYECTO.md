@@ -16,22 +16,20 @@ Videojuego retro de simulación financiera e histórica. La demo se desarrolla a
 
 ## Implementado el 10/11/2026 · pendiente de prueba en el editor
 
-Todo lo siguiente se probó automáticamente con Godot 4.7.2 en modo *headless*, sin errores. Falta revisarlo jugando en el editor (detalle en [EURASIA_SEGUIMIENTO.md](EURASIA_SEGUIMIENTO.md)).
+Probado con Godot 4.7.2 en modo *headless* y con capturas reales, sin errores. Falta revisarlo jugando en el editor (detalle en [EURASIA_SEGUIMIENTO.md](EURASIA_SEGUIMIENTO.md)).
 
-- **Ciclo completo del día:** al dormir se aplican comida y salud, nómina y gastos fijos (el día 1 de cada mes), el descubierto y los precios del mercado según la fecha. Después se comprueba si la partida termina.
-- **Decisiones con consecuencias** registradas para el informe final.
-- **Noticias anonimizadas y noticias falsas** de tono coloquial. Los datos reales solo se ven al terminar.
-- **Portátil** con resumen, cartera, gráfica de evolución, ingresos y gastos, y asistente Claude a través de `servidor_asistente/`.
-- **Nevera** para comer y comprar comida. **Derrota** por muerte o bancarrota y **fin de escenario** el 10/10/2008, con informe básico y técnico.
-- **Guardado de estado vital** y botón «Nueva partida» que reinicia todos los sistemas.
+- **Escenario:** del lunes **01/09/2008** al jueves **18/09/2008** (18 días). Al dormir el día 18 termina la partida, salvo que antes haya una bancarrota o la muerte del personaje.
+- **Situación inicial:** 15.000 € en cuenta, **2.000 € en efectivo** y unos 13.000 € en acciones: 30.000 € en total, como indica el GDD.
+- **Cartera inicial de empresas reales con nombre ficticio:** Casa Halvard Hermanos (= Lehman Brothers, quiebra el 15/09), Hipotecaria Federal Fanara (= Fannie Mae, intervenida el 07/09) y Refrescos Cola Dorada (= Coca-Cola). Otras 7 empresas reales se pueden comprar. La equivalencia se revela al final.
+- **Cotizaciones reales:** datos diarios de dos años convertidos a euros (Yahoo Finance; Lehman, reconstruida con cierres publicados en prensa). Fichas de cotización con rangos de 5 días a 2 años, rentabilidades y descripción, en el banco y en el portátil (pestaña «Mercado»). La bolsa cierra fines de semana y festivos reales.
+- **Hemeroteca:** 18 noticias relevantes de los dos años anteriores. Los periódicos recogidos se van añadiendo.
+- **Decisiones del día:** botón «Decisiones (N)» en el HUD o tecla D, para consultarlas y responderlas en cualquier momento.
+- **Gastos domésticos:** alquiler, luz, gas, agua y teléfono en su día del mes, y gastos personales cada lunes. Se pagan primero con efectivo.
+- **Banco:** confirmación dentro del panel (ya no usa una ventana aparte) e importes con formato español.
+- **Asistente:** el portátil arranca solo el servicio local. La clave va en `.env` (ver `.env.example` y `servidor_asistente/README.md`).
+- Siguen funcionando la nevera, la derrota, el informe final, las noticias falsas y el guardado de estado. Un guardado de una versión anterior se aparta como `.incompatible.bak` y se empieza de cero.
 
-Las cifras provisionales están en `godot/datos/reglas_demo.json`. Los precios del mercado son una **serie ilustrativa no verificada** (`godot/datos/mercado/mercado_2008.json`, `verificado: false`).
-
-## Banco: implementado, pendiente de prueba final
-
-La nueva interfaz tiene pestañas de cuenta, efectivo, inversiones e historial. La ventanilla permite acceder a todas; el cajero abre las operaciones de efectivo. Ingresos, retiradas, compras y ventas requieren confirmación, validan fondos y guardan el historial localmente.
-
-El prototipo arranca con **15.000 € en cuenta**, **0 € en efectivo** y 50 acciones de cada uno de tres activos ficticios, valoradas a **100 € por acción** el día 1. Eso da 15.000 € en inversiones y 30.000 € de patrimonio total. Hay tres activos más disponibles para comprar. A partir del día 1 los precios siguen la serie ilustrativa del mercado, la comisión es del 0,25 % (mínimo 2 €) y se permiten hasta diez posiciones activas. **No son reglas ni cotizaciones históricas definitivas.** Falta probar las operaciones en Godot y comprobar que persisten al reiniciar.
+Las cifras provisionales están en `godot/datos/reglas_demo.json`.
 
 ## Estructura técnica útil
 
@@ -42,7 +40,8 @@ El prototipo arranca con **15.000 € en cuenta**, **0 € en efectivo** y 50 ac
 - `godot/sistemas/SistemaMercado.gd`: catálogo de activos, precios por fecha y apertura de la bolsa.
 - `godot/sistemas/SistemaVida.gd`: comida y salud.
 - `godot/sistemas/GestorPartida.gd`: pausa compartida, proceso de cada día, efectos de las decisiones, derrota, informe final y reinicio.
-- `godot/sistemas/ClienteAsistente.gd` y `servidor_asistente/`: asistente Claude a través de un servicio local (la clave nunca está en el juego).
+- `godot/sistemas/ClienteAsistente.gd` (autoload `Asistente`) y `servidor_asistente/`: asistente Claude a través de un servicio local que el juego arranca solo. La clave nunca está en el juego.
+- `godot/datos/mercado/mercado_2008.json`: cotizaciones en céntimos de euro con equivalencias reales internas.
 - `godot/datos/noticias/`: contenido JSON de noticias y preguntas.
 - `godot/escenas/habitacion/`, `banco/`, `interfaces/`: escenas y pantallas.
 
@@ -50,10 +49,10 @@ Los sistemas principales están registrados como *autoloads* en `godot/project.g
 
 ## Próximos pasos recomendados
 
-1. Abrir el proyecto en el editor, jugar un ciclo completo y añadir al repositorio los `.uid` que genere Godot.
-2. Revisar y ajustar las reglas provisionales de `datos/reglas_demo.json`.
-3. Sustituir la serie de precios ilustrativa por cotizaciones históricas verificadas.
-4. Probar el asistente con una clave real (`servidor_asistente/README.md`) y ampliar las noticias más allá del día 3.
+1. Abrir el proyecto en el editor, jugar los 18 días y añadir al repositorio los `.uid` que genere Godot.
+2. Crear `.env` con la clave de Anthropic y probar el asistente.
+3. Verificar los cierres aproximados de Lehman y enlazar las fuentes de las noticias que no tienen enlace.
+4. Revisar y ajustar las reglas provisionales de `datos/reglas_demo.json`.
 
-**Importante para colaborar:** el calendario comienza provisionalmente el 15/09/2008; el perfil, los activos y varios valores también son datos de prototipo. Conviene mantenerlos identificados como provisionales hasta contrastarlos con el GDD. Antes de editar, sincronizad el repositorio y evitad trabajar simultáneamente en los mismos scripts.
+**Importante para colaborar:** el calendario va del 01/09/2008 al 18/09/2008. El perfil, los gastos y otros valores son datos de prototipo. Conviene mantenerlos identificados como provisionales hasta contrastarlos con el GDD. Antes de editar, sincronizad el repositorio y evitad trabajar simultáneamente en los mismos scripts.
 

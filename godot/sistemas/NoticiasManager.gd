@@ -78,6 +78,8 @@ func _generar_semilla() -> void:
 ## Las noticias auténticas siempre se programan; las falsas, con la probabilidad configurada en reglas_demo.json.
 ## El resultado es estable para una misma partida (depende de la semilla y del id).
 func _noticia_programada(noticia: Dictionary) -> bool:
+	if bool(noticia.get("archivo", false)):
+		return false
 	if not bool(noticia.get("falsa", false)):
 		return true
 	var rng := RandomNumberGenerator.new()
@@ -118,6 +120,48 @@ func obtener_noticias_recogidas() -> Array[Dictionary]:
 		if recogidas.has(str(noticia.get("id", ""))):
 			resultado.append(noticia)
 	return resultado
+
+
+## Hemeroteca: noticias relevantes de los dos años anteriores más todas las recogidas, de la más reciente a la más antigua.
+func obtener_hemeroteca() -> Array[Dictionary]:
+	var resultado: Array[Dictionary] = []
+	for noticia in noticias:
+		if bool(noticia.get("archivo", false)) or recogidas.has(str(noticia.get("id", ""))):
+			resultado.append(noticia)
+	resultado.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
+		var fecha_a := str(a.get("disponible_desde", ""))
+		var fecha_b := str(b.get("disponible_desde", ""))
+		if fecha_a != fecha_b:
+			return fecha_a > fecha_b
+		return int(a.get("prioridad", 0)) > int(b.get("prioridad", 0)))
+	return resultado
+
+
+## Decisiones del día con su estado: "por_llegar", "sin_recoger", "pendiente" o "respondida".
+func decisiones_de_hoy() -> Array[Dictionary]:
+	var resultado: Array[Dictionary] = []
+	for noticia in obtener_noticias_hoy():
+		var noticia_id := str(noticia.get("id", ""))
+		var pregunta := obtener_pregunta(noticia_id)
+		if pregunta.is_empty():
+			continue
+		var estado := "por_llegar"
+		if respuestas.has(noticia_id):
+			estado = "respondida"
+		elif recogidas.has(noticia_id):
+			estado = "pendiente"
+		elif entregadas.has(noticia_id):
+			estado = "sin_recoger"
+		resultado.append({"noticia": noticia, "pregunta": pregunta, "estado": estado})
+	return resultado
+
+
+func cuantas_decisiones_pendientes() -> int:
+	var total := 0
+	for decision in decisiones_de_hoy():
+		if str(decision.get("estado", "")) != "respondida":
+			total += 1
+	return total
 
 
 ## Noticias de hoy que el jugador ya ha recogido: es la única información que puede enviarse al asistente.
@@ -247,7 +291,7 @@ func motivo_no_puede_dormir() -> String:
 	for noticia in obtener_noticias_hoy():
 		var id := str(noticia.get("id", ""))
 		if not obtener_pregunta(id).is_empty() and not respuestas.has(id):
-			return "Debes responder las decisiones pendientes antes de dormir."
+			return "Debes responder las decisiones pendientes antes de dormir (pulsa D para verlas)."
 	return ""
 
 
@@ -258,6 +302,12 @@ func puede_dormir() -> bool:
 func avanzar_dia() -> bool:
 	if not puede_dormir():
 		return false
+
+	# El último día del escenario no se pasa al siguiente: se cierra la partida.
+	if GestorPartida.es_ultimo_dia():
+		GestorPartida.cerrar_ultimo_dia()
+		_guardar_partida()
+		return true
 
 	EstadoJuego.avanzar_un_dia()
 	# Salario, gastos, comida, salud, patrimonio y condiciones de derrota.
@@ -355,14 +405,8 @@ func _cargar_partida() -> void:
 
 	var guardado: Dictionary = _leer_json(ruta_guardado)
 	var version := int(guardado.get("version", 0))
-	if version != 2 and version != 3:
-		_guardado_bloqueado = true
-		push_warning("Versión de guardado incompatible.")
-		return
-
-	if str(guardado.get("fecha_inicio", "")) != EstadoJuego.FECHA_INICIO_PROVISIONAL:
-		_guardado_bloqueado = true
-		push_warning("El guardado pertenece a otro calendario.")
+	if (version != 2 and version != 3) or str(guardado.get("fecha_inicio", "")) != EstadoJuego.FECHA_INICIO_PROVISIONAL:
+		EstadoJuego.archivar_guardado_incompatible(ruta_guardado, "El guardado de noticias pertenece a otra versión o calendario.")
 		return
 
 	var dia_guardado := int(guardado.get("dia_de_partida", 0))

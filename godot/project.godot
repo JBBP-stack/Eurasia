@@ -24,6 +24,7 @@ NoticiasManager="*uid://bo45pvnr0fobp"
 SistemaMercado="*res://sistemas/SistemaMercado.gd"
 SistemaVida="*res://sistemas/SistemaVida.gd"
 GestorPartida="*res://sistemas/GestorPartida.gd"
+Asistente="*res://sistemas/ClienteAsistente.gd"
 
 [display]
 

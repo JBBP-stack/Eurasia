@@ -5,7 +5,7 @@ signal finanzas_actualizadas
 
 const RUTA_GUARDADO: String = "user://eurasia_finanzas.json"
 const VERSION_GUARDADO: int = 1
-const ID_ESCENARIO: String = "eurasia_demo_2008"
+const ID_ESCENARIO: String = "eurasia_demo_2008_sep"
 const MAX_POSICIONES: int = 10
 const MAX_MOVIMIENTOS: int = 200
 # Las comisiones y la disponibilidad del mercado se leen de datos/reglas_demo.json (provisionales).
@@ -168,6 +168,15 @@ func registrar_movimiento_externo(tipo: String, detalle: String, delta_banco_cen
 	return _finalizar_operacion(snapshot, tipo, detalle, delta_banco_centimos + delta_efectivo_centimos)
 
 
+## Gasto obligatorio (alquiler, suministros, gastos personales): se paga primero con efectivo y el resto
+## se carga en la cuenta, aunque la deje en descubierto.
+func cargar_gasto_obligatorio(tipo: String, detalle: String, importe_centimos: int) -> Dictionary:
+	if importe_centimos <= 0:
+		return {"ok": true, "mensaje": detalle}
+	var desde_efectivo := mini(EstadoJuego.efectivo_centimos, importe_centimos)
+	return registrar_movimiento_externo(tipo, detalle, -(importe_centimos - desde_efectivo), -desde_efectivo)
+
+
 ## Borra movimientos y vuelve a los valores iniciales de EstadoJuego (que debe haberse reiniciado antes).
 func reiniciar() -> void:
 	movimientos.clear()
@@ -180,7 +189,7 @@ func _motivo_mercado_no_disponible() -> String:
 	if EstadoJuego.partida_terminada:
 		return "La partida ha terminado."
 	if not SistemaMercado.mercado_abierto():
-		return "La bolsa está cerrada hoy (fin de semana). Podrás operar el próximo día laborable."
+		return "La bolsa está cerrada hoy (%s). Podrás operar el próximo día con sesión." % SistemaMercado.motivo_mercado_cerrado()
 	return ""
 
 
@@ -291,11 +300,8 @@ func _cargar_estado() -> void:
 	if not datos is Dictionary:
 		_bloquear_guardado("El archivo de finanzas no tiene un formato válido.")
 		return
-	if int(datos.get("version", 0)) != VERSION_GUARDADO:
-		_bloquear_guardado("La versión del archivo de finanzas no es compatible.")
-		return
-	if str(datos.get("escenario", "")) != ID_ESCENARIO:
-		_bloquear_guardado("El archivo de finanzas pertenece a otro escenario.")
+	if int(datos.get("version", 0)) != VERSION_GUARDADO or str(datos.get("escenario", "")) != ID_ESCENARIO:
+		EstadoJuego.archivar_guardado_incompatible(RUTA_GUARDADO, "El archivo de finanzas pertenece a otra versión o escenario.")
 		return
 
 	var saldo := int(datos.get("saldo_bancario_centimos", 0))

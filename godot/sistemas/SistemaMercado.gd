@@ -1,7 +1,7 @@
 extends Node
 ## Mercado del escenario: catálogo de activos ficticios y precios por fecha interna.
-## Los precios provienen de datos/mercado/mercado_2008.json. Mientras ese archivo tenga
-## "verificado": false, las cotizaciones son ilustrativas y la interfaz lo indica.
+## Los precios provienen de datos/mercado/mercado_2008.json: cotizaciones reales (empresas con nombre ficticio)
+## en céntimos de euro. Cada activo indica si su serie está verificada ("verificado") y su fuente.
 
 signal precios_actualizados
 
@@ -90,18 +90,78 @@ func precio_sesion_anterior(activo_id: String) -> int:
 	return precio_en(activo_id, anterior)
 
 
+## Hay sesión si el activo de referencia cotizó ese día (cierra fines de semana y festivos reales).
 func mercado_abierto(fecha: String = "") -> bool:
 	if fecha.is_empty():
 		fecha = EstadoJuego.fecha_historica_interna
-	if not bool(Reglas.valor("mercado/cerrado_fines_de_semana", true)):
-		return true
-	var fecha_dict := Time.get_datetime_dict_from_datetime_string(fecha + "T00:00:00", true)
-	var dia_semana := int(fecha_dict.get("weekday", 1))
-	return dia_semana != Time.WEEKDAY_SATURDAY and dia_semana != Time.WEEKDAY_SUNDAY
+	var referencia := info_activo(Reglas.texto("mercado/activo_referencia_sesiones", "COL"))
+	if referencia.is_empty():
+		return not _es_fin_de_semana(fecha)
+	return (referencia.get("precios_centimos", {}) as Dictionary).has(fecha)
+
+
+func motivo_mercado_cerrado(fecha: String = "") -> String:
+	if fecha.is_empty():
+		fecha = EstadoJuego.fecha_historica_interna
+	if mercado_abierto(fecha):
+		return ""
+	return "fin de semana" if _es_fin_de_semana(fecha) else "festivo, sin sesión"
+
+
+func _es_fin_de_semana(fecha: String) -> bool:
+	var dia_semana := int(Time.get_datetime_dict_from_datetime_string(fecha + "T00:00:00", true).get("weekday", 1))
+	return dia_semana == Time.WEEKDAY_SATURDAY or dia_semana == Time.WEEKDAY_SUNDAY
+
+
+## Serie de cotizaciones entre dos fechas (incluidas) para las gráficas: [{"fecha": String, "valor": int}].
+## Nunca devuelve datos posteriores a la fecha actual de la partida.
+func serie(activo_id: String, desde: String, hasta: String = "") -> Array[Dictionary]:
+	if hasta.is_empty() or hasta > EstadoJuego.fecha_historica_interna:
+		hasta = EstadoJuego.fecha_historica_interna
+	var resultado: Array[Dictionary] = []
+	var activo := info_activo(activo_id)
+	var precios: Dictionary = activo.get("precios_centimos", {})
+	for f in _fechas_ordenadas.get(activo_id, []):
+		var fecha := str(f)
+		if fecha >= desde and fecha <= hasta:
+			resultado.append({"fecha": fecha, "valor": int(precios[fecha])})
+	return resultado
+
+
+## Fecha interna desplazada N días hacia atrás desde hoy.
+func fecha_hace_dias(dias: int) -> String:
+	var hoy := Time.get_unix_time_from_datetime_string(EstadoJuego.fecha_historica_interna + "T00:00:00")
+	return Time.get_date_string_from_unix_time(hoy - dias * 86_400)
+
+
+## Variación porcentual del precio entre hace N días y hoy (0 si no hay datos).
+func variacion_desde(activo_id: String, dias: int) -> float:
+	var inicial := precio_en(activo_id, fecha_hace_dias(dias))
+	var actual := precio_actual_centimos(activo_id)
+	if inicial <= 0:
+		return 0.0
+	return float(actual - inicial) / float(inicial)
+
+
+## Máximo y mínimo de cierre en los últimos N días: Vector2i(minimo, maximo).
+func rango_precios(activo_id: String, dias: int) -> Vector2i:
+	var minimo := 0
+	var maximo := 0
+	for punto in serie(activo_id, fecha_hace_dias(dias)):
+		var v := int(punto["valor"])
+		minimo = v if minimo == 0 else mini(minimo, v)
+		maximo = maxi(maximo, v)
+	return Vector2i(minimo, maximo)
 
 
 ## Garantiza que la cartera contiene una entrada (aunque sea con 0 acciones) por cada activo del catálogo.
 func sincronizar_cartera() -> void:
+	# Se descartan posiciones de activos que ya no existen en el catálogo (escenarios anteriores).
+	var depurada: Array[Dictionary] = []
+	for posicion in EstadoJuego.cartera:
+		if not info_activo(str(posicion.get("id", ""))).is_empty():
+			depurada.append(posicion)
+	EstadoJuego.cartera = depurada
 	for activo in activos:
 		var activo_id := str(activo.get("id", ""))
 		var encontrado := false

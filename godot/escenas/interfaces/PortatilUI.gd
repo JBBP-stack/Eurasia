@@ -4,10 +4,11 @@ extends CanvasLayer
 
 const GraficoLineas := preload("res://escenas/interfaces/graficos/GraficoLineas.gd")
 const GraficoBarras := preload("res://escenas/interfaces/graficos/GraficoBarras.gd")
-const ClienteAsistente := preload("res://sistemas/ClienteAsistente.gd")
+const FichaCotizacion := preload("res://escenas/interfaces/graficos/FichaCotizacion.gd")
 
 const TAB_RESUMEN: int = 0
-const TAB_ASISTENTE: int = 4
+const TAB_MERCADO: int = 2
+const TAB_ASISTENTE: int = 5
 
 var _fondo: ColorRect
 var _pestanas: TabContainer
@@ -23,7 +24,6 @@ var _scroll_conversacion: ScrollContainer
 var _pregunta: LineEdit
 var _boton_analizar: Button
 var _boton_enviar: Button
-var _cliente: Node
 var _abierta: bool = false
 
 
@@ -31,10 +31,9 @@ func _ready() -> void:
 	layer = 40
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	add_to_group("portatil_ui")
-	_cliente = ClienteAsistente.new()
-	add_child(_cliente)
-	_cliente.respuesta_recibida.connect(_al_recibir_respuesta)
-	_cliente.error_asistente.connect(_al_recibir_error)
+	Asistente.respuesta_recibida.connect(_al_recibir_respuesta)
+	Asistente.error_asistente.connect(_al_recibir_error)
+	Asistente.estado_cambiado.connect(func(texto: String) -> void: _estado_asistente.text = texto)
 	_crear_interfaz()
 	_cerrar()
 
@@ -79,6 +78,7 @@ func _crear_interfaz() -> void:
 	raiz.add_child(_pestanas)
 	_crear_pagina_resumen()
 	_crear_pagina_cartera()
+	_crear_pagina_mercado()
 	_crear_pagina_evolucion()
 	_crear_pagina_ingresos()
 	_crear_pagina_asistente()
@@ -118,6 +118,17 @@ func _crear_pagina_cartera() -> void:
 	_info_activos = Label.new()
 	_info_activos.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	pagina.add_child(_info_activos)
+
+
+func _crear_pagina_mercado() -> void:
+	var pagina := _pagina_con_scroll("Mercado")
+	var ayuda := Label.new()
+	ayuda.text = "Consulta la cotización de cualquier empresa. Para comprar o vender, ve al banco."
+	ayuda.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	pagina.add_child(ayuda)
+	var ficha := FichaCotizacion.new()
+	ficha.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	pagina.add_child(ficha)
 
 
 func _crear_pagina_evolucion() -> void:
@@ -240,8 +251,15 @@ func _actualizar_resumen() -> void:
 	for gasto in Reglas.valor("economia_domestica/gastos_fijos_mensuales", []):
 		if gasto is Dictionary:
 			gastos_fijos += int(gasto.get("importe_centimos", 0))
-	_resumen.text = "%s\n\nCuenta bancaria: %s €\nEfectivo: %s €\nInversiones: %s €\nPatrimonio total: %s € (%+.1f %% desde el inicio)\n\nIngreso mensual: %s € · Gastos fijos mensuales: %s €\nPróximo cobro y cargo de gastos: dentro de %d día(s)\n\nSalud: %d · Comida: %d raciones · %s\nBolsa: %s\n%s" % [
+	var proximos: Array[String] = []
+	for gasto in GestorPartida.proximos_gastos(10):
+		proximos.append("· %s: %s € %s" % [
+			str(gasto["concepto"]), EstadoJuego.euros(int(gasto["importe_centimos"])),
+			"mañana" if int(gasto["dias"]) == 1 else "dentro de %d días" % int(gasto["dias"])
+		])
+	_resumen.text = "%s (quedan %d días del escenario)\n\nCuenta bancaria: %s €\nEfectivo: %s €\nInversiones: %s €\nPatrimonio total: %s € (%+.1f %% desde el inicio)\n\nIngreso mensual: %s € · Gastos fijos mensuales: %s €\nPróximos gastos:\n%s\n\nSalud: %d · Comida: %d raciones · %s\nBolsa: %s\n%s" % [
 		EstadoJuego.etiqueta_dia(),
+		GestorPartida.dias_restantes(),
 		EstadoJuego.euros(EstadoJuego.saldo_bancario_centimos),
 		EstadoJuego.euros(EstadoJuego.efectivo_centimos),
 		EstadoJuego.euros(EstadoJuego.valor_cartera_centimos()),
@@ -249,26 +267,17 @@ func _actualizar_resumen() -> void:
 		variacion,
 		EstadoJuego.euros(int(EstadoJuego.perfil.get("ingreso_mensual_centimos", 0))),
 		EstadoJuego.euros(gastos_fijos),
-		_dias_hasta_cobro(),
+		"\n".join(proximos) if not proximos.is_empty() else "· Ninguno en los próximos 10 días",
 		EstadoJuego.salud,
 		EstadoJuego.comida_disponible,
 		"ya has comido hoy" if EstadoJuego.comido_hoy else "todavía no has comido hoy",
-		"abierta" if SistemaMercado.mercado_abierto() else "cerrada (fin de semana)",
-		"" if SistemaMercado.verificado else "Aviso: los precios del mercado son ilustrativos y están pendientes de verificar."
+		"abierta" if SistemaMercado.mercado_abierto() else "cerrada hoy (%s)" % SistemaMercado.motivo_mercado_cerrado(),
+		"Cotizaciones reales de empresas con nombre ficticio, convertidas a euros."
 	]
 	if EstadoJuego.saldo_bancario_centimos < 0:
 		_resumen.text += "\n\n¡Cuenta en descubierto! Días de impago: %d de %d permitidos." % [
 			EstadoJuego.dias_en_descubierto, Reglas.entero("bancarrota/dias_gracia_descubierto", 3)
 		]
-
-
-func _dias_hasta_cobro() -> int:
-	var dia_cobro := Reglas.entero("economia_domestica/dia_del_mes_cobro", 1)
-	for dias in range(1, 40):
-		var fecha := EstadoJuego.fecha_de_dia(EstadoJuego.dia_de_partida + dias)
-		if int(fecha.substr(8, 2)) == dia_cobro:
-			return dias
-	return 0
 
 
 func _actualizar_cartera() -> void:
@@ -344,7 +353,7 @@ func _actualizar_ingresos() -> void:
 
 func _actualizar_asistente() -> void:
 	var disponible := NoticiasManager.puede_analizar_noticias_hoy() and not EstadoJuego.partida_terminada
-	var ocupado := bool(_cliente.get("ocupado"))
+	var ocupado := Asistente.ocupado
 	if ocupado:
 		_estado_asistente.text = "El asistente está pensando…"
 	elif disponible:
@@ -359,7 +368,7 @@ func _actualizar_asistente() -> void:
 
 func _pintar_conversacion() -> void:
 	var lineas: Array[String] = []
-	var historial: Array = _cliente.get("historial")
+	var historial: Array = Asistente.historial
 	for turno in historial:
 		var prefijo := "Tú: " if str(turno.get("rol", "")) == "jugador" else "Asistente: "
 		lineas.append(prefijo + str(turno.get("texto", "")))
@@ -377,7 +386,7 @@ func _enviar_pregunta() -> void:
 
 
 func _enviar(texto: String) -> void:
-	if _cliente.call("enviar", texto):
+	if Asistente.enviar(texto):
 		_pregunta.clear()
 	_actualizar_asistente()
 

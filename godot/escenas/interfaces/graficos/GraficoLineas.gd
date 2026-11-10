@@ -44,7 +44,7 @@ func _rango() -> Vector2:
 		maximo = maxf(maximo, v)
 	if is_inf(minimo):
 		return Vector2(0, 1)
-	var margen := maxf((maximo - minimo) * 0.1, absf(maximo) * 0.02 + 100.0)
+	var margen := maxf((maximo - minimo) * 0.1, absf(maximo) * 0.02 + 1.0)
 	return Vector2(minimo - margen, maximo + margen)
 
 
@@ -78,7 +78,7 @@ func _draw() -> void:
 		if i % paso != 0 and i != puntos.size() - 1:
 			continue
 		var p := _posicion(i, rango, area)
-		draw_string(fuente, Vector2(p.x - 18, size.y - 8), str(puntos[i].get("etiqueta", "")), HORIZONTAL_ALIGNMENT_CENTER, 36, tam, COLOR_TEXTO_SECUNDARIO)
+		draw_string(fuente, Vector2(clampf(p.x - 30, 0, size.x - 60), size.y - 8), str(puntos[i].get("etiqueta", "")), HORIZONTAL_ALIGNMENT_CENTER, 60, tam, COLOR_TEXTO_SECUNDARIO)
 
 	# Línea de 2 px y marcadores.
 	var linea := PackedVector2Array()
@@ -118,4 +118,6 @@ func _formato_euros(centimos: float) -> String:
 	var euros := centimos / 100.0
 	if absf(euros) >= 1000.0:
 		return "%.1fk €" % (euros / 1000.0)
+	if absf(euros) < 10.0:
+		return "%.2f €" % euros
 	return "%d €" % int(round(euros))

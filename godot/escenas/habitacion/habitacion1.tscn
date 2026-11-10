@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" path="res://escenas/interfaces/NeveraUI.tscn" id="15_nevera_ui"]
 [ext_resource type="PackedScene" path="res://escenas/interfaces/PortatilUI.tscn" id="16_portatil_ui"]
 [ext_resource type="PackedScene" path="res://escenas/interfaces/InformeFinalUI.tscn" id="17_informe_final"]
+[ext_resource type="PackedScene" path="res://escenas/interfaces/DecisionesUI.tscn" id="18_decisiones"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7r0pk"]
 texture = ExtResource("2_xym36")
@@ -339,6 +340,8 @@ position = Vector2(143, 312)
 [node name="PortatilUI" parent="." unique_id=902311587 instance=ExtResource("16_portatil_ui")]
 
 [node name="InformeFinalUI" parent="." unique_id=1688402291 instance=ExtResource("17_informe_final")]
+
+[node name="DecisionesUI" parent="." unique_id=1520774410 instance=ExtResource("18_decisiones")]
 
 [node name="PuertaBanco" parent="." unique_id=1737794248 instance=ExtResource("13_puerta_banco")]
 position = Vector2(138, 16)

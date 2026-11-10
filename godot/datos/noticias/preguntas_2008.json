@@ -4,25 +4,241 @@
 		"p_lehman": {
 			"enunciado": "Tienes gastos que cubrir este mes y recibes noticias sobre la quiebra de un gran banco. ¿Qué decisión es más prudente?",
 			"opciones": [
-				{"id": "a", "adecuada": true, "texto": "Revisar mi liquidez y fondo de emergencia antes de asumir más riesgo.", "efecto": {"prudencia": 2}, "explicacion": "La liquidez ayuda a afrontar imprevistos sin tener que vender inversiones precipitadamente."},
-				{"id": "b", "adecuada": false, "texto": "Pedir un préstamo para comprar acciones porque ahora parecen baratas.", "efecto": {"prudencia": -2, "riesgo": 3, "saldo_bancario_centimos": -30000}, "explicacion": "Invertir mediante deuda aumenta la exposición a pérdidas y compromete pagos futuros. Abrir el préstamo te cuesta 300 € en comisiones e intereses."},
-				{"id": "c", "adecuada": false, "texto": "Invertir todos mis ahorros en una única empresa financiera.", "efecto": {"prudencia": -2, "riesgo": 2}, "explicacion": "La concentración en una empresa expone a riesgos específicos sin diversificación."}
+				{
+					"id": "a",
+					"adecuada": true,
+					"texto": "Revisar mi liquidez y fondo de emergencia antes de asumir más riesgo.",
+					"efecto": {
+						"prudencia": 2
+					},
+					"explicacion": "La liquidez ayuda a afrontar imprevistos sin tener que vender inversiones precipitadamente."
+				},
+				{
+					"id": "b",
+					"adecuada": false,
+					"texto": "Pedir un préstamo para comprar acciones porque ahora parecen baratas.",
+					"efecto": {
+						"prudencia": -2,
+						"riesgo": 3,
+						"saldo_bancario_centimos": -30000
+					},
+					"explicacion": "Invertir mediante deuda aumenta la exposición a pérdidas y compromete pagos futuros. Abrir el préstamo te cuesta 300 € en comisiones e intereses."
+				},
+				{
+					"id": "c",
+					"adecuada": false,
+					"texto": "Invertir todos mis ahorros en una única empresa financiera.",
+					"efecto": {
+						"prudencia": -2,
+						"riesgo": 2
+					},
+					"explicacion": "La concentración en una empresa expone a riesgos específicos sin diversificación."
+				}
 			]
 		},
 		"p_tipos": {
 			"enunciado": "El banco central mantiene su tipo objetivo en el 2 %. ¿Qué conclusión puede obtenerse con seguridad de esta noticia aislada?",
 			"opciones": [
-				{"id": "a", "adecuada": false, "texto": "Que todas las acciones subirán mañana.", "efecto": {"prudencia": -2, "riesgo": 1}, "explicacion": "Una decisión de tipos no permite predecir con certeza el movimiento de todas las acciones."},
-				{"id": "b", "adecuada": true, "texto": "Que las condiciones monetarias importan, pero necesito más información antes de actuar.", "efecto": {"prudencia": 2}, "explicacion": "Los tipos influyen en financiación y valoración, pero no determinan por sí solos el mercado."},
-				{"id": "c", "adecuada": false, "texto": "Que desaparece el riesgo de quiebra bancaria.", "efecto": {"prudencia": -2, "riesgo": 2}, "explicacion": "Mantener tipos de interés no garantiza la solvencia de las entidades."}
+				{
+					"id": "a",
+					"adecuada": false,
+					"texto": "Que todas las acciones subirán mañana.",
+					"efecto": {
+						"prudencia": -2,
+						"riesgo": 1
+					},
+					"explicacion": "Una decisión de tipos no permite predecir con certeza el movimiento de todas las acciones."
+				},
+				{
+					"id": "b",
+					"adecuada": true,
+					"texto": "Que las condiciones monetarias importan, pero necesito más información antes de actuar.",
+					"efecto": {
+						"prudencia": 2
+					},
+					"explicacion": "Los tipos influyen en financiación y valoración, pero no determinan por sí solos el mercado."
+				},
+				{
+					"id": "c",
+					"adecuada": false,
+					"texto": "Que desaparece el riesgo de quiebra bancaria.",
+					"efecto": {
+						"prudencia": -2,
+						"riesgo": 2
+					},
+					"explicacion": "Mantener tipos de interés no garantiza la solvencia de las entidades."
+				}
 			]
 		},
 		"p_aig": {
 			"enunciado": "Tras el rescate anunciado de una gran aseguradora, ¿qué significa realmente que la empresa reciba apoyo público?",
 			"opciones": [
-				{"id": "a", "adecuada": false, "texto": "Que sus accionistas tienen garantizada una ganancia.", "efecto": {"prudencia": -2, "riesgo": 2}, "explicacion": "Ayudar a la continuidad de una empresa no garantiza rendimientos a sus accionistas."},
-				{"id": "b", "adecuada": false, "texto": "Que ya no existe ningún riesgo financiero en el sector.", "efecto": {"prudencia": -2, "riesgo": 2}, "explicacion": "Un rescate concreto no elimina automáticamente otros riesgos sistémicos."},
-				{"id": "c", "adecuada": true, "texto": "Que debo distinguir entre estabilidad de la empresa y valor para sus accionistas.", "efecto": {"prudencia": 2}, "explicacion": "Las medidas de rescate pueden proteger la estabilidad financiera y a la vez perjudicar el valor de las acciones."}
+				{
+					"id": "a",
+					"adecuada": false,
+					"texto": "Que sus accionistas tienen garantizada una ganancia.",
+					"efecto": {
+						"prudencia": -2,
+						"riesgo": 2
+					},
+					"explicacion": "Ayudar a la continuidad de una empresa no garantiza rendimientos a sus accionistas."
+				},
+				{
+					"id": "b",
+					"adecuada": false,
+					"texto": "Que ya no existe ningún riesgo financiero en el sector.",
+					"efecto": {
+						"prudencia": -2,
+						"riesgo": 2
+					},
+					"explicacion": "Un rescate concreto no elimina automáticamente otros riesgos sistémicos."
+				},
+				{
+					"id": "c",
+					"adecuada": true,
+					"texto": "Que debo distinguir entre estabilidad de la empresa y valor para sus accionistas.",
+					"efecto": {
+						"prudencia": 2
+					},
+					"explicacion": "Las medidas de rescate pueden proteger la estabilidad financiera y a la vez perjudicar el valor de las acciones."
+				}
+			]
+		},
+		"p_paro": {
+			"enunciado": "El paro sube con fuerza en tu país. Tú mantienes tu empleo. ¿Qué es lo más prudente revisar primero?",
+			"opciones": [
+				{
+					"id": "a",
+					"adecuada": true,
+					"texto": "Comprobar que tengo un fondo de emergencia que cubra varios meses de gastos fijos.",
+					"efecto": {
+						"prudencia": 2
+					},
+					"explicacion": "Si pierdes ingresos, un colchón de liquidez evita endeudarte o vender inversiones en mal momento."
+				},
+				{
+					"id": "b",
+					"adecuada": false,
+					"texto": "Gastar ahora mis ahorros antes de que todo se ponga peor.",
+					"efecto": {
+						"prudencia": -2,
+						"efectivo_centimos": -15000
+					},
+					"explicacion": "Consumir el colchón justo cuando aumenta el riesgo de perder ingresos te deja sin margen. Gastas 150 € en caprichos."
+				},
+				{
+					"id": "c",
+					"adecuada": false,
+					"texto": "Invertir mi efectivo en promotoras inmobiliarias porque han bajado mucho.",
+					"efecto": {
+						"prudencia": -2,
+						"riesgo": 3
+					},
+					"explicacion": "Que algo haya bajado no significa que esté barato: el sector inmobiliario es el epicentro del problema."
+				}
+			]
+		},
+		"p_fannie": {
+			"enunciado": "El Estado toma el control de dos grandes hipotecarias para evitar su quiebra. Si tienes acciones de una de ellas, ¿qué significa para ti?",
+			"opciones": [
+				{
+					"id": "a",
+					"adecuada": false,
+					"texto": "Que el Estado protege a los accionistas y mis acciones están a salvo.",
+					"efecto": {
+						"prudencia": -2,
+						"riesgo": 2
+					},
+					"explicacion": "Los rescates protegen el sistema y a los acreedores; los accionistas suelen ser los primeros en perder."
+				},
+				{
+					"id": "b",
+					"adecuada": true,
+					"texto": "Que el rescate protege el sistema financiero, pero los accionistas pueden perder casi todo.",
+					"efecto": {
+						"prudencia": 2
+					},
+					"explicacion": "En una intervención el Estado prioriza la estabilidad, no el valor de las acciones existentes."
+				},
+				{
+					"id": "c",
+					"adecuada": false,
+					"texto": "Que es una compra segura, porque el Estado nunca dejará que caigan.",
+					"efecto": {
+						"prudencia": -2,
+						"riesgo": 3
+					},
+					"explicacion": "Confundir «la empresa sobrevive» con «la acción recupera su valor» es un error muy caro."
+				}
+			]
+		},
+		"p_caida": {
+			"enunciado": "Las acciones de un banco en el que tienes dinero invertido caen un 45 % en un solo día. ¿Qué haces?",
+			"opciones": [
+				{
+					"id": "a",
+					"adecuada": false,
+					"texto": "Comprar muchas más para «promediar» el precio, sin analizar por qué caen.",
+					"efecto": {
+						"prudencia": -2,
+						"riesgo": 3
+					},
+					"explicacion": "Promediar a la baja sin entender la causa puede multiplicar las pérdidas si la empresa no se recupera."
+				},
+				{
+					"id": "b",
+					"adecuada": true,
+					"texto": "Analizar por qué cae, cuánto pesa en mi patrimonio y si puedo asumir perderlo todo.",
+					"efecto": {
+						"prudencia": 2
+					},
+					"explicacion": "Decidir con información y según tu tolerancia al riesgo es mejor que reaccionar por impulso en cualquier dirección."
+				},
+				{
+					"id": "c",
+					"adecuada": false,
+					"texto": "Dejar de mirar las noticias y esperar a que vuelva a subir.",
+					"efecto": {
+						"prudencia": -2,
+						"riesgo": 1
+					},
+					"explicacion": "Ignorar la información no reduce el riesgo: solo te impide gestionarlo."
+				}
+			]
+		},
+		"p_final": {
+			"enunciado": "Los bancos centrales inyectan liquidez y se anuncian fusiones de emergencia. Pensando en tus finanzas personales, ¿qué lección es más útil?",
+			"opciones": [
+				{
+					"id": "a",
+					"adecuada": true,
+					"texto": "Diversificar y mantener liquidez para no depender de que una sola empresa sobreviva.",
+					"efecto": {
+						"prudencia": 2
+					},
+					"explicacion": "La diversificación y el colchón de liquidez son las defensas básicas frente a crisis que nadie sabe predecir."
+				},
+				{
+					"id": "b",
+					"adecuada": false,
+					"texto": "Que el Estado siempre rescatará a todas las empresas, así que no hay riesgo.",
+					"efecto": {
+						"prudencia": -2,
+						"riesgo": 2
+					},
+					"explicacion": "Esta misma semana una gran entidad quebró sin rescate: los rescates no están garantizados."
+				},
+				{
+					"id": "c",
+					"adecuada": false,
+					"texto": "Pedir un crédito para invertir todo en bancos ahora que están baratos.",
+					"efecto": {
+						"prudencia": -2,
+						"riesgo": 3,
+						"saldo_bancario_centimos": -20000
+					},
+					"explicacion": "Invertir con deuda en el sector en crisis maximiza el riesgo. Abrir el crédito te cuesta 200 € en comisiones."
+				}
 			]
 		}
 	}

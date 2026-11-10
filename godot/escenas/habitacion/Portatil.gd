@@ -48,5 +48,5 @@ func _consultar_estado() -> void:
 		push_warning("No se encontró la interfaz del portátil.")
 		return
 	# Si el análisis está disponible se abre directamente la pestaña del asistente.
-	var pestana: int = 4 if NoticiasManager.puede_analizar_noticias_hoy() else 0
+	var pestana: int = 5 if NoticiasManager.puede_analizar_noticias_hoy() else 0
 	portatil_ui.call("abrir_portatil", pestana)

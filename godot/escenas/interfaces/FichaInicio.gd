@@ -64,6 +64,7 @@ func _crear_ficha() -> void:
 	_agregar_dato(datos, "Fecha", EstadoJuego.etiqueta_dia() + " de la partida")
 	_agregar_dato(datos, "Ingreso mensual", "%s €" % EstadoJuego.euros(int(persona.get("ingreso_mensual_centimos", 0))))
 	_agregar_dato(datos, "Dinero en el banco", "%s €" % EstadoJuego.euros(EstadoJuego.saldo_bancario_centimos))
+	_agregar_dato(datos, "Efectivo", "%s €" % EstadoJuego.euros(EstadoJuego.efectivo_centimos))
 	_agregar_dato(datos, "Inversiones", "%s €" % EstadoJuego.euros(EstadoJuego.valor_cartera_centimos()))
 	_agregar_dato(datos, "Patrimonio total", "%s €" % EstadoJuego.euros(EstadoJuego.patrimonio_total_centimos()))
 

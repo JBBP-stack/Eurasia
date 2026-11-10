@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" path="res://escenas/banco/BancoUI.tscn" id="6_banco_ui"]
 [ext_resource type="Script" path="res://escenas/banco/PuntoBanco.gd" id="7_punto_banco"]
 [ext_resource type="PackedScene" path="res://escenas/interfaces/InformeFinalUI.tscn" id="8_informe_final"]
+[ext_resource type="PackedScene" path="res://escenas/interfaces/DecisionesUI.tscn" id="9_decisiones"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_horizontal"]
 size = Vector2(286, 14)
@@ -39,6 +40,8 @@ radius = 44.0
 [node name="BancoUI" parent="." instance=ExtResource("6_banco_ui")]
 
 [node name="InformeFinalUI" parent="." instance=ExtResource("8_informe_final")]
+
+[node name="DecisionesUI" parent="." instance=ExtResource("9_decisiones")]
 
 [node name="Suelo" type="Node2D" parent="."]
 script = ExtResource("4_suelo")

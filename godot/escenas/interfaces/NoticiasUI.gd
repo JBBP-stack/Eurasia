@@ -14,6 +14,10 @@ var _temporizador_aviso: Timer
 var _hoy: Array[Dictionary] = []
 var _abierta: bool = false
 var _indice_seleccionado: int = 0
+# false = periódicos recogidos; true = hemeroteca (últimos dos años + periódicos recogidos).
+var _modo_hemeroteca: bool = false
+var _boton_recogidos: Button
+var _boton_hemeroteca: Button
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -63,12 +67,30 @@ func _crear_interfaz() -> void:
 	cerrar.pressed.connect(cerrar_buzon)
 	cabecera.add_child(cerrar)
 
+	var modos := HBoxContainer.new()
+	modos.add_theme_constant_override("separation", 6)
+	raiz.add_child(modos)
+	var grupo := ButtonGroup.new()
+	_boton_recogidos = Button.new()
+	_boton_recogidos.text = "Periódicos recogidos"
+	_boton_recogidos.toggle_mode = true
+	_boton_recogidos.button_group = grupo
+	_boton_recogidos.button_pressed = true
+	_boton_recogidos.pressed.connect(func() -> void: _cambiar_modo(false))
+	modos.add_child(_boton_recogidos)
+	_boton_hemeroteca = Button.new()
+	_boton_hemeroteca.text = "Hemeroteca (últimos dos años)"
+	_boton_hemeroteca.toggle_mode = true
+	_boton_hemeroteca.button_group = grupo
+	_boton_hemeroteca.pressed.connect(func() -> void: _cambiar_modo(true))
+	modos.add_child(_boton_hemeroteca)
+
 	var cuerpo := HSplitContainer.new()
 	cuerpo.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	raiz.add_child(cuerpo)
 
 	_lista = ItemList.new()
-	_lista.custom_minimum_size = Vector2(185, 0)
+	_lista.custom_minimum_size = Vector2(240, 0)
 	_lista.item_selected.connect(_seleccionar)
 	cuerpo.add_child(_lista)
 
@@ -118,16 +140,45 @@ func _crear_interfaz() -> void:
 
 	cerrar_buzon()
 
+func _cambiar_modo(hemeroteca: bool) -> void:
+	_modo_hemeroteca = hemeroteca
+	_actualizar(NoticiasManager.cuantas_sin_leer())
+
+
+## «Día N» para noticias de la partida; «Hace N meses» para la hemeroteca (sin fechas reales).
+func _antiguedad(noticia: Dictionary) -> String:
+	var fecha := str(noticia.get("disponible_desde", ""))
+	var dia := EstadoJuego.dia_de_fecha(fecha)
+	if dia >= 1:
+		return "Día %d" % dia
+	var dias := EstadoJuego.dia_de_partida - dia
+	var meses := int(round(float(dias) / 30.4))
+	if meses >= 12:
+		var anios := meses / 12
+		var resto := meses % 12
+		return "Hace %d año%s%s" % [anios, "" if anios == 1 else "s", (" y %d mes%s" % [resto, "" if resto == 1 else "es"]) if resto > 0 else ""]
+	if meses >= 1:
+		return "Hace %d mes%s" % [meses, "" if meses == 1 else "es"]
+	return "Hace %d días" % dias
+
+
 func _actualizar(_cantidad: int) -> void:
-	_hoy = NoticiasManager.obtener_noticias_recogidas()
-	_titulo.text = "BUZÓN | " + EstadoJuego.etiqueta_dia()
+	_hoy = NoticiasManager.obtener_hemeroteca() if _modo_hemeroteca else NoticiasManager.obtener_noticias_recogidas()
+	_titulo.text = ("HEMEROTECA | " if _modo_hemeroteca else "BUZÓN | ") + EstadoJuego.etiqueta_dia()
 	_buzon.text = "Buzón: %d por leer" % NoticiasManager.cuantas_sin_leer()
-	_buzon.tooltip_text = "%d periódicos pendientes de recogida" % NoticiasManager.cuantas_por_recoger()
+	_buzon.tooltip_text = "%d periódicos pendientes de recogida · tecla N" % NoticiasManager.cuantas_por_recoger()
 	_lista.clear()
 	for noticia in _hoy:
 		var id := str(noticia.get("id", ""))
-		var marca := "✓ " if NoticiasManager.leidas.has(id) else "• "
-		_lista.add_item(marca + str(noticia.get("titulo", "")))
+		if _modo_hemeroteca:
+			_lista.add_item("[%s] %s" % [_antiguedad(noticia), str(noticia.get("titulo", ""))])
+		else:
+			var marca := "✓ " if NoticiasManager.leidas.has(id) else "• "
+			_lista.add_item(marca + str(noticia.get("titulo", "")))
+	if _modo_hemeroteca and _abierta:
+		_texto.text = "Noticias económicas más relevantes de los dos últimos años. Los periódicos que recojas se añaden aquí."
+		_limpiar_opciones()
+		return
 	if _hoy.is_empty():
 		if NoticiasManager.cuantas_por_recoger() > 0:
 			_texto.text = "Hay periódicos entregados. Acércate al buzón y pulsa E para recogerlos."
@@ -168,6 +219,9 @@ func abrir_buzon_con_noticia(noticia_id: String) -> void:
 
 func _abrir_buzon(noticia_id: String) -> void:
 	_abierta = true
+	if not noticia_id.is_empty() and _modo_hemeroteca:
+		_modo_hemeroteca = false
+		_boton_recogidos.button_pressed = true
 	_oscurecer.visible = true
 	_ventana.visible = true
 	_buzon.visible = false
@@ -202,12 +256,12 @@ func _seleccionar(indice: int) -> void:
 	_indice_seleccionado = indice
 	var noticia: Dictionary = _hoy[indice]
 	var noticia_id := str(noticia.get("id", ""))
-	NoticiasManager.marcar_leida(noticia_id)
+	if not bool(noticia.get("archivo", false)):
+		NoticiasManager.marcar_leida(noticia_id)
 	# Solo se muestran campos anonimizados: la fecha real, la fuente y si es falsa se revelan en el informe final.
-	var dia_publicacion := EstadoJuego.dia_de_fecha(str(noticia.get("disponible_desde", "")))
 	_texto.text = str(noticia.get("titulo", "")) \
 		+ "\n\n" + str(noticia.get("resumen", "")) \
-		+ "\n\nRecibido: Día %d" % dia_publicacion \
+		+ "\n\nPublicado: " + _antiguedad(noticia) \
 		+ "\nMedio: " + str(noticia.get("medio", "Desconocido")) \
 		+ "\n\nTexto educativo adaptado por EURASIA. Contrasta la fiabilidad de cada medio."
 	_limpiar_opciones()

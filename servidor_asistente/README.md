@@ -5,20 +5,26 @@ que guarda la clave de la API, controla qué información se envía y filtra la 
 
 ## Puesta en marcha
 
+1. Instala las dependencias en el `.venv` del proyecto (solo una vez):
+
+   ```bash
+   python3 -m venv .venv
+   .venv/bin/pip install -r requirements.txt
+   ```
+
+2. Copia `.env.example` como `.env` en la raíz del proyecto y escribe tu clave:
+   `ANTHROPIC_API_KEY=...` (el archivo `.env` no se sube a GitHub).
+3. Juega normalmente: al usar el asistente en el portátil, el juego **arranca el servicio solo**
+   (con el Python del `.venv`) y lo detiene al cerrarse.
+
+También puedes arrancarlo a mano (por ejemplo, para ver sus registros):
+
 ```bash
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-export ANTHROPIC_API_KEY=...        # o bien: ant auth login
-python servidor_asistente/servidor.py
+.venv/bin/python servidor_asistente/servidor.py              # con Claude
+.venv/bin/python servidor_asistente/servidor.py --simulado   # respuesta de prueba, sin coste
 ```
 
-Para probar el flujo sin clave y sin coste:
-
-```bash
-python servidor_asistente/servidor.py --simulado
-```
-
-Después abre el juego en Godot, recoge todos los periódicos del día y usa el portátil (pestaña «Asistente»).
+Si falta la clave o el SDK, el servicio arranca igualmente y el juego muestra qué hay que configurar.
 
 ## Qué controla el servicio
 
