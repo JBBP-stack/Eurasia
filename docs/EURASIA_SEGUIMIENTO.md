@@ -12,13 +12,16 @@ Actualizado: 10/11/2026
 - [x] **Cama física.** La interacción usa el mismo avance de día que ambos botones y muestra el motivo si no se puede dormir. Confirmado por el usuario.
 - [x] **Acceso al estado del análisis desde el portátil.** El bloqueo depende de que termine el reparto y de que se hayan recogido todas las noticias del día. La integración real con Claude queda separada.
 - [x] **Consulta de existencias en la nevera.** La interacción muestra la cantidad actual de comida de EstadoJuego; no consume ni compra raciones. Confirmado por el usuario.
+- [x] **Diccionario financiero ampliado.** Búsqueda local, panel legible y siete conceptos con ejemplos. Confirmado por el usuario.
+- [x] **Escena provisional y acceso al banco.** La puerta permite entrar y volver a la habitación conservando la posición del personaje; no incluye operaciones financieras. Confirmado por el usuario.
+- [x] **Teléfono provisional.** La interacción informa que no hay llamadas pendientes; no altera el estado económico. Confirmado por el usuario.
 
 ## Pendiente
 
 - [ ] Integrar el análisis real de noticias cuando se incorpore Claude.
 - [ ] Implementar consumo y compra de comida cuando se definan sus reglas.
 - [ ] Distribuir los objetos interactivos de la habitación sin alterar movimiento, cámara ni colisiones.
-- [ ] Completar la escena del banco y sus puntos de interacción; reservar las operaciones financieras para la última fase funcional.
+- [ ] Sustituir los precios fijos de prueba por cotizaciones históricas verificadas y definir comisiones y disponibilidad de mercado.
 
 ## Notas
 
@@ -27,5 +30,4 @@ Actualizado: 10/11/2026
 
 ## En curso
 
-- [ ] **Diccionario financiero en la habitación.** El panel ahora queda por encima del HUD y el buzón; pendiente de confirmar la lectura en Godot.
-- [ ] **Escenario provisional del banco.** Acceso desde la puerta superior, retorno a la posición anterior y mostrador/cajero visuales; sin operaciones financieras.
+- [ ] **Banco funcional provisional.** Cuenta y efectivo, ingresos/retiradas, compra/venta con confirmación, historial persistente y accesos desde ventanilla/cajero. Usa los tres activos actuales, precio fijo de prueba y comisión cero; pendiente de validación en Godot.

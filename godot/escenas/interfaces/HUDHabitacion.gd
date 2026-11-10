@@ -3,6 +3,7 @@ extends CanvasLayer
 
 var _dia: Label
 var _saldo_bancario: Label
+var _efectivo: Label
 var _total_inversiones: Label
 var _lista_inversiones: VBoxContainer
 var _patrimonio_total: Label
@@ -17,6 +18,7 @@ func _ready() -> void:
 	_crear_interfaz()
 	EstadoJuego.dia_cambiado.connect(_al_cambiar_dia)
 	NoticiasManager.decision_resuelta.connect(_al_resolver_decision)
+	SistemaFinanciero.finanzas_actualizadas.connect(_al_actualizar_finanzas)
 	actualizar()
 
 
@@ -85,6 +87,9 @@ func _crear_interfaz() -> void:
 	_saldo_bancario = Label.new()
 	contenido.add_child(_saldo_bancario)
 
+	_efectivo = Label.new()
+	contenido.add_child(_efectivo)
+
 	_total_inversiones = Label.new()
 	contenido.add_child(_total_inversiones)
 
@@ -100,6 +105,7 @@ func _crear_interfaz() -> void:
 func actualizar() -> void:
 	_dia.text = EstadoJuego.etiqueta_dia()
 	_saldo_bancario.text = "Banco: %s €" % EstadoJuego.euros(EstadoJuego.saldo_bancario_centimos)
+	_efectivo.text = "Efectivo: %s €" % EstadoJuego.euros(EstadoJuego.efectivo_centimos)
 	_total_inversiones.text = "Inversiones: %s €" % EstadoJuego.euros(EstadoJuego.valor_cartera_centimos())
 	_patrimonio_total.text = "Total: %s €" % EstadoJuego.euros(EstadoJuego.patrimonio_total_centimos())
 
@@ -128,6 +134,10 @@ func _al_cambiar_dia(_nuevo_dia: int) -> void:
 
 
 func _al_resolver_decision(_noticia_id: String, _opcion_id: String, _efecto: Dictionary) -> void:
+	actualizar()
+
+
+func _al_actualizar_finanzas() -> void:
 	actualizar()
 
 

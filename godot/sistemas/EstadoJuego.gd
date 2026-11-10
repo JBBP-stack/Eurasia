@@ -24,6 +24,7 @@ var perfil: Dictionary = {
 }
 
 var saldo_bancario_centimos: int = 1_500_000  # 15.000 €
+var efectivo_centimos: int = 0
 
 # Precios de PRUEBA (no cotizaciones históricas).
 # Sustituiremos sus precios y cantidades por datos de la fecha real del escenario.
@@ -45,7 +46,7 @@ func valor_cartera_centimos() -> int:
 	return total
 
 func patrimonio_total_centimos() -> int:
-	return saldo_bancario_centimos + valor_cartera_centimos()
+	return saldo_bancario_centimos + efectivo_centimos + valor_cartera_centimos()
 
 func euros(centimos: int) -> String:
 	return "%.2f" % (float(centimos) / 100.0)

@@ -23,6 +23,38 @@
       "ejemplo": "Si una acción alterna subidas y bajadas grandes en pocos días, su precio muestra alta volatilidad.",
       "fuente": "Investor.gov, SEC",
       "url": "https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins/investor-2"
+    },
+    {
+      "termino": "Deuda",
+      "aliases": ["préstamo", "crédito"],
+      "definicion": "Dinero que una persona debe devolver tras recibir financiación. El acuerdo establece cómo y cuándo se devuelve y qué intereses o gastos corresponden.",
+      "ejemplo": "Si pides 1.000 € prestados, debes devolver el capital según el calendario acordado y pagar los costes que correspondan.",
+      "fuente": "Banco de España",
+      "url": "https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/financiacion/prestamopersonal/guia-textual/conceptocaracter/Prestamo_o_credito.html"
+    },
+    {
+      "termino": "Diversificación",
+      "aliases": ["diversificar", "riesgo de concentración"],
+      "definicion": "Repartir el dinero entre distintas inversiones para reducir la dependencia de una sola. Puede reducir el riesgo de concentración, pero no garantiza evitar pérdidas.",
+      "ejemplo": "Si una inversión cae, otras podrían amortiguar parte del descenso del conjunto; no es seguro que compensen toda la caída.",
+      "fuente": "Investor.gov, SEC",
+      "url": "https://www.investor.gov/introduction-investing/investing-basics/glossary/diversification"
+    },
+    {
+      "termino": "Interés compuesto",
+      "aliases": ["interés sobre interés", "capitalización"],
+      "definicion": "Interés calculado sobre el capital inicial y también sobre los intereses acumulados, si estos se mantienen en la cuenta o inversión.",
+      "ejemplo": "Con 100 € al 5 % anual, el saldo pasa a 105 € el primer año y a 110,25 € el segundo si se mantienen los intereses y el tipo.",
+      "fuente": "Investor.gov, SEC",
+      "url": "https://www.investor.gov/additional-resources/information/youth/teachers-classroom-resources/what-compound-interest"
+    },
+    {
+      "termino": "Riesgo financiero",
+      "aliases": ["riesgo de inversión", "posible pérdida"],
+      "definicion": "Incertidumbre asociada a una decisión financiera y posibilidad de sufrir una pérdida. El riesgo no indica que una pérdida vaya a ocurrir con seguridad.",
+      "ejemplo": "Una acción puede bajar tras publicarse nuevos resultados, pero no se sabe de antemano cuánto ni cuándo cambiará su precio.",
+      "fuente": "Investor.gov, SEC",
+      "url": "https://www.investor.gov/introduction-investing/investing-basics/what-risk"
     }
   ]
 }

@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" path="res://escenas/interfaces/DiccionarioUI.tscn" id="11_diccionario"]
 [ext_resource type="Script" uid="uid://by3vbqgsht3hq" path="res://escenas/habitacion/Habitacion.gd" id="12_habitacion"]
 [ext_resource type="PackedScene" path="res://escenas/habitacion/PuertaBanco.tscn" id="13_puerta_banco"]
+[ext_resource type="PackedScene" path="res://escenas/habitacion/Telefono.tscn" id="14_telefono"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7r0pk"]
 texture = ExtResource("2_xym36")
@@ -323,6 +324,7 @@ position = Vector2(34, 100)
 position = Vector2(241, 86)
 
 [node name="Nevera" parent="." unique_id=843991717 instance=ExtResource("9_nevera")]
+position = Vector2(239, 286)
 
 [node name="Libro" parent="." unique_id=1035530416 instance=ExtResource("10_libro")]
 position = Vector2(143, 312)
@@ -331,6 +333,9 @@ position = Vector2(143, 312)
 
 [node name="PuertaBanco" parent="." unique_id=1737794248 instance=ExtResource("13_puerta_banco")]
 position = Vector2(138, 16)
+
+[node name="Telefono" parent="." unique_id=637491637 instance=ExtResource("14_telefono")]
+position = Vector2(35, 253)
 
 [node name="Jugador" parent="." unique_id=1196908318 instance=ExtResource("3_xym36")]
 position = Vector2(100, 100)

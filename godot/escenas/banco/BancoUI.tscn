@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://escenas/banco/BancoUI.gd" id="1_banco_ui"]
+
+[node name="BancoUI" type="CanvasLayer"]
+script = ExtResource("1_banco_ui")

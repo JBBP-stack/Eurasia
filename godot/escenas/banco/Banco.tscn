@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" path="res://escenas/interfaces/NoticiasUI.tscn" id="3_noticias"]
 [ext_resource type="Script" path="res://escenas/banco/BancoSuelo.gd" id="4_suelo"]
 [ext_resource type="PackedScene" path="res://escenas/habitacion/PuertaBanco.tscn" id="5_puerta"]
+[ext_resource type="PackedScene" path="res://escenas/banco/BancoUI.tscn" id="6_banco_ui"]
+[ext_resource type="Script" path="res://escenas/banco/PuntoBanco.gd" id="7_punto_banco"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_horizontal"]
 size = Vector2(286, 14)
@@ -21,11 +23,19 @@ radius = 9.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cajero"]
 size = Vector2(34, 48)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_atencion"]
+radius = 44.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cajero_rango"]
+radius = 44.0
+
 [node name="Banco" type="Node2D"]
 
 [node name="NoticiasUI" parent="." instance=ExtResource("3_noticias")]
 
 [node name="HUDHabitacion" parent="." instance=ExtResource("2_hud")]
+
+[node name="BancoUI" parent="." instance=ExtResource("6_banco_ui")]
 
 [node name="Suelo" type="Node2D" parent="."]
 script = ExtResource("4_suelo")
@@ -76,6 +86,27 @@ collision_mask = 1
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_empleado")
 
+[node name="ZonaAtencion" type="Area2D" parent="Empleado"]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("7_punto_banco")
+modo = "ventanilla"
+texto_indicador = "E: hablar con el empleado"
+
+[node name="Rango" type="CollisionShape2D" parent="Empleado/ZonaAtencion"]
+shape = SubResource("CircleShape2D_atencion")
+
+[node name="Indicador" type="Label" parent="Empleado/ZonaAtencion"]
+offset_left = -88.0
+offset_top = -51.0
+offset_right = 88.0
+offset_bottom = -27.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 9
+text = "E: hablar con el empleado"
+horizontal_alignment = 1
+visible = false
+
 [node name="Mostrador" type="StaticBody2D" parent="."]
 position = Vector2(55, 178)
 collision_layer = 1
@@ -118,6 +149,27 @@ color = Color(0.68, 0.68, 0.64, 1)
 
 [node name="Colision" type="CollisionShape2D" parent="CajeroAutomatico"]
 shape = SubResource("RectangleShape2D_cajero")
+
+[node name="ZonaCajero" type="Area2D" parent="CajeroAutomatico"]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("7_punto_banco")
+modo = "cajero"
+texto_indicador = "E: usar el cajero"
+
+[node name="Rango" type="CollisionShape2D" parent="CajeroAutomatico/ZonaCajero"]
+shape = SubResource("CircleShape2D_cajero_rango")
+
+[node name="Indicador" type="Label" parent="CajeroAutomatico/ZonaCajero"]
+offset_left = -82.0
+offset_top = -52.0
+offset_right = 82.0
+offset_bottom = -28.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 9
+text = "E: usar el cajero"
+horizontal_alignment = 1
+visible = false
 
 [node name="RotuloCajero" type="Label" parent="."]
 position = Vector2(202, 188)

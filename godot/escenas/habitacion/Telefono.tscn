@@ -1,0 +1,73 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://escenas/habitacion/Telefono.gd" id="1_telefono"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rango"]
+radius = 32.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mesa"]
+size = Vector2(54, 36)
+
+[node name="Telefono" type="Area2D"]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("1_telefono")
+
+[node name="Rango" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rango")
+
+[node name="PataTraseraIzquierda" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-27, -17, -19, -17, -19, -9, -27, -9)
+color = Color(0.25, 0.16, 0.1, 1)
+
+[node name="PataTraseraDerecha" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(19, -17, 27, -17, 27, -9, 19, -9)
+color = Color(0.25, 0.16, 0.1, 1)
+
+[node name="PataDelanteraIzquierda" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-27, 9, -19, 9, -19, 17, -27, 17)
+color = Color(0.25, 0.16, 0.1, 1)
+
+[node name="PataDelanteraDerecha" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(19, 9, 27, 9, 27, 17, 19, 17)
+color = Color(0.25, 0.16, 0.1, 1)
+
+[node name="BloqueoMesa" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 1
+
+[node name="Colision" type="CollisionShape2D" parent="BloqueoMesa"]
+shape = SubResource("RectangleShape2D_mesa")
+
+[node name="Tablero" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-27, -18, 27, -18, 27, 18, -27, 18)
+color = Color(0.47, 0.31, 0.2, 1)
+
+[node name="Superficie" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-25, -16, 25, -16, 25, 16, -25, 16)
+color = Color(0.68, 0.48, 0.3, 1)
+
+[node name="BaseTelefono" type="Polygon2D" parent="."]
+position = Vector2(0, 1)
+polygon = PackedVector2Array(-11, -5, 11, -5, 11, 9, -11, 9)
+color = Color(0.19, 0.22, 0.24, 1)
+
+[node name="PantallaTelefono" type="Polygon2D" parent="."]
+position = Vector2(0, -2)
+polygon = PackedVector2Array(-7, -2, 7, -2, 7, 2, -7, 2)
+color = Color(0.66, 0.72, 0.65, 1)
+
+[node name="Auricular" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-12, -10, -9, -14, -5, -12, -4, -9, 4, -9, 5, -12, 9, -14, 12, -10, 8, -7, -8, -7)
+color = Color(0.12, 0.14, 0.16, 1)
+
+[node name="Indicador" type="Label" parent="."]
+offset_left = -78.0
+offset_top = -53.0
+offset_right = 78.0
+offset_bottom = -29.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 9
+text = "E: revisar teléfono"
+horizontal_alignment = 1
+visible = false
