@@ -29,7 +29,6 @@ Asistente="*res://sistemas/ClienteAsistente.gd"
 [display]
 
 window/stretch/mode="viewport"
-window/stretch/scale_mode="integer"
 
 [physics]
 
