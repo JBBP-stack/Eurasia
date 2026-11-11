@@ -1,0 +1,79 @@
+{
+	"nota": "Diálogos de Marisa, gestora de la sucursal de la Caja Popular de Liria. Solo conoce lo publicado hasta cada fecha. Es amable y habladora; como empleada del banco a veces menciona productos de la entidad, pero no puede decirte qué hacer con tus inversiones.",
+	"empleada": {
+		"nombre": "Marisa",
+		"cargo": "gestora de la sucursal de la Caja Popular de Liria"
+	},
+	"saludos": [
+		"¡Buenos días! Pase, pase, que hoy hay poca cola.",
+		"Hombre, ¡usted por aquí otra vez! ¿Qué tal lleva la semana?",
+		"Buenas. Siéntese, que le atiendo enseguida. Bueno, ya, que no hay nadie.",
+		"¡Hola! Perdone el desorden, llevamos unos días que no paramos."
+	],
+	"despedidas": [
+		"Que tenga buen día. Y no se agobie con las noticias, ¿eh?",
+		"Aquí estaremos. Cualquier cosa, ya sabe dónde encontrarme.",
+		"Hasta luego. Y coma bien, que con tanto disgusto la gente se olvida."
+	],
+	"por_fecha": {
+		"2008-09-05": [
+			"¿Ha visto lo del paro en Ostria? Un 6,1 %. Aquí en Liria tampoco vamos bien: esta semana han venido tres clientes a pedirme que les alarguemos la hipoteca porque no llegan.",
+			"Y la inmobiliaria de enfrente lleva un mes sin vender un piso. El dueño viene cada mañana a por café y a mirar el móvil.",
+			"Por cierto, en las elecciones de Ostria parece que va todo muy reñido. Mi marido se pasa la noche viendo los debates."
+		],
+		"2008-09-06": [
+			"Dicen en la radio que el Gobierno de Ostria va a meterse en Fanara y Fredan, las hipotecarias. Yo no sé qué pasará con los accionistas, la verdad; ya sabe que eso yo no lo puedo valorar.",
+			"Hoy empiezan los Paralímpicos en Catay. Mi sobrina nada en un club adaptado y está como loca."
+		],
+		"2008-09-07": [
+			"Los domingos solo abrimos por la mañana, pero hoy no paran de llamar: han intervenido Fanara y Fredan.",
+			"Un señor me ha preguntado si eso quiere decir que el Estado le va a devolver lo que perdió en bolsa. Le he dicho que yo de eso no sé, que pregunte a un asesor independiente.",
+			"Y el huracán ha arrasado medio Caribia. Qué pena de gente."
+		],
+		"2008-09-08": [
+			"Hoy la bolsa ha subido muchísimo, todo el mundo contento... menos los que tenían Fanara y Fredan, y fíjese en Halvard, que también ha bajado.",
+			"Cuando todo sube y algo baja, a mí eso me da que pensar. Pero no me haga caso, que yo de bolsa sé lo justo.",
+			"¿Vio la final de tenis? Ese helvecio es un reloj."
+		],
+		"2008-09-09": [
+			"Halvard ha caído un 45 % hoy. Ha venido un señor mayor muy nervioso a sacar todos sus ahorros en efectivo.",
+			"Le he explicado que sus depósitos están cubiertos por el fondo de garantía hasta 20.000 € por persona y entidad, pero se ha ido con el sobre lleno de billetes. Ojalá no le pase nada por la calle.",
+			"Y en Siam han echado al primer ministro por presentar un programa de cocina. ¡Qué mundo!"
+		],
+		"2008-09-10": [
+			"Ha arrancado ese acelerador de partículas de Helvecia. Mi sobrino decía que se iba a acabar el mundo. Pues aquí seguimos, con Halvard perdiendo 3.900 millones.",
+			"Hoy ha venido un chico joven a pedirme un préstamo para comprar acciones «porque están baratísimas». Se lo he tenido que denegar: cobra 900 € al mes.",
+			"¿Ganó la selección? Cuatro a cero, ¡qué partidazo!"
+		],
+		"2008-09-11": [
+			"Dicen que Halvard busca comprador. Se oye de todo: que si un banco de Albión, que si el Continental de Ostria...",
+			"Aquí en la oficina nos han pedido que no comentemos nada con los clientes, así que haga como que no le he dicho nada.",
+			"Y ojo con la gasolina, que con el huracán que viene hacia el golfo dicen que va a subir."
+		],
+		"2008-09-12": [
+			"Esta tarde reúnen a todos los grandes banqueros en el banco central de Ostria para salvar a Halvard. Fin de semana movidito les espera.",
+			"Por la calle están repartiendo un panfleto que dice que mañana cierran los bancos de Liria. ¡Mentira! Mañana es sábado y abrimos como siempre por la mañana.",
+			"Qué horror lo del choque de trenes en Ostria. Dicen que el maquinista iba con el móvil."
+		],
+		"2008-09-13": [
+			"Sábado y la oficina llena. Todo el mundo quiere saber si su dinero está seguro.",
+			"Mire, le cuento lo que le digo a todos: las cuentas y depósitos están cubiertos por el fondo de garantía hasta 20.000 €. Los fondos de inversión y las acciones no.",
+			"Y el huracán ha arrasado una ciudad petrolera de Ostria. Ya verá la gasolina el lunes."
+		],
+		"2008-09-14": [
+			"Domingo y yo aquí... Nos han pedido venir por si hay mucho movimiento mañana.",
+			"Dicen que Banco Barcia se ha echado atrás y que Halvard va a presentar la quiebra esta noche. Si es verdad, mañana va a ser un día muy largo.",
+			"Mi marido dice que esto es como un dominó. Yo espero que no."
+		],
+		"2008-09-15": [
+			"Esto es un lunes negro. Halvard ha quebrado y el Continental se ha quedado con Linares en un fin de semana.",
+			"He tenido clientes llorando en la mesa. Gente que lo tenía casi todo en acciones de una sola empresa.",
+			"Nuestro director ha mandado un mensaje: la Caja Popular no tiene nada de Halvard. Menos mal."
+		],
+		"2008-09-16": [
+			"Ahora dicen que la que tiene problemas es Atlántida, la aseguradora. Y un fondo monetario de Ostria ha perdido valor; la gente creía que eso no podía pasar.",
+			"Por cierto, el director me ha pedido que ofrezca a los clientes nuestro fondo monetario... Yo se lo cuento porque es mi trabajo, pero léase bien la letra pequeña, que un fondo no es un depósito.",
+			"Bueno, al menos el banco central no ha subido los tipos. Algo es algo."
+		]
+	}
+}

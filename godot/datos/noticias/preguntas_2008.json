@@ -1,29 +1,434 @@
 {
-  "nota": "Estas preguntas y puntuaciones son diseño didáctico del videojuego, NO hechos históricos ni recomendaciones de inversión.",
-  "preguntas": {
-    "p_lehman": {
-      "enunciado": "Tienes gastos que cubrir este mes y recibes noticias sobre la quiebra de un gran banco. ¿Qué decisión es más prudente?",
-      "opciones": [
-        {"id": "a", "texto": "Revisar mi liquidez y fondo de emergencia antes de asumir más riesgo.", "efecto": {"prudencia": 2}, "explicacion": "La liquidez ayuda a afrontar imprevistos sin tener que vender inversiones precipitadamente."},
-        {"id": "b", "texto": "Pedir un préstamo para comprar acciones porque ahora parecen baratas.", "efecto": {"prudencia": -2}, "explicacion": "Invertir mediante deuda aumenta la exposición a pérdidas y compromete pagos futuros."},
-        {"id": "c", "texto": "Invertir todos mis ahorros en una única empresa financiera.", "efecto": {"prudencia": -2}, "explicacion": "La concentración en una empresa expone a riesgos específicos sin diversificación."}
-      ]
-    },
-    "p_tipos": {
-      "enunciado": "La Reserva Federal mantiene su tipo objetivo en el 2 %. ¿Qué conclusión puede obtenerse con seguridad de esta noticia aislada?",
-      "opciones": [
-        {"id": "a", "texto": "Que todas las acciones subirán mañana.", "efecto": {"prudencia": -2}, "explicacion": "Una decisión de tipos no permite predecir con certeza el movimiento de todas las acciones."},
-        {"id": "b", "texto": "Que las condiciones monetarias importan, pero necesito más información antes de actuar.", "efecto": {"prudencia": 2}, "explicacion": "Los tipos influyen en financiación y valoración, pero no determinan por sí solos el mercado."},
-        {"id": "c", "texto": "Que desaparece el riesgo de quiebra bancaria.", "efecto": {"prudencia": -2}, "explicacion": "Mantener tipos de interés no garantiza la solvencia de las entidades."}
-      ]
-    },
-    "p_aig": {
-      "enunciado": "Tras el rescate anunciado de AIG, ¿qué significa realmente que la empresa reciba apoyo público?",
-      "opciones": [
-        {"id": "a", "texto": "Que sus accionistas tienen garantizada una ganancia.", "efecto": {"prudencia": -2}, "explicacion": "Ayudar a la continuidad de una empresa no garantiza rendimientos a sus accionistas."},
-        {"id": "b", "texto": "Que ya no existe ningún riesgo financiero en el sector.", "efecto": {"prudencia": -2}, "explicacion": "Un rescate concreto no elimina automáticamente otros riesgos sistémicos."},
-        {"id": "c", "texto": "Que debo distinguir entre estabilidad de la empresa y valor para sus accionistas.", "efecto": {"prudencia": 2}, "explicacion": "Las medidas de rescate pueden proteger la estabilidad financiera y a la vez perjudicar el valor de las acciones."}
-      ]
-    }
-  }
+	"nota": "Decisiones didácticas PROVISIONALES (no recomendaciones de inversión). Cada pregunta tiene exactamente una opción 'adecuada'. Claves de 'efecto': prudencia, riesgo, saldo_bancario_centimos, efectivo_centimos, comida, salud, vender {id: porcentaje}, vender_todo (bool), comprar {id: céntimos}. Las compras y ventas se ejecutan al precio del día con comisión.",
+	"preguntas": {
+		"p_cunado": {
+			"enunciado": "Tu cuñado trabaja en una inmobiliaria y lleva meses sin cobrar comisiones. Te pide 1.500 € para pagar la letra del coche y promete devolvértelos «en cuanto venda un piso». ¿Qué haces?",
+			"opciones": [
+				{
+					"id": "a",
+					"adecuada": false,
+					"texto": "Le prestas los 1.500 €: es familia y seguro que lo devuelve en unas semanas.",
+					"efecto": {
+						"efectivo_centimos": -150000,
+						"riesgo": 2
+					},
+					"explicacion": "Prestas dinero a alguien cuyos ingresos dependen de un sector que se está hundiendo: es probable que tardes mucho en recuperarlo, y ese dinero sale de tu colchón para gastos."
+				},
+				{
+					"id": "b",
+					"adecuada": true,
+					"texto": "Le das 400 €, una cantidad que puedes permitirte no recuperar.",
+					"efecto": {
+						"efectivo_centimos": -40000,
+						"prudencia": 1
+					},
+					"explicacion": "Ayudas sin poner en riesgo tus propios pagos. Prestar a familiares es habitual; la clave es prestar solo lo que puedes perder."
+				},
+				{
+					"id": "c",
+					"adecuada": false,
+					"texto": "No le prestas nada y le aconsejas renegociar con su banco.",
+					"efecto": {
+						"salud": -10,
+						"prudencia": 1
+					},
+					"explicacion": "Proteges tu liquidez, pero la tensión familiar te pasa factura (−10 de salud). Las finanzas personales también son relaciones personales."
+				}
+			]
+		},
+		"p_fanara": {
+			"enunciado": "La prensa dice que el Gobierno prepara la toma de control de Fanara. Tienes acciones de la hipotecaria. Unos dicen que es la salvación de la empresa; otros, que los accionistas lo perderán todo. ¿Qué haces?",
+			"opciones": [
+				{
+					"id": "a",
+					"adecuada": true,
+					"texto": "Vendes todas tus acciones de Fanara hoy.",
+					"efecto": {
+						"vender": {
+							"FAN": 100
+						}
+					},
+					"explicacion": "Cuando el Estado interviene una entidad para salvar el sistema, protege a ahorradores y acreedores; los accionistas suelen ser los últimos en cobrar (recuerda Roca del Norte u Osborne-Stern en la hemeroteca)."
+				},
+				{
+					"id": "b",
+					"adecuada": false,
+					"texto": "Vendes la mitad y conservas la otra mitad por si el rescate la revaloriza.",
+					"efecto": {
+						"vender": {
+							"FAN": 50
+						}
+					},
+					"explicacion": "Reduces el riesgo a la mitad, pero la otra mitad sigue expuesta a una pérdida casi total. Dividir no siempre es prudencia: depende de qué riesgo mantienes."
+				},
+				{
+					"id": "c",
+					"adecuada": false,
+					"texto": "Las mantienes: con el Estado detrás, la empresa ya no puede quebrar.",
+					"efecto": {
+						"riesgo": 2
+					},
+					"explicacion": "Que una empresa no quiebre no significa que su acción conserve el valor: el rescate puede diluir o anular a los accionistas."
+				}
+			]
+		},
+		"p_fredan": {
+			"enunciado": "Fanara y Fredan han sido intervenidas. Un amigo que «sabe de bolsa» va a comprar acciones de Fredan: «ahora tienen al Estado detrás y están baratísimas». Te propone hacer lo mismo.",
+			"opciones": [
+				{
+					"id": "a",
+					"adecuada": false,
+					"texto": "Compras 1.000 € de acciones de Fredan.",
+					"efecto": {
+						"comprar": {
+							"FRE": 100000
+						},
+						"riesgo": 2
+					},
+					"explicacion": "El Estado protege la función de la empresa, no el valor de sus acciones: tras la intervención, los accionistas quedan detrás del Estado en el reparto de cualquier beneficio."
+				},
+				{
+					"id": "b",
+					"adecuada": false,
+					"texto": "Compras solo 250 €, una cantidad que puedes permitirte perder.",
+					"efecto": {
+						"comprar": {
+							"FRE": 25000
+						},
+						"riesgo": 1
+					},
+					"explicacion": "Limitar lo que arriesgas es sensato, pero aquí apuestas contra una estructura de rescate que deja a los accionistas en último lugar."
+				},
+				{
+					"id": "c",
+					"adecuada": true,
+					"texto": "No compras: no tienes claro qué derechos conservan ahora los accionistas.",
+					"efecto": {
+						"prudencia": 1
+					},
+					"explicacion": "No invertir en lo que no entiendes es una regla básica. Tras una intervención, los accionistas suelen perder casi todo el valor."
+				}
+			]
+		},
+		"p_halvard": {
+			"enunciado": "La bolsa sube con fuerza, pero Casa Halvard Hermanos cae un 13 %. Un analista dice en la radio que es «una oportunidad de compra». Tienes acciones de Halvard. ¿Qué haces?",
+			"opciones": [
+				{
+					"id": "a",
+					"adecuada": true,
+					"texto": "Vendes todas tus acciones de Halvard.",
+					"efecto": {
+						"vender": {
+							"HAL": 100
+						}
+					},
+					"explicacion": "Cuando una acción cae mientras el resto del mercado sube, el mercado está señalando un problema específico de esa empresa. Reducir una exposición que no entiendes limita el daño."
+				},
+				{
+					"id": "b",
+					"adecuada": false,
+					"texto": "Vendes la mitad y esperas a ver qué pasa con la otra mitad.",
+					"efecto": {
+						"vender": {
+							"HAL": 50
+						}
+					},
+					"explicacion": "Es un término medio razonable, pero mantienes la mitad del riesgo en una empresa con problemas graves."
+				},
+				{
+					"id": "c",
+					"adecuada": false,
+					"texto": "Aprovechas para comprar 500 € más: si el analista tiene razón, ganarás mucho.",
+					"efecto": {
+						"comprar": {
+							"HAL": 50000
+						},
+						"riesgo": 3
+					},
+					"explicacion": "Aumentar la apuesta en una empresa que cae mientras el resto sube concentra todavía más tu riesgo. Las opiniones en los medios no conocen tu situación."
+				}
+			]
+		},
+		"p_garantia": {
+			"enunciado": "Halvard se desploma un 45 % y en el trabajo todos dicen que «los bancos pueden caer como fichas de dominó». Tienes unos 15.000 € en tu cuenta de la Caja Popular de Liria. ¿Qué haces con ese dinero?",
+			"opciones": [
+				{
+					"id": "a",
+					"adecuada": false,
+					"texto": "Sacas 5.000 € en efectivo y los guardas en casa, por si acaso.",
+					"efecto": {
+						"saldo_bancario_centimos": -500000,
+						"efectivo_centimos": 500000,
+						"riesgo": 1
+					},
+					"explicacion": "El efectivo en casa no rinde nada, puede perderse o robarse y no está asegurado. Tus depósitos en Liria están cubiertos por el fondo de garantía de depósitos hasta 20.000 € por persona y entidad."
+				},
+				{
+					"id": "b",
+					"adecuada": true,
+					"texto": "Lo dejas donde está.",
+					"efecto": {
+						"prudencia": 2
+					},
+					"explicacion": "Tus depósitos están cubiertos por el fondo de garantía de depósitos hasta 20.000 € por persona y entidad. Conocer esa protección evita decisiones por miedo (búscalo en el diccionario)."
+				},
+				{
+					"id": "c",
+					"adecuada": false,
+					"texto": "Abres una cuenta en otro banco y pasas 7.000 € para repartir el riesgo (comisión de 30 €).",
+					"efecto": {
+						"saldo_bancario_centimos": -3000
+					},
+					"explicacion": "Repartir los depósitos tiene sentido cuando superas el límite del fondo de garantía (20.000 € por entidad). Con tu saldo, pagas una comisión sin ganar protección."
+				}
+			]
+		},
+		"p_chollo": {
+			"enunciado": "Halvard pierde 3.900 millones y su acción vale un 75 % menos que en enero. Un compañero va a comprar: «a este precio es un chollo, solo sus edificios valen más que todo el banco». ¿Te unes?",
+			"opciones": [
+				{
+					"id": "a",
+					"adecuada": false,
+					"texto": "Compras 1.000 € de acciones de Halvard.",
+					"efecto": {
+						"comprar": {
+							"HAL": 100000
+						},
+						"riesgo": 3
+					},
+					"explicacion": "Un precio bajo no significa barato: si una empresa puede quebrar, el valor de sus activos es dudoso y los accionistas cobran los últimos."
+				},
+				{
+					"id": "b",
+					"adecuada": false,
+					"texto": "Compras 300 €, solo lo que podrías permitirte perder.",
+					"efecto": {
+						"comprar": {
+							"HAL": 30000
+						},
+						"riesgo": 1
+					},
+					"explicacion": "Arriesgar solo lo que puedes perder es sensato, pero aquí la probabilidad de perderlo todo es muy alta."
+				},
+				{
+					"id": "c",
+					"adecuada": true,
+					"texto": "No compras: prefieres no apostar por una empresa que podría quebrar.",
+					"efecto": {
+						"prudencia": 1
+					},
+					"explicacion": "Evitar empresas con riesgo de quiebra por mucho que hayan caído protege tu patrimonio. «Barato» y «en peligro» se parecen mucho en una crisis."
+				}
+			]
+		},
+		"p_horas": {
+			"enunciado": "Tu empresa necesita gente este fin de semana: 150 € extra por cada día trabajado. Llevas semanas durmiendo mal por las noticias y te notas agotado. ¿Qué haces?",
+			"opciones": [
+				{
+					"id": "a",
+					"adecuada": false,
+					"texto": "Trabajas sábado y domingo: +300 €.",
+					"efecto": {
+						"saldo_bancario_centimos": 30000,
+						"salud": -25
+					},
+					"explicacion": "Ingresas más, pero el agotamiento te pasa factura (−25 de salud). En una crisis, la salud también es un activo que hay que proteger."
+				},
+				{
+					"id": "b",
+					"adecuada": true,
+					"texto": "Trabajas solo el sábado: +150 €.",
+					"efecto": {
+						"saldo_bancario_centimos": 15000,
+						"salud": -5
+					},
+					"explicacion": "Aumentas tus ingresos sin quemarte. Equilibrar dinero y bienestar es parte de una buena economía doméstica."
+				},
+				{
+					"id": "c",
+					"adecuada": false,
+					"texto": "Descansas todo el fin de semana.",
+					"efecto": {
+						"salud": 10
+					},
+					"explicacion": "Recuperas energía (+10 de salud), aunque renuncias a un ingreso extra que en tiempos de incertidumbre habría reforzado tu colchón."
+				}
+			]
+		},
+		"p_cola": {
+			"enunciado": "Los banqueros se reúnen de urgencia por Halvard. Tu vecino lo ha vendido todo y dice que hay que estar en efectivo «hasta que pase la tormenta». Tus acciones de Cola Dorada apenas han caído. ¿Qué haces con ellas?",
+			"opciones": [
+				{
+					"id": "a",
+					"adecuada": false,
+					"texto": "Las vendes todas: mejor estar en liquidez hasta que se aclare todo.",
+					"efecto": {
+						"vender": {
+							"COL": 100
+						}
+					},
+					"explicacion": "Vender por miedo una empresa estable de consumo, que apenas ha caído, te hace pagar comisiones y te deja fuera si el mercado se recupera. El pánico de los demás no es una estrategia."
+				},
+				{
+					"id": "b",
+					"adecuada": false,
+					"texto": "Vendes la mitad para tener más liquidez.",
+					"efecto": {
+						"vender": {
+							"COL": 50
+						}
+					},
+					"explicacion": "Ganar liquidez puede tener sentido si la necesitas, pero no has revisado si te hace falta: tu colchón ya cubre tus gastos."
+				},
+				{
+					"id": "c",
+					"adecuada": true,
+					"texto": "Las mantienes: es una empresa de consumo con beneficios estables.",
+					"efecto": {
+						"prudencia": 1
+					},
+					"explicacion": "Las empresas de consumo básico suelen resistir mejor las crisis. Mantener una inversión diversificada evita vender en el peor momento."
+				}
+			]
+		},
+		"p_finde": {
+			"enunciado": "Es sábado. Tu pareja propone una escapada a la costa (250 €) para desconectar de tanta mala noticia. ¿Qué haces?",
+			"opciones": [
+				{
+					"id": "a",
+					"adecuada": false,
+					"texto": "Os vais a la costa: 250 €.",
+					"efecto": {
+						"efectivo_centimos": -25000,
+						"salud": 15
+					},
+					"explicacion": "Desconectas y mejoras tu bienestar (+15 de salud), pero gastas una parte notable de tu efectivo justo cuando la incertidumbre es máxima."
+				},
+				{
+					"id": "b",
+					"adecuada": true,
+					"texto": "Proponéis un plan sencillo cerca de casa: 40 €.",
+					"efecto": {
+						"efectivo_centimos": -4000,
+						"salud": 10
+					},
+					"explicacion": "Cuidas tu bienestar (+10 de salud) con un gasto pequeño. En economía doméstica, el ocio no se elimina: se ajusta."
+				},
+				{
+					"id": "c",
+					"adecuada": false,
+					"texto": "Te quedas en casa siguiendo las noticias.",
+					"efecto": {
+						"salud": -10
+					},
+					"explicacion": "Ahorras, pero el estrés acumulado te pasa factura (−10 de salud). Estar pendiente de cada noticia no cambia lo que va a pasar."
+				}
+			]
+		},
+		"p_quiebra": {
+			"enunciado": "Banco Barcia se retira y se habla de quiebra de Halvard esta noche. Hace seis meses, el Gobierno salvó a Osborne-Stern en el último minuto. Aún puedes dar órdenes al último precio. ¿Qué haces con Halvard?",
+			"opciones": [
+				{
+					"id": "a",
+					"adecuada": true,
+					"texto": "Vendes todas tus acciones de Halvard al precio que sea.",
+					"efecto": {
+						"vender": {
+							"HAL": 100
+						}
+					},
+					"explicacion": "Cuando la quiebra es probable, los accionistas pierden casi todo. Vender con pérdidas es duro, pero conservar algo es mejor que nada."
+				},
+				{
+					"id": "b",
+					"adecuada": false,
+					"texto": "Las mantienes: puede haber un rescate de última hora, como con Osborne-Stern.",
+					"efecto": {
+						"riesgo": 2
+					},
+					"explicacion": "Esta vez el Gobierno había dicho claramente que no pondría dinero público. Apostar a que se repetirá un rescate es arriesgar todo a una sola carta."
+				},
+				{
+					"id": "c",
+					"adecuada": false,
+					"texto": "Compras 300 € más: si hay rescate, la acción se disparará.",
+					"efecto": {
+						"comprar": {
+							"HAL": 30000
+						},
+						"riesgo": 3
+					},
+					"explicacion": "Es una apuesta binaria: o rescate o pérdida total. Invertir así es especular, no gestionar tu patrimonio."
+				}
+			]
+		},
+		"p_lehman": {
+			"enunciado": "Halvard ha quebrado y las bolsas se hunden. Tu cartera ha perdido mucho valor en una semana. ¿Qué haces con tus inversiones?",
+			"opciones": [
+				{
+					"id": "a",
+					"adecuada": false,
+					"texto": "Lo vendes todo para no perder más.",
+					"efecto": {
+						"vender_todo": true
+					},
+					"explicacion": "Vender todo tras una caída fuerte convierte pérdidas temporales en definitivas y te hace pagar comisiones. Si tus inversiones son sólidas, el pánico es el peor consejero."
+				},
+				{
+					"id": "b",
+					"adecuada": true,
+					"texto": "No tocas nada hoy y revisas con calma tu plan y tu colchón de liquidez.",
+					"efecto": {
+						"prudencia": 2
+					},
+					"explicacion": "Decidir en frío, comprobando que tus gastos están cubiertos, evita reaccionar en el peor momento. Tus decisiones anteriores ya determinan cuánto te afecta esta caída."
+				},
+				{
+					"id": "c",
+					"adecuada": false,
+					"texto": "Inviertes 1.500 € en bancos sólidos que han caído, como Morhaven.",
+					"efecto": {
+						"comprar": {
+							"MOR": 150000
+						},
+						"riesgo": 2
+					},
+					"explicacion": "Puede salir bien a largo plazo, pero aumentas tu exposición al sector que está en el centro de la tormenta, el mismo día del pánico."
+				}
+			]
+		},
+		"p_monetario": {
+			"enunciado": "El director de tu sucursal te ofrece pasar 5.000 € de tu cuenta a su fondo monetario: «rinde más que la cuenta y es igual de seguro». ¿Qué haces?",
+			"opciones": [
+				{
+					"id": "a",
+					"adecuada": false,
+					"texto": "Pasas los 5.000 € al fondo monetario.",
+					"efecto": {
+						"saldo_bancario_centimos": -15000,
+						"riesgo": 1
+					},
+					"explicacion": "Ese mismo día, la quiebra de Halvard hace caer el valor de muchos fondos monetarios: el tuyo pierde un 3 % (150 €). Un fondo monetario no es un depósito: no está cubierto por el fondo de garantía."
+				},
+				{
+					"id": "b",
+					"adecuada": false,
+					"texto": "Pasas solo 2.000 € para probar.",
+					"efecto": {
+						"saldo_bancario_centimos": -6000
+					},
+					"explicacion": "Limitas el riesgo, pero pierdes igualmente un 3 % (60 €) el mismo día. «Igual de seguro» no era cierto."
+				},
+				{
+					"id": "c",
+					"adecuada": true,
+					"texto": "Lo dejas en la cuenta, cubierta por el fondo de garantía de depósitos.",
+					"efecto": {
+						"prudencia": 2
+					},
+					"explicacion": "Un fondo monetario no es un depósito: no está garantizado y puede perder valor, como acaba de pasar con Reserva Prima."
+				}
+			]
+		}
+	}
 }

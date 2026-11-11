@@ -31,6 +31,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_E:
 		get_viewport().set_input_as_handled()
+		# En la ventanilla atiende una persona: primero se conversa con ella.
+		if modo == "ventanilla":
+			var atencion := get_tree().get_first_node_in_group("atencion_ui")
+			if atencion != null:
+				atencion.call("abrir_atencion")
+				return
 		var interfaz := get_tree().get_first_node_in_group("banco_ui")
 		if interfaz == null:
 			push_warning("No se encontró la interfaz del banco.")

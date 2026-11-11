@@ -1,0 +1,299 @@
+{
+	"nota": "Equivalencias INTERNAS entre entidades reales y nombres ficticios. Cada entidad real conserva siempre el mismo nombre ficticio (principio de anonimización consistente). No se muestra al jugador hasta el informe final. 'terminos_prohibidos' lo usa tools/validar_noticias.py para impedir fugas en los textos visibles.",
+	"entidades": [
+		{
+			"real": "Lehman Brothers",
+			"ficticio": "Casa Halvard Hermanos",
+			"tipo": "banco de inversión"
+		},
+		{
+			"real": "Merrill Lynch",
+			"ficticio": "Corredora Linares",
+			"tipo": "banco de inversión"
+		},
+		{
+			"real": "Bank of America",
+			"ficticio": "Banco Continental de Ostria",
+			"tipo": "banco comercial"
+		},
+		{
+			"real": "AIG",
+			"ficticio": "Aseguradora Atlántida",
+			"tipo": "aseguradora"
+		},
+		{
+			"real": "Reserva Federal",
+			"ficticio": "Banco Central de Ostria",
+			"tipo": "banco central"
+		},
+		{
+			"real": "Estados Unidos",
+			"ficticio": "Federación de Ostria",
+			"tipo": "país"
+		},
+		{
+			"real": "dólares",
+			"ficticio": "coronas ostrianas",
+			"tipo": "moneda"
+		},
+		{
+			"real": "The Guardian",
+			"ficticio": "El Observador Financiero",
+			"tipo": "medio de comunicación"
+		},
+		{
+			"real": "Fannie Mae",
+			"ficticio": "Hipotecaria Federal Fanara",
+			"tipo": "hipotecaria pública"
+		},
+		{
+			"real": "Freddie Mac",
+			"ficticio": "Corporación Hipotecaria Fredan",
+			"tipo": "hipotecaria pública"
+		},
+		{
+			"real": "Coca-Cola",
+			"ficticio": "Refrescos Cola Dorada",
+			"tipo": "empresa"
+		},
+		{
+			"real": "JPMorgan Chase",
+			"ficticio": "Grupo Bancario Morhaven",
+			"tipo": "banco"
+		},
+		{
+			"real": "Goldman Sachs",
+			"ficticio": "Banca Goldar & Saxe",
+			"tipo": "banco de inversión"
+		},
+		{
+			"real": "ExxonMobil",
+			"ficticio": "Petróleos Boreales",
+			"tipo": "empresa"
+		},
+		{
+			"real": "McDonald's",
+			"ficticio": "Hamburgueserías Donal",
+			"tipo": "empresa"
+		},
+		{
+			"real": "Walmart",
+			"ficticio": "Hipermercados Valmar",
+			"tipo": "empresa"
+		},
+		{
+			"real": "Bear Stearns",
+			"ficticio": "Banca Osborne-Stern",
+			"tipo": "banco de inversión"
+		},
+		{
+			"real": "New Century Financial",
+			"ficticio": "Hipotecas Nuevo Siglo",
+			"tipo": "hipotecaria"
+		},
+		{
+			"real": "HSBC",
+			"ficticio": "Banco Imperial de Albión",
+			"tipo": "banco"
+		},
+		{
+			"real": "Northern Rock",
+			"ficticio": "Banco Roca del Norte",
+			"tipo": "banco"
+		},
+		{
+			"real": "BNP Paribas",
+			"ficticio": "Banco Nacional de Galia",
+			"tipo": "banco"
+		},
+		{
+			"real": "Société Générale",
+			"ficticio": "Sociedad General de Galia",
+			"tipo": "banco"
+		},
+		{
+			"real": "Countrywide",
+			"ficticio": "Hipotecaria Campiña",
+			"tipo": "hipotecaria"
+		},
+		{
+			"real": "IndyMac",
+			"ficticio": "Hipotecaria Indimar",
+			"tipo": "hipotecaria"
+		},
+		{
+			"real": "Martinsa-Fadesa",
+			"ficticio": "Inmobiliaria Torreval",
+			"tipo": "promotora"
+		},
+		{
+			"real": "Lloyds TSB",
+			"ficticio": "Banco Lloydan",
+			"tipo": "banco"
+		},
+		{
+			"real": "HBOS",
+			"ficticio": "Banco Hipotecario de Caledonia",
+			"tipo": "banco"
+		},
+		{
+			"real": "Barclays",
+			"ficticio": "Banco Barcia",
+			"tipo": "banco"
+		},
+		{
+			"real": "Korea Development Bank",
+			"ficticio": "banco de Goryeo",
+			"tipo": "banco"
+		},
+		{
+			"real": "Reserve Primary Fund",
+			"ficticio": "Fondo Monetario Reserva Prima",
+			"tipo": "fondo"
+		},
+		{
+			"real": "Reino Unido",
+			"ficticio": "Albión",
+			"tipo": "país"
+		},
+		{
+			"real": "Francia",
+			"ficticio": "Galia",
+			"tipo": "país"
+		},
+		{
+			"real": "China",
+			"ficticio": "Catay",
+			"tipo": "país"
+		},
+		{
+			"real": "España",
+			"ficticio": "República de Liria",
+			"tipo": "país"
+		},
+		{
+			"real": "Banco Central Europeo",
+			"ficticio": "Banco Central de la Unión",
+			"tipo": "banco central"
+		},
+		{
+			"real": "Cuba",
+			"ficticio": "Caribia",
+			"tipo": "país"
+		},
+		{
+			"real": "Suiza",
+			"ficticio": "Helvecia",
+			"tipo": "país"
+		},
+		{
+			"real": "Tailandia",
+			"ficticio": "Siam",
+			"tipo": "país"
+		},
+		{
+			"real": "India",
+			"ficticio": "Indostán",
+			"tipo": "país"
+		},
+		{
+			"real": "Rusia",
+			"ficticio": "Rus",
+			"tipo": "país"
+		},
+		{
+			"real": "Zimbabue",
+			"ficticio": "país del sur de África",
+			"tipo": "país"
+		},
+		{
+			"real": "CERN",
+			"ficticio": "gran laboratorio europeo de Helvecia",
+			"tipo": "institución"
+		},
+		{
+			"real": "Ike",
+			"ficticio": "el huracán",
+			"tipo": "fenómeno"
+		}
+	],
+	"terminos_prohibidos": [
+		"2006",
+		"2007",
+		"2008",
+		"AIG",
+		"Aeroflot",
+		"BCE",
+		"BNP",
+		"Bank of America",
+		"Barclays",
+		"Bear Stearns",
+		"Bernanke",
+		"Bush",
+		"CERN",
+		"China",
+		"Coca-Cola",
+		"Corea",
+		"Countrywide",
+		"Cuba",
+		"Darling",
+		"Delhi",
+		"España",
+		"Estados Unidos",
+		"Exxon",
+		"Fadesa",
+		"Fannie",
+		"Federal Reserve",
+		"Federer",
+		"Francia",
+		"Freddie",
+		"Galveston",
+		"Goldman",
+		"Guardian",
+		"Gustav",
+		"HBOS",
+		"HSBC",
+		"Hanna",
+		"Ike",
+		"India",
+		"IndyMac",
+		"Inglaterra",
+		"JPMorgan",
+		"Korea",
+		"LHC",
+		"Lehman",
+		"Lloyds",
+		"Martinsa",
+		"McCain",
+		"McDonald",
+		"Merrill",
+		"Mugabe",
+		"Nadal",
+		"New Century",
+		"Northern Rock",
+		"Nueva York",
+		"Obama",
+		"Palin",
+		"Paribas",
+		"Paulson",
+		"Pekín",
+		"Reino Unido",
+		"Reserva Federal",
+		"Reserve Primary",
+		"Rusia",
+		"Samak",
+		"Shanghai",
+		"Shanghái",
+		"Société",
+		"Stearns",
+		"Suiza",
+		"Tailandia",
+		"Texas",
+		"Trichet",
+		"Wall Street",
+		"Walmart",
+		"Zimbabue",
+		"dólar",
+		"estadounidense"
+	]
+}

@@ -7,15 +7,17 @@ var _buzon: Button
 var _titulo: Label
 var _lista: ItemList
 var _texto: Label
-var _enlace: Button
 var _opciones: VBoxContainer
 var _resultado: Label
 var _aviso_entrega: Label
 var _temporizador_aviso: Timer
-var _origen_url: String = ""
 var _hoy: Array[Dictionary] = []
 var _abierta: bool = false
 var _indice_seleccionado: int = 0
+# false = periódicos recogidos; true = hemeroteca (últimos dos años + periódicos recogidos).
+var _modo_hemeroteca: bool = false
+var _boton_recogidos: Button
+var _boton_hemeroteca: Button
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -65,12 +67,31 @@ func _crear_interfaz() -> void:
 	cerrar.pressed.connect(cerrar_buzon)
 	cabecera.add_child(cerrar)
 
+	var modos := HBoxContainer.new()
+	modos.add_theme_constant_override("separation", 6)
+	raiz.add_child(modos)
+	var grupo := ButtonGroup.new()
+	_boton_recogidos = Button.new()
+	_boton_recogidos.text = "Periódicos recogidos"
+	_boton_recogidos.toggle_mode = true
+	_boton_recogidos.button_group = grupo
+	_boton_recogidos.button_pressed = true
+	_boton_recogidos.pressed.connect(func() -> void: _cambiar_modo(false))
+	modos.add_child(_boton_recogidos)
+	_boton_hemeroteca = Button.new()
+	_boton_hemeroteca.text = "Hemeroteca (últimos dos años)"
+	_boton_hemeroteca.toggle_mode = true
+	_boton_hemeroteca.button_group = grupo
+	_boton_hemeroteca.pressed.connect(func() -> void: _cambiar_modo(true))
+	modos.add_child(_boton_hemeroteca)
+
 	var cuerpo := HSplitContainer.new()
 	cuerpo.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	cuerpo.split_offset = 160
 	raiz.add_child(cuerpo)
 
 	_lista = ItemList.new()
-	_lista.custom_minimum_size = Vector2(185, 0)
+	_lista.custom_minimum_size = Vector2(240, 0)
 	_lista.item_selected.connect(_seleccionar)
 	cuerpo.add_child(_lista)
 
@@ -86,11 +107,6 @@ func _crear_interfaz() -> void:
 	_texto = Label.new()
 	_texto.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	contenido.add_child(_texto)
-
-	_enlace = Button.new()
-	_enlace.text = "Ver fuente original"
-	_enlace.pressed.connect(_abrir_fuente)
-	contenido.add_child(_enlace)
 
 	_opciones = VBoxContainer.new()
 	contenido.add_child(_opciones)
@@ -125,16 +141,45 @@ func _crear_interfaz() -> void:
 
 	cerrar_buzon()
 
+func _cambiar_modo(hemeroteca: bool) -> void:
+	_modo_hemeroteca = hemeroteca
+	_actualizar(NoticiasManager.cuantas_sin_leer())
+
+
+## «Día N» para noticias de la partida; «Hace N meses» para la hemeroteca (sin fechas reales).
+func _antiguedad(noticia: Dictionary) -> String:
+	var fecha := str(noticia.get("disponible_desde", ""))
+	var dia := EstadoJuego.dia_de_fecha(fecha)
+	if dia >= 1:
+		return "Día %d" % dia
+	var dias := EstadoJuego.dia_de_partida - dia
+	var meses := int(round(float(dias) / 30.4))
+	if meses >= 12:
+		var anios := meses / 12
+		var resto := meses % 12
+		return "Hace %d año%s%s" % [anios, "" if anios == 1 else "s", (" y %d mes%s" % [resto, "" if resto == 1 else "es"]) if resto > 0 else ""]
+	if meses >= 1:
+		return "Hace %d mes%s" % [meses, "" if meses == 1 else "es"]
+	return "Hace %d días" % dias
+
+
 func _actualizar(_cantidad: int) -> void:
-	_hoy = NoticiasManager.obtener_noticias_recogidas()
-	_titulo.text = "BUZÓN | " + EstadoJuego.etiqueta_dia()
+	_hoy = NoticiasManager.obtener_hemeroteca() if _modo_hemeroteca else NoticiasManager.obtener_noticias_recogidas()
+	_titulo.text = ("HEMEROTECA | " if _modo_hemeroteca else "BUZÓN | ") + EstadoJuego.etiqueta_dia()
 	_buzon.text = "Buzón: %d por leer" % NoticiasManager.cuantas_sin_leer()
-	_buzon.tooltip_text = "%d periódicos pendientes de recogida" % NoticiasManager.cuantas_por_recoger()
+	_buzon.tooltip_text = "%d periódicos pendientes de recogida · tecla N" % NoticiasManager.cuantas_por_recoger()
 	_lista.clear()
 	for noticia in _hoy:
 		var id := str(noticia.get("id", ""))
-		var marca := "✓ " if NoticiasManager.leidas.has(id) else "• "
-		_lista.add_item(marca + str(noticia.get("titulo", "")))
+		if _modo_hemeroteca:
+			_lista.add_item("[%s] %s" % [_antiguedad(noticia), str(noticia.get("titulo", ""))])
+		else:
+			var marca := "✓ " if NoticiasManager.leidas.has(id) else "• "
+			_lista.add_item(marca + "[%s] %s" % [str(noticia.get("seccion", "")), str(noticia.get("titulo", ""))])
+	if _modo_hemeroteca and _abierta:
+		_texto.text = "Noticias económicas más relevantes de los dos últimos años. Los periódicos que recojas se añaden aquí."
+		_limpiar_opciones()
+		return
 	if _hoy.is_empty():
 		if NoticiasManager.cuantas_por_recoger() > 0:
 			_texto.text = "Hay periódicos entregados. Acércate al buzón y pulsa E para recogerlos."
@@ -144,7 +189,6 @@ func _actualizar(_cantidad: int) -> void:
 			_texto.text = "No hay noticias programadas para este día."
 		else:
 			_texto.text = "Todavía no has recogido los periódicos de hoy."
-		_enlace.visible = false
 		_limpiar_opciones()
 	elif _abierta:
 		var por_recoger := NoticiasManager.cuantas_por_recoger()
@@ -152,7 +196,6 @@ func _actualizar(_cantidad: int) -> void:
 			_texto.text = "%d periódico(s) esperan en el buzón de la habitación. Acércate y pulsa E para recogerlos." % por_recoger
 		else:
 			_texto.text = "Selecciona un periódico recogido para leerlo."
-		_enlace.visible = false
 		_limpiar_opciones()
 
 func _al_llegar_noticia(_noticia_id: String, ultimo_del_dia: bool) -> void:
@@ -177,10 +220,13 @@ func abrir_buzon_con_noticia(noticia_id: String) -> void:
 
 func _abrir_buzon(noticia_id: String) -> void:
 	_abierta = true
+	if not noticia_id.is_empty() and _modo_hemeroteca:
+		_modo_hemeroteca = false
+		_boton_recogidos.button_pressed = true
 	_oscurecer.visible = true
 	_ventana.visible = true
 	_buzon.visible = false
-	get_tree().paused = true
+	GestorPartida.abrir_ventana("noticias")
 	_actualizar(NoticiasManager.cuantas_sin_leer())
 	if noticia_id.is_empty():
 		return
@@ -199,7 +245,11 @@ func cerrar_buzon() -> void:
 		_ventana.visible = false
 	if _buzon:
 		_buzon.visible = true
-	get_tree().paused = false
+	GestorPartida.cerrar_ventana("noticias")
+
+
+func _exit_tree() -> void:
+	GestorPartida.cerrar_ventana("noticias")
 
 func _seleccionar(indice: int) -> void:
 	if indice < 0 or indice >= _hoy.size():
@@ -207,14 +257,14 @@ func _seleccionar(indice: int) -> void:
 	_indice_seleccionado = indice
 	var noticia: Dictionary = _hoy[indice]
 	var noticia_id := str(noticia.get("id", ""))
-	NoticiasManager.marcar_leida(noticia_id)
-	_texto.text = str(noticia.get("titulo", "")) \
+	if not bool(noticia.get("archivo", false)):
+		NoticiasManager.marcar_leida(noticia_id)
+	# Solo se muestran campos anonimizados: la fecha real, la fuente y si es falsa se revelan en el informe final.
+	_texto.text = str(noticia.get("seccion", "Noticias")).to_upper() + "\n\n" + str(noticia.get("titulo", "")) \
 		+ "\n\n" + str(noticia.get("resumen", "")) \
-		+ "\n\nPublicado: " + str(noticia.get("fecha_publicacion", "")) \
-		+ "\nFuente: " + str(noticia.get("fuente", "")) \
-		+ "\n\nTexto educativo adaptado por EURASIA."
-	_origen_url = str(noticia.get("fuente_url", ""))
-	_enlace.visible = not _origen_url.is_empty()
+		+ "\n\nPublicado: " + _antiguedad(noticia) \
+		+ "\nMedio: " + str(noticia.get("medio", "Desconocido")) \
+		+ "\n\nTexto educativo adaptado por EURASIA. Contrasta la fiabilidad de cada medio."
 	_limpiar_opciones()
 	var pregunta := NoticiasManager.obtener_pregunta(noticia_id)
 	if pregunta.is_empty():
@@ -245,17 +295,13 @@ func _responder(noticia_id: String, opcion_id: String) -> void:
 	if not opcion.is_empty():
 		_actualizar(NoticiasManager.cuantas_sin_leer())
 		_seleccionar(_indice_seleccionado)
-		_resultado.text = "Consecuencia educativa: " + str(opcion.get("explicacion", ""))
+		_resultado.text = "Consecuencia: %s\n\n%s" % [GestorPartida.ultima_consecuencia, str(opcion.get("explicacion", ""))]
 
 func _dormir() -> void:
 	if NoticiasManager.avanzar_dia():
 		_actualizar(NoticiasManager.cuantas_sin_leer())
 	else:
 		_resultado.text = NoticiasManager.motivo_no_puede_dormir()
-
-func _abrir_fuente() -> void:
-	if _origen_url.begins_with("https://"):
-		OS.shell_open(_origen_url)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_N:

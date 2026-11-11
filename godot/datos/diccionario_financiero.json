@@ -1,60 +1,617 @@
 {
-  "terminos": [
-    {
-      "termino": "Inflación",
-      "aliases": ["IPC", "poder adquisitivo"],
-      "definicion": "Aumento general y sostenido de los precios de bienes y servicios. Cuando los precios suben, cada unidad de dinero permite comprar menos.",
-      "ejemplo": "Si tus ingresos no cambian y suben los precios de la compra, con el mismo dinero puedes llevarte menos productos.",
-      "fuente": "Banco Central Europeo",
-      "url": "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/what_is_inflation.es.html"
-    },
-    {
-      "termino": "Liquidez",
-      "aliases": ["disponibilidad", "activo líquido"],
-      "definicion": "Facilidad y rapidez con la que puedes disponer del dinero o convertir un activo en dinero. Un depósito disponible a la vista suele ser más líquido que una inversión con vencimiento.",
-      "ejemplo": "El saldo de una cuenta corriente suele estar disponible antes que el dinero colocado en un depósito a plazo.",
-      "fuente": "Banco de España",
-      "url": "https://clientebancario.bde.es/pcb/es/blog/productos-de-ahorro-vs-inversion.html?blog=%2Fwebcb%2FBlog%2FCuentasDepositos"
-    },
-    {
-      "termino": "Volatilidad",
-      "aliases": ["variación de precio", "riesgo de mercado"],
-      "definicion": "Grado en que el precio de una inversión cambia con el tiempo. Una volatilidad alta implica cambios más amplios o frecuentes.",
-      "ejemplo": "Si una acción alterna subidas y bajadas grandes en pocos días, su precio muestra alta volatilidad.",
-      "fuente": "Investor.gov, SEC",
-      "url": "https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins/investor-2"
-    },
-    {
-      "termino": "Deuda",
-      "aliases": ["préstamo", "crédito"],
-      "definicion": "Dinero que una persona debe devolver tras recibir financiación. El acuerdo establece cómo y cuándo se devuelve y qué intereses o gastos corresponden.",
-      "ejemplo": "Si pides 1.000 € prestados, debes devolver el capital según el calendario acordado y pagar los costes que correspondan.",
-      "fuente": "Banco de España",
-      "url": "https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/financiacion/prestamopersonal/guia-textual/conceptocaracter/Prestamo_o_credito.html"
-    },
-    {
-      "termino": "Diversificación",
-      "aliases": ["diversificar", "riesgo de concentración"],
-      "definicion": "Repartir el dinero entre distintas inversiones para reducir la dependencia de una sola. Puede reducir el riesgo de concentración, pero no garantiza evitar pérdidas.",
-      "ejemplo": "Si una inversión cae, otras podrían amortiguar parte del descenso del conjunto; no es seguro que compensen toda la caída.",
-      "fuente": "Investor.gov, SEC",
-      "url": "https://www.investor.gov/introduction-investing/investing-basics/glossary/diversification"
-    },
-    {
-      "termino": "Interés compuesto",
-      "aliases": ["interés sobre interés", "capitalización"],
-      "definicion": "Interés calculado sobre el capital inicial y también sobre los intereses acumulados, si estos se mantienen en la cuenta o inversión.",
-      "ejemplo": "Con 100 € al 5 % anual, el saldo pasa a 105 € el primer año y a 110,25 € el segundo si se mantienen los intereses y el tipo.",
-      "fuente": "Investor.gov, SEC",
-      "url": "https://www.investor.gov/additional-resources/information/youth/teachers-classroom-resources/what-compound-interest"
-    },
-    {
-      "termino": "Riesgo financiero",
-      "aliases": ["riesgo de inversión", "posible pérdida"],
-      "definicion": "Incertidumbre asociada a una decisión financiera y posibilidad de sufrir una pérdida. El riesgo no indica que una pérdida vaya a ocurrir con seguridad.",
-      "ejemplo": "Una acción puede bajar tras publicarse nuevos resultados, pero no se sabe de antemano cuánto ni cuándo cambiará su precio.",
-      "fuente": "Investor.gov, SEC",
-      "url": "https://www.investor.gov/introduction-investing/investing-basics/what-risk"
-    }
-  ]
+	"terminos": [
+		{
+			"termino": "Acción",
+			"aliases": [
+				"acciones",
+				"accionista",
+				"título"
+			],
+			"definicion": "Parte proporcional del capital de una empresa. Quien tiene acciones es dueño de una pequeña parte de la empresa: puede cobrar dividendos y votar, pero si la empresa quiebra es de los últimos en cobrar.",
+			"ejemplo": "Si una empresa tiene 1.000 acciones y tú tienes 10, eres dueño del 1 % de la empresa."
+		},
+		{
+			"termino": "Activo tóxico",
+			"aliases": [
+				"activos tóxicos",
+				"activos dañados"
+			],
+			"definicion": "Activo cuyo valor es muy difícil de calcular o ha caído mucho, normalmente ligado a préstamos con muchos impagos.",
+			"ejemplo": "Nadie quería comprar un banco con muchos activos tóxicos sin saber cuánto valían realmente."
+		},
+		{
+			"termino": "Apalancamiento",
+			"aliases": [
+				"apalancado",
+				"endeudarse para invertir"
+			],
+			"definicion": "Uso de deuda para invertir más de lo que se tiene. Multiplica las ganancias, pero también las pérdidas.",
+			"ejemplo": "Si inviertes con dinero prestado y la inversión cae, sigues debiendo el préstamo completo."
+		},
+		{
+			"termino": "Banco central",
+			"aliases": [
+				"banco central",
+				"autoridad monetaria",
+				"prestamista de última instancia"
+			],
+			"definicion": "Institución que fija los tipos de interés oficiales, controla la cantidad de dinero y presta a los bancos cuando nadie más lo hace.",
+			"ejemplo": "En una crisis, el banco central puede inyectar liquidez para que los bancos sigan funcionando."
+		},
+		{
+			"termino": "Banco de inversión",
+			"aliases": [
+				"bancos de inversión",
+				"corredora"
+			],
+			"definicion": "Entidad que ayuda a empresas y Gobiernos a financiarse, asesora en compras de empresas y opera en los mercados. A diferencia de un banco comercial, no suele captar depósitos de particulares.",
+			"ejemplo": "Un banco de inversión muy endeudado puede caer en días si deja de conseguir financiación."
+		},
+		{
+			"termino": "Bolsa de valores",
+			"aliases": [
+				"bolsa",
+				"mercado bursátil",
+				"sesión",
+				"cotizar"
+			],
+			"definicion": "Mercado organizado donde se compran y venden acciones y otros valores. Abre los días laborables; los fines de semana y festivos no hay sesión.",
+			"ejemplo": "Si compras acciones un sábado, en la práctica se usa el precio de cierre del viernes."
+		},
+		{
+			"termino": "Bono",
+			"aliases": [
+				"bonos",
+				"obligación",
+				"renta fija"
+			],
+			"definicion": "Título de deuda: quien lo compra presta dinero a una empresa o Estado a cambio de intereses y de la devolución al vencimiento.",
+			"ejemplo": "Si la empresa que emitió el bono quiebra, quizá solo recuperes una parte."
+		},
+		{
+			"termino": "Bulo",
+			"aliases": [
+				"rumor",
+				"noticia falsa",
+				"desinformación",
+				"fake news"
+			],
+			"definicion": "Información falsa difundida para engañar. Señales de alerta: fuente anónima, tono alarmista, prisas («¡hazlo ya!») y promesas de ganancias seguras.",
+			"ejemplo": "Un mensaje reenviado que dice «el oro se multiplicará por diez, mételo todo ya» tiene todas las señales de un bulo."
+		},
+		{
+			"termino": "Burbuja",
+			"aliases": [
+				"burbuja inmobiliaria",
+				"burbuja especulativa"
+			],
+			"definicion": "Subida de precios de un activo muy por encima de su valor razonable, alimentada por la expectativa de que seguirá subiendo. Cuando estalla, los precios caen de golpe.",
+			"ejemplo": "Durante una burbuja inmobiliaria, mucha gente compra pisos solo porque cree que valdrán más mañana."
+		},
+		{
+			"termino": "Calificación crediticia",
+			"aliases": [
+				"rating",
+				"agencia de calificación",
+				"nota crediticia",
+				"rebaja de calificación"
+			],
+			"definicion": "Nota que dan agencias especializadas sobre la capacidad de una empresa o país para pagar sus deudas. Una rebaja encarece su financiación.",
+			"ejemplo": "Si rebajan la nota de un banco, sus acreedores le exigen más garantías."
+		},
+		{
+			"termino": "Capitalización bursátil",
+			"aliases": [
+				"capitalización",
+				"valor en bolsa"
+			],
+			"definicion": "Valor total de una empresa en bolsa: precio de la acción multiplicado por el número de acciones.",
+			"ejemplo": "Si una empresa tiene 100 millones de acciones a 5 €, su capitalización es de 500 millones."
+		},
+		{
+			"termino": "Cartera de inversión",
+			"aliases": [
+				"cartera",
+				"portafolio",
+				"posiciones"
+			],
+			"definicion": "Conjunto de inversiones que tiene una persona: acciones, fondos, depósitos, etc.",
+			"ejemplo": "Una cartera con acciones de tres empresas de sectores distintos está más diversificada que una con una sola."
+		},
+		{
+			"termino": "Comisión",
+			"aliases": [
+				"comisiones",
+				"gastos de operación"
+			],
+			"definicion": "Cantidad que cobra un banco o intermediario por realizar una operación o prestar un servicio.",
+			"ejemplo": "Si compras 1.000 € en acciones con una comisión del 0,25 %, pagas 2,50 €."
+		},
+		{
+			"termino": "Concentración",
+			"aliases": [
+				"concentrar",
+				"concentrado"
+			],
+			"definicion": "Situación en la que una gran parte del patrimonio depende de una sola inversión, empresa o sector. Es lo contrario de la diversificación.",
+			"ejemplo": "Tener el 80 % de los ahorros en acciones de un solo banco es una concentración muy arriesgada."
+		},
+		{
+			"termino": "Cotización",
+			"aliases": [
+				"precio de la acción",
+				"cotiza"
+			],
+			"definicion": "Precio al que se compra y vende un valor en la bolsa en un momento dado. Cambia continuamente según la oferta y la demanda.",
+			"ejemplo": "Si una acción cotiza a 10 € y al día siguiente a 9 €, ha caído un 10 %."
+		},
+		{
+			"termino": "Crisis de liquidez",
+			"aliases": [
+				"falta de liquidez",
+				"sequía de crédito"
+			],
+			"definicion": "Situación en la que bancos o empresas no consiguen dinero prestado a corto plazo aunque sean solventes.",
+			"ejemplo": "Cuando los bancos dejan de prestarse entre sí, hasta entidades sanas pueden tener problemas."
+		},
+		{
+			"termino": "Deflación",
+			"aliases": [
+				"caída de precios"
+			],
+			"definicion": "Bajada general y sostenida de los precios. Parece buena, pero puede hacer que la gente retrase sus compras y la economía se frene.",
+			"ejemplo": "Si esperas que el coche cueste menos el año que viene, puedes retrasar la compra."
+		},
+		{
+			"termino": "Depósito bancario",
+			"aliases": [
+				"depósito",
+				"depósitos",
+				"cuenta corriente",
+				"plazo fijo",
+				"imposición a plazo"
+			],
+			"definicion": "Dinero que se deja en un banco, a la vista (cuenta) o a plazo fijo a cambio de un interés. En Liria está protegido por el fondo de garantía de depósitos.",
+			"ejemplo": "Un depósito a plazo fijo de un año inmoviliza el dinero a cambio de un interés conocido de antemano."
+		},
+		{
+			"termino": "Descubierto",
+			"aliases": [
+				"números rojos",
+				"saldo negativo"
+			],
+			"definicion": "Situación en la que una cuenta bancaria queda con saldo negativo. Suele tener comisiones e intereses altos.",
+			"ejemplo": "Si pagas el alquiler sin tener saldo suficiente, la cuenta queda en descubierto."
+		},
+		{
+			"termino": "Deuda",
+			"aliases": [
+				"préstamo",
+				"crédito"
+			],
+			"definicion": "Dinero que una persona debe devolver tras recibir financiación. El acuerdo establece cómo y cuándo se devuelve y qué intereses o gastos corresponden.",
+			"ejemplo": "Si pides 1.000 € prestados, debes devolver el capital según el calendario acordado y pagar los costes que correspondan.",
+			"fuente": "Banco de España",
+			"url": "https://clientebancario.bde.es/pcb/es/menu-horizontal/productosservici/financiacion/prestamopersonal/guia-textual/conceptocaracter/Prestamo_o_credito.html"
+		},
+		{
+			"termino": "Deuda pública",
+			"aliases": [
+				"bonos del Estado",
+				"letras del Tesoro"
+			],
+			"definicion": "Préstamos que hacen los inversores al Estado comprando sus títulos. En las crisis se consideran un refugio porque se confía en que el Estado pagará.",
+			"ejemplo": "Cuando hay pánico, muchos inversores venden acciones y compran deuda pública."
+		},
+		{
+			"termino": "Diversificación",
+			"aliases": [
+				"diversificar",
+				"riesgo de concentración"
+			],
+			"definicion": "Repartir el dinero entre distintas inversiones para reducir la dependencia de una sola. Puede reducir el riesgo de concentración, pero no garantiza evitar pérdidas.",
+			"ejemplo": "Si una inversión cae, otras podrían amortiguar parte del descenso del conjunto; no es seguro que compensen toda la caída.",
+			"fuente": "Investor.gov, SEC",
+			"url": "https://www.investor.gov/introduction-investing/investing-basics/glossary/diversification"
+		},
+		{
+			"termino": "Dividendo",
+			"aliases": [
+				"dividendos",
+				"reparto de beneficios"
+			],
+			"definicion": "Parte de los beneficios que una empresa reparte entre sus accionistas. No es obligatorio: en una crisis muchas empresas lo suspenden.",
+			"ejemplo": "Una empresa intervenida suele suspender el dividendo para conservar dinero."
+		},
+		{
+			"termino": "Especulación",
+			"aliases": [
+				"especular",
+				"especulador"
+			],
+			"definicion": "Compra de un activo con la intención de venderlo pronto más caro, apostando por movimientos de precio más que por su valor a largo plazo.",
+			"ejemplo": "Comprar acciones de una empresa a punto de quebrar esperando un rescate es especular."
+		},
+		{
+			"termino": "Euríbor",
+			"aliases": [
+				"euribor",
+				"índice de referencia hipotecario"
+			],
+			"definicion": "Tipo de interés al que los bancos de la zona euro se prestan dinero entre sí. Es el índice al que se referencian la mayoría de las hipotecas variables.",
+			"ejemplo": "Si el Euríbor sube un punto, la cuota de una hipoteca variable sube en la siguiente revisión."
+		},
+		{
+			"termino": "Fondo de emergencia",
+			"aliases": [
+				"colchón",
+				"colchón de liquidez",
+				"ahorro de emergencia"
+			],
+			"definicion": "Dinero reservado para imprevistos, fácil de usar en cualquier momento. Se suele recomendar que cubra varios meses de gastos fijos.",
+			"ejemplo": "Si tus gastos fijos son 1.000 € al mes, un colchón de 3.000-6.000 € te protege ante un despido."
+		},
+		{
+			"termino": "Fondo de garantía de depósitos",
+			"aliases": [
+				"FGD",
+				"garantía de depósitos",
+				"fondo de garantía"
+			],
+			"definicion": "Mecanismo que devuelve a cada cliente sus depósitos, hasta un límite, si su banco quiebra. En Liria cubre hasta 20.000 € por persona y entidad. No cubre acciones ni fondos de inversión.",
+			"ejemplo": "Si tienes 15.000 € en una cuenta y el banco quiebra, el fondo de garantía te los devuelve."
+		},
+		{
+			"termino": "Fondo de inversión",
+			"aliases": [
+				"fondos de inversión",
+				"participación",
+				"partícipe"
+			],
+			"definicion": "Patrimonio formado por el dinero de muchos inversores que una gestora invierte en acciones, bonos u otros activos. Su valor sube y baja: no está garantizado.",
+			"ejemplo": "Si el fondo invierte en acciones y la bolsa cae un 20 %, tu participación también pierde valor."
+		},
+		{
+			"termino": "Fondo monetario",
+			"aliases": [
+				"fondo del mercado monetario",
+				"monetario",
+				"valor liquidativo"
+			],
+			"definicion": "Fondo de inversión que invierte en deuda a muy corto plazo. Se considera de bajo riesgo, pero no es un depósito: no está cubierto por el fondo de garantía y puede perder valor.",
+			"ejemplo": "Un fondo monetario con bonos de un banco quebrado puede valer menos de lo invertido."
+		},
+		{
+			"termino": "Fusión y adquisición",
+			"aliases": [
+				"fusión",
+				"adquisición",
+				"compra de empresas",
+				"OPA",
+				"absorción"
+			],
+			"definicion": "Unión de dos empresas o compra de una por otra. En las crisis, muchas compras se hacen de urgencia para evitar quiebras.",
+			"ejemplo": "Un banco grande puede comprar a otro en apuros durante un fin de semana."
+		},
+		{
+			"termino": "Hipoteca",
+			"aliases": [
+				"préstamo hipotecario",
+				"hipotecas"
+			],
+			"definicion": "Préstamo para comprar una vivienda en el que la propia vivienda sirve de garantía. Si no se paga, el banco puede quedarse con ella.",
+			"ejemplo": "Una hipoteca de 150.000 € a 25 años puede suponer una cuota de varios cientos de euros al mes."
+		},
+		{
+			"termino": "Hipoteca de alto riesgo",
+			"aliases": [
+				"subprime",
+				"hipotecas basura",
+				"alto riesgo"
+			],
+			"definicion": "Hipoteca concedida a personas con poca capacidad de pago o mal historial. Fueron el origen de la crisis: cuando dejaron de pagarse, los títulos ligados a ellas perdieron valor.",
+			"ejemplo": "Muchas hipotecas de alto riesgo se concedieron con intereses bajos los primeros años que luego se disparaban."
+		},
+		{
+			"termino": "Inflación",
+			"aliases": [
+				"IPC",
+				"poder adquisitivo"
+			],
+			"definicion": "Aumento general y sostenido de los precios de bienes y servicios. Cuando los precios suben, cada unidad de dinero permite comprar menos.",
+			"ejemplo": "Si tus ingresos no cambian y suben los precios de la compra, con el mismo dinero puedes llevarte menos productos.",
+			"fuente": "Banco Central Europeo",
+			"url": "https://www.ecb.europa.eu/ecb-and-you/explainers/tell-me-more/html/what_is_inflation.es.html"
+		},
+		{
+			"termino": "Intervención pública",
+			"aliases": [
+				"intervención",
+				"intervenida",
+				"tutela pública",
+				"nacionalización",
+				"nacionalizar"
+			],
+			"definicion": "Toma de control de una empresa por parte del Estado para evitar su caída desordenada. Protege el sistema y a los ahorradores, pero los accionistas suelen perder casi todo su valor.",
+			"ejemplo": "Cuando el Estado nacionalizó un banco hipotecario, sus accionistas se quedaron sin nada."
+		},
+		{
+			"termino": "Interés compuesto",
+			"aliases": [
+				"interés sobre interés",
+				"capitalización"
+			],
+			"definicion": "Interés calculado sobre el capital inicial y también sobre los intereses acumulados, si estos se mantienen en la cuenta o inversión.",
+			"ejemplo": "Con 100 € al 5 % anual, el saldo pasa a 105 € el primer año y a 110,25 € el segundo si se mantienen los intereses y el tipo.",
+			"fuente": "Investor.gov, SEC",
+			"url": "https://www.investor.gov/additional-resources/information/youth/teachers-classroom-resources/what-compound-interest"
+		},
+		{
+			"termino": "Inyección de liquidez",
+			"aliases": [
+				"inyectar liquidez",
+				"subasta de liquidez"
+			],
+			"definicion": "Préstamo masivo del banco central a los bancos para que tengan dinero disponible.",
+			"ejemplo": "Tras un gran susto financiero, los bancos centrales suelen inyectar liquidez en el sistema."
+		},
+		{
+			"termino": "Liquidez",
+			"aliases": [
+				"disponibilidad",
+				"activo líquido"
+			],
+			"definicion": "Facilidad y rapidez con la que puedes disponer del dinero o convertir un activo en dinero. Un depósito disponible a la vista suele ser más líquido que una inversión con vencimiento.",
+			"ejemplo": "El saldo de una cuenta corriente suele estar disponible antes que el dinero colocado en un depósito a plazo.",
+			"fuente": "Banco de España",
+			"url": "https://clientebancario.bde.es/pcb/es/blog/productos-de-ahorro-vs-inversion.html?blog=%2Fwebcb%2FBlog%2FCuentasDepositos"
+		},
+		{
+			"termino": "Mercado interbancario",
+			"aliases": [
+				"interbancario",
+				"préstamos entre bancos"
+			],
+			"definicion": "Mercado en el que los bancos se prestan dinero entre sí a corto plazo. Si deja de funcionar, el crédito se seca para todos.",
+			"ejemplo": "Cuando nadie sabe qué banco puede caer, los tipos interbancarios se disparan."
+		},
+		{
+			"termino": "Morosidad",
+			"aliases": [
+				"moroso",
+				"impago",
+				"impagos"
+			],
+			"definicion": "Retraso o falta de pago de una deuda. Cuando sube la morosidad, los bancos pierden dinero y prestan menos.",
+			"ejemplo": "Si muchas familias dejan de pagar la hipoteca, los bancos que les prestaron tienen pérdidas."
+		},
+		{
+			"termino": "Máximo y mínimo de 52 semanas",
+			"aliases": [
+				"máximo anual",
+				"mínimo anual",
+				"52 semanas"
+			],
+			"definicion": "Precios más alto y más bajo de una acción en el último año. Ayudan a ver si cotiza cerca de sus extremos.",
+			"ejemplo": "Si una acción cotiza muy cerca de su mínimo de 52 semanas, el mercado desconfía de ella."
+		},
+		{
+			"termino": "Nómina",
+			"aliases": [
+				"salario",
+				"sueldo"
+			],
+			"definicion": "Documento y pago del salario mensual de un trabajador por cuenta ajena.",
+			"ejemplo": "Si tu nómina llega el día 28, los gastos de principios de mes deben salir de lo ahorrado."
+		},
+		{
+			"termino": "Paro",
+			"aliases": [
+				"desempleo",
+				"tasa de paro",
+				"parado"
+			],
+			"definicion": "Situación de las personas que quieren trabajar y no encuentran empleo. La tasa de paro es el porcentaje de la población activa que está desempleada.",
+			"ejemplo": "Una subida del paro reduce el consumo y aumenta los impagos."
+		},
+		{
+			"termino": "Petróleo",
+			"aliases": [
+				"barril",
+				"crudo",
+				"precio del petróleo"
+			],
+			"definicion": "Materia prima energética clave. Su precio afecta al transporte, a la inflación y a los beneficios de las empresas.",
+			"ejemplo": "Si el petróleo sube, llenar el depósito del coche cuesta más."
+		},
+		{
+			"termino": "PIB",
+			"aliases": [
+				"producto interior bruto",
+				"crecimiento económico"
+			],
+			"definicion": "Valor de todos los bienes y servicios producidos en un país durante un periodo. Mide el tamaño de la economía.",
+			"ejemplo": "Si el PIB crece un 3 %, la economía produce un 3 % más que el año anterior."
+		},
+		{
+			"termino": "Presupuesto doméstico",
+			"aliases": [
+				"presupuesto",
+				"gastos fijos",
+				"gastos variables",
+				"economía doméstica"
+			],
+			"definicion": "Plan de los ingresos y gastos de un hogar. Distingue gastos fijos (alquiler, suministros) y variables (ocio, compras).",
+			"ejemplo": "Anotar los gastos de un mes ayuda a ver dónde se puede ahorrar."
+		},
+		{
+			"termino": "Promediar a la baja",
+			"aliases": [
+				"promediar",
+				"comprar más barato"
+			],
+			"definicion": "Comprar más acciones de una empresa cuando su precio ha caído para bajar el precio medio de compra. Si la empresa quiebra, multiplica las pérdidas.",
+			"ejemplo": "Comprar más acciones de un banco que se está hundiendo «para promediar» puede salir muy caro."
+		},
+		{
+			"termino": "Préstamo personal",
+			"aliases": [
+				"préstamo",
+				"crédito",
+				"crédito al consumo"
+			],
+			"definicion": "Dinero que presta un banco a un particular, que lo devuelve en cuotas con intereses.",
+			"ejemplo": "Pedir un préstamo para comprar acciones obliga a pagar cuotas aunque las acciones pierdan valor."
+		},
+		{
+			"termino": "Quiebra",
+			"aliases": [
+				"bancarrota",
+				"concurso de acreedores",
+				"insolvencia",
+				"suspensión de pagos"
+			],
+			"definicion": "Situación en la que una empresa no puede pagar sus deudas. Se abre un proceso judicial para repartir lo que queda entre los acreedores; los accionistas suelen perder casi todo.",
+			"ejemplo": "Cuando un banco quiebra, sus acciones pueden pasar de valer decenas de euros a céntimos en un solo día."
+		},
+		{
+			"termino": "Recesión",
+			"aliases": [
+				"recesión económica",
+				"contracción"
+			],
+			"definicion": "Periodo en el que la economía de un país se reduce, normalmente dos trimestres seguidos de caída del PIB.",
+			"ejemplo": "En una recesión, las empresas venden menos y suelen recortar empleo."
+		},
+		{
+			"termino": "Renta variable",
+			"aliases": [
+				"renta variable",
+				"bolsa"
+			],
+			"definicion": "Inversión cuya rentabilidad no se conoce de antemano, como las acciones. Puede ganar mucho o perder mucho.",
+			"ejemplo": "Las acciones son renta variable: su valor depende de cómo le vaya a la empresa y del mercado."
+		},
+		{
+			"termino": "Rentabilidad",
+			"aliases": [
+				"rentabilidad",
+				"rendimiento",
+				"ganancia"
+			],
+			"definicion": "Beneficio o pérdida de una inversión expresado en porcentaje de lo invertido.",
+			"ejemplo": "Si inviertes 1.000 € y al cabo de un año tienes 1.050 €, la rentabilidad es del 5 %."
+		},
+		{
+			"termino": "Rescate",
+			"aliases": [
+				"rescatar",
+				"ayuda pública",
+				"rescate financiero"
+			],
+			"definicion": "Ayuda de un Gobierno o banco central a una entidad en apuros, normalmente mediante préstamos o compra de acciones. Su objetivo es evitar el contagio, no proteger a los accionistas.",
+			"ejemplo": "Un rescate puede salvar a una aseguradora y a la vez dejar a sus accionistas con muy poco."
+		},
+		{
+			"termino": "Riesgo financiero",
+			"aliases": [
+				"riesgo de inversión",
+				"posible pérdida"
+			],
+			"definicion": "Incertidumbre asociada a una decisión financiera y posibilidad de sufrir una pérdida. El riesgo no indica que una pérdida vaya a ocurrir con seguridad.",
+			"ejemplo": "Una acción puede bajar tras publicarse nuevos resultados, pero no se sabe de antemano cuánto ni cuándo cambiará su precio.",
+			"fuente": "Investor.gov, SEC",
+			"url": "https://www.investor.gov/introduction-investing/investing-basics/what-risk"
+		},
+		{
+			"termino": "Riesgo sistémico",
+			"aliases": [
+				"contagio",
+				"efecto dominó",
+				"sistémico"
+			],
+			"definicion": "Riesgo de que la caída de una entidad arrastre a otras y ponga en peligro todo el sistema financiero.",
+			"ejemplo": "La caída de una gran aseguradora que garantiza préstamos de muchos bancos es un riesgo sistémico."
+		},
+		{
+			"termino": "Seguro de impago",
+			"aliases": [
+				"CDS",
+				"derivado de crédito",
+				"seguro contra impagos"
+			],
+			"definicion": "Contrato por el que una entidad cobra una prima a cambio de pagar si un deudor no devuelve su deuda. Si quien asegura no puede pagar, el riesgo se extiende.",
+			"ejemplo": "Una aseguradora que vendió muchos seguros de impago puede verse en apuros si llegan muchos impagos a la vez."
+		},
+		{
+			"termino": "Solvencia",
+			"aliases": [
+				"solvente",
+				"insolvente"
+			],
+			"definicion": "Capacidad de una persona o empresa para hacer frente a todas sus deudas con sus bienes. Es distinta de la liquidez: se puede ser solvente y no tener dinero disponible hoy.",
+			"ejemplo": "Una familia con una casa pagada es solvente aunque a final de mes tenga poco dinero en la cuenta."
+		},
+		{
+			"termino": "Tipo de interés",
+			"aliases": [
+				"tipos de interés",
+				"interés",
+				"tipo oficial",
+				"precio del dinero"
+			],
+			"definicion": "Precio que se paga por pedir dinero prestado, expresado en porcentaje anual. Los bancos centrales fijan un tipo de referencia que influye en hipotecas y préstamos.",
+			"ejemplo": "Si el banco central sube los tipos, las hipotecas variables suelen encarecerse."
+		},
+		{
+			"termino": "Titulización",
+			"aliases": [
+				"titulizar",
+				"bonos hipotecarios",
+				"productos estructurados"
+			],
+			"definicion": "Proceso por el que un banco agrupa muchos préstamos (por ejemplo, hipotecas) y los vende a inversores en forma de títulos. Reparte el riesgo, pero también lo hace menos visible.",
+			"ejemplo": "Un fondo de otro país podía tener títulos respaldados por hipotecas de familias que nunca conoció."
+		},
+		{
+			"termino": "Valor refugio",
+			"aliases": [
+				"refugio",
+				"oro",
+				"activo refugio"
+			],
+			"definicion": "Inversión que se suele considerar segura en momentos de crisis, como el oro o la deuda de Estados fiables. No significa que no pueda bajar.",
+			"ejemplo": "Cuando la bolsa se hunde, el precio del oro suele subir porque muchos inversores lo compran."
+		},
+		{
+			"termino": "Venta por pánico",
+			"aliases": [
+				"pánico",
+				"vender en pánico",
+				"capitulación"
+			],
+			"definicion": "Venta precipitada de inversiones por miedo, normalmente después de una gran caída. Convierte pérdidas temporales en definitivas.",
+			"ejemplo": "Vender todas tus acciones el día de mayor caída suele ser vender al peor precio."
+		},
+		{
+			"termino": "Volatilidad",
+			"aliases": [
+				"variación de precio",
+				"riesgo de mercado"
+			],
+			"definicion": "Grado en que el precio de una inversión cambia con el tiempo. Una volatilidad alta implica cambios más amplios o frecuentes.",
+			"ejemplo": "Si una acción alterna subidas y bajadas grandes en pocos días, su precio muestra alta volatilidad.",
+			"fuente": "Investor.gov, SEC",
+			"url": "https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins/investor-2"
+		},
+		{
+			"termino": "Índice bursátil",
+			"aliases": [
+				"índice",
+				"índice de bolsa"
+			],
+			"definicion": "Indicador que resume la evolución de un grupo de acciones representativas de un mercado.",
+			"ejemplo": "Si el índice cae un 4 %, la mayoría de las grandes empresas de esa bolsa han bajado."
+		}
+	]
 }

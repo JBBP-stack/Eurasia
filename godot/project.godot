@@ -17,9 +17,14 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Reglas="*res://sistemas/Reglas.gd"
 EstadoJuego="*uid://du7t4qf72pyea"
 SistemaFinanciero="*res://sistemas/SistemaFinanciero.gd"
 NoticiasManager="*uid://bo45pvnr0fobp"
+SistemaMercado="*res://sistemas/SistemaMercado.gd"
+SistemaVida="*res://sistemas/SistemaVida.gd"
+GestorPartida="*res://sistemas/GestorPartida.gd"
+Asistente="*res://sistemas/ClienteAsistente.gd"
 
 [display]
 

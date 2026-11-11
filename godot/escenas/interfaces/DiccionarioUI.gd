@@ -59,7 +59,7 @@ func _crear_interfaz() -> void:
 	cabecera.add_child(cerrar)
 
 	_filtro = LineEdit.new()
-	_filtro.placeholder_text = "Buscar término..."
+	_filtro.placeholder_text = "Busca cualquier palabra: quiebra, hipoteca, fondo de garantía, bulo..."
 	_filtro.text_changed.connect(_filtrar)
 	raiz.add_child(_filtro)
 
@@ -68,7 +68,7 @@ func _crear_interfaz() -> void:
 	raiz.add_child(cuerpo)
 
 	_lista = ItemList.new()
-	_lista.custom_minimum_size = Vector2(145, 0)
+	_lista.custom_minimum_size = Vector2(300, 0)
 	_lista.item_selected.connect(_seleccionar_termino)
 	cuerpo.add_child(_lista)
 
@@ -108,32 +108,65 @@ func _cargar_terminos() -> void:
 	_filtrar("")
 
 
+## Busca cualquier palabra: primero en el nombre y sinónimos, después en definiciones y ejemplos.
+## Si no hay resultados, sugiere los términos con el nombre más parecido.
 func _filtrar(texto: String) -> void:
 	_resultados.clear()
 	_lista.clear()
 	var consulta := _normalizar(texto)
+	var palabras := consulta.split(" ", false)
 
+	var en_nombre: Array[Dictionary] = []
+	var en_texto: Array[Dictionary] = []
 	for termino in _terminos:
-		var coincide := consulta.is_empty()
-		var nombre := str(termino.get("termino", ""))
-		if _normalizar(nombre).contains(consulta):
-			coincide = true
-		for alias in termino.get("aliases", []):
-			if _normalizar(str(alias)).contains(consulta):
-				coincide = true
-		if coincide:
-			_resultados.append(termino)
-			_lista.add_item(nombre)
+		if palabras.is_empty():
+			en_nombre.append(termino)
+			continue
+		var nombre := _normalizar(str(termino.get("termino", "")) + " " + " ".join(termino.get("aliases", [])))
+		var cuerpo := _normalizar(str(termino.get("definicion", "")) + " " + str(termino.get("ejemplo", "")))
+		if _contiene_todas(nombre, palabras):
+			en_nombre.append(termino)
+		elif _contiene_todas(nombre + " " + cuerpo, palabras):
+			en_texto.append(termino)
+
+	for termino in en_nombre:
+		_resultados.append(termino)
+		_lista.add_item(str(termino.get("termino", "")))
+	for termino in en_texto:
+		_resultados.append(termino)
+		_lista.add_item(str(termino.get("termino", "")) + "  (en la definición)")
 
 	if _resultados.is_empty():
-		_detalle.text = "No hay términos que coincidan con la búsqueda."
+		_mostrar_sugerencias(consulta)
 	else:
 		_lista.select(0)
 		_mostrar_termino(0)
 
 
+func _contiene_todas(texto: String, palabras: PackedStringArray) -> bool:
+	for palabra in palabras:
+		if not texto.contains(palabra):
+			return false
+	return true
+
+
+func _mostrar_sugerencias(consulta: String) -> void:
+	var puntuados: Array = []
+	for termino in _terminos:
+		var mejor := _normalizar(str(termino.get("termino", ""))).similarity(consulta)
+		for alias in termino.get("aliases", []):
+			mejor = maxf(mejor, _normalizar(str(alias)).similarity(consulta))
+		puntuados.append([mejor, termino])
+	puntuados.sort_custom(func(a: Array, b: Array) -> bool: return float(a[0]) > float(b[0]))
+	for indice in range(mini(5, puntuados.size())):
+		var termino: Dictionary = puntuados[indice][1]
+		_resultados.append(termino)
+		_lista.add_item("¿Quizás? " + str(termino.get("termino", "")))
+	_detalle.text = "No hay ningún término con «%s».\n\nA la izquierda tienes los términos más parecidos. Si buscas algo que no está en el diccionario, pregúntaselo al asistente del portátil." % consulta
+
+
 func _normalizar(texto: String) -> String:
-	return texto.strip_edges().to_lower() \
+	return texto.strip_edges().to_lower().replace(",", " ").replace(".", " ") \
 		.replace("á", "a").replace("é", "e").replace("í", "i") \
 		.replace("ó", "o").replace("ú", "u").replace("ü", "u")
 
@@ -156,7 +189,7 @@ func abrir_diccionario() -> void:
 	_fondo.visible = true
 	_panel.visible = true
 	_filtro.clear()
-	get_tree().paused = true
+	GestorPartida.abrir_ventana("diccionario")
 	_filtro.grab_focus()
 
 
@@ -166,7 +199,11 @@ func _cerrar_diccionario() -> void:
 		_fondo.visible = false
 	if _panel:
 		_panel.visible = false
-	get_tree().paused = false
+	GestorPartida.cerrar_ventana("diccionario")
+
+
+func _exit_tree() -> void:
+	GestorPartida.cerrar_ventana("diccionario")
 
 
 func _unhandled_input(event: InputEvent) -> void:

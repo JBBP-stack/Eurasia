@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cwtoqbucky8g" path="res://assets/objetos/puerta.png" id="2_textura"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rango"]
-radius = 44.0
+radius = 50.0
 
 [node name="PuertaBanco" type="Area2D"]
 collision_layer = 0
@@ -18,14 +18,15 @@ texto_indicador = "E: ir al banco"
 shape = SubResource("CircleShape2D_rango")
 
 [node name="Ilustracion" type="Sprite2D" parent="."]
+texture_filter = 1
 texture = ExtResource("2_textura")
-scale = Vector2(0.35, 0.35)
+scale = Vector2(1.5, 1.5)
 
 [node name="Indicador" type="Label" parent="."]
 offset_left = -88.0
-offset_top = 29.0
+offset_top = 30.0
 offset_right = 88.0
-offset_bottom = 55.0
+offset_bottom = 56.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 10
 text = "E: ir al banco"

@@ -17,6 +17,10 @@
 [ext_resource type="Script" uid="uid://by3vbqgsht3hq" path="res://escenas/habitacion/Habitacion.gd" id="12_habitacion"]
 [ext_resource type="PackedScene" path="res://escenas/habitacion/PuertaBanco.tscn" id="13_puerta_banco"]
 [ext_resource type="PackedScene" path="res://escenas/habitacion/Telefono.tscn" id="14_telefono"]
+[ext_resource type="PackedScene" path="res://escenas/interfaces/NeveraUI.tscn" id="15_nevera_ui"]
+[ext_resource type="PackedScene" path="res://escenas/interfaces/PortatilUI.tscn" id="16_portatil_ui"]
+[ext_resource type="PackedScene" path="res://escenas/interfaces/InformeFinalUI.tscn" id="17_informe_final"]
+[ext_resource type="PackedScene" path="res://escenas/interfaces/DecisionesUI.tscn" id="18_decisiones"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7r0pk"]
 texture = ExtResource("2_xym36")
@@ -357,6 +361,14 @@ position = Vector2(239, 286)
 position = Vector2(143, 312)
 
 [node name="DiccionarioUI" parent="." unique_id=1994601392 instance=ExtResource("11_diccionario")]
+
+[node name="NeveraUI" parent="." unique_id=1405716263 instance=ExtResource("15_nevera_ui")]
+
+[node name="PortatilUI" parent="." unique_id=902311587 instance=ExtResource("16_portatil_ui")]
+
+[node name="InformeFinalUI" parent="." unique_id=1688402291 instance=ExtResource("17_informe_final")]
+
+[node name="DecisionesUI" parent="." unique_id=1520774410 instance=ExtResource("18_decisiones")]
 
 [node name="PuertaBanco" parent="." unique_id=1737794248 instance=ExtResource("13_puerta_banco")]
 position = Vector2(138, 16)
