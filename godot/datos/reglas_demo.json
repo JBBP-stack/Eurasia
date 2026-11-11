@@ -64,7 +64,9 @@
 		"comida_inicial": 3,
 		"precio_racion_centimos": 600,
 		"raciones_por_paquete": 7,
-		"perdida_salud_dia_sin_comer": 20,
+		"perdida_salud_dia_sin_comer": 15,
+		"incremento_perdida_salud_por_dia_sin_comer": 5,
+		"perdida_salud_maxima_dia_sin_comer": 30,
 		"recuperacion_salud_dia_comiendo": 10,
 		"salud_maxima": 100
 	},

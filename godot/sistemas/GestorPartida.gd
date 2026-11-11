@@ -54,6 +54,33 @@ func hay_ventanas_abiertas() -> bool:
 	return not _ventanas_abiertas.is_empty()
 
 
+## Indica si hay progreso que convenga continuar o reiniciar desde la ficha inicial.
+## No basta con comprobar el día: durante el Día 1 ya se pueden guardar noticias y estado vital.
+func hay_progreso_guardado() -> bool:
+	if EstadoJuego.partida_terminada or EstadoJuego.dia_de_partida > 1:
+		return true
+	if not SistemaFinanciero.movimientos.is_empty() or not EstadoJuego.registro_decisiones.is_empty():
+		return true
+	if not NoticiasManager.entregadas.is_empty() or not NoticiasManager.recogidas.is_empty():
+		return true
+	if not NoticiasManager.leidas.is_empty() or not NoticiasManager.respuestas.is_empty():
+		return true
+	if EstadoJuego.historial_patrimonio.size() > 1:
+		return true
+
+	var comida_inicial := Reglas.entero("alimentacion/comida_inicial", 3)
+	var salud_inicial := Reglas.entero("alimentacion/salud_maxima", 100)
+	if (
+		EstadoJuego.comido_hoy
+		or EstadoJuego.comida_disponible != comida_inicial
+		or EstadoJuego.dias_sin_comer > 0
+		or EstadoJuego.salud != salud_inicial
+		or EstadoJuego.dias_en_descubierto > 0
+	):
+		return true
+	return false
+
+
 # --- Avance del día -----------------------------------------------------------
 
 ## Lo llama NoticiasManager.avanzar_dia() justo después de cambiar la fecha.
@@ -427,7 +454,7 @@ func _detectar_errores(m: Dictionary) -> Array[String]:
 		var activo_id := str(posicion.get("id", ""))
 		var precio_inicio := SistemaMercado.precio_en(activo_id, EstadoJuego.FECHA_INICIO_PROVISIONAL)
 		var precio_actual := int(posicion.get("precio_centimos", 0))
-		if acciones > 0 and precio_inicio > 0 and precio_actual < precio_inicio / 2:
+		if acciones > 0 and precio_inicio > 0 and float(precio_actual) < float(precio_inicio) / 2.0:
 			errores.append("Mantuviste %d acciones de %s hasta el final: su cotización cayó un %s durante la partida." % [
 				acciones, str(posicion.get("nombre", activo_id)), _porcentaje(1.0 - float(precio_actual) / float(precio_inicio), false)
 			])

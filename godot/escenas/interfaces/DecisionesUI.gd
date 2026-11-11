@@ -145,8 +145,8 @@ func _agregar_tarjeta(decision: Dictionary) -> void:
 
 	var textos_estado := {
 		"por_llegar": "Esta decisión llegará con un periódico que aún no ha sido repartido.",
-		"sin_recoger": "El periódico ya está en el buzón: recógelo (E junto al buzón) para poder decidir.",
-		"pendiente": "PENDIENTE: responde antes de dormir.",
+		"sin_recoger": "El periódico está en el buzón. Recógelo con E; después podrás responder aquí.",
+		"pendiente": "PENDIENTE: responde aquí antes de ir a la cama.",
 		"respondida": "Respondida."
 	}
 	var cabecera := Label.new()
@@ -155,7 +155,7 @@ func _agregar_tarjeta(decision: Dictionary) -> void:
 		cabecera.text = "Decisión pendiente de llegar\n" + str(textos_estado[estado])
 		caja.add_child(cabecera)
 		return
-	cabecera.text = "Noticia: %s\n%s\n\n%s" % [str(noticia.get("titulo", "")), str(textos_estado.get(estado, "")), str(pregunta.get("enunciado", ""))]
+	cabecera.text = "DECISIÓN · DÍA %d\n%s\n\n%s" % [int(noticia.get("dia", EstadoJuego.dia_de_partida)), str(textos_estado.get(estado, "")), str(pregunta.get("enunciado", ""))]
 	caja.add_child(cabecera)
 
 	var respondida := NoticiasManager.respuesta_de(noticia_id)

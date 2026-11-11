@@ -1,59 +1,42 @@
-﻿# EURASIA — Estado del proyecto
+# EURASIA — Estado del proyecto
 
-**Nota de traspaso · 10/11/2026**
+**Nota de traspaso · 11/11/2026**
 
-## Qué es
+## Resumen
 
-Videojuego retro de simulación financiera e histórica. La demo se desarrolla alrededor de una habitación que sirve de centro para las actividades del personaje: recibir noticias, tomar decisiones, consultar información y gestionar sus finanzas. El proyecto está hecho en **Godot 4.7**; abre `godot/project.godot`.
+Prototipo avanzado de simulación financiera e histórica, desarrollado en Godot 4.7. El ciclo principal de juego está implementado y el usuario confirma que la jugabilidad funciona bien. Esta revisión mejora la ficha inicial y la elección entre continuar o reiniciar; esos cambios concretos necesitan comprobación manual en Godot. El guardado automático ya existe en los sistemas, aunque conviene validar su recorrido completo.
 
-## Ya implementado y confirmado en Godot
+Abre `godot/project.godot` en Godot y ejecuta el proyecto con F5. La puesta en marcha del servicio del asistente está en [servidor_asistente/README.md](../servidor_asistente/README.md).
 
-- **Ficha de inicio y habitación:** perfil inicial, personaje controlable y HUD con día, banco, efectivo, inversiones y patrimonio.
-- **Día y noticias:** reparto escalonado desde el buzón; se recogen y leen periódicos. Dormir queda bloqueado hasta que termina el reparto y se resuelven las decisiones obligatorias.
-- **Habitación interactiva:** cama, buzón, portátil, nevera, libro/diccionario, teléfono y puerta del banco. El teléfono sigue siendo una pantalla provisional (fuera del alcance de la primera demo).
-- **Diccionario financiero:** búsqueda local y conceptos con ejemplos.
-- **Acceso al banco:** la puerta permite entrar y regresar a la habitación conservando la posición del personaje.
+## Qué incluye ahora
 
-## Implementado el 10/11/2026 · pendiente de prueba en el editor
+- **Habitación y HUD:** movimiento, interacciones con cama, buzón, portátil, nevera, diccionario, teléfono y puerta del banco. El HUD muestra día, patrimonio, cartera, salud, comida y decisiones pendientes.
+- **Noticias y decisiones:** escenario del **5 al 16 de septiembre de 2008** (12 días); 40 noticias del periodo, 23 entradas de hemeroteca, cuatro rumores falsos candidatos y 12 cuestionarios. Los periódicos llegan escalonados, se recogen físicamente y las decisiones obligatorias bloquean el descanso. La interfaz oculta fechas y nombres reales durante la partida.
+- **Finanzas y supervivencia:** cuenta, efectivo, inversiones, cotizaciones por fecha, gráficas, comisiones, gastos domésticos, nómina, compra de comida, salud, descubierto y condiciones de bancarrota/fin de escenario. El informe final explica decisiones y revela fuentes y equivalencias reales.
+- **Banco:** cuenta, efectivo, operaciones de inversión con confirmación, historial y atención bancaria. El catálogo tiene diez empresas; las operaciones usan precios históricos según el día.
+- **Asistente:** portátil integrado con un servicio local que limita las noticias al día actual, oculta campos internos y filtra la respuesta. Existe modo simulado; **no consta una llamada real a Claude**.
+- **Guardado y reinicio:** decisión confirmada: guardado automático durante la partida, sin ranuras ni botón manual. Noticias, finanzas y estado vital se guardan en archivos separados bajo `user://`; el reinicio está coordinado. La ficha detecta progreso también durante el primer día y pide confirmar antes de borrar una partida al iniciar otra. Falta confirmar guardar, cerrar y continuar dentro del editor con esta revisión.
+- **Fuentes históricas:** [REGISTRO_FUENTES_HISTORICAS.md](REGISTRO_FUENTES_HISTORICAS.md) reúne las noticias y cotizaciones. El JSON de datos es el registro canónico; una referencia debe indicar medio o institución, publicación/documento y fecha. La URL directa es opcional.
 
-Probado con Godot 4.7.2 en modo *headless* y con capturas reales, sin errores. Falta revisarlo jugando en el editor (detalle en [EURASIA_SEGUIMIENTO.md](EURASIA_SEGUIMIENTO.md)).
+Los sistemas se reparten principalmente entre [EstadoJuego.gd](../godot/sistemas/EstadoJuego.gd), [NoticiasManager.gd](../godot/sistemas/NoticiasManager.gd), [GestorPartida.gd](../godot/sistemas/GestorPartida.gd), [SistemaFinanciero.gd](../godot/sistemas/SistemaFinanciero.gd), [SistemaMercado.gd](../godot/sistemas/SistemaMercado.gd) y [SistemaVida.gd](../godot/sistemas/SistemaVida.gd). Reglas provisionales: [reglas_demo.json](../godot/datos/reglas_demo.json). El seguimiento técnico detallado está en [EURASIA_SEGUIMIENTO.md](EURASIA_SEGUIMIENTO.md).
 
-- **Escenario:** del viernes **05/09/2008** al martes **16/09/2008** (12 días). Al dormir el día 16 termina la partida, salvo que antes haya una bancarrota o la muerte del personaje.
-- **Situación inicial:** 15.000 € en cuenta, **2.000 € en efectivo** y unos 13.000 € en acciones: 30.000 € en total, como indica el GDD.
-- **Cartera inicial de empresas reales con nombre ficticio:** Casa Halvard Hermanos (= Lehman Brothers, quiebra el 15/09), Hipotecaria Federal Fanara (= Fannie Mae, intervenida el 07/09) y Refrescos Cola Dorada (= Coca-Cola). Otras 7 empresas reales se pueden comprar. La equivalencia se revela al final.
-- **Cotizaciones reales:** datos diarios de dos años convertidos a euros (Yahoo Finance; Lehman, reconstruida con cierres publicados en prensa). Fichas de cotización con rangos de 5 días a 2 años, rentabilidades y descripción, en el banco y en el portátil (pestaña «Mercado»). Se puede comprar y vender cualquier día: si no hay sesión, se usa el último precio de cierre.
-- **Noticias:** entre 2 y 4 auténticas cada día, más completas y con sección (Portada, Economía, Internacional, Deportes, Ciencia, Sucesos), incluidas primeras planas no financieras. La hemeroteca tiene 23 noticias de los dos años anteriores y se le van sumando los periódicos recogidos.
-- **Decisiones:** una por día (12) con consecuencias directas: compran o venden acciones, mueven dinero o cambian la salud. Opciones con argumentos creíbles para que la correcta no sea evidente. Se consultan y responden en cualquier momento (botón «Decisiones (N)» o tecla D).
-- **Gastos domésticos:** alquiler, luz, gas, agua y teléfono en su día del mes, y gastos personales cada lunes. Se pagan primero con efectivo.
-- **Banco:** en la ventanilla atiende Marisa, la gestora, que comenta la actualidad del día y tu situación. El cajero permite todas las operaciones, incluidas las de inversión. La confirmación aparece dentro del panel.
-- **Diccionario:** 62 términos. Busca cualquier palabra (también dentro de las definiciones) y sugiere términos parecidos si no hay coincidencias.
-- **Asistente:** el portátil arranca solo el servicio local. La clave va en `.env` (ver `.env.example` y `servidor_asistente/README.md`).
-- Siguen funcionando la nevera, la derrota, el informe final, las noticias falsas y el guardado de estado. Un guardado de una versión anterior se aparta como `.incompatible.bak` y se empieza de cero.
+## Revisión jugable del 11/11/2026
 
-Las cifras provisionales están en `godot/datos/reglas_demo.json`.
+- El reparto muestra un aviso en el HUD y deja el periódico en el buzón. E lo recoge con animación y confirma la acción en el HUD; W o el botón Buzón abren los periódicos recogidos y la hemeroteca. Las decisiones se responden en un panel separado.
+- La salud y la comida aparecen en el HUD y en la nevera. No comer aumenta la pérdida de salud noche a noche; la nevera cambia entre cerrada y abierta con comida/vacía usando los sprites del proyecto.
+- Se quitó el botón de dormir del HUD: el avance ocurre desde la cama. Las interacciones del mundo quedan bloqueadas mientras hay ventanas abiertas.
+- Comprobación: validador de datos, `git diff --check` y referencias `res://` correctos. Godot 4.7.2 en modo *headless* recargó los scripts sin errores ni avisos de GDScript. Queda la prueba visual y de juego en el editor; la carga *headless* sí notificó problemas del almacén de certificados y al guardar ajustes del editor.
 
-## Estructura técnica útil
+## Validación conocida
 
-- `godot/sistemas/EstadoJuego.gd`: perfil, calendario, saldos y estado general.
-- `godot/sistemas/NoticiasManager.gd`: noticias, entregas, recogidas, decisiones y avance del día.
-- `godot/sistemas/SistemaFinanciero.gd`: operaciones bancarias, pagos, cargos, validación e historial persistente.
-- `godot/sistemas/Reglas.gd`: carga `datos/reglas_demo.json` (reglas provisionales).
-- `godot/sistemas/SistemaMercado.gd`: catálogo de activos, precios por fecha y apertura de la bolsa.
-- `godot/sistemas/SistemaVida.gd`: comida y salud.
-- `godot/sistemas/GestorPartida.gd`: pausa compartida, proceso de cada día, efectos de las decisiones, derrota, informe final y reinicio.
-- `godot/sistemas/ClienteAsistente.gd` (autoload `Asistente`) y `servidor_asistente/`: asistente Claude a través de un servicio local que el juego arranca solo. La clave nunca está en el juego.
-- `godot/datos/mercado/mercado_2008.json`: cotizaciones en céntimos de euro con equivalencias reales internas.
-- `godot/datos/noticias/`: contenido JSON de noticias y preguntas.
-- `godot/escenas/habitacion/`, `banco/`, `interfaces/`: escenas y pantallas.
+El seguimiento registra pruebas automáticas con Godot 4.7.2 en modo *headless* y el servicio del asistente en modo simulado. En etapas anteriores, el usuario confirmó que funcionaban la habitación, el buzón, el avance de día, el diccionario y la puerta del banco; ahora confirma que la jugabilidad va bien. **En esta revisión no he ejecutado Godot ni repetido esas pruebas.** La ficha modificada y la secuencia de continuar/nueva partida deben revisarse en el editor. Claude tampoco se ha probado con credenciales reales.
 
-Los sistemas principales están registrados como *autoloads* en `godot/project.godot`. El detalle de validaciones y pendientes está en [EURASIA_SEGUIMIENTO.md](EURASIA_SEGUIMIENTO.md).
+## Qué falta, por prioridad
 
-## Próximos pasos recomendados
+1. **Comprobar el guardado en Godot:** jugar unos minutos el primer día, recoger noticias y cambiar el estado vital, cerrar y volver a abrir; elegir «Continuar» y confirmar que se conserva el progreso. Probar «Nueva partida» y cancelar/confirmar el aviso.
+2. **Revisar datos y reglas:** concretar las referencias de 53 noticias que ahora están marcadas como pendientes en el registro (la URL es opcional), validar cronología y anonimización, y verificar la serie de Casa Halvard (Lehman), que aún contiene cierres aproximados. Ajustar las reglas económicas provisionales cuando se decida su balance.
+3. **Claude, al final:** el servicio está preparado y la dependencia `anthropic` instalada en el `.venv` local. Para cerrar la integración faltan una clave local en `.env` y una consulta real para revisar calidad, filtrado y coste; no incluir la clave en Git.
+4. **Cierre técnico:** renovar capturas después de la revisión visual, preparar empaquetado/exportación y ampliar la guía de colaboración.
+5. **Arte:** se trabaja por separado durante el día; no bloquea esta tanda de código y documentación.
 
-1. Abrir el proyecto en el editor, jugar los 12 días y añadir al repositorio los `.uid` que genere Godot.
-2. Crear `.env` con la clave de Anthropic y probar el asistente.
-3. Verificar los cierres aproximados de Lehman y enlazar las fuentes de las noticias que no tienen enlace.
-4. Revisar y ajustar las reglas provisionales de `datos/reglas_demo.json`.
-
-**Importante para colaborar:** el calendario va del 05/09/2008 al 16/09/2008. El perfil, los gastos y otros valores son datos de prototipo. Conviene mantenerlos identificados como provisionales hasta contrastarlos con el GDD. Antes de editar, sincronizad el repositorio y evitad trabajar simultáneamente en los mismos scripts.
-
+**Nota para el equipo:** el contenido y las reglas son todavía de prototipo. Antes de editar, sincronizad Git y acordad quién trabaja en cada sistema para evitar conflictos. La lista de cambios y pruebas conocidas está en el seguimiento técnico; este documento resume el estado actual, no certifica que todo esté validado.

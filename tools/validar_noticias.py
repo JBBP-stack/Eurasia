@@ -32,7 +32,7 @@ prohibidos = set(anonimizacion["terminos_prohibidos"]) | {e["real"] for e in ano
 ids = set()
 falsas = 0
 archivo = 0
-sin_enlace = []
+referencias_pendientes = []
 for noticia in noticias:
     identificador = noticia["id"]
     assert identificador not in ids, f"ID duplicado: {identificador}"
@@ -58,8 +58,13 @@ for noticia in noticias:
         assert origen["titulo_real"].strip() and origen["fuente"].strip(), identificador
         if origen["fuente_url"]:
             assert origen["fuente_url"].startswith("https://"), identificador
-        else:
-            sin_enlace.append(identificador)
+        fuente = str(origen.get("fuente", "")).strip().lower()
+        if (
+            not fuente
+            or "referencia bibliográfica pendiente" in fuente
+            or "pendiente de concretar" in fuente
+        ):
+            referencias_pendientes.append(identificador)
     pregunta_id = noticia["pregunta_id"]
     if pregunta_id:
         assert pregunta_id in preguntas, identificador
@@ -142,6 +147,6 @@ print(f"Datos coherentes: {len(noticias)} noticias ({archivo} de hemeroteca, {fa
 no_verificados = [a["id"] for a in mercado["activos"] if not a.get("verificado")]
 if no_verificados:
     print(f"AVISO: series de precios no verificadas del todo: {', '.join(no_verificados)}.")
-if sin_enlace:
-    print(f"AVISO: {len(sin_enlace)} noticias reales sin enlace a la fuente primaria.")
+if referencias_pendientes:
+    print(f"AVISO: {len(referencias_pendientes)} noticias reales necesitan concretar su referencia; la URL es opcional.")
 print("Falta auditoría humana de fuentes, licencias y equivalencias reales de los activos.")

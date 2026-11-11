@@ -27,7 +27,7 @@ func _al_salir_del_rango(cuerpo: Node2D) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not _jugador_cerca:
+	if not _jugador_cerca or GestorPartida.hay_ventanas_abiertas():
 		return
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_E:
 		get_viewport().set_input_as_handled()

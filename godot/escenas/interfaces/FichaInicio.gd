@@ -2,6 +2,9 @@ extends CanvasLayer
 ## Ficha inicial del personaje. Se muestra sobre la habitación al arrancar el juego.
 ## Si existe una partida guardada permite continuarla o empezar una nueva.
 
+var _confirmacion_nueva: ConfirmationDialog
+
+
 func _ready() -> void:
 	if EstadoJuego.partida_iniciada:
 		queue_free()
@@ -60,13 +63,6 @@ func _crear_ficha() -> void:
 	_agregar_dato(datos, "Género", str(persona.get("genero", "Por definir")))
 	_agregar_dato(datos, "País", str(persona.get("pais_ficticio", "Por definir")))
 	_agregar_dato(datos, "Clase social", str(persona.get("clase_social", "Por definir")))
-	# La fecha histórica real es interna: el jugador solo ve el día de partida.
-	_agregar_dato(datos, "Fecha", EstadoJuego.etiqueta_dia() + " de la partida")
-	_agregar_dato(datos, "Ingreso mensual", "%s €" % EstadoJuego.euros(int(persona.get("ingreso_mensual_centimos", 0))))
-	_agregar_dato(datos, "Dinero en el banco", "%s €" % EstadoJuego.euros(EstadoJuego.saldo_bancario_centimos))
-	_agregar_dato(datos, "Efectivo", "%s €" % EstadoJuego.euros(EstadoJuego.efectivo_centimos))
-	_agregar_dato(datos, "Inversiones", "%s €" % EstadoJuego.euros(EstadoJuego.valor_cartera_centimos()))
-	_agregar_dato(datos, "Patrimonio total", "%s €" % EstadoJuego.euros(EstadoJuego.patrimonio_total_centimos()))
 
 	var retrato := PanelContainer.new()
 	retrato.custom_minimum_size = Vector2(170, 190)
@@ -80,7 +76,7 @@ func _crear_ficha() -> void:
 	retrato.add_child(marcador_retrato)
 
 	var nota := Label.new()
-	nota.text = "Perfil provisional · retrato pendiente"
+	nota.text = "Perfil provisional · el progreso se guarda automáticamente"
 	nota.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	contenido.add_child(nota)
 
@@ -88,8 +84,8 @@ func _crear_ficha() -> void:
 	botones.add_theme_constant_override("separation", 12)
 	contenido.add_child(botones)
 
-	# Hay partida en curso si ya se avanzó algún día, se operó o se respondió alguna decisión.
-	var hay_partida := EstadoJuego.dia_de_partida > 1 or not SistemaFinanciero.movimientos.is_empty() or not NoticiasManager.respuestas.is_empty()
+	# La partida también puede tener progreso guardado durante el primer día.
+	var hay_partida := GestorPartida.hay_progreso_guardado()
 	var empezar := Button.new()
 	empezar.text = "Continuar partida" if hay_partida else "Comenzar partida"
 	empezar.custom_minimum_size = Vector2(0, 44)
@@ -102,8 +98,16 @@ func _crear_ficha() -> void:
 		nueva.text = "Nueva partida"
 		nueva.custom_minimum_size = Vector2(0, 44)
 		nueva.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		nueva.pressed.connect(_nueva_partida)
+		nueva.pressed.connect(_pedir_confirmacion_nueva_partida)
 		botones.add_child(nueva)
+
+		_confirmacion_nueva = ConfirmationDialog.new()
+		_confirmacion_nueva.title = "Empezar una nueva partida"
+		_confirmacion_nueva.dialog_text = "Se reiniciará el progreso guardado. ¿Quieres continuar?"
+		_confirmacion_nueva.ok_button_text = "Empezar nueva partida"
+		_confirmacion_nueva.cancel_button_text = "Cancelar"
+		_confirmacion_nueva.confirmed.connect(_nueva_partida)
+		add_child(_confirmacion_nueva)
 
 
 func _agregar_dato(contenedor: VBoxContainer, nombre: String, valor: String) -> void:
@@ -120,3 +124,8 @@ func _comenzar() -> void:
 func _nueva_partida() -> void:
 	# reiniciar_partida() recarga la habitación y vuelve a mostrar esta ficha con los valores iniciales.
 	GestorPartida.reiniciar_partida()
+
+
+func _pedir_confirmacion_nueva_partida() -> void:
+	if _confirmacion_nueva:
+		_confirmacion_nueva.popup_centered()

@@ -99,7 +99,7 @@ func _restablecer_valores_iniciales() -> void:
 
 ## Un guardado de otro calendario o versión se aparta (renombrado) y la partida empieza de cero.
 ## Así un cambio de escenario no deja el juego sin poder guardar.
-static func archivar_guardado_incompatible(ruta: String, motivo: String) -> void:
+func archivar_guardado_incompatible(ruta: String, motivo: String) -> void:
 	var destino := ruta + ".incompatible.bak"
 	if FileAccess.file_exists(destino):
 		DirAccess.remove_absolute(destino)

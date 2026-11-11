@@ -38,24 +38,23 @@ Al finalizar el juego sí tendrá acceso a toda la información real.
 
 ## 3. Inicio de la partida
 
-Al comenzar, aparecerá una ficha con información sobre el personaje asignado:
+Al comenzar, aparecerá la ficha **«Tu personaje»**, con retrato provisional y únicamente estos datos personales:
 
 - Edad.
 - Género.
 - País de residencia.
-- Fecha ficticia o día de partida.
-- Ingreso mensual.
-- Dinero disponible en el banco.
-- Inversiones existentes.
-- Patrimonio total.
+- Clase social.
 
-Para la primera demo, el personaje tendrá un patrimonio inicial de 30.000 €, distribuido en:
+La ficha no mostrará fecha, salario, cuenta, efectivo, inversiones ni patrimonio. Esa información económica estará disponible en el HUD y en el portátil una vez iniciada la partida.
+
+El estado financiero inicial de la demo tendrá un valor objetivo provisional de 30.000 €, distribuido así:
 
 | Concepto | Cantidad |
 |---|---:|
 | Cuenta bancaria | 15.000 € |
-| Inversiones | 13.000 € |
-| Patrimonio total | 30.000 € |
+| Efectivo | 2.000 € |
+| Inversiones | Aproximadamente 13.000 € |
+| **Patrimonio total** | **30.000 €** |
 
 Las inversiones estarán distribuidas inicialmente entre tres empresas de la época, representadas mediante nombres ficticios.
 
@@ -90,13 +89,12 @@ Su funcionamiento será el siguiente:
 
 1. El juego determina las noticias correspondientes al día histórico.
 2. Se programa la llegada de los periódicos durante el día.
-3. Cuando llega uno, aparece una notificación de nuevo correo.
-4. Una pequeña animación representa la llegada del periódico.
-5. El jugador se acerca al buzón o puerta y pulsa la tecla de interacción.
-6. El periódico se recoge y puede abrirse para leer su contenido.
-7. La noticia queda almacenada en una memoria o registro personal.
-8. El jugador podrá volver a consultarla sin desplazarse físicamente al buzón.
-9. Cuando se haya completado el reparto, aparecerá una notificación indicando que no llegarán más periódicos ese día.
+3. Cuando llega uno, aparece un aviso en el HUD y el periódico cae con una pequeña animación en el buzón.
+4. El jugador se acerca al buzón y pulsa E. El periódico se recoge con una animación breve y el HUD confirma el titular.
+5. El botón «Buzón» o la tecla W abre la lista de periódicos recogidos y la hemeroteca; seleccionar un titular permite leerlo.
+6. Los periódicos recogidos quedan guardados y se pueden volver a consultar desde ese panel.
+7. Las preguntas y sus opciones aparecen por separado en el panel de decisiones, accesible con D; no forman parte del texto del artículo.
+8. Al terminar el reparto, aparece un aviso indicando que no llegarán más periódicos ese día.
 
 El sistema distinguirá entre noticias programadas, entregadas, recogidas y leídas.
 
@@ -221,6 +219,8 @@ La nevera permitirá consultar la comida disponible, consumirla y comprar más.
 Si el personaje pasa varios días sin comer, su salud o calidad de vida disminuirá.
 
 La falta prolongada de alimentación podrá provocar su muerte y terminar la partida.
+
+En el prototipo actual, la primera noche sin comer resta 15 puntos de salud; la pérdida sube 5 puntos por noche consecutiva hasta un máximo de 30. Comer reinicia la racha y, al descansar, permite recuperar hasta 10 puntos de salud. Son reglas provisionales y se ajustarán tras probar el ritmo de varios días.
 
 ### Necesidades fisiológicas
 

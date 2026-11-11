@@ -11,6 +11,37 @@ func raciones_por_paquete() -> int:
 	return maxi(1, Reglas.entero("alimentacion/raciones_por_paquete", 7))
 
 
+func perdida_salud_proxima_noche() -> int:
+	if EstadoJuego.comido_hoy:
+		return 0
+	return perdida_salud_por_dias_sin_comer(EstadoJuego.dias_sin_comer + 1)
+
+
+func perdida_salud_por_dias_sin_comer(dias: int) -> int:
+	if dias <= 0:
+		return 0
+	var base := Reglas.entero("alimentacion/perdida_salud_dia_sin_comer", 15)
+	var incremento := Reglas.entero("alimentacion/incremento_perdida_salud_por_dia_sin_comer", 5)
+	var maximo := Reglas.entero("alimentacion/perdida_salud_maxima_dia_sin_comer", 30)
+	return mini(maximo, base + (dias - 1) * incremento)
+
+
+func etiqueta_estado_hambre() -> String:
+	if EstadoJuego.comido_hoy:
+		return "Has comido hoy"
+	if EstadoJuego.dias_sin_comer <= 0:
+		return "Aún no has comido hoy" if EstadoJuego.comida_disponible > 0 else "Nevera vacía"
+	match EstadoJuego.dias_sin_comer:
+		1:
+			return "Hambre"
+		2:
+			return "Debilidad"
+		3:
+			return "Mareos"
+		_:
+			return "Riesgo grave por falta de comida"
+
+
 func comer() -> Dictionary:
 	if EstadoJuego.partida_terminada:
 		return {"ok": false, "mensaje": "La partida ha terminado."}
@@ -22,7 +53,7 @@ func comer() -> Dictionary:
 	EstadoJuego.comido_hoy = true
 	EstadoJuego.guardar_estado()
 	EstadoJuego.estado_vital_actualizado.emit()
-	return {"ok": true, "mensaje": "Has comido. Te quedan %d raciones." % EstadoJuego.comida_disponible}
+	return {"ok": true, "mensaje": "Has comido hoy. Te quedan %d raciones; si mantienes las comidas, recuperarás salud al descansar." % EstadoJuego.comida_disponible}
 
 
 func comprar_raciones(cantidad: int) -> Dictionary:
@@ -51,12 +82,15 @@ func procesar_fin_de_dia() -> Array[String]:
 		var recuperacion := Reglas.entero("alimentacion/recuperacion_salud_dia_comiendo", 10)
 		if EstadoJuego.salud < salud_maxima:
 			EstadoJuego.salud = mini(salud_maxima, EstadoJuego.salud + recuperacion)
-			eventos.append("Has comido bien: tu salud mejora hasta %d." % EstadoJuego.salud)
+			eventos.append("Comiste y descansaste: recuperas %d de salud (%d/%d)." % [recuperacion, EstadoJuego.salud, salud_maxima])
+		else:
+			eventos.append("Comiste y descansaste. Tu salud se mantiene en %d/%d." % [EstadoJuego.salud, salud_maxima])
 	else:
 		EstadoJuego.dias_sin_comer += 1
-		var perdida := Reglas.entero("alimentacion/perdida_salud_dia_sin_comer", 20)
+		var perdida := perdida_salud_por_dias_sin_comer(EstadoJuego.dias_sin_comer)
 		EstadoJuego.salud = maxi(0, EstadoJuego.salud - perdida)
-		eventos.append("Ayer no comiste (%d día(s) seguidos). Salud: %d." % [EstadoJuego.dias_sin_comer, EstadoJuego.salud])
+		var efecto := "Hambre" if EstadoJuego.dias_sin_comer == 1 else etiqueta_estado_hambre()
+		eventos.append("Ayer no comiste. %s: −%d salud (%d/%d)." % [efecto, perdida, EstadoJuego.salud, salud_maxima])
 	EstadoJuego.comido_hoy = false
 	EstadoJuego.estado_vital_actualizado.emit()
 	return eventos

@@ -1,6 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://escenas/habitacion/Nevera.gd" id="1_nevera"]
+[ext_resource type="Texture2D" path="res://assets/objetos/nevera1.png" id="2_nevera"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rango"]
 radius = 48.0
@@ -17,25 +18,10 @@ script = ExtResource("1_nevera")
 [node name="Rango" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_rango")
 
-[node name="Carcasa" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-17, -26, 17, -26, 17, 26, -17, 26)
-color = Color(0.58, 0.68, 0.72, 1)
-
-[node name="PuertaSuperior" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-14, -23, 14, -23, 14, -5, -14, -5)
-color = Color(0.72, 0.8, 0.82, 1)
-
-[node name="PuertaInferior" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-14, -2, 14, -2, 14, 23, -14, 23)
-color = Color(0.66, 0.75, 0.78, 1)
-
-[node name="TiradorSuperior" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(9, -19, 11, -19, 11, -10, 9, -10)
-color = Color(0.2, 0.25, 0.28, 1)
-
-[node name="TiradorInferior" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(9, 4, 11, 4, 11, 17, 9, 17)
-color = Color(0.2, 0.25, 0.28, 1)
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_nevera")
+scale = Vector2(0.09, 0.09)
 
 [node name="Bloqueo" type="StaticBody2D" parent="."]
 collision_layer = 1

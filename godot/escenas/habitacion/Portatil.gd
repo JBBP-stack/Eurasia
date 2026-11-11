@@ -35,7 +35,7 @@ func _actualizar_indicador(_cantidad: int) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not _jugador_cerca:
+	if not _jugador_cerca or GestorPartida.hay_ventanas_abiertas():
 		return
 	if event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_E:
 		_consultar_estado()

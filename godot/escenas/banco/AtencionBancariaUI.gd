@@ -81,7 +81,7 @@ func _crear_interfaz() -> void:
 	columna.add_child(_texto)
 
 	_continuar = Label.new()
-	_continuar.text = "▼ clic, E o Intro para continuar"
+	_continuar.text = "▼ clic, E o Intro para continuar · Esc para salir"
 	_continuar.modulate = Color(1, 1, 1, 0.6)
 	columna.add_child(_continuar)
 

@@ -8,6 +8,8 @@ var _total_inversiones: Label
 var _lista_inversiones: VBoxContainer
 var _patrimonio_total: Label
 var _vital: Label
+var _barra_salud: ProgressBar
+var _comida: Label
 var _boton_decisiones: Button
 var _mensaje: Label
 var _temporizador_mensaje: Timer
@@ -20,6 +22,7 @@ func _ready() -> void:
 	_crear_interfaz()
 	EstadoJuego.dia_cambiado.connect(_al_cambiar_dia)
 	NoticiasManager.decision_resuelta.connect(_al_resolver_decision)
+	NoticiasManager.noticia_entregada.connect(_al_llegar_periodico)
 	SistemaFinanciero.finanzas_actualizadas.connect(_al_actualizar_finanzas)
 	SistemaMercado.precios_actualizados.connect(_al_actualizar_finanzas)
 	EstadoJuego.estado_vital_actualizado.connect(_al_actualizar_finanzas)
@@ -41,17 +44,8 @@ func _crear_interfaz() -> void:
 
 	_dia = Label.new()
 	_dia.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_dia.tooltip_text = "Para avanzar al día siguiente, acércate a la cama y pulsa E."
 	panel_dia.add_child(_dia)
-
-	var dormir := Button.new()
-	add_child(dormir)
-	dormir.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
-	dormir.offset_left = 182
-	dormir.offset_top = 12
-	dormir.offset_right = 258
-	dormir.offset_bottom = 48
-	dormir.text = "Dormir"
-	dormir.pressed.connect(_dormir)
 
 	_boton_decisiones = Button.new()
 	add_child(_boton_decisiones)
@@ -86,7 +80,7 @@ func _crear_interfaz() -> void:
 	panel_patrimonio.offset_left = 12
 	panel_patrimonio.offset_top = 58
 	panel_patrimonio.offset_right = 252
-	panel_patrimonio.offset_bottom = 400
+	panel_patrimonio.offset_bottom = 438
 
 	var margen := MarginContainer.new()
 	for lado in ["left", "right", "top", "bottom"]:
@@ -121,8 +115,29 @@ func _crear_interfaz() -> void:
 	contenido.add_child(_patrimonio_total)
 
 	contenido.add_child(HSeparator.new())
+	var fila_salud := HBoxContainer.new()
+	fila_salud.add_theme_constant_override("separation", 6)
+	contenido.add_child(fila_salud)
+	var corazon := TextureRect.new()
+	corazon.texture = load("res://assets/objetos/Corazón-20261108-133000.png") as Texture2D
+	corazon.custom_minimum_size = Vector2(16, 16)
+	corazon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	corazon.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	fila_salud.add_child(corazon)
 	_vital = Label.new()
-	contenido.add_child(_vital)
+	_vital.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_vital.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	fila_salud.add_child(_vital)
+	_barra_salud = ProgressBar.new()
+	_barra_salud.custom_minimum_size = Vector2(0, 12)
+	_barra_salud.show_percentage = false
+	var fondo_salud := StyleBoxFlat.new()
+	fondo_salud.bg_color = Color("#35383b")
+	_barra_salud.add_theme_stylebox_override("background", fondo_salud)
+	contenido.add_child(_barra_salud)
+	_comida = Label.new()
+	_comida.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	contenido.add_child(_comida)
 
 
 func actualizar() -> void:
@@ -136,10 +151,21 @@ func actualizar() -> void:
 	_total_inversiones.text = "Inversiones: %s €" % EstadoJuego.euros(EstadoJuego.valor_cartera_centimos())
 	_patrimonio_total.text = "Total: %s €" % EstadoJuego.euros(EstadoJuego.patrimonio_total_centimos())
 
-	_vital.text = "Salud: %d · Comida: %d raciones%s" % [
-		EstadoJuego.salud,
+	var salud_maxima := Reglas.entero("alimentacion/salud_maxima", 100)
+	_vital.text = "Salud: %d/%d · %s" % [EstadoJuego.salud, salud_maxima, SistemaVida.etiqueta_estado_hambre()]
+	_barra_salud.max_value = salud_maxima
+	_barra_salud.value = EstadoJuego.salud
+	var color_salud := Color("#68bd73")
+	if EstadoJuego.salud <= 30:
+		color_salud = Color("#d85a52")
+	elif EstadoJuego.salud <= 60:
+		color_salud = Color("#e6b94d")
+	var relleno_salud := StyleBoxFlat.new()
+	relleno_salud.bg_color = color_salud
+	_barra_salud.add_theme_stylebox_override("fill", relleno_salud)
+	_comida.text = "Comida: %d raciones · %s" % [
 		EstadoJuego.comida_disponible,
-		"" if EstadoJuego.comido_hoy else " · sin comer hoy"
+		"has comido hoy" if EstadoJuego.comido_hoy else "sin comer hoy"
 	]
 
 	# Solo se listan las posiciones con acciones; el catálogo completo está en el portátil y el banco.
@@ -186,20 +212,17 @@ func _al_recibir_resumen_dia(eventos: Array[String]) -> void:
 	mostrar_mensaje_temporal("%s · %s" % [EstadoJuego.etiqueta_dia(), " ".join(eventos)], 8.0)
 
 
+func _al_llegar_periodico(_noticia_id: String, ultimo_del_dia: bool) -> void:
+	var aviso := "¡Nuevo periódico en el buzón! Acércate y pulsa E para recogerlo."
+	if ultimo_del_dia:
+		aviso += " El reparto de hoy ha terminado."
+	mostrar_mensaje_temporal(aviso, 5.0)
+
+
 func _abrir_decisiones() -> void:
 	var interfaz := get_tree().get_first_node_in_group("decisiones_ui")
 	if interfaz != null and not GestorPartida.hay_ventanas_abiertas():
 		interfaz.call("abrir_decisiones")
-
-
-func _dormir() -> void:
-	if GestorPartida.hay_ventanas_abiertas():
-		mostrar_mensaje_temporal("Cierra la ventana abierta antes de dormir.")
-		return
-	if NoticiasManager.avanzar_dia():
-		mostrar_mensaje_temporal("Has pasado a %s." % EstadoJuego.etiqueta_dia())
-	else:
-		mostrar_mensaje_temporal(NoticiasManager.motivo_no_puede_dormir())
 
 
 func mostrar_mensaje_temporal(texto: String, segundos: float = 4.0) -> void:
