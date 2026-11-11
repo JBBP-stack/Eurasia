@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drr35ca0l71xt"
-path="res://.godot/imported/rodapies1.png-7b85b1323cd10308532fb67a6d913f74.ctex"
+uid="uid://b2kwfhc1rfq14"
+path="res://.godot/imported/esquina_sup_izq_rp.png-eaa24282bda0a9ae88547c334b0a2f84.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/escenarios/rodapies1.png"
-dest_files=["res://.godot/imported/rodapies1.png-7b85b1323cd10308532fb67a6d913f74.ctex"]
+source_file="res://assets/escenarios/esquina_sup_izq_rp.png"
+dest_files=["res://.godot/imported/esquina_sup_izq_rp.png-eaa24282bda0a9ae88547c334b0a2f84.ctex"]
 
 [params]
 
