@@ -11,6 +11,16 @@
 [ext_resource type="PackedScene" path="res://escenas/interfaces/DecisionesUI.tscn" id="9_decisiones"]
 [ext_resource type="PackedScene" path="res://escenas/banco/AtencionBancariaUI.tscn" id="10_atencion"]
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3lp02"]
+texture = ExtResource("5_7fbvq")
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_62odp"]
+sources/0 = SubResource("TileSetAtlasSource_3lp02")
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_horizontal"]
 size = Vector2(286, 14)
 
