@@ -387,7 +387,7 @@ position = Vector2(250, 42)
 position = Vector2(-2, 113)
 
 [node name="Portatil" parent="." unique_id=627521874 instance=ExtResource("8_portatil")]
-position = Vector2(190, 120)
+position = Vector2(286, 109)
 
 [node name="Nevera" parent="." unique_id=843991717 instance=ExtResource("9_nevera")]
 position = Vector2(263, 302)
@@ -407,12 +407,13 @@ position = Vector2(142, 262)
 
 [node name="PuertaBanco" parent="." unique_id=1737794248 instance=ExtResource("13_puerta_banco")]
 position = Vector2(143, -7)
+scale = Vector2(0.045, 0.045)
 
 [node name="Telefono" parent="." unique_id=637491637 instance=ExtResource("14_telefono")]
 position = Vector2(14, 317)
 
 [node name="Jugador" parent="." unique_id=1196908318 instance=ExtResource("3_xym36")]
-position = Vector2(100, 102)
+position = Vector2(118, 132)
 
 [node name="Pared izquierda" type="StaticBody2D" parent="." unique_id=1980136408]
 position = Vector2(100, 102)
