@@ -66,7 +66,7 @@ func _restablecer_valores_iniciales() -> void:
 		"edad": 30,
 		"genero": "Hombre",
 		"pais_ficticio": "República de Liria",
-		"clase_social": "Clase media (provisional)",
+		"clase_social": "Clase media",
 		"ingreso_mensual_centimos": 200_000
 	}
 	# Situación inicial (reglas_demo.json): 15.000 € en cuenta, 2.000 € en efectivo y ~13.000 € invertidos.

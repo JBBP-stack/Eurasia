@@ -2,6 +2,8 @@ extends CanvasLayer
 ## Ficha inicial del personaje. Se muestra sobre la habitación al arrancar el juego.
 ## Si existe una partida guardada permite continuarla o empezar una nueva.
 
+const RUTA_RETRATO := "res://assets/personaje/jugador_idle_abajo_64x96.png"
+
 var _confirmacion_nueva: ConfirmationDialog
 
 
@@ -65,18 +67,23 @@ func _crear_ficha() -> void:
 	_agregar_dato(datos, "Clase social", str(persona.get("clase_social", "Por definir")))
 
 	var retrato := PanelContainer.new()
-	retrato.custom_minimum_size = Vector2(170, 190)
+	retrato.custom_minimum_size = Vector2(170, 210)
 	retrato.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	fila.add_child(retrato)
 
-	var marcador_retrato := Label.new()
-	marcador_retrato.text = "Retrato\nprovisional"
-	marcador_retrato.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	marcador_retrato.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	retrato.add_child(marcador_retrato)
+	# Sprite de 64x96 a escala x2 exacta para que el pixel art quede nítido.
+	var imagen_retrato := TextureRect.new()
+	imagen_retrato.texture = load(RUTA_RETRATO) as Texture2D
+	imagen_retrato.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	imagen_retrato.custom_minimum_size = Vector2(128, 192)
+	imagen_retrato.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	imagen_retrato.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	imagen_retrato.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+	imagen_retrato.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	retrato.add_child(imagen_retrato)
 
 	var nota := Label.new()
-	nota.text = "Perfil provisional · el progreso se guarda automáticamente"
+	nota.text = "El progreso se guarda automáticamente"
 	nota.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	contenido.add_child(nota)
 
