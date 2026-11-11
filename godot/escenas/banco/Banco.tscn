@@ -1,12 +1,22 @@
-[gd_scene format=3]
+[gd_scene format=4 uid="uid://8ugpdspq8vny"]
 
 [ext_resource type="PackedScene" uid="uid://dpjo5ovx45rkc" path="res://escenas/personaje/jugador.tscn" id="1_jugador"]
 [ext_resource type="PackedScene" path="res://escenas/interfaces/HUDHabitacion.tscn" id="2_hud"]
 [ext_resource type="PackedScene" path="res://escenas/interfaces/NoticiasUI.tscn" id="3_noticias"]
-[ext_resource type="Script" path="res://escenas/banco/BancoSuelo.gd" id="4_suelo"]
+[ext_resource type="Texture2D" uid="uid://bsrunq3vodtdt" path="res://assets/escenarios/suelo_banco.png" id="5_7fbvq"]
 [ext_resource type="PackedScene" path="res://escenas/habitacion/PuertaBanco.tscn" id="5_puerta"]
 [ext_resource type="PackedScene" path="res://escenas/banco/BancoUI.tscn" id="6_banco_ui"]
-[ext_resource type="Script" path="res://escenas/banco/PuntoBanco.gd" id="7_punto_banco"]
+[ext_resource type="Script" uid="uid://bcdkl86u1jlpm" path="res://escenas/banco/PuntoBanco.gd" id="7_punto_banco"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3lp02"]
+texture = ExtResource("5_7fbvq")
+0:0/0 = 0
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_62odp"]
+sources/0 = SubResource("TileSetAtlasSource_3lp02")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_horizontal"]
 size = Vector2(286, 14)
@@ -14,89 +24,85 @@ size = Vector2(286, 14)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vertical"]
 size = Vector2(14, 356)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_mostrador"]
-size = Vector2(58, 16)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_empleado"]
 radius = 9.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cajero"]
-size = Vector2(34, 48)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_atencion"]
 radius = 44.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mostrador"]
+size = Vector2(58, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cajero"]
+size = Vector2(34, 48)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_cajero_rango"]
 radius = 44.0
 
-[node name="Banco" type="Node2D"]
+[node name="Banco" type="Node2D" unique_id=752276548]
 
-[node name="NoticiasUI" parent="." instance=ExtResource("3_noticias")]
+[node name="NoticiasUI" parent="." unique_id=440181229 instance=ExtResource("3_noticias")]
 
-[node name="HUDHabitacion" parent="." instance=ExtResource("2_hud")]
+[node name="HUDHabitacion" parent="." unique_id=26267560 instance=ExtResource("2_hud")]
 
-[node name="BancoUI" parent="." instance=ExtResource("6_banco_ui")]
+[node name="BancoUI" parent="." unique_id=588204739 instance=ExtResource("6_banco_ui")]
 
-[node name="Suelo" type="Node2D" parent="."]
-script = ExtResource("4_suelo")
+[node name="Suelo_banco" type="TileMapLayer" parent="." unique_id=1174745899]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAABAAAAAAABAAAAAAABAAEAAAABAAEAAAACAAAAAAAAAAAAAAACAAEAAAAAAAEAAAADAAAAAAABAAAAAAADAAEAAAABAAEAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAEAAAAFAAAAAAABAAAAAAAFAAEAAAABAAEAAAAGAAAAAAAAAAAAAAAGAAEAAAAAAAEAAAAHAAAAAAABAAAAAAAHAAEAAAABAAEAAAAIAAAAAAAAAAAAAAAIAAEAAAAAAAEAAAAJAAAAAAABAAAAAAAJAAEAAAABAAEAAAAKAAAAAAAAAAAAAAAKAAEAAAAAAAEAAAALAAAAAAABAAAAAAALAAEAAAABAAEAAAAMAAAAAAAAAAAAAAAMAAEAAAAAAAEAAAANAAAAAAABAAAAAAANAAEAAAABAAEAAAAOAAAAAAAAAAAAAAAOAAEAAAAAAAEAAAAPAAAAAAABAAAAAAAPAAEAAAABAAEAAAAQAAAAAAAAAAAAAAAQAAEAAAAAAAEAAAARAAAAAAABAAAAAAARAAEAAAABAAEAAAAOAAIAAAAAAAAAAAAOAAMAAAAAAAEAAAAPAAIAAAABAAAAAAAPAAMAAAABAAEAAAAOAAQAAAAAAAAAAAAOAAUAAAAAAAEAAAAPAAQAAAABAAAAAAAPAAUAAAABAAEAAAAQAAQAAAAAAAAAAAAQAAUAAAAAAAEAAAARAAQAAAABAAAAAAARAAUAAAABAAEAAAAQAAIAAAAAAAAAAAAQAAMAAAAAAAEAAAARAAIAAAABAAAAAAARAAMAAAABAAEAAAAQAAYAAAAAAAAAAAAQAAcAAAAAAAEAAAARAAYAAAABAAAAAAARAAcAAAABAAEAAAAQAAgAAAAAAAAAAAAQAAkAAAAAAAEAAAARAAgAAAABAAAAAAARAAkAAAABAAEAAAAQAAoAAAAAAAAAAAAQAAsAAAAAAAEAAAARAAoAAAABAAAAAAARAAsAAAABAAEAAAAQAAwAAAAAAAAAAAAQAA0AAAAAAAEAAAARAAwAAAABAAAAAAARAA0AAAABAAEAAAAQAA4AAAAAAAAAAAAQAA8AAAAAAAEAAAARAA4AAAABAAAAAAARAA8AAAABAAEAAAAQABAAAAAAAAAAAAAQABEAAAAAAAEAAAARABAAAAABAAAAAAARABEAAAABAAEAAAAQABIAAAAAAAAAAAAQABMAAAAAAAEAAAARABIAAAABAAAAAAARABMAAAABAAEAAAAQABQAAAAAAAAAAAAQABUAAAAAAAEAAAARABQAAAABAAAAAAARABUAAAABAAEAAAAOABQAAAAAAAAAAAAOABUAAAAAAAEAAAAPABQAAAABAAAAAAAPABUAAAABAAEAAAAOABIAAAAAAAAAAAAOABMAAAAAAAEAAAAPABIAAAABAAAAAAAPABMAAAABAAEAAAAOABAAAAAAAAAAAAAOABEAAAAAAAEAAAAPABAAAAABAAAAAAAPABEAAAABAAEAAAAOAA4AAAAAAAAAAAAOAA8AAAAAAAEAAAAPAA4AAAABAAAAAAAPAA8AAAABAAEAAAAOAAwAAAAAAAAAAAAOAA0AAAAAAAEAAAAPAAwAAAABAAAAAAAPAA0AAAABAAEAAAAOAAoAAAAAAAAAAAAOAAsAAAAAAAEAAAAPAAoAAAABAAAAAAAPAAsAAAABAAEAAAAOAAgAAAAAAAAAAAAOAAkAAAAAAAEAAAAPAAgAAAABAAAAAAAPAAkAAAABAAEAAAAOAAYAAAAAAAAAAAAOAAcAAAAAAAEAAAAPAAYAAAABAAAAAAAPAAcAAAABAAEAAAAMAAQAAAAAAAAAAAAMAAUAAAAAAAEAAAANAAQAAAABAAAAAAANAAUAAAABAAEAAAAMAAIAAAAAAAAAAAAMAAMAAAAAAAEAAAANAAIAAAABAAAAAAANAAMAAAABAAEAAAAKAAIAAAAAAAAAAAAKAAMAAAAAAAEAAAALAAIAAAABAAAAAAALAAMAAAABAAEAAAAIAAIAAAAAAAAAAAAIAAMAAAAAAAEAAAAJAAIAAAABAAAAAAAJAAMAAAABAAEAAAAGAAIAAAAAAAAAAAAGAAMAAAAAAAEAAAAHAAIAAAABAAAAAAAHAAMAAAABAAEAAAAEAAIAAAAAAAAAAAAEAAMAAAAAAAEAAAAFAAIAAAABAAAAAAAFAAMAAAABAAEAAAACAAIAAAAAAAAAAAACAAMAAAAAAAEAAAADAAIAAAABAAAAAAADAAMAAAABAAEAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAEAAAABAAIAAAABAAAAAAABAAMAAAABAAEAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAEAAAABAAQAAAABAAAAAAABAAUAAAABAAEAAAAAAAYAAAAAAAAAAAAAAAcAAAAAAAEAAAABAAYAAAABAAAAAAABAAcAAAABAAEAAAAAAAgAAAAAAAAAAAAAAAkAAAAAAAEAAAABAAgAAAABAAAAAAABAAkAAAABAAEAAAAAAAoAAAAAAAAAAAAAAAsAAAAAAAEAAAABAAoAAAABAAAAAAABAAsAAAABAAEAAAAAAAwAAAAAAAAAAAAAAA0AAAAAAAEAAAABAAwAAAABAAAAAAABAA0AAAABAAEAAAAAAA4AAAAAAAAAAAAAAA8AAAAAAAEAAAABAA4AAAABAAAAAAABAA8AAAABAAEAAAAAABAAAAAAAAAAAAAAABEAAAAAAAEAAAABABAAAAABAAAAAAABABEAAAABAAEAAAAAABIAAAAAAAAAAAAAABMAAAAAAAEAAAABABIAAAABAAAAAAABABMAAAABAAEAAAACABIAAAAAAAAAAAACABMAAAAAAAEAAAADABIAAAABAAAAAAADABMAAAABAAEAAAAEABIAAAAAAAAAAAAEABMAAAAAAAEAAAAFABIAAAABAAAAAAAFABMAAAABAAEAAAAGABIAAAAAAAAAAAAGABMAAAAAAAEAAAAHABIAAAABAAAAAAAHABMAAAABAAEAAAAIABIAAAAAAAAAAAAIABMAAAAAAAEAAAAJABIAAAABAAAAAAAJABMAAAABAAEAAAAKABIAAAAAAAAAAAAKABMAAAAAAAEAAAALABIAAAABAAAAAAALABMAAAABAAEAAAAMABIAAAAAAAAAAAAMABMAAAAAAAEAAAANABIAAAABAAAAAAANABMAAAABAAEAAAAMABQAAAAAAAAAAAAMABUAAAAAAAEAAAANABQAAAABAAAAAAANABUAAAABAAEAAAAKABQAAAAAAAAAAAAKABUAAAAAAAEAAAALABQAAAABAAAAAAALABUAAAABAAEAAAAIABQAAAAAAAAAAAAIABUAAAAAAAEAAAAJABQAAAABAAAAAAAJABUAAAABAAEAAAAGABQAAAAAAAAAAAAGABUAAAAAAAEAAAAHABQAAAABAAAAAAAHABUAAAABAAEAAAAEABQAAAAAAAAAAAAEABUAAAAAAAEAAAAFABQAAAABAAAAAAAFABUAAAABAAEAAAACABQAAAAAAAAAAAACABUAAAAAAAEAAAADABQAAAABAAAAAAADABUAAAABAAEAAAAAABQAAAAAAAAAAAAAABUAAAAAAAEAAAABABQAAAABAAAAAAABABUAAAABAAEAAAACAA4AAAAAAAAAAAACAA8AAAAAAAEAAAADAA4AAAABAAAAAAADAA8AAAABAAEAAAACAAwAAAAAAAAAAAACAA0AAAAAAAEAAAADAAwAAAABAAAAAAADAA0AAAABAAEAAAACAAoAAAAAAAAAAAACAAsAAAAAAAEAAAADAAoAAAABAAAAAAADAAsAAAABAAEAAAACAAgAAAAAAAAAAAACAAkAAAAAAAEAAAADAAgAAAABAAAAAAADAAkAAAABAAEAAAACAAYAAAAAAAAAAAACAAcAAAAAAAEAAAADAAYAAAABAAAAAAADAAcAAAABAAEAAAACAAQAAAAAAAAAAAACAAUAAAAAAAEAAAADAAQAAAABAAAAAAADAAUAAAABAAEAAAAEAAQAAAAAAAAAAAAEAAUAAAAAAAEAAAAFAAQAAAABAAAAAAAFAAUAAAABAAEAAAAGAAQAAAAAAAAAAAAGAAUAAAAAAAEAAAAHAAQAAAABAAAAAAAHAAUAAAABAAEAAAAIAAQAAAAAAAAAAAAIAAUAAAAAAAEAAAAJAAQAAAABAAAAAAAJAAUAAAABAAEAAAAKAAQAAAAAAAAAAAAKAAUAAAAAAAEAAAALAAQAAAABAAAAAAALAAUAAAABAAEAAAAKAAYAAAAAAAAAAAAKAAcAAAAAAAEAAAALAAYAAAABAAAAAAALAAcAAAABAAEAAAAIAAYAAAAAAAAAAAAIAAcAAAAAAAEAAAAJAAYAAAABAAAAAAAJAAcAAAABAAEAAAAGAAYAAAAAAAAAAAAGAAcAAAAAAAEAAAAHAAYAAAABAAAAAAAHAAcAAAABAAEAAAAEAAYAAAAAAAAAAAAEAAcAAAAAAAEAAAAFAAYAAAABAAAAAAAFAAcAAAABAAEAAAAMAAYAAAAAAAAAAAAMAAcAAAAAAAEAAAANAAYAAAABAAAAAAANAAcAAAABAAEAAAAMAAgAAAAAAAAAAAAMAAkAAAAAAAEAAAANAAgAAAABAAAAAAANAAkAAAABAAEAAAAKAAgAAAAAAAAAAAAKAAkAAAAAAAEAAAALAAgAAAABAAAAAAALAAkAAAABAAEAAAAKAAoAAAAAAAAAAAAKAAsAAAAAAAEAAAALAAoAAAABAAAAAAALAAsAAAABAAEAAAAIAAgAAAAAAAAAAAAIAAkAAAAAAAEAAAAJAAgAAAABAAAAAAAJAAkAAAABAAEAAAAGAAgAAAAAAAAAAAAGAAkAAAAAAAEAAAAHAAgAAAABAAAAAAAHAAkAAAABAAEAAAAEAAgAAAAAAAAAAAAEAAkAAAAAAAEAAAAFAAgAAAABAAAAAAAFAAkAAAABAAEAAAAGAAoAAAAAAAAAAAAGAAsAAAAAAAEAAAAHAAoAAAABAAAAAAAHAAsAAAABAAEAAAAGAAwAAAAAAAAAAAAGAA0AAAAAAAEAAAAHAAwAAAABAAAAAAAHAA0AAAABAAEAAAAEAAwAAAAAAAAAAAAEAA0AAAAAAAEAAAAFAAwAAAABAAAAAAAFAA0AAAABAAEAAAAEAA4AAAAAAAAAAAAEAA8AAAAAAAEAAAAFAA4AAAABAAAAAAAFAA8AAAABAAEAAAACABAAAAAAAAAAAAACABEAAAAAAAEAAAADABAAAAABAAAAAAADABEAAAABAAEAAAAEABAAAAAAAAAAAAAEABEAAAAAAAEAAAAFABAAAAABAAAAAAAFABEAAAABAAEAAAAGABAAAAAAAAAAAAAGABEAAAAAAAEAAAAHABAAAAABAAAAAAAHABEAAAABAAEAAAAIABAAAAAAAAAAAAAIABEAAAAAAAEAAAAJABAAAAABAAAAAAAJABEAAAABAAEAAAAIAA4AAAAAAAAAAAAIAA8AAAAAAAEAAAAJAA4AAAABAAAAAAAJAA8AAAABAAEAAAAKAA4AAAAAAAAAAAAKAA8AAAAAAAEAAAALAA4AAAABAAAAAAALAA8AAAABAAEAAAAMAA4AAAAAAAAAAAAMAA8AAAAAAAEAAAANAA4AAAABAAAAAAANAA8AAAABAAEAAAAMABAAAAAAAAAAAAAMABEAAAAAAAEAAAANABAAAAABAAAAAAANABEAAAABAAEAAAAMAAwAAAAAAAAAAAAMAA0AAAAAAAEAAAANAAwAAAABAAAAAAANAA0AAAABAAEAAAAMAAoAAAAAAAAAAAAMAAsAAAAAAAEAAAANAAoAAAABAAAAAAANAAsAAAABAAEAAAAKAAwAAAAAAAAAAAAKAA0AAAAAAAEAAAALAAwAAAABAAAAAAALAA0AAAABAAEAAAAKABAAAAAAAAAAAAAKABEAAAAAAAEAAAALABAAAAABAAAAAAALABEAAAABAAEAAAAIAAoAAAAAAAAAAAAIAAsAAAAAAAEAAAAJAAoAAAABAAAAAAAJAAsAAAABAAEAAAAIAAwAAAAAAAAAAAAIAA0AAAAAAAEAAAAJAAwAAAABAAAAAAAJAA0AAAABAAEAAAAGAA4AAAAAAAAAAAAGAA8AAAAAAAEAAAAHAA4AAAABAAAAAAAHAA8AAAABAAEAAAAEAAoAAAAAAAAAAAAEAAsAAAAAAAEAAAAFAAoAAAABAAAAAAAFAAsAAAABAAEAAAA=")
+tile_set = SubResource("TileSet_62odp")
 
-[node name="Limites" type="StaticBody2D" parent="."]
-collision_layer = 1
-collision_mask = 1
+[node name="Limites" type="StaticBody2D" parent="." unique_id=405710107]
 
-[node name="Superior" type="CollisionShape2D" parent="Limites"]
+[node name="Superior" type="CollisionShape2D" parent="Limites" unique_id=137481387]
 position = Vector2(135, 0)
 shape = SubResource("RectangleShape2D_horizontal")
 
-[node name="Inferior" type="CollisionShape2D" parent="Limites"]
+[node name="Inferior" type="CollisionShape2D" parent="Limites" unique_id=929916475]
 position = Vector2(135, 342)
 shape = SubResource("RectangleShape2D_horizontal")
 
-[node name="Izquierda" type="CollisionShape2D" parent="Limites"]
+[node name="Izquierda" type="CollisionShape2D" parent="Limites" unique_id=2065164137]
 position = Vector2(-8, 171)
 shape = SubResource("RectangleShape2D_vertical")
 
-[node name="Derecha" type="CollisionShape2D" parent="Limites"]
+[node name="Derecha" type="CollisionShape2D" parent="Limites" unique_id=1476128247]
 position = Vector2(278, 171)
 shape = SubResource("RectangleShape2D_vertical")
 
-[node name="PuertaSalida" parent="." instance=ExtResource("5_puerta")]
+[node name="PuertaSalida" parent="." unique_id=1532353322 instance=ExtResource("5_puerta")]
 position = Vector2(138, 16)
 escena_destino = "res://escenas/habitacion/habitacion1.tscn"
 guardar_posicion_habitacion = false
 restaurar_posicion_habitacion = true
 texto_indicador = "E: volver a la habitación"
 
-[node name="Empleado" type="Node2D" parent="."]
+[node name="Empleado" type="Node2D" parent="." unique_id=261026481]
 position = Vector2(55, 142)
 
-[node name="Cabeza" type="Polygon2D" parent="Empleado"]
-polygon = PackedVector2Array(-6, -20, 0, -24, 6, -20, 8, -13, 4, -8, -4, -8, -8, -13)
+[node name="Cabeza" type="Polygon2D" parent="Empleado" unique_id=2064824019]
 color = Color(0.78, 0.6, 0.43, 1)
+polygon = PackedVector2Array(-6, -20, 0, -24, 6, -20, 8, -13, 4, -8, -4, -8, -8, -13)
 
-[node name="Cuerpo" type="Polygon2D" parent="Empleado"]
-polygon = PackedVector2Array(-9, -8, 9, -8, 11, 13, -11, 13)
+[node name="Cuerpo" type="Polygon2D" parent="Empleado" unique_id=983183920]
 color = Color(0.23, 0.34, 0.52, 1)
+polygon = PackedVector2Array(-9, -8, 9, -8, 11, 13, -11, 13)
 
-[node name="BloqueoEmpleado" type="StaticBody2D" parent="Empleado"]
-collision_layer = 1
-collision_mask = 1
+[node name="BloqueoEmpleado" type="StaticBody2D" parent="Empleado" unique_id=387599395]
 
-[node name="Colision" type="CollisionShape2D" parent="Empleado/BloqueoEmpleado"]
+[node name="Colision" type="CollisionShape2D" parent="Empleado/BloqueoEmpleado" unique_id=731703346]
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_empleado")
 
-[node name="ZonaAtencion" type="Area2D" parent="Empleado"]
+[node name="ZonaAtencion" type="Area2D" parent="Empleado" unique_id=808434237]
 collision_layer = 0
-collision_mask = 1
 script = ExtResource("7_punto_banco")
-modo = "ventanilla"
 texto_indicador = "E: hablar con el empleado"
 
-[node name="Rango" type="CollisionShape2D" parent="Empleado/ZonaAtencion"]
+[node name="Rango" type="CollisionShape2D" parent="Empleado/ZonaAtencion" unique_id=1954290813]
 shape = SubResource("CircleShape2D_atencion")
 
-[node name="Indicador" type="Label" parent="Empleado/ZonaAtencion"]
+[node name="Indicador" type="Label" parent="Empleado/ZonaAtencion" unique_id=825449261]
+visible = false
 offset_left = -88.0
 offset_top = -51.0
 offset_right = 88.0
@@ -105,22 +111,20 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 9
 text = "E: hablar con el empleado"
 horizontal_alignment = 1
-visible = false
 
-[node name="Mostrador" type="StaticBody2D" parent="."]
+[node name="Mostrador" type="StaticBody2D" parent="." unique_id=559248186]
 position = Vector2(55, 178)
-collision_layer = 1
-collision_mask = 1
 
-[node name="Frente" type="Polygon2D" parent="Mostrador"]
-polygon = PackedVector2Array(-29, -8, 29, -8, 29, 8, -29, 8)
+[node name="Frente" type="Polygon2D" parent="Mostrador" unique_id=630386581]
 color = Color(0.36, 0.25, 0.18, 1)
+polygon = PackedVector2Array(-29, -8, 29, -8, 29, 8, -29, 8)
 
-[node name="Colision" type="CollisionShape2D" parent="Mostrador"]
+[node name="Colision" type="CollisionShape2D" parent="Mostrador" unique_id=1043684867]
 shape = SubResource("RectangleShape2D_mostrador")
 
-[node name="RotuloAtencion" type="Label" parent="."]
-position = Vector2(25, 194)
+[node name="RotuloAtencion" type="Label" parent="." unique_id=534684075]
+offset_left = 25.0
+offset_top = 194.0
 offset_right = 80.0
 offset_bottom = 20.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -128,39 +132,37 @@ theme_override_font_sizes/font_size = 9
 text = "Atención bancaria"
 horizontal_alignment = 1
 
-[node name="CajeroAutomatico" type="StaticBody2D" parent="."]
+[node name="CajeroAutomatico" type="StaticBody2D" parent="." unique_id=1637842377]
 position = Vector2(238, 160)
-collision_layer = 1
-collision_mask = 1
 
-[node name="Carcasa" type="Polygon2D" parent="CajeroAutomatico"]
-polygon = PackedVector2Array(-17, -24, 17, -24, 17, 24, -17, 24)
+[node name="Carcasa" type="Polygon2D" parent="CajeroAutomatico" unique_id=201239668]
 color = Color(0.25, 0.3, 0.34, 1)
+polygon = PackedVector2Array(-17, -24, 17, -24, 17, 24, -17, 24)
 
-[node name="Pantalla" type="Polygon2D" parent="CajeroAutomatico"]
+[node name="Pantalla" type="Polygon2D" parent="CajeroAutomatico" unique_id=2036173142]
 position = Vector2(0, -10)
-polygon = PackedVector2Array(-11, -6, 11, -6, 11, 5, -11, 5)
 color = Color(0.35, 0.62, 0.62, 1)
+polygon = PackedVector2Array(-11, -6, 11, -6, 11, 5, -11, 5)
 
-[node name="Teclado" type="Polygon2D" parent="CajeroAutomatico"]
+[node name="Teclado" type="Polygon2D" parent="CajeroAutomatico" unique_id=1481600516]
 position = Vector2(0, 9)
-polygon = PackedVector2Array(-9, -3, 9, -3, 9, 3, -9, 3)
 color = Color(0.68, 0.68, 0.64, 1)
+polygon = PackedVector2Array(-9, -3, 9, -3, 9, 3, -9, 3)
 
-[node name="Colision" type="CollisionShape2D" parent="CajeroAutomatico"]
+[node name="Colision" type="CollisionShape2D" parent="CajeroAutomatico" unique_id=1899030271]
 shape = SubResource("RectangleShape2D_cajero")
 
-[node name="ZonaCajero" type="Area2D" parent="CajeroAutomatico"]
+[node name="ZonaCajero" type="Area2D" parent="CajeroAutomatico" unique_id=482866699]
 collision_layer = 0
-collision_mask = 1
 script = ExtResource("7_punto_banco")
 modo = "cajero"
 texto_indicador = "E: usar el cajero"
 
-[node name="Rango" type="CollisionShape2D" parent="CajeroAutomatico/ZonaCajero"]
+[node name="Rango" type="CollisionShape2D" parent="CajeroAutomatico/ZonaCajero" unique_id=344272998]
 shape = SubResource("CircleShape2D_cajero_rango")
 
-[node name="Indicador" type="Label" parent="CajeroAutomatico/ZonaCajero"]
+[node name="Indicador" type="Label" parent="CajeroAutomatico/ZonaCajero" unique_id=205584756]
+visible = false
 offset_left = -82.0
 offset_top = -52.0
 offset_right = 82.0
@@ -169,10 +171,10 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 9
 text = "E: usar el cajero"
 horizontal_alignment = 1
-visible = false
 
-[node name="RotuloCajero" type="Label" parent="."]
-position = Vector2(202, 188)
+[node name="RotuloCajero" type="Label" parent="." unique_id=1544643489]
+offset_left = 202.0
+offset_top = 188.0
 offset_right = 72.0
 offset_bottom = 20.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -180,5 +182,5 @@ theme_override_font_sizes/font_size = 9
 text = "Cajero"
 horizontal_alignment = 1
 
-[node name="Jugador" parent="." instance=ExtResource("1_jugador")]
+[node name="Jugador" parent="." unique_id=1243226511 instance=ExtResource("1_jugador")]
 position = Vector2(110, 38)
