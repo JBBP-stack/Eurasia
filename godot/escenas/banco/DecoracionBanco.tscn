@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://c428333ylj1dy"]
+
+[ext_resource type="Texture2D" uid="uid://hpooydka8chc" path="res://assets/escenarios/decoracion/banco_atlas.png" id="1_atlas"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aplique"]
+atlas = ExtResource("1_atlas")
+region = Rect2(0, 80, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cuerda"]
+atlas = ExtResource("1_atlas")
+region = Rect2(0, 200, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_banco"]
+atlas = ExtResource("1_atlas")
+region = Rect2(100, 200, 144, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_planta"]
+atlas = ExtResource("1_atlas")
+region = Rect2(400, 320, 64, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_banco"]
+size = Vector2(64, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_maceta"]
+size = Vector2(16, 12)
+
+[node name="DecoracionBanco" type="Node2D" unique_id=323653206]
+texture_filter = 1
+
+[node name="ApliqueIzquierdo" type="Sprite2D" parent="." unique_id=1528469011]
+position = Vector2(18, 91)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_aplique")
+
+[node name="ApliqueDerecho" type="Sprite2D" parent="." unique_id=1483539608]
+position = Vector2(260, 94)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_aplique")
+
+[node name="CuerdaIzquierda" type="Sprite2D" parent="." unique_id=1760492523]
+position = Vector2(74, 138)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_cuerda")
+
+[node name="CuerdaDerecha" type="Sprite2D" parent="." unique_id=1213957508]
+position = Vector2(190, 139)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_cuerda")
+
+[node name="BancoEsperaIzquierdo" type="Sprite2D" parent="." unique_id=508491174]
+position = Vector2(46, 280)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_banco")
+
+[node name="BancoEsperaDerecho" type="Sprite2D" parent="." unique_id=788466736]
+position = Vector2(224, 280)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_banco")
+
+[node name="PlantaIzquierda" type="Sprite2D" parent="." unique_id=1225459886]
+position = Vector2(17, 321)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_planta")
+
+[node name="PlantaDerecha" type="Sprite2D" parent="." unique_id=1314877620]
+position = Vector2(253, 321)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_planta")
+
+[node name="BloqueoBancoIzquierdo" type="StaticBody2D" parent="." unique_id=1346686710]
+position = Vector2(46, 280)
+
+[node name="Colision" type="CollisionShape2D" parent="BloqueoBancoIzquierdo" unique_id=1398697918]
+shape = SubResource("RectangleShape2D_banco")
+
+[node name="BloqueoBancoDerecho" type="StaticBody2D" parent="." unique_id=2037873863]
+position = Vector2(224, 280)
+
+[node name="Colision" type="CollisionShape2D" parent="BloqueoBancoDerecho" unique_id=185332255]
+shape = SubResource("RectangleShape2D_banco")
+
+[node name="BloqueoMesa" type="StaticBody2D" parent="." unique_id=948935587]
+position = Vector2(135, 299)
+
+[node name="BloqueoPlantaIzquierda" type="StaticBody2D" parent="." unique_id=1884495212]
+position = Vector2(17, 327)
+
+[node name="Colision" type="CollisionShape2D" parent="BloqueoPlantaIzquierda" unique_id=1665623567]
+shape = SubResource("RectangleShape2D_maceta")
+
+[node name="BloqueoPlantaDerecha" type="StaticBody2D" parent="." unique_id=1086535916]
+position = Vector2(253, 327)
+
+[node name="Colision" type="CollisionShape2D" parent="BloqueoPlantaDerecha" unique_id=1968556654]
+shape = SubResource("RectangleShape2D_maceta")
+
+[node name="BloqueoRevistero" type="StaticBody2D" parent="." unique_id=909557397]
+position = Vector2(258, 208)

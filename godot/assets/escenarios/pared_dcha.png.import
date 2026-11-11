@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://be1eql5n6x4j1"
-path="res://.godot/imported/ordenador.png-d8fc6ed02b26f5f20051b6326030e29c.ctex"
+uid="uid://dhf1wi6e0pe"
+path="res://.godot/imported/pared_dcha.png-5adf620bc8c8b5a409378c3597c8d582.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/objetos/ordenador.png"
-dest_files=["res://.godot/imported/ordenador.png-d8fc6ed02b26f5f20051b6326030e29c.ctex"]
+source_file="res://assets/escenarios/pared_dcha.png"
+dest_files=["res://.godot/imported/pared_dcha.png-5adf620bc8c8b5a409378c3597c8d582.ctex"]
 
 [params]
 

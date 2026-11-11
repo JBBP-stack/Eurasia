@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6g4wvijo13g2"
-path="res://.godot/imported/livro.png-b5479d30bbea52f03e9130c641ff3226.ctex"
+uid="uid://cbsuksauwjbby"
+path="res://.godot/imported/esquinaxd2.png-c85f21cd45b72239257d56519a54b541.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/objetos/livro.png"
-dest_files=["res://.godot/imported/livro.png-b5479d30bbea52f03e9130c641ff3226.ctex"]
+source_file="res://assets/escenarios/esquinaxd2.png"
+dest_files=["res://.godot/imported/esquinaxd2.png-c85f21cd45b72239257d56519a54b541.ctex"]
 
 [params]
 

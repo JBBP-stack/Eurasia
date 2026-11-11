@@ -1,6 +1,11 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://escenas/habitacion/Buzon.gd" id="1_buzon"]
+[ext_resource type="Texture2D" path="res://assets/escenarios/decoracion/habitacion_atlas.png" id="2_atlas"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_buzon"]
+atlas = ExtResource("2_atlas")
+region = Rect2(0, 336, 80, 72)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rango"]
 radius = 44.0
@@ -9,19 +14,15 @@ radius = 44.0
 position = Vector2(250, 170)
 collision_layer = 0
 collision_mask = 1
+texture_filter = 1
 script = ExtResource("1_buzon")
 
 [node name="Rango" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_rango")
 
-[node name="Cuerpo" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-16, -12, 16, -12, 16, 12, -16, 12)
-color = Color(0.42, 0.25, 0.12, 1)
-
-[node name="Ranura" type="Polygon2D" parent="."]
-position = Vector2(0, -4)
-polygon = PackedVector2Array(-10, -1, 10, -1, 10, 1, -10, 1)
-color = Color(0.08, 0.06, 0.04, 1)
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_buzon")
+scale = Vector2(0.5, 0.5)
 
 [node name="Indicador" type="Label" parent="."]
 offset_left = -75.0

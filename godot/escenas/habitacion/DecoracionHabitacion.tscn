@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://dedwndv6llsvu"]
+
+[ext_resource type="Texture2D" uid="uid://by6thqw1hwdb8" path="res://assets/escenarios/decoracion/habitacion_atlas.png" id="1_atlas"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cuadro_ciudad"]
+atlas = ExtResource("1_atlas")
+region = Rect2(0, 0, 80, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cuadro_mapa"]
+atlas = ExtResource("1_atlas")
+region = Rect2(96, 0, 88, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_perchero"]
+atlas = ExtResource("1_atlas")
+region = Rect2(192, 0, 72, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_alfombra"]
+atlas = ExtResource("1_atlas")
+region = Rect2(0, 112, 232, 120)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_escritorio"]
+atlas = ExtResource("1_atlas")
+region = Rect2(240, 104, 160, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_libreria"]
+atlas = ExtResource("1_atlas")
+region = Rect2(240, 200, 224, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mesita"]
+atlas = ExtResource("1_atlas")
+region = Rect2(0, 240, 72, 88)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_planta"]
+atlas = ExtResource("1_atlas")
+region = Rect2(80, 240, 64, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_escritorio"]
+size = Vector2(70, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_libreria"]
+size = Vector2(108, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mesita"]
+size = Vector2(28, 18)
+
+[node name="DecoracionHabitacion" type="Node2D" unique_id=1043281418]
+texture_filter = 1
+
+[node name="CuadroCiudad" type="Sprite2D" parent="." unique_id=486087398]
+position = Vector2(48, 24)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_cuadro_ciudad")
+
+[node name="CuadroMapa" type="Sprite2D" parent="." unique_id=906361399]
+position = Vector2(204, 24)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_cuadro_mapa")
+
+[node name="Perchero" type="Sprite2D" parent="." unique_id=211321957]
+position = Vector2(95, 28)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_perchero")
+
+[node name="Alfombra" type="Sprite2D" parent="." unique_id=663172046]
+position = Vector2(149, 234)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_alfombra")
+
+[node name="Escritorio" type="Sprite2D" parent="." unique_id=2031706220]
+position = Vector2(299, 158)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_escritorio")
+
+[node name="Libreria" type="Sprite2D" parent="." unique_id=697029346]
+position = Vector2(143, 326)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_libreria")
+
+[node name="MesitaConLampara" type="Sprite2D" parent="." unique_id=1429394010]
+position = Vector2(44, 162)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_mesita")
+
+[node name="Planta" type="Sprite2D" parent="." unique_id=870625036]
+position = Vector2(320, 140)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_planta")
+
+[node name="BloqueoEscritorio" type="StaticBody2D" parent="." unique_id=1780350415]
+position = Vector2(301, 156)
+
+[node name="Colision" type="CollisionShape2D" parent="BloqueoEscritorio" unique_id=1457958603]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_escritorio")
+
+[node name="BloqueoLibreria" type="StaticBody2D" parent="." unique_id=1644930306]
+position = Vector2(143, 326)
+
+[node name="Colision" type="CollisionShape2D" parent="BloqueoLibreria" unique_id=1065041221]
+shape = SubResource("RectangleShape2D_libreria")
+
+[node name="BloqueoMesita" type="StaticBody2D" parent="." unique_id=2059077879]
+position = Vector2(45, 160)
+
+[node name="Colision" type="CollisionShape2D" parent="BloqueoMesita" unique_id=1450734271]
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_mesita")
+
+[node name="BloqueoMaceta" type="StaticBody2D" parent="." unique_id=1359783939]
+position = Vector2(322, 152)

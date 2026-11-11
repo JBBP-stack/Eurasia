@@ -163,10 +163,22 @@ func actualizar() -> void:
 	var relleno_salud := StyleBoxFlat.new()
 	relleno_salud.bg_color = color_salud
 	_barra_salud.add_theme_stylebox_override("fill", relleno_salud)
-	_comida.text = "Comida: %d raciones · %s" % [
-		EstadoJuego.comida_disponible,
-		"has comido hoy" if EstadoJuego.comido_hoy else "sin comer hoy"
-	]
+	_comida.tooltip_text = "Comer una ración evita la pérdida de salud de esta noche. Si mantienes las comidas, recuperas salud al descansar."
+	if EstadoJuego.comido_hoy:
+		_comida.text = "Comida: %d raciones · has comido hoy" % EstadoJuego.comida_disponible
+		_comida.modulate = Color("#d7e2d2")
+	else:
+		var perdida_proxima := SistemaVida.perdida_salud_proxima_noche()
+		_comida.text = "Comida: %d raciones\nSi duermes sin comer: −%d salud" % [
+			EstadoJuego.comida_disponible,
+			perdida_proxima
+		]
+		if EstadoJuego.comida_disponible <= 0 or EstadoJuego.salud <= 30:
+			_comida.modulate = Color("#f08b81")
+		elif EstadoJuego.comida_disponible <= 1 or EstadoJuego.dias_sin_comer > 0:
+			_comida.modulate = Color("#f0c96f")
+		else:
+			_comida.modulate = Color("#f2f2f2")
 
 	# Solo se listan las posiciones con acciones; el catálogo completo está en el portátil y el banco.
 	var posiciones: Array[Dictionary] = []

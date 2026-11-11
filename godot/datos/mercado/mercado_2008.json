@@ -10,7 +10,7 @@
 			"equivalencia_real": "Lehman Brothers",
 			"ticker_real": "LEH",
 			"destino_real": "Quiebra el 15/09/2008 (la mayor de la historia de EE. UU.).",
-			"fuente": "Reconstruida: cierres de septiembre de 2008 según prensa (ABC News, CNN, Wikipedia); cierres mensuales anteriores y del 2-8 y 16-18/09 aproximados, pendientes de verificar",
+			"fuente": "Serie parcial, no marcar como verificada. Cierres mensuales ene-2007–ago-2008: base histórica LEH de Strasmore (https://www.strasmore.com/blog/lehman-collapse-market-crash-2008); cierres USD 02–12/09: Washington Post (https://www.washingtonpost.com/archive/business/2008/09/03/dow-retreats-after-250point-gain-to-end-day-in-the-red/e31ea79b-e4a7-4439-bc80-7c5cb8761647/), informe del examinador, vol. 8 (https://www.alston.com/files/docs/LehmanExaminersReportVol8.pdf) y TheStreet (https://www.thestreet.com/markets/stock-market-locks-in-mortgage-bailout-gains-10436331); 15/09: Los Angeles Times (https://www.latimes.com/archives/blogs/money-company/story/2008-09-15/for-some-lehman-debt-holders-pennies-on-the-dollar); 16/09: estudio de NYU (https://w4.stern.nyu.edu/finance/docs/pdfs/Seminars/083m-li.pdf); 17/09: 8-K de Lehman ante la SEC (https://www.sec.gov/Archives/edgar/data/806085/000110465908059900/a08-22764_68k.htm). Precios convertidos a EUR con cierres diarios EUR/USD; falta auditar los datos de 2006 y verificar conversiones/redondeos. El 18/09 no tuvo cotización NYSE: la serie termina el 17/09.",
 			"verificado": false,
 			"precios_centimos": {
 				"2006-08-31": 4990,
@@ -38,19 +38,18 @@
 				"2008-06-30": 1258,
 				"2008-07-31": 1112,
 				"2008-08-29": 1097,
-				"2008-09-02": 1169,
-				"2008-09-03": 1130,
-				"2008-09-04": 1063,
+				"2008-09-02": 1111,
+				"2008-09-03": 1169,
+				"2008-09-04": 1065,
 				"2008-09-05": 1135,
-				"2008-09-08": 1000,
-				"2008-09-09": 557,
+				"2008-09-08": 1002,
+				"2008-09-09": 551,
 				"2008-09-10": 518,
-				"2008-09-11": 296,
-				"2008-09-12": 256,
+				"2008-09-11": 270,
+				"2008-09-12": 257,
 				"2008-09-15": 15,
 				"2008-09-16": 21,
-				"2008-09-17": 12,
-				"2008-09-18": 12
+				"2008-09-17": 10
 			}
 		},
 		{

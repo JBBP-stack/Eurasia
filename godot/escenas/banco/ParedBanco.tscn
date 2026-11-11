@@ -1,0 +1,33 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://assets/escenarios/decoracion/pared_banco_atlas.png" id="1_atlas"]
+[ext_resource type="Script" path="res://escenas/banco/BancoParedes.gd" id="2_script"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pared"]
+texture = ExtResource("1_atlas")
+texture_region_size = Vector2i(16, 16)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_pared"]
+tile_size = Vector2i(16, 16)
+sources/0 = SubResource("TileSetAtlasSource_pared")
+
+[node name="ParedBanco" type="TileMapLayer"]
+texture_filter = 1
+tile_set = SubResource("TileSet_pared")
+script = ExtResource("2_script")
