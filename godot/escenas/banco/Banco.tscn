@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" path="res://escenas/interfaces/HUDHabitacion.tscn" id="2_hud"]
 [ext_resource type="PackedScene" path="res://escenas/interfaces/NoticiasUI.tscn" id="3_noticias"]
 [ext_resource type="Texture2D" uid="uid://bsrunq3vodtdt" path="res://assets/escenarios/suelo_banco.png" id="5_7fbvq"]
-[ext_resource type="PackedScene" path="res://escenas/habitacion/PuertaBanco.tscn" id="5_puerta"]
+[ext_resource type="PackedScene" path="res://escenas/banco/PuertaSalidaBanco.tscn" id="5_puerta"]
 [ext_resource type="PackedScene" path="res://escenas/banco/BancoUI.tscn" id="6_banco_ui"]
 [ext_resource type="Script" uid="uid://bcdkl86u1jlpm" path="res://escenas/banco/PuntoBanco.gd" id="7_punto_banco"]
 [ext_resource type="PackedScene" path="res://escenas/interfaces/InformeFinalUI.tscn" id="8_informe_final"]
@@ -32,13 +32,13 @@ size = Vector2(14, 356)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_empleado"]
 atlas = ExtResource("13_atlas")
-region = Rect2(400.96973, 241.697, 45.45456, 63.03032)
+region = Rect2(424.96973, 241.697, 45.45456, 63.03032)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_empleado"]
 radius = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_atencion"]
-radius = 75.0
+radius = 55.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mostrador"]
 atlas = ExtResource("13_atlas")
@@ -85,28 +85,23 @@ position = Vector2(13, -29)
 [node name="Limites" type="StaticBody2D" parent="." unique_id=405710107]
 
 [node name="Superior" type="CollisionShape2D" parent="Limites" unique_id=137481387]
-position = Vector2(147, -7)
+position = Vector2(147, 41)
 shape = SubResource("RectangleShape2D_horizontal")
 
 [node name="Inferior" type="CollisionShape2D" parent="Limites" unique_id=929916475]
-position = Vector2(143, 358)
+position = Vector2(143, 329)
 shape = SubResource("RectangleShape2D_horizontal")
 
 [node name="Izquierda" type="CollisionShape2D" parent="Limites" unique_id=2065164137]
-position = Vector2(-8, 171)
+position = Vector2(9, 171)
 shape = SubResource("RectangleShape2D_vertical")
 
 [node name="Derecha" type="CollisionShape2D" parent="Limites" unique_id=1476128247]
-position = Vector2(294, 176)
+position = Vector2(279, 176)
 shape = SubResource("RectangleShape2D_vertical")
 
 [node name="PuertaSalida" parent="." unique_id=1532353322 instance=ExtResource("5_puerta")]
-position = Vector2(147, 343)
-scale = Vector2(0.025, 0.025)
-escena_destino = "res://escenas/habitacion/habitacion1.tscn"
-guardar_posicion_habitacion = false
-restaurar_posicion_habitacion = true
-texto_indicador = "E: volver a la habitación"
+position = Vector2(147, 322)
 
 [node name="Empleado" type="Node2D" parent="." unique_id=261026481]
 position = Vector2(127, 133)
@@ -130,7 +125,7 @@ script = ExtResource("7_punto_banco")
 texto_indicador = "E: hablar con Marisa"
 
 [node name="Rango" type="CollisionShape2D" parent="Empleado/ZonaAtencion" unique_id=1954290813]
-position = Vector2(161, -5)
+position = Vector2(-37, -13)
 shape = SubResource("CircleShape2D_atencion")
 
 [node name="Indicador" type="Label" parent="Empleado/ZonaAtencion" unique_id=825449261]
@@ -179,20 +174,20 @@ position = Vector2(242, -22)
 shape = SubResource("RectangleShape2D_cajero")
 
 [node name="ZonaCajero" type="Area2D" parent="CajeroAutomatico" unique_id=482866699]
+position = Vector2(229, -22)
 collision_layer = 0
 script = ExtResource("7_punto_banco")
 modo = "cajero"
 texto_indicador = "E: usar el cajero"
 
 [node name="Rango" type="CollisionShape2D" parent="CajeroAutomatico/ZonaCajero" unique_id=344272998]
-position = Vector2(229, -22)
 shape = SubResource("CircleShape2D_cajero_rango")
 
 [node name="Indicador" type="Label" parent="CajeroAutomatico/ZonaCajero" unique_id=205584756]
 visible = false
-offset_left = -82.0
+offset_left = -100.0
 offset_top = -52.0
-offset_right = 82.0
+offset_right = 64.0
 offset_bottom = -28.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 9
@@ -210,4 +205,4 @@ text = "Cajero"
 horizontal_alignment = 1
 
 [node name="Jugador" parent="." unique_id=1243226511 instance=ExtResource("1_jugador")]
-position = Vector2(113, 276)
+position = Vector2(122, 266)

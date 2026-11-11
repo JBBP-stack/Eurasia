@@ -1,0 +1,45 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://escenas/habitacion/PuertaEscena.gd" id="1_puerta"]
+[ext_resource type="Texture2D" uid="uid://n2sv0qkvaavf" path="res://assets/escenarios/peurta_banco_delbanco.png" id="2_textura"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rango"]
+radius = 50.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_puerta"]
+size = Vector2(56, 50)
+
+[node name="PuertaSalidaBanco" type="Area2D"]
+z_index = 1
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("1_puerta")
+escena_destino = "res://escenas/habitacion/habitacion1.tscn"
+restaurar_posicion_habitacion = true
+texto_indicador = "E: volver a la habitación"
+
+[node name="Rango" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rango")
+
+[node name="Ilustracion" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_textura")
+
+[node name="Bloqueo" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bloqueo"]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_puerta")
+
+[node name="Indicador" type="Label" parent="."]
+offset_left = 34.0
+offset_top = -6.0
+offset_right = 106.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 9
+text = "E: volver a la habitación"
+autowrap_mode = 3
+visible = false

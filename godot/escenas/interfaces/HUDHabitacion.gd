@@ -91,10 +91,19 @@ func _crear_interfaz() -> void:
 	contenido.add_theme_constant_override("separation", 6)
 	margen.add_child(contenido)
 
+	var fila_titulo := HBoxContainer.new()
+	fila_titulo.alignment = BoxContainer.ALIGNMENT_CENTER
+	fila_titulo.add_theme_constant_override("separation", 4)
+	contenido.add_child(fila_titulo)
+	var moneda := TextureRect.new()
+	moneda.texture = load("res://assets/objetos/Moneda-20261108-134315.png") as Texture2D
+	moneda.custom_minimum_size = Vector2(16, 16)
+	moneda.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	moneda.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	fila_titulo.add_child(moneda)
 	var titulo := Label.new()
 	titulo.text = "Patrimonio"
-	titulo.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	contenido.add_child(titulo)
+	fila_titulo.add_child(titulo)
 	contenido.add_child(HSeparator.new())
 
 	_saldo_bancario = Label.new()

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dpjo5ovx45rkc"]
 
 [ext_resource type="Script" uid="uid://ykad3t33b848" path="res://escenas/personaje/jugador.gd" id="1_g6icg"]
+[ext_resource type="Texture2D" uid="uid://kppjjj2omenw" path="res://assets/personaje/jugador_idle_4_direcciones_32x48.png" id="2_sprites"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o42vu"]
 size = Vector2(1.3333335, 1.3333335)
@@ -8,12 +9,11 @@ size = Vector2(1.3333335, 1.3333335)
 [node name="Jugador" type="CharacterBody2D" unique_id=1196908318]
 script = ExtResource("1_g6icg")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=2064118550]
-offset_left = 17.0
-offset_top = 8.0
-offset_right = 33.0
-offset_bottom = 24.0
-color = Color(0.60170525, 1, 0.4275429, 1)
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(25, 0)
+texture = ExtResource("2_sprites")
+hframes = 4
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1229590578]
 zoom = Vector2(2, 2)

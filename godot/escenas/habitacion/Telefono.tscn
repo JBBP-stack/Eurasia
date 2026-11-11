@@ -9,6 +9,7 @@ radius = 32.0
 size = Vector2(54, 36)
 
 [node name="Telefono" type="Area2D"]
+z_index = 1
 collision_layer = 0
 collision_mask = 1
 script = ExtResource("1_telefono")

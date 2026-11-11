@@ -18,14 +18,55 @@ region = Rect2(100, 200, 144, 64)
 atlas = ExtResource("1_atlas")
 region = Rect2(400, 320, 64, 88)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_rotulo"]
+atlas = ExtResource("1_atlas")
+region = Rect2(0, 12, 200, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_servicios"]
+atlas = ExtResource("1_atlas")
+region = Rect2(200, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mercados"]
+atlas = ExtResource("1_atlas")
+region = Rect2(352, 0, 148, 180)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mesa"]
+atlas = ExtResource("1_atlas")
+region = Rect2(250, 200, 120, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_revistero"]
+atlas = ExtResource("1_atlas")
+region = Rect2(376, 200, 44, 80)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_banco"]
 size = Vector2(64, 22)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_maceta"]
 size = Vector2(16, 12)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mesa"]
+size = Vector2(56, 28)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_revistero"]
+size = Vector2(20, 36)
+
 [node name="DecoracionBanco" type="Node2D" unique_id=323653206]
 texture_filter = 1
+
+[node name="RotuloBanco" type="Sprite2D" parent="."]
+position = Vector2(219, 51)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_rotulo")
+
+[node name="PanelServicios" type="Sprite2D" parent="."]
+position = Vector2(7, 52)
+scale = Vector2(0.25, 0.25)
+texture = SubResource("AtlasTexture_servicios")
+
+[node name="PanelMercados" type="Sprite2D" parent="."]
+position = Vector2(47.5, 52.5)
+scale = Vector2(0.25, 0.25)
+texture = SubResource("AtlasTexture_mercados")
 
 [node name="ApliqueIzquierdo" type="Sprite2D" parent="." unique_id=1528469011]
 position = Vector2(18, 91)
@@ -47,6 +88,11 @@ position = Vector2(190, 139)
 scale = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_cuerda")
 
+[node name="Revistero" type="Sprite2D" parent="."]
+position = Vector2(15, 189)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_revistero")
+
 [node name="BancoEsperaIzquierdo" type="Sprite2D" parent="." unique_id=508491174]
 position = Vector2(46, 280)
 scale = Vector2(0.5, 0.5)
@@ -56,6 +102,11 @@ texture = SubResource("AtlasTexture_banco")
 position = Vector2(224, 280)
 scale = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_banco")
+
+[node name="MesaPeriodicos" type="Sprite2D" parent="."]
+position = Vector2(135, 280)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("AtlasTexture_mesa")
 
 [node name="PlantaIzquierda" type="Sprite2D" parent="." unique_id=1225459886]
 position = Vector2(17, 321)
@@ -80,7 +131,10 @@ position = Vector2(224, 280)
 shape = SubResource("RectangleShape2D_banco")
 
 [node name="BloqueoMesa" type="StaticBody2D" parent="." unique_id=948935587]
-position = Vector2(135, 299)
+position = Vector2(135, 281)
+
+[node name="Colision" type="CollisionShape2D" parent="BloqueoMesa"]
+shape = SubResource("RectangleShape2D_mesa")
 
 [node name="BloqueoPlantaIzquierda" type="StaticBody2D" parent="." unique_id=1884495212]
 position = Vector2(17, 327)
@@ -95,4 +149,7 @@ position = Vector2(253, 327)
 shape = SubResource("RectangleShape2D_maceta")
 
 [node name="BloqueoRevistero" type="StaticBody2D" parent="." unique_id=909557397]
-position = Vector2(258, 208)
+position = Vector2(15, 189)
+
+[node name="Colision" type="CollisionShape2D" parent="BloqueoRevistero"]
+shape = SubResource("RectangleShape2D_revistero")

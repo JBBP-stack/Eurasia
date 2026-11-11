@@ -20,13 +20,12 @@ shape = SubResource("CircleShape2D_rango")
 [node name="Ilustracion" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("2_textura")
-scale = Vector2(1.5, 1.5)
 
 [node name="Indicador" type="Label" parent="."]
 offset_left = -88.0
-offset_top = 30.0
+offset_top = 44.0
 offset_right = 88.0
-offset_bottom = 56.0
+offset_bottom = 64.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 10
 text = "E: ir al banco"

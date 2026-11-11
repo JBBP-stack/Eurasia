@@ -482,7 +482,7 @@ def build_bank_atlas():
         "sign": Part(c, 0, 0), "services": Part(c, 200, 0), "market": Part(c, 352, 0),
         "lamp": Part(c, 0, 80), "queue": Part(c, 0, 200), "bench": Part(c, 100, 200),
         "table": Part(c, 250, 200), "rack": Part(c, 376, 200), "atm": Part(c, 0, 240),
-        "counter": Part(c, 128, 280), "clerk": Part(c, 400, 240), "plant": Part(c, 400, 320),
+        "counter": Part(c, 128, 280), "clerk": Part(c, 424, 240), "plant": Part(c, 400, 320),
     }
     draw_bank_sign(parts["sign"])
     draw_service_board(parts["services"])
